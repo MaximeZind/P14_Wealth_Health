@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from '../styles/Form.module.css';
+import { getDepartments, getStates } from '../utils/fetchData';
 
 function Form() {
 
@@ -7,6 +8,9 @@ function Form() {
         event.preventDefault();
         console.log(event);
     }
+
+    const departments = getDepartments();
+    const states = getStates();
 
     return (
                 <form onSubmit={saveEmployee} action="#" id="create-employee">
@@ -32,42 +36,23 @@ function Form() {
                         <input id="city" type="text" />
 
                         <label htmlFor="state-button">State</label>
-                        <select name="state" id="state" style={{ display: 'none' }}>
-                            {/* ...options */}
+                        <select name="state" id="state" >
+                            {states.map((state) =>{
+                                return <option key={state.abbreviation} value={state.abbreviation}>{state.name}</option>
+                            })}
                         </select>
-                        <span
-                            tabIndex="0"
-                            id="state-button"
-                            role="combobox"
-                            aria-expanded="false"
-                            aria-autocomplete="list"
-                            aria-owns="state-menu"
-                            aria-haspopup="true"
-                            className={`ui-selectmenu-button ui-selectmenu-button-closed ui-corner-all ui-button ui-widget ${classes.uiSelectmenuButton}`}
-                        >
-                            {/* ... */}
-                        </span>
+                        
 
                         <label htmlFor="zip-code">Zip Code</label>
                         <input id="zip-code" type="number" />
                     </fieldset>
 
                     <label htmlFor="department-button">Department</label>
-                    <select name="department" id="department" style={{ display: 'none' }}>
-                        {/* ...options */}
+                    <select name="department" id="department" >
+                        {departments.map((department) => {
+                            return <option key={department} value={department}>{department}</option>
+                        })}
                     </select>
-                    <span
-                        tabIndex="0"
-                        id="department-button"
-                        role="combobox"
-                        aria-expanded="false"
-                        aria-autocomplete="list"
-                        aria-owns="department-menu"
-                        aria-haspopup="true"
-                        className={`ui-selectmenu-button ui-selectmenu-button-closed ui-corner-all ui-button ui-widget ${classes.uiSelectmenuButton}`}
-                    >
-                        {/* ... */}
-                    </span>
                     <button>Save</button>
                 </form>
     );

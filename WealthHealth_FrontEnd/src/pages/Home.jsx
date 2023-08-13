@@ -6,7 +6,7 @@ function Home() {
 
     return (
         <main className={classes.main}>
-            <div class={classes.title}>
+            <div className={classes.title}>
                 <h1>HRnet</h1>
             </div>
             <div className={classes.container}>
