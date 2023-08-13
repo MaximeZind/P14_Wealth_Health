@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from '../styles/Home.module.css';
 import Form from '../components/Form';
+import { Link } from 'react-router-dom';
 
 function Home() {
 
@@ -10,7 +11,7 @@ function Home() {
                 <h1>HRnet</h1>
             </div>
             <div className={classes.container}>
-                <a href="employee-list.html">View Current Employees</a>
+                <Link to={'/employeelist'}>View Current Employees</Link>
                 <h2>Create Employee</h2>
                 <Form />
             </div>
