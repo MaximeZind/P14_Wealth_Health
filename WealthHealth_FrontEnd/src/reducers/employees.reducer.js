@@ -2,6 +2,7 @@ import { ADD_EMPLOYEE } from "../actions/employees.action";
 
 const initialState = [];
 
+//
 // {
 //     firstName: null,
 //     lastName: null,
