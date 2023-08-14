@@ -2,16 +2,20 @@ import React from 'react';
 import classes from '../styles/Form.module.css';
 import { getDepartments, getStates } from '../utils/fetchData';
 import { addEmployee } from '../actions/employees.action';
+import { validateDate } from '../utils/formValidation';
+import { useDispatch } from 'react-redux';
 
 function Form() {
 
+    const dispatch = useDispatch()
     async function saveEmployee(event){
         event.preventDefault();
         const form = event.target;
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
         if (formJson){
-            addEmployee(formJson);
+            validateDate(formJson.dateOfBirth);
+            dispatch(addEmployee(formJson));
         }
     }
 
@@ -59,7 +63,7 @@ function Form() {
                             return <option key={department} value={department}>{department}</option>
                         })}
                     </select>
-                    <button>Save</button>
+                    <button value="submit">Save</button>
                 </form>
     );
 }
