@@ -4,16 +4,18 @@ import { getDepartments, getStates } from '../utils/fetchData';
 import { addEmployee } from '../actions/employees.action';
 import { validateForm } from '../utils/formValidation';
 import { useDispatch } from 'react-redux';
+import TextInput from './TextInput';
+import DateInput from './dateInput';
 
 function Form() {
 
-    const [firstNameErrorMsg, setFirstNameErrorMsg] = useState(null);
-    const [lastNameErrorMsg, setLastNameErrorMsg] = useState(null);
-    const [dateOfBirthErrorMsg, setDateOfBirthErrorMsg] = useState(null);
-    const [startDateErrorMsg, setStartDateErrorMsg] = useState(null);
-    const [streetErrorMsg, setStreetErrorMsg] = useState(null);
-    const [cityErrorMsg, setCityErrorMsg] = useState(null);
-    const [zipCodeErrorMsg, setZipCodeErrorMsg] = useState(null);
+    const [firstNameErrorMsg, setFirstNameErrorMsg] = useState('');
+    const [lastNameErrorMsg, setLastNameErrorMsg] = useState('');
+    const [dateOfBirthErrorMsg, setDateOfBirthErrorMsg] = useState('');
+    const [startDateErrorMsg, setStartDateErrorMsg] = useState('');
+    const [streetErrorMsg, setStreetErrorMsg] = useState('');
+    const [cityErrorMsg, setCityErrorMsg] = useState('');
+    const [zipCodeErrorMsg, setZipCodeErrorMsg] = useState('');
 
     const dispatch = useDispatch()
     async function saveEmployee(event){
@@ -42,7 +44,6 @@ function Form() {
             setCityErrorMsg(formValidation.data.cityValidation.errorMsg);
             setZipCodeErrorMsg(formValidation.data.zipCodeValidation.errorMsg);
         }
-
     }
 
     const departments = getDepartments();
@@ -50,35 +51,22 @@ function Form() {
 
     return (
                 <form onSubmit={saveEmployee} action="#" id="create_employee">
-                    <label htmlFor="firstName">First Name</label>
-                    <input type="text" id="firstName" name='firstName'/>
-
-                    <label htmlFor="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName"/>
-
-                    <label htmlFor="dateOfBirth">Date of Birth</label>
-                    <input id="dateOfBirth" type="date" name='dateOfBirth'/>
-
-                    <label htmlFor="startDate">Start Date</label>
-                    <input id="startDate" type="date" name='startDate'/>
+                    <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg}/>
+                    <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg}/>
+                    <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg}/>
+                    <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg}/>
 
                     <fieldset className={classes.address}>
                         <legend>Address</legend>
-
-                        <label htmlFor="street">Street</label>
-                        <input id="street" type="text" name='street'/>
-
-                        <label htmlFor="city">City</label>
-                        <input id="city" type="text" name='city'/>
-
+                        <TextInput name='street' label='Street' errorMsg={streetErrorMsg}/>
+                        <TextInput name='city' label='City' errorMsg={cityErrorMsg}/>
                         <label htmlFor="state">State</label>
                         <select name="state" id="state" >
                             {states.map((state) =>{
                                 return <option key={state.abbreviation} value={state.abbreviation}>{state.name}</option>
                             })}
                         </select>
-                        <label htmlFor="zipCode">Zip Code</label>
-                        <input id="zipCode" type="number" name='zipCode'/>
+                        <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg}/>
                     </fieldset>
                     <label htmlFor="department">Department</label>
                     <select name="department" id="department">

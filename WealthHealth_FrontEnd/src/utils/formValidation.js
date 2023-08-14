@@ -42,10 +42,10 @@ export function validateName(string) {
         if ((regex.test(nameValue)) && (!nameValue.includes(",,")) && (!nameValue.includes("..")) && (!nameValue.includes("''")) && (!nameValue.includes("--")) && (!nameValue.trim().includes("  "))) {
             response = nameValue.toLowerCase();
         } else if ((regex.test(nameValue) === false) || (nameValue.includes(",,")) || (nameValue.includes("..")) || (nameValue.includes("''")) || (nameValue.includes("--")) || nameValue.trim().includes("  ")) {
-            errorMsg = "Le nom est invalide."
+            errorMsg = "The name is invalid."
         }
     } else if (nameValue.length < 2) {
-        errorMsg = "Le nom doit faire au moins 2 charactères."
+        errorMsg = "The name should be at least 2 characters."
     }
 
     let validation = {
