@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from '../styles/Form.module.css';
 import { getDepartments, getStates } from '../utils/fetchData';
 import { addEmployee } from '../actions/employees.action';
-import { validateDate } from '../utils/formValidation';
+import { validateForm } from '../utils/formValidation';
 import { useDispatch } from 'react-redux';
 
 function Form() {
+
+    const [firstNameErrorMsg, setFirstNameErrorMsg] = useState(null);
+    const [lastNameErrorMsg, setLastNameErrorMsg] = useState(null);
+    const [dateOfBirthErrorMsg, setDateOfBirthErrorMsg] = useState(null);
+    const [startDateErrorMsg, setStartDateErrorMsg] = useState(null);
+    const [streetErrorMsg, setStreetErrorMsg] = useState(null);
+    const [cityErrorMsg, setCityErrorMsg] = useState(null);
+    const [zipCodeErrorMsg, setZipCodeErrorMsg] = useState(null);
 
     const dispatch = useDispatch()
     async function saveEmployee(event){
@@ -13,10 +21,28 @@ function Form() {
         const form = event.target;
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
-        if (formJson){
-            validateDate(formJson.dateOfBirth);
+        console.log(formJson);
+        const formValidation = validateForm(formJson);
+        console.log(formValidation);
+        if (formValidation.isValid){
             dispatch(addEmployee(formJson));
+            setFirstNameErrorMsg(null);
+            setLastNameErrorMsg(null);
+            setDateOfBirthErrorMsg(null);
+            setStartDateErrorMsg(null);
+            setStreetErrorMsg(null);
+            setCityErrorMsg(null);
+            setZipCodeErrorMsg(null);
+        } else if (!formValidation.isValid){
+            setFirstNameErrorMsg(formValidation.data.firstNameValidation.errorMsg);
+            setLastNameErrorMsg(formValidation.data.lastNameValidation.errorMsg);
+            setDateOfBirthErrorMsg(formValidation.data.dateOfBirthValidation.errorMsg);
+            setStartDateErrorMsg(formValidation.data.startDateValidation.errorMsg);
+            setStreetErrorMsg(formValidation.data.streetValidation.errorMsg);
+            setCityErrorMsg(formValidation.data.cityValidation.errorMsg);
+            setZipCodeErrorMsg(formValidation.data.zipCodeValidation.errorMsg);
         }
+
     }
 
     const departments = getDepartments();
@@ -51,12 +77,9 @@ function Form() {
                                 return <option key={state.abbreviation} value={state.abbreviation}>{state.name}</option>
                             })}
                         </select>
-                        
-
                         <label htmlFor="zipCode">Zip Code</label>
                         <input id="zipCode" type="number" name='zipCode'/>
                     </fieldset>
-
                     <label htmlFor="department">Department</label>
                     <select name="department" id="department">
                         {departments.map((department) => {
