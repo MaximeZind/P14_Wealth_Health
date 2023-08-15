@@ -1,47 +1,78 @@
 import React, { useState } from 'react';
 import classes from '../styles/Table.module.css';
 import Row from '../components/Row';
-import arrow from '../assets/arrow.svg'
+import fields from '../data/fields.json';
+import Arrow from './Arrow';
 
-function Table({employeeList}) {
+function Table({ employeeList }) {
 
-    const [list, setList] = useState(employeeList);
-    console.log(employeeList);
-    console.log(list);
+    const [list, setList] = useState([...employeeList]);
+    const [selectedField, setSelectedField] = useState(null);
+    const [isAscending, setIsAscending] = useState(false);
+
+    function sortBy(field) {
+        if (selectedField !== field) {
+            setIsAscending(false);
+        }
+        setSelectedField(field);
+        let sortedList = [...list];
+        if (isAscending){
+            sortedList = sortedList.sort((b, a) => a[field].localeCompare(b[field]));
+        } else if (!isAscending){
+            sortedList = sortedList.sort((a, b) => a[field].localeCompare(b[field]));
+        }
+        setIsAscending(!isAscending);
+        setList(sortedList);
+    }
+
+
     return (
-            <table id='employee_table' className={classes.table}>
-                <thead>
-                    <tr role='row'>
-                        <th style={{display: 'flex', flexDirection: 'row'}}>First Name <div className={classes.icons}><img className={classes.icon} src={arrow} alt="arrow"/><img className={classes.icon} src={arrow} alt="arrow" /></div></th>
-                        <th>Last Name</th>
-                        <th>Start Date</th>
-                        <th>Department</th>
-                        <th>Date of Birth</th>
-                        <th>Street</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Zip Code</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {list.length > 0 && list.map((employee) => {
-                        const index = list.indexOf(employee);
-                        const type = index % 2 ? 'even' : 'odd';
-
-                        return <Row key={index}
-                                    type={type} 
-                                    firstName={employee.firstName}
-                                    lastName={employee.lastName}
-                                    startDate={employee.startDate}
-                                    department={employee.department}
-                                    dateOfBirth={employee.dateOfBirth}
-                                    street={employee.street}
-                                    city={employee.city}
-                                    state={employee.state}
-                                    zipCode={employee.zipCode} />;
+        <table id='employee_table' className={classes.table}>
+            <thead>
+                <tr role='row'>
+                    {fields.map((field) => {
+                        return (
+                            <th key={fields.indexOf(field)} onClick={() => sortBy(field.camelField)}>
+                                <div className={classes.field}>{field.field}
+                                    {selectedField !== field.camelField ?
+                                        <div className={classes.icons}>
+                                            {/* <img style={{ transform: 'rotate(180deg)' }} className={classes.icon} src={arrow} alt="arrow" />
+                                            <img style={{fill:'red'}} className={classes.icon} src={arrow} alt="arrow" /> */}
+                                            <Arrow transform='rotate(180deg)' color='#ddd'/>
+                                            <Arrow transform='rotate(0deg)' color='#ddd'/>
+                                        </div> :
+                                        <div className={classes.icons}>
+                                            {isAscending ? 
+                                            <><Arrow transform='rotate(180deg)' color='#000000'/>
+                                            <Arrow transform='rotate(0deg)' color='#ddd'/></> :
+                                             <><Arrow transform='rotate(180deg)' color='#ddd'/>
+                                             <Arrow transform='rotate(0deg)' color='#000000'/></>}
+                                        </div>
+                                    }
+                                </div>
+                            </th>)
                     })}
-                </tbody>
-            </table>
+                </tr>
+            </thead>
+            <tbody>
+                {list.length > 0 && list.map((employee) => {
+                    const index = list.indexOf(employee);
+                    const type = index % 2 ? 'even' : 'odd';
+
+                    return <Row key={index}
+                        type={type}
+                        firstName={employee.firstName}
+                        lastName={employee.lastName}
+                        startDate={employee.startDate}
+                        department={employee.department}
+                        dateOfBirth={employee.dateOfBirth}
+                        street={employee.street}
+                        city={employee.city}
+                        state={employee.state}
+                        zipCode={employee.zipCode} />;
+                })}
+            </tbody>
+        </table>
     );
 }
 

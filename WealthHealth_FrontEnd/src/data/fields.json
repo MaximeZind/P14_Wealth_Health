@@ -1,0 +1,39 @@
+[
+    {
+      "field": "First Name",
+      "camelField": "firstName"
+    },
+    {
+      "field": "Last Name",
+      "camelField": "lastName"
+    },
+    {
+      "field": "Start Date",
+      "camelField": "startDate"
+    },
+    {
+      "field": "Department",
+      "camelField": "department"
+    },
+    {
+      "field": "Date of Birth",
+      "camelField": "dateOfBirth"
+    },
+    {
+      "field": "Street",
+      "camelField": "street"
+    },
+    {
+      "field": "City",
+      "camelField": "city"
+    },
+    {
+      "field": "State",
+      "camelField": "state"
+    },
+    {
+      "field": "Zip Code",
+      "camelField": "zipCode"
+    }
+  ]
+  

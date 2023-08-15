@@ -1,3 +1,27 @@
 .table{
     width: 1073px;
 }
+
+.field{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.icons{
+    width: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.icon{
+    fill: black;
+}
+
+.selectedIcon{
+    fill: red;
+}
