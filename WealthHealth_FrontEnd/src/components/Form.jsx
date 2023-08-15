@@ -6,6 +6,7 @@ import { validateForm } from '../utils/formValidation';
 import { useDispatch } from 'react-redux';
 import TextInput from './TextInput';
 import DateInput from './dateInput';
+import Dropdown from './Dropdown';
 
 function Form() {
 
@@ -65,20 +66,10 @@ function Form() {
                         <legend>Address</legend>
                         <TextInput name='street' label='Street' errorMsg={streetErrorMsg}/>
                         <TextInput name='city' label='City' errorMsg={cityErrorMsg}/>
-                        <label htmlFor="state">State</label>
-                        <select name="state" id="state" >
-                            {states.map((state) =>{
-                                return <option key={state.abbreviation} value={state.abbreviation}>{state.name}</option>
-                            })}
-                        </select>
+                        <Dropdown list={states} name='state' label='State' />
                         <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg}/>
                     </fieldset>
-                    <label htmlFor="department">Department</label>
-                    <select name="department" id="department">
-                        {departments.map((department) => {
-                            return <option key={department} value={department}>{department}</option>
-                        })}
-                    </select>
+                    <Dropdown list={departments} name='department' label='Department' />
                     <button value="submit">Save</button>
                 </form>
     );

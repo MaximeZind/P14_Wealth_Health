@@ -1,7 +1,17 @@
 [
-    "sales",
-    "marketing",
-    "engineering",
-    "human resources",
-    "legal"
+    {
+        "name": "Sales"
+    },
+    {
+        "name": "Marketing"
+    },
+    {
+        "name": "Engineering"
+    },
+    {
+        "name": "Human resources"
+    },
+    {
+        "name": "Legal"
+    }
 ]
