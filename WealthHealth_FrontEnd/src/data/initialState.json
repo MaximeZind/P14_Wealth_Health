@@ -1,0 +1,168 @@
+[
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "startDate": "15/01/2022",
+      "department": "Engineering",
+      "dateOfBirth": "10/06/1985",
+      "street": "123 Main St",
+      "city": "Anytown",
+      "state": "CA",
+      "zipCode": "12345"
+    },
+    {
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "startDate": "20/02/2022",
+      "department": "Marketing",
+      "dateOfBirth": "25/03/1990",
+      "street": "456 Elm St",
+      "city": "Smallville",
+      "state": "NY",
+      "zipCode": "54321"
+    },
+    {
+      "firstName": "Michael",
+      "lastName": "Johnson",
+      "startDate": "05/04/2022",
+      "department": "Sales",
+      "dateOfBirth": "15/09/1988",
+      "street": "789 Oak Ave",
+      "city": "Bigburg",
+      "state": "TX",
+      "zipCode": "67890"
+    },
+    {
+      "firstName": "Emily",
+      "lastName": "Brown",
+      "startDate": "10/05/2022",
+      "department": "Engineering",
+      "dateOfBirth": "20/11/1992",
+      "street": "555 Maple Ln",
+      "city": "Metroville",
+      "state": "CA",
+      "zipCode": "98765"
+    },
+    {
+      "firstName": "Daniel",
+      "lastName": "Williams",
+      "startDate": "25/06/2022",
+      "department": "Human resources",
+      "dateOfBirth": "08/07/1989",
+      "street": "777 Pine Rd",
+      "city": "Villageville",
+      "state": "IL",
+      "zipCode": "45678"
+    },
+    {
+      "firstName": "Olivia",
+      "lastName": "Jones",
+      "startDate": "01/07/2022",
+      "department": "Sales",
+      "dateOfBirth": "05/02/1995",
+      "street": "888 Birch Blvd",
+      "city": "Townsville",
+      "state": "FL",
+      "zipCode": "34567"
+    },
+    {
+      "firstName": "William",
+      "lastName": "Davis",
+      "startDate": "15/08/2022",
+      "department": "Marketing",
+      "dateOfBirth": "18/12/1991",
+      "street": "999 Cedar Dr",
+      "city": "Suburbia",
+      "state": "AZ",
+      "zipCode": "23456"
+    },
+    {
+      "firstName": "Sophia",
+      "lastName": "Miller",
+      "startDate": "20/09/2022",
+      "department": "Engineering",
+      "dateOfBirth": "30/04/1987",
+      "street": "111 Willow St",
+      "city": "Ruralville",
+      "state": "OH",
+      "zipCode": "56789"
+    },
+    {
+      "firstName": "Liam",
+      "lastName": "Wilson",
+      "startDate": "05/10/2022",
+      "department": "Legal",
+      "dateOfBirth": "22/08/1993",
+      "street": "222 Spruce Rd",
+      "city": "Countryside",
+      "state": "GA",
+      "zipCode": "45632"
+    },
+    {
+      "firstName": "Ava",
+      "lastName": "Moore",
+      "startDate": "10/11/2022",
+      "department": "Sales",
+      "dateOfBirth": "12/01/1998",
+      "street": "333 Oakwood Ave",
+      "city": "Hometown",
+      "state": "TN",
+      "zipCode": "54321"
+    },
+    {
+      "firstName": "Noah",
+      "lastName": "Taylor",
+      "startDate": "25/12/2022",
+      "department": "Engineering",
+      "dateOfBirth": "07/03/1986",
+      "street": "444 Elmwood Ln",
+      "city": "Neighborhood",
+      "state": "NC",
+      "zipCode": "65432"
+    },
+    {
+      "firstName": "Mia",
+      "lastName": "Anderson",
+      "startDate": "01/01/2023",
+      "department": "Marketing",
+      "dateOfBirth": "29/05/1994",
+      "street": "555 Maple Rd",
+      "city": "Cityville",
+      "state": "WA",
+      "zipCode": "12345"
+    },
+    {
+      "firstName": "James",
+      "lastName": "Clark",
+      "startDate": "15/02/2023",
+      "department": "Sales",
+      "dateOfBirth": "14/10/1997",
+      "street": "666 Oakhill Dr",
+      "city": "Metropolis",
+      "state": "NV",
+      "zipCode": "23456"
+    },
+    {
+      "firstName": "Emma",
+      "lastName": "Lewis",
+      "startDate": "20/03/2023",
+      "department": "Engineering",
+      "dateOfBirth": "03/09/1984",
+      "street": "777 Willow Rd",
+      "city": "Urbanville",
+      "state": "CO",
+      "zipCode": "34567"
+    },
+    {
+      "firstName": "Benjamin",
+      "lastName": "Harris",
+      "startDate": "05/04/2023",
+      "department": "Legal",
+      "dateOfBirth": "17/07/1999",
+      "street": "888 Cedar Ave",
+      "city": "Townburg",
+      "state": "SC",
+      "zipCode": "45678"
+    }
+  ]
+  

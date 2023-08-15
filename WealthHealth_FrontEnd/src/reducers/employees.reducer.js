@@ -1,8 +1,9 @@
 import { ADD_EMPLOYEE } from "../actions/employees.action";
+import mockedData from '../data/initialState.json';
 
-const initialState = [];
+const initialState = mockedData;
 
-//
+//Format:
 // {
 //     firstName: null,
 //     lastName: null,
