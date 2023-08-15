@@ -18,31 +18,36 @@ function Form() {
     const [zipCodeErrorMsg, setZipCodeErrorMsg] = useState('');
 
     const dispatch = useDispatch()
-    async function saveEmployee(event){
+
+    function saveEmployee(event){
         event.preventDefault();
+
         const form = event.target;
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
-        console.log(formJson);
+
+        //On associe les champs avec les fonctions qui mettent en place les messages d'erreur
+        const setters = {
+            firstName: setFirstNameErrorMsg,
+            lastName: setLastNameErrorMsg,
+            dateOfBirth: setDateOfBirthErrorMsg,
+            startDate: setStartDateErrorMsg,
+            street: setStreetErrorMsg,
+            city: setCityErrorMsg,
+            zipCode: setZipCodeErrorMsg,
+        };
         const formValidation = validateForm(formJson);
-        console.log(formValidation);
+        console.log(formValidation.data);
         if (formValidation.isValid){
-            dispatch(addEmployee(formJson));
-            setFirstNameErrorMsg(null);
-            setLastNameErrorMsg(null);
-            setDateOfBirthErrorMsg(null);
-            setStartDateErrorMsg(null);
-            setStreetErrorMsg(null);
-            setCityErrorMsg(null);
-            setZipCodeErrorMsg(null);
+            dispatch(addEmployee(formValidation.data));
+            Object.values(setters).forEach(setter => setter(null));
         } else if (!formValidation.isValid){
-            setFirstNameErrorMsg(formValidation.data.firstNameValidation.errorMsg);
-            setLastNameErrorMsg(formValidation.data.lastNameValidation.errorMsg);
-            setDateOfBirthErrorMsg(formValidation.data.dateOfBirthValidation.errorMsg);
-            setStartDateErrorMsg(formValidation.data.startDateValidation.errorMsg);
-            setStreetErrorMsg(formValidation.data.streetValidation.errorMsg);
-            setCityErrorMsg(formValidation.data.cityValidation.errorMsg);
-            setZipCodeErrorMsg(formValidation.data.zipCodeValidation.errorMsg);
+
+            Object.entries(formValidation.errorMsg).map(([field, errorMsg]) => {
+                if (setters[field]){
+                    setters[field](errorMsg);
+                }
+            });
         }
     }
 

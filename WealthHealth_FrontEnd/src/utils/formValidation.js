@@ -1,4 +1,4 @@
-export function validateForm(object){
+export function validateForm(object) {
 
     const firstNameValidation = validateName(object.firstName);
     const lastNameValidation = validateName(object.lastName);
@@ -11,21 +11,32 @@ export function validateForm(object){
 
     let isValid = true;
     array.map((item) => {
-        if (!item.response){
+        if (!item.response) {
             isValid = false;
             return;
         }
     });
-    const validation  = {
+    const validation = {
         isValid: isValid,
         data: {
-            firstNameValidation: firstNameValidation,
-            lastNameValidation: lastNameValidation,
-            dateOfBirthValidation: dateOfBirthValidation,
-            startDateValidation: startDateValidation,
-            streetValidation: streetValidation,
-            cityValidation: cityValidation,
-            zipCodeValidation: zipCodeValidation
+            firstName: firstNameValidation.response,
+            lastName: lastNameValidation.response,
+            dateOfBirth: dateOfBirthValidation.response,
+            startDate: startDateValidation.response,
+            street: streetValidation.response,
+            city: cityValidation.response,
+            state: object.state,
+            zipCode: zipCodeValidation.response,
+            department: object.department
+        },
+        errorMsg: {
+            firstName: firstNameValidation.errorMsg,
+            lastName: lastNameValidation.errorMsg,
+            dateOfBirth: dateOfBirthValidation.errorMsg,
+            startDate: startDateValidation.errorMsg,
+            street: streetValidation.errorMsg,
+            city: cityValidation.errorMsg,
+            zipCode: zipCodeValidation.errorMsg
         }
     }
     return validation;
@@ -40,7 +51,7 @@ export function validateName(string) {
 
     if (nameValue.length >= 2) { // plus de 2 caractères
         if ((regex.test(nameValue)) && (!nameValue.includes(",,")) && (!nameValue.includes("..")) && (!nameValue.includes("''")) && (!nameValue.includes("--")) && (!nameValue.trim().includes("  "))) {
-            response = nameValue.toLowerCase();
+            response = nameValue.charAt(0).toUpperCase() + nameValue.slice(1).toLowerCase();
         } else if ((regex.test(nameValue) === false) || (nameValue.includes(",,")) || (nameValue.includes("..")) || (nameValue.includes("''")) || (nameValue.includes("--")) || nameValue.trim().includes("  ")) {
             errorMsg = "The name is invalid."
         }
@@ -100,9 +111,8 @@ export function validateStreet(string) {
     let response = false;
     let errorMsg = null;
     const minLength = 5;
-    const regex = /^[a-zA-Z0-9\s.,-]*$/;
-
-    if (address.length === 0){
+    const regex = /^[a-zA-Z0-9\s'.,-]*$/;
+    if (address.length === 0) {
         errorMsg = "This field is empty.";
     } else if (address.length !== 0 && address.length < minLength) {
         errorMsg = "This address is too short.";
@@ -128,8 +138,7 @@ export function validateCity(string) {
     let errorMsg = null;
     const minLength = 2;
     const regex = /^[a-zA-Z\s.,-]*$/;
-
-    if (city.length === 0){
+    if (city.length === 0) {
         errorMsg = "This field is empty.";
     } else if (city.length !== 0 && city.length < minLength) {
         errorMsg = "This city name is too short.";
@@ -137,7 +146,7 @@ export function validateCity(string) {
         if (!regex.test(city)) {
             errorMsg = "This city name is invalid."
         } else if (regex.test(city)) {
-            response = city.toLowerCase();
+            response = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
         }
     }
 
@@ -149,16 +158,16 @@ export function validateCity(string) {
 }
 
 //Fonction pour valider le zipcode
-export function validateZipCode(string){
+export function validateZipCode(string) {
     const zipCode = string.trim();
     let response = false;
     let errorMsg = null;
-    //Zip code américain : XXXXX-XXXX
+    //Zip code américain : XXXXX ou XXXXX-XXXX
     let regex = /^\d{5}(?:-\d{4})?$/;
 
-    if (regex.test(zipCode)){
+    if (regex.test(zipCode)) {
         response = zipCode;
-    } else if (!regex.test(zipCode)){
+    } else if (!regex.test(zipCode)) {
         errorMsg = 'The Zip Code is invalid.'
     }
 
