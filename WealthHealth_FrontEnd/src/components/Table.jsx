@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import classes from '../styles/Table.module.css';
 import Row from '../components/Row';
+import arrow from '../assets/arrow.svg'
 
 function Table({employeeList}) {
 
@@ -11,7 +12,7 @@ function Table({employeeList}) {
             <table id='employee_table' className={classes.table}>
                 <thead>
                     <tr role='row'>
-                        <th>First Name</th>
+                        <th style={{display: 'flex', flexDirection: 'row'}}>First Name <div className={classes.icons}><img className={classes.icon} src={arrow} alt="arrow"/><img className={classes.icon} src={arrow} alt="arrow" /></div></th>
                         <th>Last Name</th>
                         <th>Start Date</th>
                         <th>Department</th>
