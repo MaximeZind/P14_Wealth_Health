@@ -16,6 +16,13 @@ function Table({ employeeList }) {
         }
         setSelectedField(field);
         let sortedList = [...list];
+        if (field === 'dateOfBirth' || field === 'startDate'){
+            if (isAscending){
+                sortedList = sortedList.sort((b, a) => new Date(a[field]) - new Date(b[field]));
+            } else if (!isAscending){
+                sortedList = sortedList.sort((a, b) => new Date(a[field]) - new Date(b[field]));
+            }
+        } else if (field !== 'dateOfBirth' && field !== 'startDate')
         if (isAscending){
             sortedList = sortedList.sort((b, a) => a[field].localeCompare(b[field]));
         } else if (!isAscending){

@@ -1,168 +1,167 @@
 [
-    {
-      "firstName": "Leonardo",
-      "lastName": "DiCaprio",
-      "startDate": "15/01/2002",
-      "department": "Sales",
-      "dateOfBirth": "11/11/1974",
-      "street": "123 Hollywood Blvd",
-      "city": "Los Angeles",
-      "state": "CA",
-      "zipCode": "90001"
-    },
-    {
-      "firstName": "Jennifer",
-      "lastName": "Lawrence",
-      "startDate": "20/02/2010",
-      "department": "Marketing",
-      "dateOfBirth": "15/08/1990",
-      "street": "456 Film Street",
-      "city": "New York",
-      "state": "NY",
-      "zipCode": "10001"
-    },
-    {
-      "firstName": "Elon",
-      "lastName": "Musk",
-      "startDate": "05/04/2015",
-      "department": "Engineering",
-      "dateOfBirth": "28/06/1971",
-      "street": "789 Innovation Way",
-      "city": "Palo Alto",
-      "state": "CA",
-      "zipCode": "94301"
-    },
-    {
-      "firstName": "Serena",
-      "lastName": "Williams",
-      "startDate": "10/05/2005",
-      "department": "Human resources",
-      "dateOfBirth": "26/09/1981",
-      "street": "555 Tennis Court",
-      "city": "Miami",
-      "state": "FL",
-      "zipCode": "33101"
-    },
-    {
-      "firstName": "Beyoncé",
-      "lastName": "Knowles",
-      "startDate": "25/06/2008",
-      "department": "Legal",
-      "dateOfBirth": "04/09/1981",
-      "street": "777 Stage Avenue",
-      "city": "Houston",
-      "state": "TX",
-      "zipCode": "77001"
-    },
-    {
-      "firstName": "Stephen",
-      "lastName": "Hawking",
-      "startDate": "01/07/2000",
-      "department": "Engineering",
-      "dateOfBirth": "08/01/1942",
-      "street": "888 Theoretical St",
-      "city": "Cambridge",
-      "state": "MA",
-      "zipCode": "02138"
-    },
-    {
-      "firstName": "Oprah",
-      "lastName": "Winfrey",
-      "startDate": "15/08/1995",
-      "department": "Legal",
-      "dateOfBirth": "29/01/1954",
-      "street": "111 Talk Show Blvd",
-      "city": "Chicago",
-      "state": "IL",
-      "zipCode": "60601"
-    },
-    {
-      "firstName": "Albert",
-      "lastName": "Einstein",
-      "startDate": "20/09/1919",
-      "department": "Engineering",
-      "dateOfBirth": "14/03/1879",
-      "street": "222 Relativity Rd",
-      "city": "Princeton",
-      "state": "NJ",
-      "zipCode": "08540"
-    },
-    {
-      "firstName": "Emma",
-      "lastName": "Watson",
-      "startDate": "05/10/2010",
-      "department": "Human resources",
-      "dateOfBirth": "15/04/1990",
-      "street": "333 Film Avenue",
-      "city": "Los Angeles",
-      "state": "CA",
-      "zipCode": "90001"
-    },
-    {
-      "firstName": "Tom",
-      "lastName": "Hanks",
-      "startDate": "10/11/1998",
-      "department": "Sales",
-      "dateOfBirth": "09/07/1956",
-      "street": "444 Movie Lane",
-      "city": "New York",
-      "state": "NY",
-      "zipCode": "10001"
-    },
-    {
-      "firstName": "Malala",
-      "lastName": "Yousafzai",
-      "startDate": "25/12/2016",
-      "department": "Legal",
-      "dateOfBirth": "12/07/1997",
-      "street": "555 Activist Street",
-      "city": "Los Angeles",
-      "state": "CA",
-      "zipCode": "90001"
-    },
-    {
-      "firstName": "David",
-      "lastName": "Beckham",
-      "startDate": "01/01/2003",
-      "department": "Marketing",
-      "dateOfBirth": "02/05/1975",
-      "street": "666 Soccer Ave",
-      "city": "Miami",
-      "state": "FL",
-      "zipCode": "33101"
-    },
-    {
-      "firstName": "Meryl",
-      "lastName": "Streep",
-      "startDate": "15/02/1992",
-      "department": "Human resources",
-      "dateOfBirth": "22/06/1949",
-      "street": "777 Hollywood Blvd",
-      "city": "Los Angeles",
-      "state": "CA",
-      "zipCode": "90001"
-    },
-    {
-      "firstName": "Michael",
-      "lastName": "Jordan",
-      "startDate": "20/03/1984",
-      "department": "Engineering",
-      "dateOfBirth": "17/02/1963",
-      "street": "888 Basketball Court",
-      "city": "Chicago",
-      "state": "IL",
-      "zipCode": "60601"
-    },
-    {
-      "firstName": "Angelina",
-      "lastName": "Jolie",
-      "startDate": "05/04/2001",
-      "department": "Sales",
-      "dateOfBirth": "04/06/1975",
-      "street": "999 Charity Lane",
-      "city": "New York",
-      "state": "NY",
-      "zipCode": "10001"
-    }
-  ]
-  
+  {
+    "firstName": "Leonardo",
+    "lastName": "DiCaprio",
+    "startDate": "01/15/2002",
+    "department": "Sales",
+    "dateOfBirth": "11/11/1974",
+    "street": "123 Hollywood Blvd",
+    "city": "Los Angeles",
+    "state": "CA",
+    "zipCode": "90001"
+  },
+  {
+    "firstName": "Jennifer",
+    "lastName": "Lawrence",
+    "startDate": "02/20/2010",
+    "department": "Marketing",
+    "dateOfBirth": "08/15/1990",
+    "street": "456 Film Street",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001"
+  },
+  {
+    "firstName": "Elon",
+    "lastName": "Musk",
+    "startDate": "04/05/2015",
+    "department": "Engineering",
+    "dateOfBirth": "06/28/1971",
+    "street": "789 Innovation Way",
+    "city": "Palo Alto",
+    "state": "CA",
+    "zipCode": "94301"
+  },
+  {
+    "firstName": "Serena",
+    "lastName": "Williams",
+    "startDate": "05/10/2005",
+    "department": "Human resources",
+    "dateOfBirth": "09/26/1981",
+    "street": "555 Tennis Court",
+    "city": "Miami",
+    "state": "FL",
+    "zipCode": "33101"
+  },
+  {
+    "firstName": "Beyoncé",
+    "lastName": "Knowles",
+    "startDate": "06/25/2008",
+    "department": "Legal",
+    "dateOfBirth": "09/04/1981",
+    "street": "777 Stage Avenue",
+    "city": "Houston",
+    "state": "TX",
+    "zipCode": "77001"
+  },
+  {
+    "firstName": "Stephen",
+    "lastName": "Hawking",
+    "startDate": "07/01/2000",
+    "department": "Engineering",
+    "dateOfBirth": "01/08/1942",
+    "street": "888 Theoretical St",
+    "city": "Cambridge",
+    "state": "MA",
+    "zipCode": "02138"
+  },
+  {
+    "firstName": "Oprah",
+    "lastName": "Winfrey",
+    "startDate": "08/15/1995",
+    "department": "Legal",
+    "dateOfBirth": "01/29/1954",
+    "street": "111 Talk Show Blvd",
+    "city": "Chicago",
+    "state": "IL",
+    "zipCode": "60601"
+  },
+  {
+    "firstName": "Albert",
+    "lastName": "Einstein",
+    "startDate": "09/20/1919",
+    "department": "Engineering",
+    "dateOfBirth": "03/14/1879",
+    "street": "222 Relativity Rd",
+    "city": "Princeton",
+    "state": "NJ",
+    "zipCode": "08540"
+  },
+  {
+    "firstName": "Emma",
+    "lastName": "Watson",
+    "startDate": "10/05/2010",
+    "department": "Human resources",
+    "dateOfBirth": "04/15/1990",
+    "street": "333 Film Avenue",
+    "city": "Los Angeles",
+    "state": "CA",
+    "zipCode": "90001"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "Hanks",
+    "startDate": "11/10/1998",
+    "department": "Sales",
+    "dateOfBirth": "07/09/1956",
+    "street": "444 Movie Lane",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001"
+  },
+  {
+    "firstName": "Malala",
+    "lastName": "Yousafzai",
+    "startDate": "12/25/2016",
+    "department": "Legal",
+    "dateOfBirth": "07/12/1997",
+    "street": "555 Activist Street",
+    "city": "Los Angeles",
+    "state": "CA",
+    "zipCode": "90001"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Beckham",
+    "startDate": "01/01/2003",
+    "department": "Marketing",
+    "dateOfBirth": "05/02/1975",
+    "street": "666 Soccer Ave",
+    "city": "Miami",
+    "state": "FL",
+    "zipCode": "33101"
+  },
+  {
+    "firstName": "Meryl",
+    "lastName": "Streep",
+    "startDate": "02/15/1992",
+    "department": "Human resources",
+    "dateOfBirth": "06/22/1949",
+    "street": "777 Hollywood Blvd",
+    "city": "Los Angeles",
+    "state": "CA",
+    "zipCode": "90001"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Jordan",
+    "startDate": "03/20/1984",
+    "department": "Engineering",
+    "dateOfBirth": "02/17/1963",
+    "street": "888 Basketball Court",
+    "city": "Chicago",
+    "state": "IL",
+    "zipCode": "60601"
+  },
+  {
+    "firstName": "Angelina",
+    "lastName": "Jolie",
+    "startDate": "04/05/2001",
+    "department": "Sales",
+    "dateOfBirth": "06/04/1975",
+    "street": "999 Charity Lane",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001"
+  }
+]
