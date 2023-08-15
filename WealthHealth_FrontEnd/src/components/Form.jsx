@@ -3,9 +3,9 @@ import classes from '../styles/Form.module.css';
 import { getDepartments, getStates } from '../utils/fetchData';
 import { addEmployee } from '../actions/employees.action';
 import { validateForm } from '../utils/formValidation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TextInput from './TextInput';
-import DateInput from './dateInput';
+import DateInput from './DateInput';
 import Dropdown from './Dropdown';
 
 function Form() {
@@ -17,6 +17,8 @@ function Form() {
     const [streetErrorMsg, setStreetErrorMsg] = useState('');
     const [cityErrorMsg, setCityErrorMsg] = useState('');
     const [zipCodeErrorMsg, setZipCodeErrorMsg] = useState('');
+
+    const EmployeeList = useSelector((state) => state.employeesReducer);
 
     const dispatch = useDispatch()
 
@@ -40,10 +42,25 @@ function Form() {
         const formValidation = validateForm(formJson);
         console.log(formValidation.data);
         if (formValidation.isValid){
+            //Vérification que l'employé n'est pas déjà dans la liste 
+            //On prend en compte Nom, Prénom, date de naissance
+            let doesEmployeeExist = false;
+            EmployeeList.map((employee) => {
+                if (employee.firstName === formValidation.data.firstName && employee.lastName === formValidation.data.lastName && employee.dateOfBirth === formValidation.data.dateOfBirth ){
+                    console.log("already exists");
+                    doesEmployeeExist = true;
+                    return;
+                }
+            });
+            if (doesEmployeeExist){
+                return;
+            }
+            //Si l'employé n'existe pas, on l'ajoute au state 
             dispatch(addEmployee(formValidation.data));
-            Object.values(setters).forEach(setter => setter(null));
+            //Et on efface les messages d'erreur
+            Object.values(setters).forEach(setter => setter(''));
         } else if (!formValidation.isValid){
-
+            //Mise en place des messages d'erreur
             Object.entries(formValidation.errorMsg).map(([field, errorMsg]) => {
                 if (setters[field]){
                     setters[field](errorMsg);
