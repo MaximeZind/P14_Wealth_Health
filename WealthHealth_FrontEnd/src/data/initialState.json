@@ -3,7 +3,7 @@
       "firstName": "Leonardo",
       "lastName": "DiCaprio",
       "startDate": "15/01/2002",
-      "department": "Acting",
+      "department": "Sales",
       "dateOfBirth": "11/11/1974",
       "street": "123 Hollywood Blvd",
       "city": "Los Angeles",
@@ -14,7 +14,7 @@
       "firstName": "Jennifer",
       "lastName": "Lawrence",
       "startDate": "20/02/2010",
-      "department": "Acting",
+      "department": "Marketing",
       "dateOfBirth": "15/08/1990",
       "street": "456 Film Street",
       "city": "New York",
@@ -25,7 +25,7 @@
       "firstName": "Elon",
       "lastName": "Musk",
       "startDate": "05/04/2015",
-      "department": "Innovation",
+      "department": "Engineering",
       "dateOfBirth": "28/06/1971",
       "street": "789 Innovation Way",
       "city": "Palo Alto",
@@ -36,7 +36,7 @@
       "firstName": "Serena",
       "lastName": "Williams",
       "startDate": "10/05/2005",
-      "department": "Sports",
+      "department": "Human resources",
       "dateOfBirth": "26/09/1981",
       "street": "555 Tennis Court",
       "city": "Miami",
@@ -47,7 +47,7 @@
       "firstName": "Beyoncé",
       "lastName": "Knowles",
       "startDate": "25/06/2008",
-      "department": "Music",
+      "department": "Legal",
       "dateOfBirth": "04/09/1981",
       "street": "777 Stage Avenue",
       "city": "Houston",
@@ -58,7 +58,7 @@
       "firstName": "Stephen",
       "lastName": "Hawking",
       "startDate": "01/07/2000",
-      "department": "Physics",
+      "department": "Engineering",
       "dateOfBirth": "08/01/1942",
       "street": "888 Theoretical St",
       "city": "Cambridge",
@@ -94,9 +94,9 @@
       "department": "Acting",
       "dateOfBirth": "15/04/1990",
       "street": "333 Film Avenue",
-      "city": "London",
-      "state": "UK",
-      "zipCode": "SW1A 1AA"
+      "city": "Los Angeles",
+      "state": "CA",
+      "zipCode": "90001"
     },
     {
       "firstName": "Tom",
@@ -105,9 +105,9 @@
       "department": "Acting",
       "dateOfBirth": "09/07/1956",
       "street": "444 Movie Lane",
-      "city": "Los Angeles",
-      "state": "CA",
-      "zipCode": "90001"
+      "city": "New York",
+      "state": "NY",
+      "zipCode": "10001"
     },
     {
       "firstName": "Malala",
@@ -116,9 +116,9 @@
       "department": "Education",
       "dateOfBirth": "12/07/1997",
       "street": "555 Activist Street",
-      "city": "Birmingham",
-      "state": "UK",
-      "zipCode": "B16 8UE"
+      "city": "Los Angeles",
+      "state": "CA",
+      "zipCode": "90001"
     },
     {
       "firstName": "David",
@@ -126,43 +126,43 @@
       "startDate": "01/01/2003",
       "department": "Sports",
       "dateOfBirth": "02/05/1975",
-      "street": "666 Soccer Lane",
-      "city": "London",
-      "state": "UK",
-      "zipCode": "SW1A 1AA"
+      "street": "666 Soccer Ave",
+      "city": "Miami",
+      "state": "FL",
+      "zipCode": "33101"
     },
     {
-      "firstName": "Rihanna",
-      "lastName": "Fenty",
-      "startDate": "15/02/2009",
-      "department": "Music",
-      "dateOfBirth": "20/02/1988",
-      "street": "777 Music Avenue",
-      "city": "Barbados",
-      "state": "BB",
-      "zipCode": "BB11000"
+      "firstName": "Meryl",
+      "lastName": "Streep",
+      "startDate": "15/02/1992",
+      "department": "Acting",
+      "dateOfBirth": "22/06/1949",
+      "street": "777 Hollywood Blvd",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zipCode": "90001"
     },
     {
-      "firstName": "Barack",
-      "lastName": "Obama",
-      "startDate": "20/03/2005",
-      "department": "Politics",
-      "dateOfBirth": "04/08/1961",
-      "street": "1600 Pennsylvania Ave",
-      "city": "Washington",
-      "state": "DC",
-      "zipCode": "20500"
+      "firstName": "Michael",
+      "lastName": "Jordan",
+      "startDate": "20/03/1984",
+      "department": "Sports",
+      "dateOfBirth": "17/02/1963",
+      "street": "888 Basketball Court",
+      "city": "Chicago",
+      "state": "IL",
+      "zipCode": "60601"
     },
     {
-      "firstName": "Adele",
-      "lastName": "Adkins",
-      "startDate": "05/04/2012",
-      "department": "Music",
-      "dateOfBirth": "05/05/1988",
-      "street": "888 Singing Road",
-      "city": "London",
-      "state": "UK",
-      "zipCode": "SW1A 1AA"
+      "firstName": "Angelina",
+      "lastName": "Jolie",
+      "startDate": "05/04/2001",
+      "department": "Humanitarian",
+      "dateOfBirth": "04/06/1975",
+      "street": "999 Charity Lane",
+      "city": "New York",
+      "state": "NY",
+      "zipCode": "10001"
     }
   ]
   
