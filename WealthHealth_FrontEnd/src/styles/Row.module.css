@@ -5,3 +5,7 @@
 tr:hover{
     background-color: #f6f6f6;
 }
+
+.highlighted{
+    background-color: #e6e6e6;
+}

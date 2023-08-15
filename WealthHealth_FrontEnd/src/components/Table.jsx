@@ -31,8 +31,12 @@ function Table({ employeeList }) {
         setIsAscending(!isAscending);
         setList(sortedList);
     }
-
-
+    let camelFields = []
+    fields.map((field) => {
+        camelFields.push(field.camelField);
+    })
+    const highlightedField = selectedField ? camelFields.indexOf(selectedField) : null;
+    console.log(highlightedField);
     return (
         <table id='employee_table' className={classes.table}>
             <thead>
@@ -43,8 +47,6 @@ function Table({ employeeList }) {
                                 <div className={classes.field}>{field.field}
                                     {selectedField !== field.camelField ?
                                         <div className={classes.icons}>
-                                            {/* <img style={{ transform: 'rotate(180deg)' }} className={classes.icon} src={arrow} alt="arrow" />
-                                            <img style={{fill:'red'}} className={classes.icon} src={arrow} alt="arrow" /> */}
                                             <Arrow transform='rotate(180deg)' color='#ddd'/>
                                             <Arrow transform='rotate(0deg)' color='#ddd'/>
                                         </div> :
@@ -65,8 +67,8 @@ function Table({ employeeList }) {
                 {list.length > 0 && list.map((employee) => {
                     const index = list.indexOf(employee);
                     const type = index % 2 ? 'even' : 'odd';
-
-                    return <Row key={index}
+                    return <Row highlightedField={highlightedField}
+                        key={index}
                         type={type}
                         firstName={employee.firstName}
                         lastName={employee.lastName}
