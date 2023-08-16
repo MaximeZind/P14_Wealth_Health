@@ -11,7 +11,7 @@ function Home() {
                 <h1>HRnet</h1>
             </div>
             <div className={classes.container}>
-                <Link to={'/employeelist'}>View Current Employees</Link>
+                <Link to={'/employeeslist'}>View Current Employees</Link>
                 <h2>Create Employee</h2>
                 <Form />
             </div>
