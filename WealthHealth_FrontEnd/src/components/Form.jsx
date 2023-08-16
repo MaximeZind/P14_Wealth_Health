@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import TextInput from './TextInput';
 import DateInput from './DateInput';
 import Dropdown from './Dropdown';
+import Button from './button';
 
 function Form() {
 
@@ -22,7 +23,7 @@ function Form() {
 
     const dispatch = useDispatch()
 
-    function saveEmployee(event){
+    function saveEmployee(event) {
         event.preventDefault();
 
         const form = event.target;
@@ -41,28 +42,28 @@ function Form() {
         };
         const formValidation = validateForm(formJson);
         console.log(formValidation.data);
-        if (formValidation.isValid){
+        if (formValidation.isValid) {
             //Vérification que l'employé n'est pas déjà dans la liste 
             //On prend en compte Nom, Prénom, date de naissance
             let doesEmployeeExist = false;
             EmployeeList.map((employee) => {
-                if (employee.firstName === formValidation.data.firstName && employee.lastName === formValidation.data.lastName && employee.dateOfBirth === formValidation.data.dateOfBirth ){
+                if (employee.firstName === formValidation.data.firstName && employee.lastName === formValidation.data.lastName && employee.dateOfBirth === formValidation.data.dateOfBirth) {
                     console.log("already exists");
                     doesEmployeeExist = true;
                     return;
                 }
             });
-            if (doesEmployeeExist){
+            if (doesEmployeeExist) {
                 return;
             }
             //Si l'employé n'existe pas, on l'ajoute au state 
             dispatch(addEmployee(formValidation.data));
             //Et on efface les messages d'erreur
             Object.values(setters).forEach(setter => setter(''));
-        } else if (!formValidation.isValid){
+        } else if (!formValidation.isValid) {
             //Mise en place des messages d'erreur
             Object.entries(formValidation.errorMsg).map(([field, errorMsg]) => {
-                if (setters[field]){
+                if (setters[field]) {
                     setters[field](errorMsg);
                 }
             });
@@ -73,22 +74,27 @@ function Form() {
     const states = getStates();
 
     return (
-                <form onSubmit={saveEmployee} action="#" id="create_employee">
-                    <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg}/>
-                    <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg}/>
-                    <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg}/>
-                    <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg}/>
-
+        <form className={classes.form} onSubmit={saveEmployee} action="#" id="create_employee">
+            <div className={classes.top}>
+                <div className={classes.left}>
+                    <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} />
+                    <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} />
+                    <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} />
+                    <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} />
+                    <Dropdown list={departments} name='department' label='Department' />
+                </div>
+                <div className={classes.right}>
                     <fieldset className={classes.address}>
                         <legend>Address</legend>
-                        <TextInput name='street' label='Street' errorMsg={streetErrorMsg}/>
-                        <TextInput name='city' label='City' errorMsg={cityErrorMsg}/>
+                        <TextInput name='street' label='Street' errorMsg={streetErrorMsg} />
+                        <TextInput name='city' label='City' errorMsg={cityErrorMsg} />
                         <Dropdown list={states} name='state' label='State' />
-                        <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg}/>
+                        <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg} />
                     </fieldset>
-                    <Dropdown list={departments} name='department' label='Department' />
-                    <button value="submit">Save</button>
-                </form>
+                    <Button value='submit' text='Save'/>
+                </div>
+            </div>
+        </form>
     );
 }
 
