@@ -6,6 +6,10 @@
     background-color: #FFFFFF;
 }
 
+.table_header > tr:hover{
+    background-color: #FFFFFF;
+}
+
 .table_header:hover{
     background-color: #FFFFFF;
     cursor: pointer;
