@@ -2,6 +2,15 @@
     width: 1073px;
 }
 
+.table_header{
+    background-color: #FFFFFF;
+}
+
+.table_header:hover{
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
 .field{
     display: flex;
     flex-direction: row;
@@ -16,12 +25,4 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.icon{
-    fill: black;
-}
-
-.selectedIcon{
-    fill: red;
 }

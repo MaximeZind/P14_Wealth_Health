@@ -16,18 +16,18 @@ function Table({ employeeList }) {
         }
         setSelectedField(field);
         let sortedList = [...list];
-        if (field === 'dateOfBirth' || field === 'startDate'){
-            if (isAscending){
+        if (field === 'dateOfBirth' || field === 'startDate') {
+            if (isAscending) {
                 sortedList = sortedList.sort((b, a) => new Date(a[field]) - new Date(b[field]));
-            } else if (!isAscending){
+            } else if (!isAscending) {
                 sortedList = sortedList.sort((a, b) => new Date(a[field]) - new Date(b[field]));
             }
         } else if (field !== 'dateOfBirth' && field !== 'startDate')
-        if (isAscending){
-            sortedList = sortedList.sort((b, a) => a[field].localeCompare(b[field]));
-        } else if (!isAscending){
-            sortedList = sortedList.sort((a, b) => a[field].localeCompare(b[field]));
-        }
+            if (isAscending) {
+                sortedList = sortedList.sort((b, a) => a[field].localeCompare(b[field]));
+            } else if (!isAscending) {
+                sortedList = sortedList.sort((a, b) => a[field].localeCompare(b[field]));
+            }
         setIsAscending(!isAscending);
         setList(sortedList);
     }
@@ -36,10 +36,9 @@ function Table({ employeeList }) {
         camelFields.push(field.camelField);
     })
     const highlightedField = selectedField ? camelFields.indexOf(selectedField) : null;
-    console.log(highlightedField);
     return (
         <table id='employee_table' className={classes.table}>
-            <thead>
+            <thead className={classes.table_header}>
                 <tr role='row'>
                     {fields.map((field) => {
                         return (
@@ -47,15 +46,20 @@ function Table({ employeeList }) {
                                 <div className={classes.field}>{field.field}
                                     {selectedField !== field.camelField ?
                                         <div className={classes.icons}>
-                                            <Arrow transform='rotate(180deg)' color='#ddd'/>
-                                            <Arrow transform='rotate(0deg)' color='#ddd'/>
+                                            <Arrow transform='rotate(180deg)' color='#ddd' />
+                                            <Arrow transform='rotate(0deg)' color='#ddd' />
                                         </div> :
                                         <div className={classes.icons}>
-                                            {isAscending ? 
-                                            <><Arrow transform='rotate(180deg)' color='#000000'/>
-                                            <Arrow transform='rotate(0deg)' color='#ddd'/></> :
-                                             <><Arrow transform='rotate(180deg)' color='#ddd'/>
-                                             <Arrow transform='rotate(0deg)' color='#000000'/></>}
+                                            {isAscending ?
+                                                <>
+                                                    <Arrow transform='rotate(180deg)' color='#a68ad1' />
+                                                    <Arrow transform='rotate(0deg)' color='#FFFFFF' />
+                                                </> :
+                                                <>
+                                                    <Arrow transform='rotate(180deg)' color='#FFFFFF' />
+                                                    <Arrow transform='rotate(0deg)' color='#a68ad1' />
+                                                </>
+                                            }
                                         </div>
                                     }
                                 </div>
