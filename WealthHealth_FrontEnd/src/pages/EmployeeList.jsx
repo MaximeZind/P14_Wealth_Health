@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import classes from '../styles/EmployeeList.module.css';
 import { useSelector } from 'react-redux';
