@@ -8,6 +8,7 @@
 
 .table_header > tr:hover{
     background-color: #FFFFFF;
+    color:#000000;
 }
 
 .table_header:hover{
@@ -22,6 +23,13 @@
     align-items: center;
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.selected_field{
+    background-color: rgb(52,79,4,0.4);
+    color: #FFFFFF;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .icons{

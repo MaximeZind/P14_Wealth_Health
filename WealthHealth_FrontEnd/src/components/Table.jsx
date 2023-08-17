@@ -42,22 +42,22 @@ function Table({ employeeList }) {
                 <tr role='row'>
                     {fields.map((field) => {
                         return (
-                            <th key={fields.indexOf(field)} onClick={() => sortBy(field.camelField)}>
+                            <th className={field.camelField === selectedField && classes.selected_field} key={fields.indexOf(field)} onClick={() => sortBy(field.camelField)}>
                                 <div className={classes.field}>{field.field}
                                     {selectedField !== field.camelField ?
                                         <div className={classes.icons}>
-                                            <Arrow transform='rotate(180deg)' color='#ddd' />
-                                            <Arrow transform='rotate(0deg)' color='#ddd' />
+                                            <Arrow transform='rotate(180deg)' color='rgb(52,79,4,0.6)' />
+                                            <Arrow transform='rotate(0deg)' color='rgb(52,79,4,0.6)' />
                                         </div> :
                                         <div className={classes.icons}>
                                             {isAscending ?
                                                 <>
-                                                    <Arrow transform='rotate(180deg)' color='#a68ad1' />
-                                                    <Arrow transform='rotate(0deg)' color='#FFFFFF' />
+                                                    <Arrow transform='rotate(180deg)' color='#FFFFFF' />
+                                                    <Arrow transform='rotate(0deg)' color='rgb(255, 255, 255, 0)' />
                                                 </> :
                                                 <>
-                                                    <Arrow transform='rotate(180deg)' color='#FFFFFF' />
-                                                    <Arrow transform='rotate(0deg)' color='#a68ad1' />
+                                                    <Arrow transform='rotate(180deg)' color='rgb(255, 255, 255, 0)' />
+                                                    <Arrow transform='rotate(0deg)' color='#FFFFFF' />
                                                 </>
                                             }
                                         </div>
@@ -71,7 +71,8 @@ function Table({ employeeList }) {
                 {list.length > 0 && list.map((employee) => {
                     const index = list.indexOf(employee);
                     const type = index % 2 ? 'even' : 'odd';
-                    return <Row highlightedField={highlightedField}
+                    return <Row delay={index}
+                        highlightedField={highlightedField}
                         key={index}
                         type={type}
                         firstName={employee.firstName}

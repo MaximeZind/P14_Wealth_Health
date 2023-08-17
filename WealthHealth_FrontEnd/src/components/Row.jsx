@@ -1,11 +1,15 @@
 import React from 'react';
 import classes from '../styles/Row.module.css';
 
-function EmployeeList({ highlightedField, type, firstName, lastName, startDate, department, dateOfBirth, street, city, state, zipCode }) {
+function Row({ delay, highlightedField, type, firstName, lastName, startDate, department, dateOfBirth, street, city, state, zipCode }) {
 
+    const animDelay = `${delay/20}s`;
+    const trStyle = {
+        animationDelay: animDelay,
+    };
     const className = type === 'odd' ? classes.odd : classes.even;
     return (
-        <tr role='row' className={className}>
+        <tr role='row' className={`${className} ${classes.myrow}`}  style={trStyle} id='row'>
             {highlightedField === 0 ? <td className={classes.highlighted}>{firstName}</td> : <td>{firstName}</td>}
             {highlightedField === 1 ? <td className={classes.highlighted}>{lastName}</td> : <td>{lastName}</td>}
             {highlightedField === 2 ? <td className={classes.highlighted}>{startDate}</td> : <td>{startDate}</td>}
@@ -19,4 +23,4 @@ function EmployeeList({ highlightedField, type, firstName, lastName, startDate, 
     );
 }
 
-export default EmployeeList;
+export default Row;
