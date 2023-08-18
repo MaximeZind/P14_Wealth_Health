@@ -5,7 +5,7 @@ function Dropdown({ list, name, label }) {
 
     return (
         <div>
-            <label htmlFor={name}>{label}</label>
+            <label className={classes.label} htmlFor={name}>{label}</label>
             <select className={classes.dropdown} name={name} id={name} >
                 {list.map((item) => {
                     return item.abbreviation ?

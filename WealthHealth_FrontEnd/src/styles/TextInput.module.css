@@ -1,0 +1,11 @@
+.label{
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.error_msg{
+    margin: 0;
+    font-size: 0.7rem;
+    font-style: italic;
+    color: red;
+}
