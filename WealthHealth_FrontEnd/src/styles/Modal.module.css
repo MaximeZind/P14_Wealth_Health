@@ -1,0 +1,11 @@
+.modal{
+    text-align: center;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    border: solid 1px #344f04;
+    padding: 3rem;
+}
+
+.close:hover{
+    cursor: pointer;
+}

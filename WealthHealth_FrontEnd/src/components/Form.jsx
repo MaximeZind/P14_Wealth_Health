@@ -10,7 +10,7 @@ import Dropdown from './Dropdown';
 import Button from './button';
 import { doesEmployeeExist } from '../utils/utils';
 
-function Form() {
+function Form({getModalText}) {
 
     const dispatch = useDispatch()
     const departments = getDepartments();
@@ -106,9 +106,13 @@ function Form() {
             if (formValidation.isValid === true) {
                 const newEmployee = Object.assign(personnalInformations, employeeAddress, formValidation.data);
                 //Vérification que l'employé n'est pas déjà dans la liste 
-                if (doesEmployeeExist(EmployeeList, newEmployee) === false) {
+                const verification = doesEmployeeExist(EmployeeList, newEmployee);
+                if (verification === false) {
                     //Si l'employé n'existe pas, on l'ajoute au state 
+                    getModalText('This employee was successfully created!');
                     dispatch(addEmployee(newEmployee));
+                } else if (verification === true){
+                    getModalText('This employee was already created.');
                 }
             }
             handleErrorMsgs(formValidation.errorMsg);

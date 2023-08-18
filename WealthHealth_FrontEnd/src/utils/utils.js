@@ -4,7 +4,6 @@ export function doesEmployeeExist(employeesList, newEmployee) {
     let doesEmployeeExist = false;
     employeesList.map((employee) => {
         if (employee.firstName === newEmployee.firstName && employee.lastName === newEmployee.lastName && employee.dateOfBirth === newEmployee.dateOfBirth) {
-            console.log("already exists");
             doesEmployeeExist = true;
             return;
         }
