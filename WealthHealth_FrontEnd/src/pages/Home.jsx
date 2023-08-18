@@ -6,9 +6,9 @@ function Home() {
 
     return (
         <main className={classes.main}>
-            <div className={classes.title}>
+            {/* <div className={classes.title}>
                 <h1>HRnet</h1>
-            </div>
+            </div> */}
             <div className={classes.container}>
                 <h2>Create Employee</h2>
                 <Form />
