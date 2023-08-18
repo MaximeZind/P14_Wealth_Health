@@ -2,14 +2,121 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 50px;
 }
 
 .form label{
     margin: 7px;
 }
 
-.top {
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.personnal_informations, .address, .work_situation{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    border: solid 1px #344f04;
+    padding: 3rem;
+}
+
+.activating{
+    animation-name: fade_slide_in;
+    animation-duration: 0.5s;
+    animation-fill-mode: backwards;
+    animation-timing-function: ease;
+}
+
+.inactivating{
+    animation-name: fade_slide_out;
+    animation-duration: 0.5s;
+    animation-fill-mode: backwards;
+    animation-timing-function: ease;
+}
+
+.activating_right{
+    animation-name: fade_slide_in_right;
+    animation-duration: 0.5s;
+    animation-fill-mode: backwards;
+    animation-timing-function: ease;
+}
+
+.inactivating_right{
+    animation-name: fade_slide_out_right;
+    animation-duration: 0.5s;
+    animation-fill-mode: backwards;
+    animation-timing-function: ease;
+}
+
+.inactive{
+    position: absolute;
+    left: -100vw;
+    max-width: 0px;
+    max-height: 0px;
+    overflow: hidden;
+}
+
+/* TO THE LEFT SIDE */
+@keyframes fade_slide_in {
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes fade_slide_out {
+    from {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+}
+
+/* TO THE RIGHT SIDE */
+
+@keyframes fade_slide_in_right {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes fade_slide_out_right {
+
+    from {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+}
+
+/* .top {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -22,17 +129,17 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 10px;
-}
+} */
 
-.right{
+/* .right{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 1rem;
-}
+} */
 
-.bottom{
+/* .bottom{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-}
+} */

@@ -1,14 +1,8 @@
-export function validateForm(object) {
-
+export function validatePersonnalInformations(object){
     const firstNameValidation = validateName(object.firstName);
     const lastNameValidation = validateName(object.lastName);
     const dateOfBirthValidation = validateDate(object.dateOfBirth, 18, 100);
-    const startDateValidation = validateDate(object.startDate);
-    const streetValidation = validateStreet(object.street);
-    const cityValidation = validateCity(object.city);
-    const zipCodeValidation = validateZipCode(object.zipCode);
-    const array = [firstNameValidation, lastNameValidation, dateOfBirthValidation, startDateValidation, streetValidation, cityValidation, zipCodeValidation];
-
+    const array = [firstNameValidation, lastNameValidation, dateOfBirthValidation];
     let isValid = true;
     array.map((item) => {
         if (!item.response) {
@@ -22,21 +16,67 @@ export function validateForm(object) {
             firstName: firstNameValidation.response,
             lastName: lastNameValidation.response,
             dateOfBirth: dateOfBirthValidation.response,
-            startDate: startDateValidation.response,
-            street: streetValidation.response,
-            city: cityValidation.response,
-            state: object.state,
-            zipCode: zipCodeValidation.response,
-            department: object.department
         },
         errorMsg: {
             firstName: firstNameValidation.errorMsg,
             lastName: lastNameValidation.errorMsg,
             dateOfBirth: dateOfBirthValidation.errorMsg,
-            startDate: startDateValidation.errorMsg,
+        }
+    }
+    return validation;
+}
+
+export function validateAddress(object) {
+
+    const streetValidation = validateStreet(object.street);
+    const cityValidation = validateCity(object.city);
+    const zipCodeValidation = validateZipCode(object.zipCode);
+    const array = [streetValidation, cityValidation, zipCodeValidation];
+
+    let isValid = true;
+    array.map((item) => {
+        if (!item.response) {
+            isValid = false;
+            return;
+        }
+    });
+    const validation = {
+        isValid: isValid,
+        data: {
+            street: streetValidation.response,
+            city: cityValidation.response,
+            state: object.state,
+            zipCode: zipCodeValidation.response,
+        },
+        errorMsg: {
             street: streetValidation.errorMsg,
             city: cityValidation.errorMsg,
             zipCode: zipCodeValidation.errorMsg
+        }
+    }
+    return validation;
+}
+
+export function validateWorkSituation(object) {
+
+    const startDateValidation = validateDate(object.startDate);
+    const array = [startDateValidation];
+
+    let isValid = true;
+    array.map((item) => {
+        if (!item.response) {
+            isValid = false;
+            return;
+        }
+    });
+    const validation = {
+        isValid: isValid,
+        data: {
+            startDate: startDateValidation.response,
+            department: object.department
+        },
+        errorMsg: {
+            startDate: startDateValidation.errorMsg,
         }
     }
     return validation;
@@ -97,6 +137,9 @@ export function validateDate(string, ageMin, ageMax) {
         const year = date.getFullYear();
         const MMDDYYYYdate = `${month}/${day}/${year}`;
         response = MMDDYYYYdate;
+    }
+    if (errorMsg){
+        response = false;
     }
     let validation = {
         response: response,

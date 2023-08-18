@@ -2,15 +2,22 @@ import React, { useState } from 'react';
 import classes from '../styles/Form.module.css';
 import { getDepartments, getStates } from '../utils/fetchData';
 import { addEmployee } from '../actions/employees.action';
-import { validateForm } from '../utils/formValidation';
+import { validatePersonnalInformations, validateAddress, validateWorkSituation } from '../utils/formValidation';
 import { useDispatch, useSelector } from 'react-redux';
 import TextInput from './TextInput';
 import DateInput from './DateInput';
 import Dropdown from './Dropdown';
 import Button from './button';
+import { doesEmployeeExist } from '../utils/utils';
 
 function Form() {
 
+    const dispatch = useDispatch()
+    const departments = getDepartments();
+    const states = getStates();
+    const EmployeeList = useSelector((state) => state.employeesReducer);
+
+    //Messages d'erreur
     const [firstNameErrorMsg, setFirstNameErrorMsg] = useState('');
     const [lastNameErrorMsg, setLastNameErrorMsg] = useState('');
     const [dateOfBirthErrorMsg, setDateOfBirthErrorMsg] = useState('');
@@ -19,18 +26,97 @@ function Form() {
     const [cityErrorMsg, setCityErrorMsg] = useState('');
     const [zipCodeErrorMsg, setZipCodeErrorMsg] = useState('');
 
-    const EmployeeList = useSelector((state) => state.employeesReducer);
+    //States avec nos données
+    const [personnalInformations, setPersonnalInformations] = useState(null);
+    const [employeeAddress, setEmployeeAddress] = useState(null);
 
-    const dispatch = useDispatch()
+    //States pour gérer les animations / formulaires affichés
+    const [personnalInformationsStatus, setPersonnalInformationsStatus] = useState('active');
+    const [employeeAddressStatus, setEmployeeAddressStatus] = useState('inactive');
+    const [workSituationStatus, setWorkSituationStatus] = useState('inactive');
 
-    function saveEmployee(event) {
+    function handleClickNext(completedPart) {
+        if (completedPart === 'personnalInformations') {
+            setPersonnalInformationsStatus('inactivating');
+            setTimeout(() => {
+                setEmployeeAddressStatus('activating');
+                setPersonnalInformationsStatus('inactive');
+            }, 450);
+            setTimeout(() => {
+                setEmployeeAddressStatus('active');
+            }, 900);
+        } else if (completedPart === 'employeeAddress') {
+            setEmployeeAddressStatus('inactivating');
+            setTimeout(() => {
+                setWorkSituationStatus('activating');
+                setEmployeeAddressStatus('inactive');
+            }, 450);
+            setTimeout(() => {
+                setWorkSituationStatus('active');
+            }, 900);
+        }
+    }
+
+    function handleClickPrevious(event) {
+        event.preventDefault();
+        const completedPart = event.target.value;
+        if (completedPart === 'employeeAddress') {
+            setEmployeeAddressStatus('inactivating_right');
+            setTimeout(() => {
+                setPersonnalInformationsStatus('activating_right');
+                setEmployeeAddressStatus('inactive');
+            }, 450);
+            setTimeout(() => {
+                setPersonnalInformationsStatus('active');
+            }, 900);
+        } else if (completedPart === 'workSituation') {
+            setWorkSituationStatus('inactivating_right');
+            setTimeout(() => {
+                setEmployeeAddressStatus('activating_right');
+                setWorkSituationStatus('inactive');
+            }, 450);
+            setTimeout(() => {
+                setEmployeeAddressStatus('active');
+            }, 900);
+        }
+    }
+
+    function handleFormSubmit(event) {
         event.preventDefault();
 
         const form = event.target;
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
+        if (form.className.includes('personnal_informations')) {
+            const formValidation = validatePersonnalInformations(formJson);
+            if (formValidation.isValid === true) {
+                setPersonnalInformations(formValidation.data);
+                handleClickNext('personnalInformations');
+            }
+            handleErrorMsgs(formValidation.errorMsg);
+        } else if (form.className.includes('address')) {
+            const formValidation = validateAddress(formJson);
+            if (formValidation.isValid === true) {
+                setEmployeeAddress(formValidation.data);
+                handleClickNext('employeeAddress');
+            }
+            handleErrorMsgs(formValidation.errorMsg);
+        } else if (form.className.includes('work_situation')) {
+            const formValidation = validateWorkSituation(formJson);
+            if (formValidation.isValid === true) {
+                const newEmployee = Object.assign(personnalInformations, employeeAddress, formValidation.data);
+                //Vérification que l'employé n'est pas déjà dans la liste 
+                if (doesEmployeeExist(EmployeeList, newEmployee) === false) {
+                    //Si l'employé n'existe pas, on l'ajoute au state 
+                    dispatch(addEmployee(newEmployee));
+                }
+            }
+            handleErrorMsgs(formValidation.errorMsg);
+        }
+    }
 
-        //On associe les champs avec les fonctions qui mettent en place les messages d'erreur
+    function handleErrorMsgs(errorMsgs) {
+
         const setters = {
             firstName: setFirstNameErrorMsg,
             lastName: setLastNameErrorMsg,
@@ -40,61 +126,52 @@ function Form() {
             city: setCityErrorMsg,
             zipCode: setZipCodeErrorMsg,
         };
-        const formValidation = validateForm(formJson);
-        console.log(formValidation.data);
-        if (formValidation.isValid) {
-            //Vérification que l'employé n'est pas déjà dans la liste 
-            //On prend en compte Nom, Prénom, date de naissance
-            let doesEmployeeExist = false;
-            EmployeeList.map((employee) => {
-                if (employee.firstName === formValidation.data.firstName && employee.lastName === formValidation.data.lastName && employee.dateOfBirth === formValidation.data.dateOfBirth) {
-                    console.log("already exists");
-                    doesEmployeeExist = true;
-                    return;
-                }
-            });
-            if (doesEmployeeExist) {
-                return;
+
+        Object.entries(errorMsgs).map(([field, errorMsg]) => {
+            if (setters[field]) {
+                setters[field](errorMsg);
             }
-            //Si l'employé n'existe pas, on l'ajoute au state 
-            dispatch(addEmployee(formValidation.data));
-            //Et on efface les messages d'erreur
-            Object.values(setters).forEach(setter => setter(''));
-        } else if (!formValidation.isValid) {
-            //Mise en place des messages d'erreur
-            Object.entries(formValidation.errorMsg).map(([field, errorMsg]) => {
-                if (setters[field]) {
-                    setters[field](errorMsg);
-                }
-            });
-        }
+        });
     }
 
-    const departments = getDepartments();
-    const states = getStates();
 
     return (
-        <form className={classes.form} onSubmit={saveEmployee} action="#" id="create_employee">
-            <div className={classes.top}>
-                <div className={classes.left}>
-                    <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} />
-                    <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} />
-                    <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} />
-                    <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} />
-                    <Dropdown list={departments} name='department' label='Department' />
+        <div>
+            <form
+                className={`${classes.personnal_informations} ${classes[personnalInformationsStatus]}`}
+                action="#"
+                onSubmit={handleFormSubmit}
+                id="add_personnal_informations">
+                <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} />
+                <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} />
+                <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} />
+                <Button text='Next' type='submit' value='personnalInformations' />
+            </form>
+            <form
+                className={`${classes.address} ${classes[employeeAddressStatus]}`}
+                action="#"
+                onSubmit={handleFormSubmit}
+                id="add_address">
+                <TextInput name='street' label='Street' errorMsg={streetErrorMsg} />
+                <TextInput name='city' label='City' errorMsg={cityErrorMsg} />
+                <Dropdown list={states} name='state' label='State' />
+                <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg} />
+                <div className={classes.buttons}>
+                    <Button text='Previous' value='employeeAddress' onClick={handleClickPrevious} />
+                    <Button text='Next' value='employeeAddress' />
                 </div>
-                <div className={classes.right}>
-                    <fieldset className={classes.address}>
-                        <legend>Address</legend>
-                        <TextInput name='street' label='Street' errorMsg={streetErrorMsg} />
-                        <TextInput name='city' label='City' errorMsg={cityErrorMsg} />
-                        <Dropdown list={states} name='state' label='State' />
-                        <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg} />
-                    </fieldset>
-                    <Button value='submit' text='Save'/>
+            </form>
+            <form
+                className={`${classes.work_situation} ${classes[workSituationStatus]}`}
+                onSubmit={handleFormSubmit}>
+                <Dropdown list={departments} name='department' label='Department' />
+                <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} />
+                <div className={classes.buttons}>
+                    <Button text='Previous' value='workSituation' onClick={handleClickPrevious} />
+                    <Button text='Create Employee' value='submit' />
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     );
 }
 
