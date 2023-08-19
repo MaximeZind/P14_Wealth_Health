@@ -4,6 +4,8 @@ import Row from '../components/Row';
 import fields from '../data/fields.json';
 import Arrow from './Arrow';
 import PropTypes from 'prop-types';
+import TextInput from './TextInput';
+import { search } from '../utils/searchScript';
 
 function Table({ employeeList }) {
 
@@ -39,6 +41,12 @@ function Table({ employeeList }) {
         setTableLength(event.target.value);
     }
 
+    function handleSearch(event){
+        let array = event.target.value.split(' ');
+        const newList = search(array, employeeList);
+        setList(newList);
+        }
+
     //On crée une array de fields en camelCase
     let camelFields = []
     fields.map((field) => {
@@ -63,6 +71,7 @@ function Table({ employeeList }) {
                     </select>
                     entries
                 </label>
+                <TextInput name='search' label='Search: ' onChange={handleSearch}/>
             </div>
             <table id='employee_table' className={classes.table}>
                 <thead className={classes.table_header}>
