@@ -15,7 +15,7 @@ function Nav() {
                     return {
                         display: isActive ? `none` : 'block',
                     };
-                }}>Form</NavLink>
+                }}>Add an employee</NavLink>
                 <NavLink to="/employeeslist" style={({ isActive }) => {
                     return {
                         display: isActive ? `none` : 'block',
