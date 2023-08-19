@@ -9,6 +9,7 @@ import DateInput from './DateInput';
 import Dropdown from './Dropdown';
 import Button from './button';
 import { doesEmployeeExist } from '../utils/utils';
+import PropTypes from 'prop-types';
 
 function Form({getModalText}) {
 
@@ -178,5 +179,9 @@ function Form({getModalText}) {
         </div>
     );
 }
+
+Form.propTypes = {
+    getModalText: PropTypes.func.isRequired,
+  }
 
 export default Form;

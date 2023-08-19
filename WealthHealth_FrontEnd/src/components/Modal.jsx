@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from '../styles/Modal.module.css';
-import Button from './button';
+import PropTypes from 'prop-types';
 
 function Modal({modalText, getModalText}) {
 
@@ -11,5 +11,10 @@ function Modal({modalText, getModalText}) {
             </div>
     );
 }
+
+Modal.propTypes = {
+    modalText: PropTypes.string.isRequired,
+    getModalText: PropTypes.func.isRequired,
+  }
 
 export default Modal;

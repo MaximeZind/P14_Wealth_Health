@@ -3,6 +3,7 @@ import classes from '../styles/Table.module.css';
 import Row from '../components/Row';
 import fields from '../data/fields.json';
 import Arrow from './Arrow';
+import PropTypes from 'prop-types';
 
 function Table({ employeeList }) {
 
@@ -121,5 +122,21 @@ function Table({ employeeList }) {
         </section>
     );
 }
+
+Table.propTypes = {
+    employeeList: PropTypes.arrayOf(
+        PropTypes.shape({
+            firstName: PropTypes.string.isRequired,
+            lastName: PropTypes.string.isRequired,
+            startDate: PropTypes.string.isRequired,
+            department: PropTypes.string.isRequired,
+            dateOfBirth: PropTypes.string.isRequired,
+            street: PropTypes.string.isRequired,
+            city: PropTypes.string.isRequired,
+            state: PropTypes.string.isRequired,
+            zipCode: PropTypes.string.isRequired,
+        })
+    ).isRequired,
+  }
 
 export default Table;

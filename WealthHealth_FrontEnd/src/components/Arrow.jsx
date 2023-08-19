@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Arrow({transform, color}) {
   return (
@@ -16,6 +17,11 @@ function Arrow({transform, color}) {
         <polygon points="0,96.879 193.129,289.379 386.257,96.879" />
       </svg>
   );
+}
+
+Arrow.propTypes = {
+  transform: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
 }
 
 export default Arrow;

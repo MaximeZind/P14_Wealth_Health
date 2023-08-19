@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from '../styles/TextInput.module.css';
+import PropTypes from 'prop-types';
 
 function TextInput({name, label, errorMsg}) {
 
@@ -11,5 +12,11 @@ function TextInput({name, label, errorMsg}) {
         </div>
     );
 }
+
+TextInput.propTypes = {
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    errorMsg: PropTypes.string,
+  }
 
 export default TextInput;

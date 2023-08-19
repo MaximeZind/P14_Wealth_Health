@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from '../styles/Dropdown.module.css';
+import PropTypes from 'prop-types';
 
 function Dropdown({ list, name, label }) {
-
     return (
         <div>
             <label className={classes.label} htmlFor={name}>{label}</label>
@@ -16,5 +16,16 @@ function Dropdown({ list, name, label }) {
         </div>
     );
 }
+
+Dropdown.propTypes = {
+    list: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            abbreviation: PropTypes.string,
+        })
+        ).isRequired,
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }
 
 export default Dropdown;

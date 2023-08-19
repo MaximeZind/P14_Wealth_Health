@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from '../styles/Row.module.css';
+import PropTypes from 'prop-types';
 
 function Row({ delay, highlightedField, type, firstName, lastName, startDate, department, dateOfBirth, street, city, state, zipCode }) {
 
@@ -22,5 +23,20 @@ function Row({ delay, highlightedField, type, firstName, lastName, startDate, de
         </tr>
     );
 }
+
+Row.propTypes = {
+    delay: PropTypes.number.isRequired,
+    highlightedField: PropTypes.number,
+    type: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    startDate: PropTypes.string.isRequired,
+    department: PropTypes.string.isRequired,
+    dateOfBirth: PropTypes.string.isRequired,
+    street: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    state: PropTypes.string.isRequired,
+    zipCode: PropTypes.string.isRequired,
+  }
 
 export default Row;

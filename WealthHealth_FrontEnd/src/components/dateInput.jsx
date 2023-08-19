@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from '../styles/DateInput.module.css';
+import PropTypes from 'prop-types';
 
 function DateInput({name, label, errorMsg}) {
 
@@ -11,5 +12,12 @@ function DateInput({name, label, errorMsg}) {
         </div>
     );
 }
+
+DateInput.propTypes = {
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    errorMsg: PropTypes.string,
+  }
+
 
 export default DateInput; 
