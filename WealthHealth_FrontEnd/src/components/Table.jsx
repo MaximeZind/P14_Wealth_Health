@@ -35,7 +35,7 @@ function Table({ employeeList }) {
         if ((currentPage * tableLength) > list.length) {
             setCurrentPage(updatedPages)
         }
-    }, [list, tableLength]);
+    }, [list, tableLength, currentPage]);
 
     //Fonction pour trier par champ cliqué
     function sortBy(field) {
@@ -60,15 +60,17 @@ function Table({ employeeList }) {
         setList(sortedList);
     }
 
+    //fonciton qui gère la valeur reçue par le menu déroulant
     function handleSelect(event) {
         setTableLength(event.target.value);
-
     }
 
+    //Fonction qui gère le champ de recherche du tableau
     function handleSearch(event) {
         let array = event.target.value.split(' ');
         const newList = search(array, employeeList);
         setList(newList);
+        setCurrentPage(1);
     }
 
     return (
