@@ -1,3 +1,16 @@
+.table_section{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.table_filters{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .table{
     width: 1073px;
 }
@@ -37,4 +50,19 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.table_navigation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pages{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
 }

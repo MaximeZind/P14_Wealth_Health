@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from '../styles/Table.module.css';
 import Row from '../components/Row';
 import fields from '../data/fields.json';
@@ -9,10 +9,33 @@ import { search } from '../utils/searchScript';
 
 function Table({ employeeList }) {
 
+    //initialisation des States
     const [list, setList] = useState([...employeeList]);
     const [selectedField, setSelectedField] = useState(null);
     const [isAscending, setIsAscending] = useState(false);
     const [tableLength, setTableLength] = useState(10);
+    const [pages, setPages] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    //On crée une array de fields en camelCase
+    let camelFields = []
+    fields.map((field) => {
+        camelFields.push(field.camelField);
+    })
+    //... Pour savoir lequel est sélectionné
+    const highlightedField = selectedField ? camelFields.indexOf(selectedField) : null;
+    // array de longueurs possible de tableau
+    const tableLengths = [10, 25, 50, 100];
+
+    useEffect(() => {
+        //Mise en place du nombre de pages
+        const updatedPages = Math.ceil(list.length / tableLength)
+        setPages(updatedPages);
+        //Si la page actuelle est trop élevée, on lui attribue la valeur maximale
+        if ((currentPage * tableLength) > list.length) {
+            setCurrentPage(updatedPages)
+        }
+    }, [list, tableLength]);
 
     //Fonction pour trier par champ cliqué
     function sortBy(field) {
@@ -37,27 +60,17 @@ function Table({ employeeList }) {
         setList(sortedList);
     }
 
-    function handleSelect(event){
+    function handleSelect(event) {
         setTableLength(event.target.value);
+
     }
 
-    function handleSearch(event){
+    function handleSearch(event) {
         let array = event.target.value.split(' ');
         const newList = search(array, employeeList);
         setList(newList);
-        }
+    }
 
-    //On crée une array de fields en camelCase
-    let camelFields = []
-    fields.map((field) => {
-        camelFields.push(field.camelField);
-    })
-
-    //... Pour savoir lequel est sélectionné
-    const highlightedField = selectedField ? camelFields.indexOf(selectedField) : null;
-
-    // array de longueurs possible de tableau
-    const tableLengths = [10, 25, 50, 100];
     return (
         employeeList &&
         <section className={classes.table_section}>
@@ -71,7 +84,7 @@ function Table({ employeeList }) {
                     </select>
                     entries
                 </label>
-                <TextInput name='search' label='Search: ' onChange={handleSearch}/>
+                <TextInput name='search' label='Search: ' onChange={handleSearch} />
             </div>
             <table id='employee_table' className={classes.table}>
                 <thead className={classes.table_header}>
@@ -108,26 +121,36 @@ function Table({ employeeList }) {
                     {list.length > 0 && list.map((employee) => {
                         const index = list.indexOf(employee);
                         const type = index % 2 ? 'even' : 'odd';
-                        if (index < tableLength){
+                        if ((index >= (currentPage - 1) * tableLength) && (index < currentPage * tableLength)) {
                             return (<Row delay={index}
-                            highlightedField={highlightedField}
-                            key={index}
-                            type={type}
-                            firstName={employee.firstName}
-                            lastName={employee.lastName}
-                            startDate={employee.startDate}
-                            department={employee.department}
-                            dateOfBirth={employee.dateOfBirth}
-                            street={employee.street}
-                            city={employee.city}
-                            state={employee.state}
-                            zipCode={employee.zipCode} />)
-                        } else if (index >= tableLength){
+                                highlightedField={highlightedField}
+                                key={index}
+                                type={type}
+                                firstName={employee.firstName}
+                                lastName={employee.lastName}
+                                startDate={employee.startDate}
+                                department={employee.department}
+                                dateOfBirth={employee.dateOfBirth}
+                                street={employee.street}
+                                city={employee.city}
+                                state={employee.state}
+                                zipCode={employee.zipCode} />)
+                        } else if (index >= tableLength) {
                             return null;
                         }
                     })}
                 </tbody>
             </table>
+            <div className={classes.table_navigation}>
+                <p> Showing {(currentPage - 1) * tableLength + 1} to {currentPage * tableLength <= list.length ? currentPage * tableLength : list.length} of {list.length} entries</p>
+                {pages > 1 ? <div className={classes.pages}>
+                    {currentPage > 1 ? <p onClick={() => setCurrentPage(currentPage-1)}>Previous</p> : null}
+                    {Array.from(Array(pages).keys()).map((key) => {
+                        return <p onClick={() => setCurrentPage(key + 1)} key={key}>{key + 1}</p>
+                    })}
+                    {currentPage < pages ? <p onClick={() => setCurrentPage(currentPage+1)}>Next</p> : null}
+                </div> : null}
+            </div>
         </section>
     );
 }
@@ -146,6 +169,6 @@ Table.propTypes = {
             zipCode: PropTypes.string.isRequired,
         })
     ).isRequired,
-  }
+}
 
 export default Table;

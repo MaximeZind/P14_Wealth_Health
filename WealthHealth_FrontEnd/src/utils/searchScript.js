@@ -6,13 +6,13 @@ export function search(inputKeywords, employeesList) {
         let count = 0;
         const employeesArray = Object.values(employee).toString();
         inputKeywords.map((word) => {
-            if (employeesArray.toLowerCase().trim().includes(word.toLowerCase().trim())){
+            if (employeesArray.toLowerCase().trim().includes(word.toLowerCase().trim())) {
                 count++;
             }
-            if(count === inputKeywords.length){
+            if (count === inputKeywords.length) {
                 result.push(employee);
             }
         })
     });
     return result;
-  }
+}
