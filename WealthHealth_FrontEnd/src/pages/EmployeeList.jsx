@@ -5,6 +5,8 @@ import Table from '../components/Table';
 
 function EmployeeList() {
 
+    const pageTitle = 'Employees list';
+    document.title =`Wealth Health HRnet - ${pageTitle}`;
     const employeeList = useSelector((state) => state.employeesReducer);
     return (
         <main className={classes.main}>

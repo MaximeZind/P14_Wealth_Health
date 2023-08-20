@@ -5,6 +5,8 @@ import Modal from '../components/Modal';
 
 function Home() {
 
+    const pageTitle = 'Create an employee';
+    document.title =`Wealth Health HRnet - ${pageTitle}`;
     const [modalText, setModalText] = useState(null);
     function getModalText(text){
         setModalText(text);
