@@ -3,7 +3,7 @@
 }
 
 tr:hover{
-    background-color: rgb(52,79,4,0.6);
+    background-color: rgb(52,79,4,0.6); 
     color: #FFFFFF;
 }
 
@@ -17,6 +17,43 @@ tr:hover{
     animation-duration: 0.5s;
     animation-fill-mode: backwards;
     animation-timing-function: ease;
+}
+
+td{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    overflow: hidden;
+}
+.myrow p {
+    margin: 0;
+}
+
+.test{
+    width: calc(100% + 40px);
+    display: grid;
+    grid-template-columns: auto 40px;
+    transition: .5s;
+}
+
+.myrow:hover .test {
+    width: 100%;
+    opacity: 1;
+}
+
+.myrow .icons{
+    opacity: 0;
+    transition: .5s;
+}
+
+.myrow:hover .icons{
+    opacity: 1;
+}
+
+.icons{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
 }
 
 @keyframes fade_slide_in {

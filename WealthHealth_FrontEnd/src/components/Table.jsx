@@ -148,7 +148,7 @@ function Table({ employeeList }) {
                 {pages > 1 ? <div className={classes.pages}>
                     {currentPage > 1 ? <p onClick={() => setCurrentPage(currentPage-1)}>Previous</p> : null}
                     {Array.from(Array(pages).keys()).map((key) => {
-                        return <p onClick={() => setCurrentPage(key + 1)} key={key}>{key + 1}</p>
+                        return <p className={(key+1) === currentPage ? classes.active : null} onClick={() => setCurrentPage(key + 1)} key={key}>{key + 1}</p>
                     })}
                     {currentPage < pages ? <p onClick={() => setCurrentPage(currentPage+1)}>Next</p> : null}
                 </div> : null}
