@@ -20,22 +20,23 @@ tr:hover{
 }
 
 td{
-    padding-top: 5px;
-    padding-bottom: 5px;
     overflow: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #b1b1b1;
 }
 .myrow p {
     margin: 0;
 }
 
-.test{
+.zipcode_container{
     width: calc(100% + 40px);
     display: grid;
     grid-template-columns: auto 40px;
-    transition: .5s;
+    transition: width .5s;
 }
 
-.myrow:hover .test {
+.myrow:hover .zipcode_container {
     width: 100%;
     opacity: 1;
 }
@@ -56,6 +57,17 @@ td{
     align-items: center;
 }
 
+.icons > svg{
+    transition: transform .3s;
+}
+
+
+.icons > svg:hover{
+    transform: scale(1.1);
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
 @keyframes fade_slide_in {
     from {
         transform: translateY(50px);
@@ -66,4 +78,8 @@ td{
         transform: translateY(0px);
         opacity: 1;
     }
+}
+
+.inputfield{
+    width: 85%;
 }

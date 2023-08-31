@@ -17,6 +17,7 @@
 
 .table{
     width: 1073px;
+    border-spacing: 0;
 }
 
 .table_header{

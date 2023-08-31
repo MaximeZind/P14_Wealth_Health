@@ -36,16 +36,16 @@ function Row({ delay, highlightedField, type, firstName, lastName, startDate, de
     return (
         !isFormOpened ?
             <tr role='row' className={`${className} ${classes.myrow}`} style={trStyle} id='row'>
-                <td>{firstName}</td>
-                <td>{lastName}</td>
-                <td>{startDate}</td>
-                <td>{department}</td>
-                <td>{dateOfBirth}</td>
-                <td>{street}</td>
-                <td>{city}</td>
-                <td>{state}</td>
-                <td>
-                    <div className={classes.test}>
+                <td className={highlightedField === 0 ? classes.highlighted : null}>{firstName}</td>
+                <td className={highlightedField === 1 ? classes.highlighted : null}>{lastName}</td>
+                <td className={highlightedField === 2 ? classes.highlighted : null}>{startDate}</td>
+                <td className={highlightedField === 3 ? classes.highlighted : null}>{department}</td>
+                <td className={highlightedField === 4 ? classes.highlighted : null}>{dateOfBirth}</td>
+                <td className={highlightedField === 5 ? classes.highlighted : null}>{street}</td>
+                <td className={highlightedField === 6 ? classes.highlighted : null}>{city}</td>
+                <td className={highlightedField === 7 ? classes.highlighted : null}>{state}</td>
+                <td className={highlightedField === 8 ? classes.highlighted : null}>
+                    <div className={classes.zipcode_container}>
                         <p>{zipCode}</p>
                         <div className={classes.icons}>
                             <Pencil color='#000000' height='15px' width='15px' onClick={handlePencilClick} />
@@ -55,17 +55,17 @@ function Row({ delay, highlightedField, type, firstName, lastName, startDate, de
                 </td>
             </tr> :
             <tr role='row' className={`${className} ${classes.myrow}`} style={trStyle} id='row'>
-                <td><input defaultValue={firstName} id='firstName' onChange={handleChange}/></td>
-                <td><input defaultValue={lastName} id='lastName' onChange={handleChange}/></td>
-                <td><input defaultValue={startDate} id='startDate' onChange={handleChange}/></td>
-                <td><input defaultValue={department} id='department' onChange={handleChange}/></td>
-                <td><input defaultValue={dateOfBirth} id='dateOfBirth' onChange={handleChange}/></td>
-                <td><input defaultValue={street} id='street' onChange={handleChange}/></td>
-                <td><input defaultValue={city} id='city' onChange={handleChange}/></td>
-                <td><input defaultValue={state} id='state' onChange={handleChange}/></td>
-                <td>
+                <td className={highlightedField === 0 ? classes.highlighted : null}><input className={classes.inputfield} defaultValue={firstName} id='firstName' onChange={handleChange}/></td>
+                <td className={highlightedField === 1 ? classes.highlighted : null}><input className={classes.inputfield} defaultValue={lastName} id='lastName' onChange={handleChange}/></td>
+                <td className={highlightedField === 2 ? classes.highlighted : null}><input className={classes.inputfield} defaultValue={startDate} id='startDate' onChange={handleChange}/></td>
+                <td className={highlightedField === 3 ? classes.highlighted : null}><input className={classes.inputfield} defaultValue={department} id='department' onChange={handleChange}/></td>
+                <td className={highlightedField === 4 ? classes.highlighted : null}><input className={classes.inputfield} defaultValue={dateOfBirth} id='dateOfBirth' onChange={handleChange}/></td>
+                <td className={highlightedField === 5 ? classes.highlighted : null}><input className={classes.inputfield} defaultValue={street} id='street' onChange={handleChange}/></td>
+                <td className={highlightedField === 6 ? classes.highlighted : null}><input className={classes.inputfield} defaultValue={city} id='city' onChange={handleChange}/></td>
+                <td className={highlightedField === 7 ? classes.highlighted : null}><input className={classes.inputfield} defaultValue={state} id='state' onChange={handleChange}/></td>
+                <td className={highlightedField === 8 ? classes.highlighted : null}>
                     <div className={classes.zipcode}>
-                        <input ref={zipCodeRef} value={zipCode} id='zipCode' onChange={handleChange}/>
+                        <input className={classes.inputfield} ref={zipCodeRef} defaultValue={zipCode} id='zipCode' onChange={handleChange} />
                     </div>
                 </td>
             </tr>

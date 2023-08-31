@@ -15,7 +15,7 @@ function DateInput({name, label, errorMsg}) {
 
 DateInput.propTypes = {
     name: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     errorMsg: PropTypes.string,
   }
 
