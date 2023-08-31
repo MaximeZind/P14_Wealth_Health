@@ -6,7 +6,7 @@ import { validatePersonnalInformations, validateAddress, validateWorkSituation }
 import { useDispatch, useSelector } from 'react-redux';
 import TextInput from './TextInput';
 import DateInput from './DateInput';
-import Dropdown from './Dropdown';
+import Dropdown from './dropdown/Dropdown';
 import Button from './button';
 import { doesEmployeeExist } from '../utils/utils';
 import PropTypes from 'prop-types';
@@ -147,6 +147,7 @@ function Form({getModalText}) {
                 action="#"
                 onSubmit={handleFormSubmit}
                 id="add_personnal_informations">
+                    <Dropdown list={states} name='state' label='State' />
                 <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} />
                 <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} />
                 <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} />
