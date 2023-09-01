@@ -88,6 +88,7 @@ function Form({getModalText}) {
         const form = event.target;
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
+        console.log(formJson);
         if (form.className.includes('personnal_informations')) {
             const formValidation = validatePersonnalInformations(formJson);
             if (formValidation.isValid === true) {
@@ -147,7 +148,6 @@ function Form({getModalText}) {
                 action="#"
                 onSubmit={handleFormSubmit}
                 id="add_personnal_informations">
-                    <Dropdown list={states} name='state' label='State' />
                 <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} />
                 <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} />
                 <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} />

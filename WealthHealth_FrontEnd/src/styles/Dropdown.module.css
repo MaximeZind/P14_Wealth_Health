@@ -7,7 +7,7 @@
     width: auto;
     display: flex;
     flex-direction: column;
-    transition: height 0.7s ease-out, background-color 0.7s ease;
+    transition: height 0.3s ease-out, background-color 0.5s ease;
     z-index: 10;
     position: relative;
     background-color: #FFFFFF;
@@ -29,6 +29,11 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    border: none;
+}
+
+.selected_item:focus{
+    outline: none;
 }
 
 .selected_item::after{
@@ -133,6 +138,13 @@
 .dropdown_options span:hover{
     cursor: pointer;
     background-color: rgb(177,196,108, 0.2);
+}
+
+.hidden {
+    height: 0;
+    width: 0;
+    position: absolute;
+    left: -500px;
 }
 
 .label{
