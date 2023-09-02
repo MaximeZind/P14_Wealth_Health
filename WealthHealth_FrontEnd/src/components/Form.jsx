@@ -5,7 +5,7 @@ import { addEmployee } from '../actions/employees.action';
 import { validatePersonnalInformations, validateAddress, validateWorkSituation } from '../utils/formValidation';
 import { useDispatch, useSelector } from 'react-redux';
 import TextInput from './TextInput';
-import DateInput from './DateInput';
+import DateInput from './datepicker/DateInput';
 import Dropdown from './dropdown/Dropdown';
 import Button from './button';
 import { doesEmployeeExist } from '../utils/utils';
@@ -178,7 +178,7 @@ function Form({getModalText}) {
                 id="add_address">
                 <TextInput name='street' label='Street' errorMsg={streetErrorMsg} />
                 <TextInput name='city' label='City' errorMsg={cityErrorMsg} />
-                <Dropdown list={states} name='state' label='State' />
+                <Dropdown list={states} name='state' label='State' placeholder='Select a state' height={30} />
                 <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg} />
                 <div className={classes.buttons}>
                     <Button text='Previous' value='employeeAddress' onClick={handleClickPrevious} />
@@ -188,7 +188,7 @@ function Form({getModalText}) {
             <form
                 className={`${classes.work_situation} ${classes[workSituationStatus]}`}
                 onSubmit={handleFormSubmit}>
-                <Dropdown list={departments} name='department' label='Department' />
+                <Dropdown list={departments} name='department' label='Department' placeholder='Select a department' height={40} />
                 <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} />
                 <div className={classes.buttons}>
                     <Button text='Previous' value='workSituation' onClick={handleClickPrevious} />

@@ -1,3 +1,43 @@
+.date_input{
+    border: 1px solid #000000;
+    border-radius: 10px;
+    min-height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.selected_date{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.date_picker{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.date_picker_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.date_picker_days_grid{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
 .label{
     font-size: 1.4rem;
     margin: 0;
