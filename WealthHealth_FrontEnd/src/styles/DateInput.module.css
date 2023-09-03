@@ -1,4 +1,9 @@
+.date_input_container{
+    width: 100%;
+}
+
 .date_input{
+    box-sizing: border-box;
     border: 1px solid #000000;
     border-radius: 10px;
     min-height: 40px;
@@ -6,7 +11,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
+    padding: 5px;
 }
 
 .selected_date{
@@ -16,26 +21,101 @@
     align-items: center;
 }
 
+.date_input_icon{
+    box-sizing: content-box;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: rgb(177,196,108, 0.2);
+}
+
+.date_input_icon:hover{
+    cursor: pointer;
+}
+
+.date_input_icon:hover > svg{
+    transform: scale(1.1);
+}
+
 .date_picker{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #000000;
     border-radius: 10px;
-    padding: 10px;
+    padding: 20px 12px 12px 12px;
+    gap: 30px;
+    position: absolute;
+    background-color: #FFFFFF;
+    z-index: 10;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .date_picker_header{
-    display: flex;
-    flex-direction: row;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
+    display: grid;
+    grid-template-columns: 20px 20px 1fr 20px 20px;
+    gap: 10px;
+}
+
+.date_picker_nav{
+    width: 20px;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.date_picker_nav:hover{
+    cursor: pointer;
+    background-color: rgb(177,196,108, 0.2);
+}
+
+.date_picker_month_year{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.date_picker_days{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .date_picker_days_grid{
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.previous, .next{
+    color: rgb(180, 177, 177);
+}
+
+.date_picker_days_grid > span{
+    border-radius: 5px;
+}
+
+.date_picker_days_grid > span:hover{
+    cursor: pointer;
+    background-color: rgb(177,196,108, 0.2);
+}
+
+.hidden {
+    height: 0;
+    width: 0;
+    position: absolute;
+    left: -500px;
 }
 
 .label{
