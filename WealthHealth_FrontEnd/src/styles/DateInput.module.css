@@ -1,5 +1,6 @@
 .date_input_container{
     width: 100%;
+    user-select: none;
 }
 
 .date_input{
@@ -48,10 +49,12 @@
     border-radius: 10px;
     padding: 20px 12px 12px 12px;
     gap: 30px;
+    width: 270px;
     position: absolute;
     background-color: #FFFFFF;
     z-index: 10;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: bottom 0.3s ease;
 }
 
 .date_picker_header{
@@ -91,9 +94,17 @@
     gap: 16px;
 }
 
+.date_picker_days_grid_header{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
 .date_picker_days_grid{
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
     gap: 5px;
     font-family: 'Roboto Condensed', sans-serif;
 }
@@ -104,11 +115,18 @@
 
 .date_picker_days_grid > span{
     border-radius: 5px;
+    height: 25px;
+    width: 25px;
 }
 
 .date_picker_days_grid > span:hover{
     cursor: pointer;
     background-color: rgb(177,196,108, 0.2);
+}
+
+.selected_day, .date_picker_days_grid > .selected_day:hover{
+    background-color: #344f04;
+    color: #FFFFFF;
 }
 
 .hidden {

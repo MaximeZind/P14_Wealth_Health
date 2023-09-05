@@ -178,7 +178,7 @@ function Form({getModalText}) {
                 id="add_address">
                 <TextInput name='street' label='Street' errorMsg={streetErrorMsg} />
                 <TextInput name='city' label='City' errorMsg={cityErrorMsg} />
-                <Dropdown list={states} name='state' label='State' placeholder='Select a state' height={30} />
+                <Dropdown list={states} name='state' label='State' placeholder='Select a state' height={40} />
                 <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg} />
                 <div className={classes.buttons}>
                     <Button text='Previous' value='employeeAddress' onClick={handleClickPrevious} />
@@ -189,6 +189,7 @@ function Form({getModalText}) {
                 className={`${classes.work_situation} ${classes[workSituationStatus]}`}
                 onSubmit={handleFormSubmit}>
                 <Dropdown list={departments} name='department' label='Department' placeholder='Select a department' height={40} />
+                {/* <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} /> */}
                 <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} />
                 <div className={classes.buttons}>
                     <Button text='Previous' value='workSituation' onClick={handleClickPrevious} />
