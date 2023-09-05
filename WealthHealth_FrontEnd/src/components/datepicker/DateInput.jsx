@@ -19,6 +19,7 @@ function DateInput({ name, label, errorMsg }) {
     const selectedValue = `${month}/${day}/${year}`;
     const gridArray = getGridArray(year, month);
 
+    //useEffect pour déterminer si le module doit se mettre au dessus ou en dessous
     useEffect(() => {
         const inputRect = input.current.getBoundingClientRect();
         const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -40,6 +41,7 @@ function DateInput({ name, label, errorMsg }) {
         }
     }
 
+    //fonction qui sert à générer les arrays de jours qui figurent dans le tableau
     function getGridArray(year, month) {
 
         const firstDay = new Date(year, month - 1, 1).getDay();
@@ -78,10 +80,6 @@ function DateInput({ name, label, errorMsg }) {
         12: "December"
     };
 
-    // if (input.current){
-    //     console.log(input.current.clientHeight)
-    // }
-
     //Fonctions de navigations entre les mois
     function handleNextMonth() {
         if (month === 12) {
@@ -110,6 +108,7 @@ function DateInput({ name, label, errorMsg }) {
         }
     }
 
+    //Fonctions qui gèrent les cliques sur des jours des mois précédents ou suivants (gris)
     function handleClickPreviousMonth(day) {
         setDay(day);
         if (month === 1){
@@ -121,7 +120,11 @@ function DateInput({ name, label, errorMsg }) {
 
     function handleClickNextMonth(day) {
         setDay(day);
-        setMonth(month + 1);
+        if (month === 12){
+            setMonth(1);
+        } else if (month < 12){
+            setMonth(month + 1);
+        }
     }
     return (
         <div className={classes.date_input_container} ref={datePicker}>
