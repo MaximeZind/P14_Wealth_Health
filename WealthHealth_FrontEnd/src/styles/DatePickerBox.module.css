@@ -1,0 +1,126 @@
+
+.date_picker{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    padding: 20px 12px 12px 12px;
+    gap: 30px;
+    width: 285px;
+    position: absolute;
+    background-color: #FFFFFF;
+    z-index: 10;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: bottom 0.3s ease;
+}
+
+.date_picker_header{
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 20px 20px 1fr 20px 20px;
+    gap: 10px;
+}
+
+.date_picker_nav{
+    width: 20px;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.date_picker_nav:hover{
+    cursor: pointer;
+    background-color: rgb(177,196,108, 0.2);
+}
+
+.date_picker_month_year{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.date_picker_month, .date_picker_year{
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.date_picker_month:hover, .date_picker_year:hover{
+    cursor: pointer;
+    background-color: rgb(177,196,108, 0.2);
+    border-radius: 5px;
+}
+
+.selected{
+    background-color: rgb(238, 238, 238);
+}
+
+.date_picker_days{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.date_picker_days_grid_header{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.date_picker_days_grid{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 5px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+
+.previous, .next{
+    color: rgb(180, 177, 177);
+}
+
+.date_picker_months_grid{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.date_picker_years_grid{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    font-family: 'Roboto Condensed', sans-serif;
+    max-height: 215px;
+    overflow-y: scroll;
+}
+
+.date_picker_months_grid > span, .date_picker_years_grid > span {
+    border-radius: 5px;
+}
+
+.date_picker_days_grid > span{
+    border-radius: 5px;
+    height: 25px;
+    width: 25px;
+}
+
+.date_picker_days_grid > span:hover, .date_picker_months_grid > span:hover, .date_picker_years_grid > span:hover{
+    cursor: pointer;
+    background-color: rgb(177,196,108, 0.2);
+}
+
+.selected_day, .date_picker_days_grid > .selected_day:hover{
+    background-color: #344f04;
+    color: #FFFFFF;
+}

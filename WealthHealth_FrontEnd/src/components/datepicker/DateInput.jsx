@@ -44,6 +44,8 @@ function DateInput({ name, label, errorMsg }) {
     document.addEventListener('click', handleClickOutside);
     function handleClickOutside(event) {
         if (isOpen && datePicker.current && !datePicker.current.contains(event.target)) {
+            console.log(event.target);
+            console.log(datePicker.current);
             setIsOpen(false);
         }
     }
