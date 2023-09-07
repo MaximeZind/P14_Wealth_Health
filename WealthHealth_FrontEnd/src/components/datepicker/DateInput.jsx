@@ -5,7 +5,7 @@ import { useState, useRef } from 'react';
 import Calendar from './icons/Calendar';
 import DatePickerBox from './DatePickerBox';
 
-function DateInput({ name, label, errorMsg }) {
+function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax }) {
 
     const [day, setDay] = useState('DD');
     const [month, setMonth] = useState('MM');
@@ -90,7 +90,15 @@ function DateInput({ name, label, errorMsg }) {
                 </span>
             </div>
             {isOpen ?
-                <DatePickerBox position={position} handleValues={handleValues} handleClose={handleClose} startingDay={startingDay} startingMonth={startingMonth} startingYear={startingYear} /> : null
+                <DatePickerBox 
+                position={position} 
+                handleValues={handleValues} 
+                handleClose={handleClose} 
+                startingDay={startingDay} 
+                startingMonth={startingMonth} 
+                startingYear={startingYear} 
+                yearsRangeMin={yearsRangeMin} 
+                yearsRangeMax={yearsRangeMax} /> : null
             }
             {errorMsg ? <p className={classes.error_msg}>{errorMsg}</p> : null}
         </div>
@@ -101,6 +109,8 @@ DateInput.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string,
     errorMsg: PropTypes.string,
+    yearsRangeMax: PropTypes.number,
+    yearsRangeMin: PropTypes.number
 }
 
 

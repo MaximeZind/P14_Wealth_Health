@@ -168,7 +168,7 @@ function Form({getModalText}) {
                 id="add_personnal_informations">
                 <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} />
                 <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} />
-                <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} />
+                <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023}/>
                 <Button text='Next' type='submit' value='personnalInformations' />
             </form>
             <form

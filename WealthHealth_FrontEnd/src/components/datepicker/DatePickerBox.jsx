@@ -5,14 +5,11 @@ import { useState } from 'react';
 import DoubleArrow from './icons/DoubleArrow';
 import Arrow from './icons/Arrow';
 
-function DatePickerBox({ position, handleValues, handleClose, startingDay, startingMonth, startingYear }) {
+function DatePickerBox({ position, handleValues, handleClose, startingDay, startingMonth, startingYear, yearsRangeMin, yearsRangeMax }) {
 
     // Date d'aujourd'hui
     const today = new Date();
 
-    console.log(startingDay);
-    console.log(startingMonth);
-    console.log(startingYear);
     //Values used for navigation
     const [month, setMonth] = useState(startingMonth);
     const [year, setYear] = useState(startingYear);
@@ -69,8 +66,15 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
 
     function getYearsArray() {
         const currentYear = today.getFullYear();
-        const numberArray = Array.from({ length: 201 }, (_, index) => currentYear - 100 + index);
-        return numberArray;
+        let yearsArray = [];
+        if ((yearsRangeMin && yearsRangeMax) && (yearsRangeMax > yearsRangeMin)){
+            yearsArray = Array.from({ length: yearsRangeMax - yearsRangeMin + 1 }, (_, index) => yearsRangeMin + index).reverse();
+        } else if (!(yearsRangeMin && yearsRangeMax) || (yearsRangeMax > yearsRangeMin)){
+            //Array par défaut 100 ans avant et après aujourd'hui
+            yearsArray = Array.from({ length: 201 }, (_, index) => currentYear - 100 + index).reverse();
+        }
+
+        return yearsArray;
     }
 
     //fonction qui sert à générer les arrays de jours qui figurent dans le tableau
@@ -215,7 +219,12 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
 DatePickerBox.propTypes = {
     position: PropTypes.string.isRequired,
     handleValues: PropTypes.func.isRequired,
-    handleClose: PropTypes.func.isRequired
+    handleClose: PropTypes.func.isRequired,
+    startingDay: PropTypes.number.isRequired,
+    startingMonth: PropTypes.number.isRequired,
+    startingYear: PropTypes.number.isRequired,
+    yearsRangeMin: PropTypes.number,
+    yearsRangeMax: PropTypes.number
 }
 
 
