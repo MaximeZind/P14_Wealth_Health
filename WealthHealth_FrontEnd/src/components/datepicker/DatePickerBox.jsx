@@ -5,19 +5,22 @@ import { useState } from 'react';
 import DoubleArrow from './icons/DoubleArrow';
 import Arrow from './icons/Arrow';
 
-function DatePickerBox({ position, handleValues }) {
+function DatePickerBox({ position, handleValues, handleClose, startingDay, startingMonth, startingYear }) {
 
     // Date d'aujourd'hui
     const today = new Date();
 
+    console.log(startingDay);
+    console.log(startingMonth);
+    console.log(startingYear);
     //Values used for navigation
-    const [month, setMonth] = useState(today.getMonth() + 1);
-    const [year, setYear] = useState(today.getFullYear());
+    const [month, setMonth] = useState(startingMonth);
+    const [year, setYear] = useState(startingYear);
 
     //Values returned
-    const [selectedDay, setSelectedDay] = useState(today.getDate());
-    const [selectedMonth, setSelectedMonth] = useState(today.getMonth() + 1);
-    const [selectedYear, setSelectedYear] = useState(today.getFullYear());
+    const [selectedDay, setSelectedDay] = useState(startingDay);
+    const [selectedMonth, setSelectedMonth] = useState(startingMonth);
+    const [selectedYear, setSelectedYear] = useState(startingYear);
 
     //Type d'array dans la grid: jours par défaut, mais peut être "months" ou "years";
     const [arrayType, setArrayType] = useState('days');
@@ -42,10 +45,18 @@ function DatePickerBox({ position, handleValues }) {
     const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     //Fonction pour envoyer la data vers le composant parent via "handleValues"
-    function sendData(day) {
+    function sendData(day, month, year) {
         setSelectedDay(day);
-        setSelectedMonth(month);
-        setSelectedYear(year);
+        if (month === 0){
+            setSelectedMonth(12);
+            setSelectedYear(year-1);
+        } else if (month === 13){
+            setSelectedMonth(1);
+            setSelectedYear(year+1);
+        } else if (month >= 1 && month <= 12){
+            setSelectedMonth(month);
+            setSelectedYear(year);
+        }
 
         let result = {
             day: day,
@@ -53,6 +64,7 @@ function DatePickerBox({ position, handleValues }) {
             year: year
         }
         handleValues(result);
+        handleClose();
     }
 
     function getYearsArray() {
@@ -103,7 +115,6 @@ function DatePickerBox({ position, handleValues }) {
         setTimeout(() => {
             setArrayType('days');
         }, 30);
-
     }
 
     function handleSelectYear(number){
@@ -111,7 +122,6 @@ function DatePickerBox({ position, handleValues }) {
         setTimeout(() => {
             setArrayType('days');
         }, 30);
-
     }
 
     //Fonctions de navigations entre les mois
@@ -133,28 +143,6 @@ function DatePickerBox({ position, handleValues }) {
         }
     }
 
-    //Fonctions qui gèrent les cliques sur des jours des mois précédents ou suivants (gris)
-    function handleClickPreviousMonth(day) {
-        setSelectedDay(day);
-        if (month === 1) {
-            setMonth(12);
-            setSelectedMonth(12);
-        } else if (month > 1) {
-            setMonth(month - 1);
-            setSelectedMonth(month - 1);
-        }
-    }
-
-    function handleClickNextMonth(day) {
-        setSelectedDay(day);
-        if (month === 12) {
-            setMonth(1);
-            setSelectedMonth(1);
-        } else if (month < 12) {
-            setMonth(month + 1);
-            setSelectedMonth(month + 1);
-        }
-    }
     return (
         <div className={classes.date_picker} style={position === 'above' ? { transform: 'translateY(-355px)' } : {}}>
             <header className={classes.date_picker_header}>
@@ -188,17 +176,17 @@ function DatePickerBox({ position, handleValues }) {
                     </header>
                     <div className={classes.date_picker_days_grid}>
                         {gridArray.previous.map((gridDay, index) => {
-                            return <span className={classes.previous} key={index} onClick={() => handleClickPreviousMonth(gridDay)}>{gridDay}</span>
+                            return <span className={classes.previous} key={index} onClick={() => sendData(gridDay, month-1, year)}>{gridDay}</span>
                         })}
                         {gridArray.current.map((gridDay, index) => {
                             return <span
                                 style={(today.getDate() === gridDay && today.getMonth() + 1 === month && today.getFullYear() === year) ? { border: '1px solid rgba(147, 173, 24, 0.65)' } : {}}
                                 className={((gridDay === selectedDay) && (month === selectedMonth) && (year === selectedYear)) ? `${classes.current} ${classes.selected_day}` : classes.current}
                                 key={index}
-                                onClick={() => sendData(gridDay)}>{gridDay}</span>
+                                onClick={() => sendData(gridDay, month, year)}>{gridDay}</span>
                         })}
                         {gridArray.next.map((gridDay, index) => {
-                            return <span className={classes.next} key={index} onClick={() => handleClickNextMonth(gridDay)}>{gridDay}</span>
+                            return <span className={classes.next} key={index} onClick={() => sendData(gridDay, month+1, year)}>{gridDay}</span>
                         })}
                     </div>
                 </div>
@@ -226,7 +214,8 @@ function DatePickerBox({ position, handleValues }) {
 
 DatePickerBox.propTypes = {
     position: PropTypes.string.isRequired,
-    handleValues: PropTypes.func.isRequired
+    handleValues: PropTypes.func.isRequired,
+    handleClose: PropTypes.func.isRequired
 }
 
 

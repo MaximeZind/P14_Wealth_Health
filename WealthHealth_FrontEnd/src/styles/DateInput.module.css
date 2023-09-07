@@ -1,11 +1,30 @@
 .date_input_container{
     width: 100%;
     user-select: none;
+    position: relative;
+}
+
+
+.label{
+    position: absolute;
+    left: 0;
+    color: #999;
+    background-color: #fff;
+    z-index: 2;
+    transition: transform 150ms ease-out, font-size 150ms ease-out, color 150ms ease-out;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.focused .label{
+    transform: translateY(-150%);
+    font-size: .75em;
+    color: #000000;
 }
 
 .date_input{
     box-sizing: border-box;
-    border: 1px solid #000000;
+    box-shadow: 0 1px 0 0 #e5e5e5;
     border-radius: 10px;
     min-height: 40px;
     display: flex;
@@ -20,6 +39,12 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transition: opacity .2s .1s ease;
+}
+
+.focused .date_input .selected_date{
+    opacity: 1;
 }
 
 .date_input_icon{
@@ -46,11 +71,6 @@
     width: 0;
     position: absolute;
     left: -500px;
-}
-
-.label{
-    font-size: 1.4rem;
-    margin: 0;
 }
 
 .error_msg{
