@@ -189,7 +189,6 @@ function Form({getModalText}) {
                 className={`${classes.work_situation} ${classes[workSituationStatus]}`}
                 onSubmit={handleFormSubmit}>
                 <Dropdown list={departments} name='department' label='Department' placeholder='Select a department' height={40} />
-                {/* <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} /> */}
                 <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} />
                 <div className={classes.buttons}>
                     <Button text='Previous' value='workSituation' onClick={handleClickPrevious} />

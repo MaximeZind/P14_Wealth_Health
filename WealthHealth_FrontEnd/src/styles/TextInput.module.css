@@ -1,6 +1,46 @@
+.text_input{
+    position: relative;  
+    width: 100%;
+    max-width: 300px;
+}
+
 .label{
-    font-size: 1.4rem;
-    margin: 0;
+    position: absolute;
+    left: 0;
+    color: #999;
+    background-color: #fff;
+    z-index: 2;
+    transition: transform 150ms ease-out, font-size 150ms ease-out, color 150ms ease-out;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.focused .label{
+    transform: translateY(-125%);
+    font-size: .75em;
+    color: #000000;
+}
+
+.label:hover{
+    cursor: text;
+}
+
+.input{
+    position: relative;
+    padding: 12px 0px 5px 0;
+    width: 100%;
+    outline: 0;
+    border: 0;
+    box-shadow: 0 1px 0 0 #e5e5e5;
+    transition: box-shadow 150ms ease-out !important;
+}
+
+/* Empêcher le background bleu clair avec l'autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 1px 0 0 #e5e5e5, 0 0 0 30px white inset !important;
 }
 
 .error_msg{
