@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Calendar({ color }) {
+function Calendar({ color, height, width }) {
     const style = {fill: 'none', stroke:'#000', strokeLinecap:'round', strokeLinejoin:'round', strokeWidth: '2px'};
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style={{transition: "0.3s ease"}}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style={{transition: "0.3s ease"}} height={height} width={width}>
             <g id="_68.calendar" data-name="68.calendar">
                 <rect style={style} x="1" y="3" width="22" height="20" rx="3" ry="3" />
                 <line style={style} x1="1" y1="9" x2="23" y2="9" />
@@ -24,6 +24,8 @@ function Calendar({ color }) {
 
 Calendar.propTypes = {
     color: PropTypes.string,
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired
 }
 
 export default Calendar;

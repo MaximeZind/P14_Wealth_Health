@@ -86,7 +86,7 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax }) {
             <div ref={input} className={classes.date_input} onClick={() => setIsOpen(!isOpen)}>
                 <p className={classes.selected_date}>{selectedValue}</p>
                 <span className={classes.date_input_icon}>
-                    <Calendar />
+                    <Calendar width={20} height={20} />
                 </span>
             </div>
             {isOpen ?
