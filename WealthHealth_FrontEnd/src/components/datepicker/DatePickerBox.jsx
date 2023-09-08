@@ -44,13 +44,13 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
     //Fonction pour envoyer la data vers le composant parent via "handleValues"
     function sendData(day, month, year) {
         setSelectedDay(day);
-        if (month === 0){
+        if (month === 0) {
             setSelectedMonth(12);
-            setSelectedYear(year-1);
-        } else if (month === 13){
+            setSelectedYear(year - 1);
+        } else if (month === 13) {
             setSelectedMonth(1);
-            setSelectedYear(year+1);
-        } else if (month >= 1 && month <= 12){
+            setSelectedYear(year + 1);
+        } else if (month >= 1 && month <= 12) {
             setSelectedMonth(month);
             setSelectedYear(year);
         }
@@ -67,9 +67,9 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
     function getYearsArray() {
         const currentYear = today.getFullYear();
         let yearsArray = [];
-        if ((yearsRangeMin && yearsRangeMax) && (yearsRangeMax > yearsRangeMin)){
+        if ((yearsRangeMin && yearsRangeMax) && (yearsRangeMax > yearsRangeMin)) {
             yearsArray = Array.from({ length: yearsRangeMax - yearsRangeMin + 1 }, (_, index) => yearsRangeMin + index).reverse();
-        } else if (!(yearsRangeMin && yearsRangeMax) || (yearsRangeMax > yearsRangeMin)){
+        } else if (!(yearsRangeMin && yearsRangeMax) || (yearsRangeMax > yearsRangeMin)) {
             //Array par défaut 100 ans avant et après aujourd'hui
             yearsArray = Array.from({ length: 201 }, (_, index) => currentYear - 100 + index).reverse();
         }
@@ -114,14 +114,14 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
         12: "December"
     };
 
-    function handleSelectMonth(number){
+    function handleSelectMonth(number) {
         setMonth(number);
         setTimeout(() => {
             setArrayType('days');
         }, 30);
     }
 
-    function handleSelectYear(number){
+    function handleSelectYear(number) {
         setYear(number);
         setTimeout(() => {
             setArrayType('days');
@@ -180,7 +180,12 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
                     </header>
                     <div className={classes.date_picker_days_grid}>
                         {gridArray.previous.map((gridDay, index) => {
-                            return <span className={classes.previous} key={index} onClick={() => sendData(gridDay, month-1, year)}>{gridDay}</span>
+                            const previousMonth = month > 1 ? month - 1 : 12;
+                            const updatedYear = month > 1 ? year : year - 1;
+                            return <span
+                                className={((gridDay === selectedDay) && (selectedMonth === previousMonth) && (selectedYear === updatedYear)) ? `${classes.previous} ${classes.selected_day}` : classes.previous}
+                                key={index}
+                                onClick={() => sendData(gridDay, month - 1, year)}>{gridDay}</span>
                         })}
                         {gridArray.current.map((gridDay, index) => {
                             return <span
@@ -190,7 +195,12 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
                                 onClick={() => sendData(gridDay, month, year)}>{gridDay}</span>
                         })}
                         {gridArray.next.map((gridDay, index) => {
-                            return <span className={classes.next} key={index} onClick={() => sendData(gridDay, month+1, year)}>{gridDay}</span>
+                            const nextMonth = month < 12 ? month + 1 : 1;
+                            const updatedYear = month < 12 ? year : year + 1;
+                            return <span
+                            className={((gridDay === selectedDay) && (selectedMonth === nextMonth) && (selectedYear === updatedYear)) ? `${classes.next} ${classes.selected_day}` : classes.next}
+                                key={index}
+                                onClick={() => sendData(gridDay, month + 1, year)}>{gridDay}</span>
                         })}
                     </div>
                 </div>
@@ -198,20 +208,20 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
                 <div className={classes.date_picker_months_grid}>
                     {
                         monthsArray.map((month, index) => {
-                            return <span key={index} className={classes.months_grid_month} onClick={() => handleSelectMonth(index+1)}>{month}</span>
+                            return <span key={index} className={classes.months_grid_month} onClick={() => handleSelectMonth(index + 1)}>{month}</span>
                         })
                     }
                 </div>
             }
             {arrayType === 'years' &&
-            <div className={classes.date_picker_years_grid}>
-                {
-                    yearsArray.map((year, index) => {
-                        return <span key={index} className={classes.years_grid_year} onClick={() => handleSelectYear(year)}>{year}</span>
-                    })
-                }
-            </div>
-        }
+                <div className={classes.date_picker_years_grid}>
+                    {
+                        yearsArray.map((year, index) => {
+                            return <span key={index} className={classes.years_grid_year} onClick={() => handleSelectYear(year)}>{year}</span>
+                        })
+                    }
+                </div>
+            }
         </div>
     );
 }
