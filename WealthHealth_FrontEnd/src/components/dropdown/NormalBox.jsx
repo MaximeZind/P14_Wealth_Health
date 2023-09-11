@@ -1,10 +1,9 @@
 import React, { useRef, useState } from 'react';
 import classes from '../../styles/Dropdown.module.css';
 import PropTypes from 'prop-types';
-import DropdownArrow from './icons/DropdownArrow';
 import MagnifyingGlass from './icons/MagnifyingGlass';
 import { dropdownFilter } from '../../utils/searchScript';
-import SeparatedBox from './SeparatedBox';
+
 
 function Dropdown({ list, label, name, placeholder, height, separatedBox }) {
 

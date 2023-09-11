@@ -2,9 +2,8 @@ import React, { useRef, useState } from 'react';
 import classes from '../../styles/Dropdown.module.css';
 import PropTypes from 'prop-types';
 import DropdownArrow from './icons/DropdownArrow';
-// import MagnifyingGlass from './icons/MagnifyingGlass';
-// import { dropdownFilter } from '../../utils/searchScript';
 import SeparatedBox from './SeparatedBox';
+import NormalBox from './NormalBox';
 
 function Dropdown({ list, label, name, height, separatedBox }) {
 
@@ -33,16 +32,9 @@ function Dropdown({ list, label, name, height, separatedBox }) {
         setIsOpen(!isOpen);
     }
 
-    // //Fonction pour filtrer les options en fonction de l'input
-    // function handleFilter(event) {
-    //     const keywords = event.target.value.split(/[, ]+/).filter(item => item !== '');
-    //     const updatedList = dropdownFilter(keywords, list);
-    //     setNewList(updatedList);
-    // }
     return (
         <div className={classes.component_container}>
-            {/* <label className={classes.label} htmlFor={name}>{label}</label> */}
-            <label style={{ top: '10px' }} className={(isOpen || selectedName !== '') ? `${classes.label} ${classes.focused}` : classes.label} htmlFor={name} onClick={() => setIsOpen(!isOpen)}>{label}</label>
+            <label style={{ top: '10px' }} className={(isOpen || selectedName !== '') ? `${classes.label} ${classes.focused}` : classes.label} htmlFor={name}>{label}</label>
             <input className={classes.hidden} name={name} id={name} value={selectedValue} readOnly={true} />
             <div style={{ height: `${height}px` }}>
                 <div ref={dropdownMenu} 
@@ -55,6 +47,7 @@ function Dropdown({ list, label, name, height, separatedBox }) {
                         </span>
                     </div>
                     {(separatedBox && isOpen ) ? <SeparatedBox list={list} height={height} handleClick={handleClick}/> : null}
+                    {(!separatedBox && isOpen ) ? <NormalBox list={list} height={height} handleClick={handleClick}/> : null}
                     {/* <div className={separatedBox ? `${classes.dropdown_content} ${classes.separated}` : `${classes.dropdown_content} ${classes.normal}`} style={{ maxHeight: `${height * 7}px`, minHeight: `${height * 7}px`, transform: separatedBox && `translateY(${height + 2}px)` }}>
                         <div className={separatedBox ? classes.animation_box : null} style={{width:'100%', display: (separatedBox && !isOpen) ? 'none' : 'block' }}> 
                             <div className={separatedBox ? `${classes.filter_items} ${classes.separated}` : `${classes.filter_items} ${classes.normal}`} style={{ minHeight: `${height}px` }}>
