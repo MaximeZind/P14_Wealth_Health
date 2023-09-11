@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import MagnifyingGlass from './icons/MagnifyingGlass';
 import { dropdownFilter } from '../../utils/searchScript';
 
-function SeparatedBox({ list, height }) {
+function SeparatedBox({ list, height, handleClick }) {
 
     const [isOpen, setIsOpen] = useState(false);
     const [newList, setNewList] = useState(list);
@@ -18,16 +18,16 @@ function SeparatedBox({ list, height }) {
         }
     }
 
-    //Fonction pour gérer le clique sur une des options
-    function handleClick(name, value) {
-        setSelectedName(name);
-        if (value) {
-            setSelectedValue(value);
-        } else if (!value) {
-            setSelectedValue(name);
-        }
-        setIsOpen(!isOpen);
-    }
+    // //Fonction pour gérer le clique sur une des options
+    // function handleClick(name, value) {
+    //     setSelectedName(name);
+    //     if (value) {
+    //         setSelectedValue(value);
+    //     } else if (!value) {
+    //         setSelectedValue(name);
+    //     }
+    //     setIsOpen(!isOpen);
+    // }
 
     //Fonction pour filtrer les options en fonction de l'input
     function handleFilter(event) {
@@ -43,7 +43,7 @@ function SeparatedBox({ list, height }) {
                         <span className={classes.filter_items_icon}>
                             <MagnifyingGlass />
                         </span>
-                        <input className={classes.filter_items_input} type='text' placeholder='Search...' onChange={handleFilter} />
+                        <input name='search_field' className={classes.filter_items_input} type='text' placeholder='Search...' onChange={handleFilter} />
                     </div>
                     <div className={classes.dropdown_options} style={{ maxHeight: `${height * 6}px`, minHeight: `${height * 6}px` }}>
                         {newList.map((item) => {

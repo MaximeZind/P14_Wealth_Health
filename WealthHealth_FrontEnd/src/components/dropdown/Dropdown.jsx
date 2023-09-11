@@ -2,25 +2,25 @@ import React, { useRef, useState } from 'react';
 import classes from '../../styles/Dropdown.module.css';
 import PropTypes from 'prop-types';
 import DropdownArrow from './icons/DropdownArrow';
-import MagnifyingGlass from './icons/MagnifyingGlass';
-import { dropdownFilter } from '../../utils/searchScript';
+// import MagnifyingGlass from './icons/MagnifyingGlass';
+// import { dropdownFilter } from '../../utils/searchScript';
 import SeparatedBox from './SeparatedBox';
 
-function Dropdown({ list, label, name, placeholder, height, separatedBox }) {
+function Dropdown({ list, label, name, height, separatedBox }) {
 
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedName, setSelectedName] = useState(placeholder ? placeholder : list[0].name);
+    const [selectedName, setSelectedName] = useState('');
     const [selectedValue, setSelectedValue] = useState(list[0].abbreviation ? list[0].abbreviation : list[0].name);
     const [newList, setNewList] = useState(list);
     const dropdownMenu = useRef(null);
 
     //Pour que le dropdown se ferme lorsque l'utilisateur clique en dehors
-    document.addEventListener('click', handleClickOutside);
-    function handleClickOutside(event) {
-        if (isOpen && dropdownMenu.current && !dropdownMenu.current.contains(event.target)) {
-            setIsOpen(false);
-        }
-    }
+    // document.addEventListener('click', handleClickOutside);
+    // function handleClickOutside(event) {
+    //     if (isOpen && dropdownMenu.current && !dropdownMenu.current.contains(event.target)) {
+    //         setIsOpen(false);
+    //     }
+    // }
 
     //Fonction pour gérer le clique sur une des options
     function handleClick(name, value) {
@@ -33,16 +33,16 @@ function Dropdown({ list, label, name, placeholder, height, separatedBox }) {
         setIsOpen(!isOpen);
     }
 
-    //Fonction pour filtrer les options en fonction de l'input
-    function handleFilter(event) {
-        const keywords = event.target.value.split(/[, ]+/).filter(item => item !== '');
-        const updatedList = dropdownFilter(keywords, list);
-        setNewList(updatedList);
-    }
-
+    // //Fonction pour filtrer les options en fonction de l'input
+    // function handleFilter(event) {
+    //     const keywords = event.target.value.split(/[, ]+/).filter(item => item !== '');
+    //     const updatedList = dropdownFilter(keywords, list);
+    //     setNewList(updatedList);
+    // }
     return (
-        <div>
-            <label className={classes.label} htmlFor={name}>{label}</label>
+        <div className={classes.component_container}>
+            {/* <label className={classes.label} htmlFor={name}>{label}</label> */}
+            <label style={{ top: '10px' }} className={(isOpen || selectedName !== '') ? `${classes.label} ${classes.focused}` : classes.label} htmlFor={name} onClick={() => setIsOpen(!isOpen)}>{label}</label>
             <input className={classes.hidden} name={name} id={name} value={selectedValue} readOnly={true} />
             <div style={{ height: `${height}px` }}>
                 <div ref={dropdownMenu} 
@@ -54,7 +54,7 @@ function Dropdown({ list, label, name, placeholder, height, separatedBox }) {
                             <DropdownArrow transform={isOpen ? 'rotate(180deg)' : ''} />
                         </span>
                     </div>
-                    {(separatedBox && isOpen ) ? <SeparatedBox list={list} height={height}/> : null}
+                    {(separatedBox && isOpen ) ? <SeparatedBox list={list} height={height} handleClick={handleClick}/> : null}
                     {/* <div className={separatedBox ? `${classes.dropdown_content} ${classes.separated}` : `${classes.dropdown_content} ${classes.normal}`} style={{ maxHeight: `${height * 7}px`, minHeight: `${height * 7}px`, transform: separatedBox && `translateY(${height + 2}px)` }}>
                         <div className={separatedBox ? classes.animation_box : null} style={{width:'100%', display: (separatedBox && !isOpen) ? 'none' : 'block' }}> 
                             <div className={separatedBox ? `${classes.filter_items} ${classes.separated}` : `${classes.filter_items} ${classes.normal}`} style={{ minHeight: `${height}px` }}>
