@@ -11,7 +11,7 @@ import Button from './button';
 import { doesEmployeeExist } from '../utils/utils';
 import PropTypes from 'prop-types';
 
-function Form({getModalText}) {
+function Form({ getModalText }) {
 
     const dispatch = useDispatch()
     const departments = getDepartments();
@@ -92,7 +92,7 @@ function Form({getModalText}) {
         const form = event.target;
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
-        
+
         //Première partie du formulaire
         if (form.className.includes('personnal_informations')) {
             const formValidation = validatePersonnalInformations(formJson);
@@ -101,7 +101,7 @@ function Form({getModalText}) {
                 handleClickNext('personnalInformations');
             }
             handleErrorMsgs(formValidation.errorMsg);
-        //Seconde partie du formulaire
+            //Seconde partie du formulaire
         } else if (form.className.includes('address')) {
             const formValidation = validateAddress(formJson);
             if (formValidation.isValid === true) {
@@ -109,7 +109,7 @@ function Form({getModalText}) {
                 handleClickNext('employeeAddress');
             }
             handleErrorMsgs(formValidation.errorMsg);
-        //Dernière partie du formulaire
+            //Dernière partie du formulaire
         } else if (form.className.includes('work_situation')) {
             const formValidation = validateWorkSituation(formJson);
             if (formValidation.isValid === true) {
@@ -120,7 +120,7 @@ function Form({getModalText}) {
                     //Si l'employé n'existe pas, on l'ajoute au state 
                     getModalText('This employee was successfully created!');
                     dispatch(addEmployee(newEmployee));
-                } else if (verification === true){
+                } else if (verification === true) {
                     //Sinon, un message d'erreur s'affiche dans la modale
                     getModalText('This employee was already created.');
                 }
@@ -166,9 +166,12 @@ function Form({getModalText}) {
                 action="#"
                 onSubmit={handleFormSubmit}
                 id="add_personnal_informations">
+                <Dropdown list={states} name='state' label='State' placeholder='Select a state' height={40} separatedBox={true} />
+                <Dropdown list={states} name='state' label='State' placeholder='Select a state' height={40} separatedBox={true} />
+                {/* <Dropdown list={states} name='state' label='State' placeholder='Select a state' height={40} separatedBox={false} /> */}
                 <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} />
                 <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} />
-                <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023}/>
+                <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} />
                 <Button text='Next' type='submit' value='personnalInformations' />
             </form>
             <form
@@ -178,7 +181,7 @@ function Form({getModalText}) {
                 id="add_address">
                 <TextInput name='street' label='Street' errorMsg={streetErrorMsg} />
                 <TextInput name='city' label='City' errorMsg={cityErrorMsg} />
-                <Dropdown list={states} name='state' label='State' placeholder='Select a state' height={40} />
+                <Dropdown list={states} name='state' label='State' placeholder='Select a state' height={40} separatedBox={true} />
                 <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg} />
                 <div className={classes.buttons}>
                     <Button text='Previous' value='employeeAddress' onClick={handleClickPrevious} />
@@ -188,7 +191,7 @@ function Form({getModalText}) {
             <form
                 className={`${classes.work_situation} ${classes[workSituationStatus]}`}
                 onSubmit={handleFormSubmit}>
-                <Dropdown list={departments} name='department' label='Department' placeholder='Select a department' height={40} />
+                <Dropdown list={departments} name='department' label='Department' placeholder='Select a department' height={40} separatedBox={true} />
                 <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} />
                 <div className={classes.buttons}>
                     <Button text='Previous' value='workSituation' onClick={handleClickPrevious} />
@@ -201,6 +204,6 @@ function Form({getModalText}) {
 
 Form.propTypes = {
     getModalText: PropTypes.func.isRequired,
-  }
+}
 
 export default Form;

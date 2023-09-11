@@ -6,75 +6,18 @@
     flex-direction: column;
     transition: height 0.3s ease-out, background-color 0.5s ease;
     position: relative;
+    z-index: 20;
     background-color: #FFFFFF;
 }
 
-.dropdown_container.normal {
-    overflow: hidden;
-    border-radius: 10px;
-    border: 1px solid #000000;
-    z-index: 8;
-}
-
-.dropdown_header {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    padding-left: 10px;
-}
-
-.selected_item {
-    width: 200px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    border: none;
-}
-
-.selected_item:focus {
-    outline: none;
-}
-
-.dropdown_header_icon {
-    height: 100%;
-    min-width: 41px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color .3s ease;
-}
-
-.dropdown_header_icon.normal {
-    border-left: 2px solid rgb(177, 196, 108, 0.4);
-}
-
-.dropdown_header_icon:hover {
-    cursor: pointer;
-    background-color: rgb(177, 196, 108, 0.2);
-}
-
-.dropdown_header_icon svg {
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* .dropdown_content{
+.dropdown_content{
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #FFFFFF;
-}
-
-.dropdown_content.separated{
     position: absolute;
     z-index: 20;
-} */
+}
 
 .animation_box{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -85,18 +28,6 @@
     animation-fill-mode: backwards;
     animation-timing-function: ease;
 }
-
-/* .filter_items {
-
-    width: 100%;
-}
-
-.filter_items.normal {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-} */
 
 .filter_items{
     background-color: rgb(177, 196, 108, 0.2);
@@ -125,7 +56,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: rgb(177, 196, 108, 0.2); */
     color: #FFFFFF;
     padding-left: 10px;
 }
@@ -172,19 +102,7 @@
     background-color: rgb(177, 196, 108, 0.2);
 }
 
-.hidden {
-    height: 0;
-    width: 0;
-    position: absolute;
-    left: -500px;
-}
-
-.label {
-    font-size: 1.4rem;
-    margin: 0;
-}
-
-/* @keyframes fade_slide_in {
+@keyframes fade_slide_in {
     from {
         transform: translateY(-30px);
         opacity: 0;
@@ -194,4 +112,4 @@
         transform: translateY(0px);
         opacity: 1;
     }
-} */
+}
