@@ -166,8 +166,8 @@ function Form({ getModalText }) {
                 action="#"
                 onSubmit={handleFormSubmit}
                 id="add_personnal_informations">
+                <Dropdown list={states} name='state' label='State' height={40} separatedBox={false} />
                 <Dropdown list={states} name='state' label='State' height={40} separatedBox={true} />
-                {/* <Dropdown list={states} name='state' label='State' placeholder='Select a state' height={40} separatedBox={true} /> */}
                 {/* <Dropdown list={states} name='state' label='State' placeholder='Select a state' height={40} separatedBox={false} /> */}
                 <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} />
                 <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} />

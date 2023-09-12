@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import classes from '../../styles/SeparatedBox.module.css';
 import PropTypes from 'prop-types';
 import MagnifyingGlass from './icons/MagnifyingGlass';
@@ -6,28 +6,7 @@ import { dropdownFilter } from '../../utils/searchScript';
 
 function SeparatedBox({ list, height, handleClick }) {
 
-    const [isOpen, setIsOpen] = useState(false);
     const [newList, setNewList] = useState(list);
-    const dropdownMenu = useRef(null);
-
-    //Pour que le dropdown se ferme lorsque l'utilisateur clique en dehors
-    document.addEventListener('click', handleClickOutside);
-    function handleClickOutside(event) {
-        if (isOpen && dropdownMenu.current && !dropdownMenu.current.contains(event.target)) {
-            setIsOpen(false);
-        }
-    }
-
-    // //Fonction pour gérer le clique sur une des options
-    // function handleClick(name, value) {
-    //     setSelectedName(name);
-    //     if (value) {
-    //         setSelectedValue(value);
-    //     } else if (!value) {
-    //         setSelectedValue(name);
-    //     }
-    //     setIsOpen(!isOpen);
-    // }
 
     //Fonction pour filtrer les options en fonction de l'input
     function handleFilter(event) {
@@ -65,6 +44,7 @@ SeparatedBox.propTypes = {
         })
     ).isRequired,
     height: PropTypes.number.isRequired,
+    handleClick: PropTypes.func.isRequired
 }
 
 export default SeparatedBox;

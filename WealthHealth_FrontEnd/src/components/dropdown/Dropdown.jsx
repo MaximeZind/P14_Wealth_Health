@@ -10,16 +10,16 @@ function Dropdown({ list, label, name, height, separatedBox }) {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedName, setSelectedName] = useState('');
     const [selectedValue, setSelectedValue] = useState(list[0].abbreviation ? list[0].abbreviation : list[0].name);
-    const [newList, setNewList] = useState(list);
+    // const [newList, setNewList] = useState(list);
     const dropdownMenu = useRef(null);
 
     //Pour que le dropdown se ferme lorsque l'utilisateur clique en dehors
-    // document.addEventListener('click', handleClickOutside);
-    // function handleClickOutside(event) {
-    //     if (isOpen && dropdownMenu.current && !dropdownMenu.current.contains(event.target)) {
-    //         setIsOpen(false);
-    //     }
-    // }
+    document.addEventListener('click', handleClickOutside);
+    function handleClickOutside(event) {
+        if (isOpen && dropdownMenu.current && !dropdownMenu.current.contains(event.target)) {
+            setIsOpen(false);
+        }
+    }
 
     //Fonction pour gérer le clique sur une des options
     function handleClick(name, value) {
