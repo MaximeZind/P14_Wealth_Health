@@ -9,7 +9,7 @@ import { search } from '../utils/searchScript';
 
 function Table({ employeeList }) {
 
-    //initialisation des States
+    // initialisation des States
     const [list, setList] = useState([...employeeList]);
     const [selectedField, setSelectedField] = useState(null);
     const [isAscending, setIsAscending] = useState(false);
@@ -17,27 +17,27 @@ function Table({ employeeList }) {
     const [pages, setPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
 
-    //On crée une array de fields en camelCase
+    // On crée une array de fields en camelCase
     let camelFields = []
     fields.map((field) => {
         camelFields.push(field.camelField);
     })
-    //... Pour savoir lequel est sélectionné
+    // ... Pour savoir lequel est sélectionné
     const highlightedField = selectedField ? camelFields.indexOf(selectedField) : null;
     // array de longueurs possible de tableau
     const tableLengths = [10, 25, 50, 100];
 
     useEffect(() => {
-        //Mise en place du nombre de pages
+        // Mise en place du nombre de pages
         const updatedPages = Math.ceil(list.length / tableLength)
         setPages(updatedPages);
-        //Si la page actuelle est trop élevée, on lui attribue la valeur maximale
+        // Si la page actuelle est trop élevée, on lui attribue la valeur maximale
         if ((currentPage * tableLength) > list.length) {
             setCurrentPage(updatedPages)
         }
     }, [list, tableLength, currentPage]);
 
-    //Fonction pour trier par champ cliqué
+    // Fonction pour trier par champ cliqué
     function sortBy(field) {
         if (selectedField !== field) {
             setIsAscending(false);
@@ -60,12 +60,12 @@ function Table({ employeeList }) {
         setList(sortedList);
     }
 
-    //fonciton qui gère la valeur reçue par le menu déroulant
+    // fonciton qui gère la valeur reçue par le menu déroulant
     function handleSelect(event) {
         setTableLength(event.target.value);
     }
 
-    //Fonction qui gère le champ de recherche du tableau
+    // Fonction qui gère le champ de recherche du tableau
     function handleSearch(event) {
         let array = event.target.value.split(' ');
         const newList = search(array, employeeList);

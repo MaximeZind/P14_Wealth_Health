@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 function Pencil({ color, height, width, onClick }) {
     return (
-        <svg 
-        xmlns="http://www.w3.org/2000/svg" 
+        <svg
+        xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         style={{ enableBackground: 'new 0 0 386.257 386.257', fill: 'none', stroke: color, strokeLinecap: 'round', strokeLinejoin: 'round', height: height, width: width }}
         onClick={onClick}>

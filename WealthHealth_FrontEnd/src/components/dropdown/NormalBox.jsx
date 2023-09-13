@@ -9,7 +9,7 @@ function Dropdown({ list, height, handleClick, searchBar }) {
 
     const [newList, setNewList] = useState(list);
 
-    //Fonction pour filtrer les options en fonction de l'input
+    // Fonction pour filtrer les options en fonction de l'input
     function handleFilter(event) {
         const keywords = event.target.value.split(/[, ]+/).filter(item => item !== '');
         const updatedList = dropdownFilter(keywords, list);

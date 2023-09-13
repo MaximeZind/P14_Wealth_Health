@@ -12,7 +12,7 @@ function Dropdown({ list, label, name, height, separatedBox, searchBar }) {
     const [selectedValue, setSelectedValue] = useState(list[0].abbreviation ? list[0].abbreviation : list[0].name);
     const dropdownMenu = useRef(null);
 
-    //Pour que le dropdown se ferme lorsque l'utilisateur clique en dehors
+    // Pour que le dropdown se ferme lorsque l'utilisateur clique en dehors
     document.addEventListener('click', handleClickOutside);
     function handleClickOutside(event) {
         if (isOpen && dropdownMenu.current && !dropdownMenu.current.contains(event.target)) {
@@ -20,7 +20,7 @@ function Dropdown({ list, label, name, height, separatedBox, searchBar }) {
         }
     }
 
-    //Fonction pour gérer le clique sur une des options
+    // Fonction pour gérer le clique sur une des options
     function handleClick(name, value) {
         setSelectedName(name);
         if (value) {
@@ -32,12 +32,12 @@ function Dropdown({ list, label, name, height, separatedBox, searchBar }) {
     }
 
     return (
-        <div className={classes.component_container}>
-            <label style={{ top: '10px' }} className={(isOpen || selectedName !== '') ? `${classes.label} ${classes.focused}` : classes.label} htmlFor={name}>{label}</label>
+        <div className={classes.component_container} style={{ zIndex: isOpen && '998' }}>
+            <label style={{ top: '10px', zIndex: isOpen && '999' }} className={(isOpen || selectedName !== '') ? `${classes.label} ${classes.focused}` : classes.label} htmlFor={name} >{label}</label>
             <input className={classes.hidden} name={name} id={name} value={selectedValue} readOnly={true} />
             <div style={{ height: `${height}px` }}>
-                <div ref={dropdownMenu} 
-                className={separatedBox ? `${classes.dropdown_container} ${classes.separated}` : `${classes.dropdown_container} ${classes.normal}`} 
+                <div ref={dropdownMenu}
+                className={separatedBox ? `${classes.dropdown_container} ${classes.separated}` : `${classes.dropdown_container} ${classes.normal}`}
                 style={!separatedBox ? (!isOpen ? { height: `${height}px` } : { height: `${height * 8}px` }) : { height: `${height}px` }} >
                     <div className={classes.dropdown_header} style={{ minHeight: `${height}px` }}>
                         <span className={classes.selected_item}>{selectedName}</span>

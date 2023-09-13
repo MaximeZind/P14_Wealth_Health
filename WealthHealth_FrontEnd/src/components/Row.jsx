@@ -7,15 +7,15 @@ import GarbageBin from './GarbageBin';
 function Row({ delay, highlightedField, type, firstName, lastName, startDate, department, dateOfBirth, street, city, state, zipCode }) {
 
     const [isFormOpened, setIsFormOpened] = useState(false);
-    const [newFirstName, setNewFirstName] = useState(firstName);
-    const [newLastName, setNewLastName] = useState(lastName);
-    const [newStartDate, setNewStartDate] = useState(startDate);
-    const [newDepartment, setNewDepartment] = useState(department);
-    const [newDateofBirth, setNewDateofBirth] = useState(dateOfBirth);
-    const [newStreet, setNewStreet] = useState(street);
-    const [newCity, setNewCity] = useState(city);
-    const [newState, setNewState] = useState(state);
-    const [newZipCode, setNewZipCode] = useState(zipCode);
+    // const [newFirstName, setNewFirstName] = useState(firstName);
+    // const [newLastName, setNewLastName] = useState(lastName);
+    // const [newStartDate, setNewStartDate] = useState(startDate);
+    // const [newDepartment, setNewDepartment] = useState(department);
+    // const [newDateofBirth, setNewDateofBirth] = useState(dateOfBirth);
+    // const [newStreet, setNewStreet] = useState(street);
+    // const [newCity, setNewCity] = useState(city);
+    // const [newState, setNewState] = useState(state);
+    // const [newZipCode, setNewZipCode] = useState(zipCode);
 
     const zipCodeRef = useRef();
 

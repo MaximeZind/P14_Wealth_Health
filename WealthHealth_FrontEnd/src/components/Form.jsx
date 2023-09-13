@@ -18,7 +18,7 @@ function Form({ getModalText }) {
     const states = getStates();
     const EmployeeList = useSelector((state) => state.employeesReducer);
 
-    //Messages d'erreur
+    // Messages d'erreur
     const [firstNameErrorMsg, setFirstNameErrorMsg] = useState('');
     const [lastNameErrorMsg, setLastNameErrorMsg] = useState('');
     const [dateOfBirthErrorMsg, setDateOfBirthErrorMsg] = useState('');
@@ -27,16 +27,16 @@ function Form({ getModalText }) {
     const [cityErrorMsg, setCityErrorMsg] = useState('');
     const [zipCodeErrorMsg, setZipCodeErrorMsg] = useState('');
 
-    //States avec nos données
+    // States avec nos données
     const [personnalInformations, setPersonnalInformations] = useState(null);
     const [employeeAddress, setEmployeeAddress] = useState(null);
 
-    //States pour gérer les animations / formulaires affichés
+    // States pour gérer les animations / formulaires affichés
     const [personnalInformationsStatus, setPersonnalInformationsStatus] = useState('active');
     const [employeeAddressStatus, setEmployeeAddressStatus] = useState('inactive');
     const [workSituationStatus, setWorkSituationStatus] = useState('inactive');
 
-    //Fonction qui gère la navigation d'un formulaire à l'autre, une fois validé
+    // Fonction qui gère la navigation d'un formulaire à l'autre, une fois validé
     // (gère les animations via setTimeOut)
     function handleClickNext(completedPart) {
         if (completedPart === 'personnalInformations') {
@@ -60,7 +60,7 @@ function Form({ getModalText }) {
         }
     }
 
-    //Fonction pour revenir au formulaire précédent
+    // Fonction pour revenir au formulaire précédent
     // (gère les animations via setTimeOut)
     function handleClickPrevious(event) {
         event.preventDefault();
@@ -86,14 +86,14 @@ function Form({ getModalText }) {
         }
     }
 
-    //Fonction de gestion de soumission du formulaire (appelée à chaque étape)
+    // Fonction de gestion de soumission du formulaire (appelée à chaque étape)
     function handleFormSubmit(event) {
         event.preventDefault();
         const form = event.target;
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
 
-        //Première partie du formulaire
+        // Première partie du formulaire
         if (form.className.includes('personnal_informations')) {
             const formValidation = validatePersonnalInformations(formJson);
             if (formValidation.isValid === true) {
@@ -101,7 +101,7 @@ function Form({ getModalText }) {
                 handleClickNext('personnalInformations');
             }
             handleErrorMsgs(formValidation.errorMsg);
-            //Seconde partie du formulaire
+            // Seconde partie du formulaire
         } else if (form.className.includes('address')) {
             const formValidation = validateAddress(formJson);
             if (formValidation.isValid === true) {
@@ -109,19 +109,19 @@ function Form({ getModalText }) {
                 handleClickNext('employeeAddress');
             }
             handleErrorMsgs(formValidation.errorMsg);
-            //Dernière partie du formulaire
+            // Dernière partie du formulaire
         } else if (form.className.includes('work_situation')) {
             const formValidation = validateWorkSituation(formJson, personnalInformations.dateOfBirth);
             if (formValidation.isValid === true) {
                 const newEmployee = Object.assign(personnalInformations, employeeAddress, formValidation.data);
-                //Vérification que l'employé n'est pas déjà dans la liste 
+                // Vérification que l'employé n'est pas déjà dans la liste
                 const verification = doesEmployeeExist(EmployeeList, newEmployee);
                 if (verification === false) {
-                    //Si l'employé n'existe pas, on l'ajoute au state 
+                    // Si l'employé n'existe pas, on l'ajoute au state
                     getModalText('This employee was successfully created!');
                     dispatch(addEmployee(newEmployee));
                 } else if (verification === true) {
-                    //Sinon, un message d'erreur s'affiche dans la modale
+                    // Sinon, un message d'erreur s'affiche dans la modale
                     getModalText('This employee was already created.');
                 }
             }
@@ -129,12 +129,12 @@ function Form({ getModalText }) {
         }
     }
 
-    //fonction de gestion des messages d'erreur
-    //reçoit un objet type:
-    //{
+    // fonction de gestion des messages d'erreur
+    // reçoit un objet type:
+    // {
     //  dateOfBirth: "Enter a valid date"
     //  firstName: "The name should be a least 2 characters"
-    //}
+    // }
     function handleErrorMsgs(errorMsgs) {
 
         const setters = {
@@ -148,7 +148,7 @@ function Form({ getModalText }) {
         };
 
         Object.entries(errorMsgs).map(([field, errorMsg]) => {
-            //exemple 
+            // exemple
             // if (setters[firstName]){
             //     setters[firstName(errorMsg)] ( ou setFirstNameErrorMsg(errorMsg))
             // }
@@ -166,9 +166,10 @@ function Form({ getModalText }) {
                 action="#"
                 onSubmit={handleFormSubmit}
                 id="add_personnal_informations">
-                {/* <Dropdown list={states} name='state' label='State' height={40} separatedBox={false} />
-                <Dropdown list={states} name='state' label='State' height={40} separatedBox={true} searchBar={true} />
-                <Dropdown list={states} name='state' label='State'  height={40} separatedBox={true} /> */}
+                <Dropdown list={states} name='state' label='State' height={40} separatedBox={false} />
+                {/* <Dropdown list={states} name='state' label='State' height={40} separatedBox={true} searchBar={true} /> */}
+                <Dropdown list={states} name='state' label='State' height={40} separatedBox={false} />
+                <Dropdown list={states} name='state' label='State'  height={40} separatedBox={true} />
                 <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} />
                 <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} />
                 <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} />

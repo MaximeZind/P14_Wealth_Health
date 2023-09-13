@@ -25,6 +25,16 @@
     padding-right: 3px;
 }
 
+.dropdown_content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    position: absolute;
+    z-index: 20;
+}
+
+
 .focused.label{
     transform: translateY(-150%);
     font-size: .75em;

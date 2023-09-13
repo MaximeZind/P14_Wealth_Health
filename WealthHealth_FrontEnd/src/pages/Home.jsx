@@ -13,7 +13,7 @@ function Home() {
     }
     return (
         <main className={classes.main}>
-            {modalText ? 
+            {modalText ?
             < Modal modalText={modalText} getModalText={getModalText}/>
             :
             <div className={classes.container}>

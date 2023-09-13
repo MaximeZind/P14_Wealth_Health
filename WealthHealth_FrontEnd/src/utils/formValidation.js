@@ -85,7 +85,7 @@ export function validateWorkSituation(object, dateOfBirth) {
 // Fonction pour valider les noms
 export function validateName(string) {
     const nameValue = string.trim();
-    const regex = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/; //pattern
+    const regex = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/; // pattern
     let response = false;
     let errorMsg = null;
 
@@ -106,8 +106,8 @@ export function validateName(string) {
     return validation;
 }
 
-//fonction pour valider les dates
-//Si c'est une date de naissance, on aura l'âge max et l'âge min à vérifier
+// fonction pour valider les dates
+// Si c'est une date de naissance, on aura l'âge max et l'âge min à vérifier
 export function validateDate(string, ageMin, ageMax, dateOfBirth) {
     const date = new Date(string.trim());
     let response = false;
@@ -162,7 +162,7 @@ export function validateDate(string, ageMin, ageMax, dateOfBirth) {
     return validation;
 }
 
-//Fonction pour valider la rue
+// Fonction pour valider la rue
 export function validateStreet(string) {
     const address = string.trim();
     let response = false;
@@ -188,7 +188,7 @@ export function validateStreet(string) {
     return validation;
 }
 
-//Fonction pour valider la ville
+// Fonction pour valider la ville
 export function validateCity(string) {
     const city = string.trim();
     let response = false;
@@ -214,12 +214,12 @@ export function validateCity(string) {
     return validation;
 }
 
-//Fonction pour valider le zipcode
+// Fonction pour valider le zipcode
 export function validateZipCode(string) {
     const zipCode = string.trim();
     let response = false;
     let errorMsg = null;
-    //Zip code américain : XXXXX ou XXXXX-XXXX
+    // Zip code américain : XXXXX ou XXXXX-XXXX
     let regex = /^\d{5}(?:-\d{4})?$/;
 
     if (regex.test(zipCode)) {

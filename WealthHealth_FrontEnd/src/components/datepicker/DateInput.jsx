@@ -11,7 +11,7 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax }) {
     const [month, setMonth] = useState('MM');
     const [year, setYear] = useState('YYYY');
 
-    //On définit les valeurs des départ pour le composant datePickerBox
+    // On définit les valeurs des départ pour le composant datePickerBox
     const today = new Date();
     const [startingDay, setStartingDay] = useState(today.getDate());
     const [startingMonth, setStartingMonth] = useState(today.getMonth() + 1);
@@ -39,7 +39,7 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax }) {
         setStartingYear(values.year);
     }
 
-    //useEffect pour déterminer si le module doit se mettre au dessus ou en dessous
+    // useEffect pour déterminer si le module doit se mettre au dessus ou en dessous
     useEffect(() => {
         const inputRect = input.current.getBoundingClientRect();
         const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
@@ -53,7 +53,7 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax }) {
 
     }, [isOpen]);
 
-    //Pour que le datepicker se ferme lorsque l'utilisateur clique en dehors
+    // Pour que le datepicker se ferme lorsque l'utilisateur clique en dehors
     document.addEventListener('click', handleClickOutside);
     function handleClickOutside(event) {
         if (isOpen && datePicker.current && !datePicker.current.contains(event.target)) {
@@ -61,7 +61,7 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax }) {
         }
     }
 
-    //Ajouter la classe focused lors d'une modification de la value dans l'input
+    // Ajouter la classe focused lors d'une modification de la value dans l'input
 
     useEffect(() => {
         handleOnChange();
@@ -90,14 +90,14 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax }) {
                 </span>
             </div>
             {isOpen ?
-                <DatePickerBox 
-                position={position} 
-                handleValues={handleValues} 
-                handleClose={handleClose} 
-                startingDay={startingDay} 
-                startingMonth={startingMonth} 
-                startingYear={startingYear} 
-                yearsRangeMin={yearsRangeMin} 
+                <DatePickerBox
+                position={position}
+                handleValues={handleValues}
+                handleClose={handleClose}
+                startingDay={startingDay}
+                startingMonth={startingMonth}
+                startingYear={startingYear}
+                yearsRangeMin={yearsRangeMin}
                 yearsRangeMax={yearsRangeMax} /> : null
             }
             {errorMsg ? <p className={classes.error_msg}>{errorMsg}</p> : null}
@@ -114,4 +114,4 @@ DateInput.propTypes = {
 }
 
 
-export default DateInput; 
+export default DateInput;

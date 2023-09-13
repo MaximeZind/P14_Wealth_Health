@@ -1,5 +1,5 @@
-//Fonction qui va filtrer les employés en fonction de 
-//l'input utilisateur 
+// Fonction qui va filtrer les employés en fonction de
+// l'input utilisateur
 export function search(inputKeywords, employeesList) {
     let result = [];
     employeesList.map((employee) => {
@@ -17,7 +17,7 @@ export function search(inputKeywords, employeesList) {
     return result;
 }
 
-//Fonction qui va filtrer les options du menu de sélection
+// Fonction qui va filtrer les options du menu de sélection
 export function dropdownFilter(inputKeywords, list) {
     let result = [];
     if(inputKeywords.length === 0){

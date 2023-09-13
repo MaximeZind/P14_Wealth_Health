@@ -10,16 +10,16 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
     // Date d'aujourd'hui
     const today = new Date();
 
-    //Values used for navigation
+    // Values used for navigation
     const [month, setMonth] = useState(startingMonth);
     const [year, setYear] = useState(startingYear);
 
-    //Values returned
+    // Values returned
     const [selectedDay, setSelectedDay] = useState(startingDay);
     const [selectedMonth, setSelectedMonth] = useState(startingMonth);
     const [selectedYear, setSelectedYear] = useState(startingYear);
 
-    //Type d'array dans la grid: jours par défaut, mais peut être "months" ou "years";
+    // Type d'array dans la grid: jours par défaut, mais peut être "months" ou "years";
     const [arrayType, setArrayType] = useState('days');
 
     const gridArray = getGridArray(year, month);
@@ -41,7 +41,7 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
 
     const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-    //Fonction pour envoyer la data vers le composant parent via "handleValues"
+    // Fonction pour envoyer la data vers le composant parent via "handleValues"
     function sendData(day, month, year) {
         setSelectedDay(day);
         if (month === 0) {
@@ -70,14 +70,14 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
         if ((yearsRangeMin && yearsRangeMax) && (yearsRangeMax > yearsRangeMin)) {
             yearsArray = Array.from({ length: yearsRangeMax - yearsRangeMin + 1 }, (_, index) => yearsRangeMin + index).reverse();
         } else if (!(yearsRangeMin && yearsRangeMax) || (yearsRangeMax > yearsRangeMin)) {
-            //Array par défaut 100 ans avant et après aujourd'hui
+            // Array par défaut 100 ans avant et après aujourd'hui
             yearsArray = Array.from({ length: 201 }, (_, index) => currentYear - 100 + index).reverse();
         }
 
         return yearsArray;
     }
 
-    //fonction qui sert à générer les arrays de jours qui figurent dans le tableau
+    // fonction qui sert à générer les arrays de jours qui figurent dans le tableau
     function getGridArray(year, month) {
 
         const firstDay = new Date(year, month - 1, 1).getDay();
@@ -128,7 +128,7 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
         }, 30);
     }
 
-    //Fonctions de navigations entre les mois
+    // Fonctions de navigations entre les mois
     function handleNextMonth() {
         if (month === 12) {
             setMonth(1);
@@ -238,4 +238,4 @@ DatePickerBox.propTypes = {
 }
 
 
-export default DatePickerBox; 
+export default DatePickerBox;

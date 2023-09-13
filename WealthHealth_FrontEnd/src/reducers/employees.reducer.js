@@ -3,7 +3,7 @@ import mockedData from '../data/initialState.json';
 
 const initialState = mockedData;
 
-//Format:
+// Format:
 // {
 //     firstName: null,
 //     lastName: null,
