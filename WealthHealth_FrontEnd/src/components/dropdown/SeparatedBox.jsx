@@ -16,7 +16,7 @@ function SeparatedBox({ list, height, handleClick, searchBar }) {
     }
 
     return (
-        <div className={classes.dropdown_content} style={{ maxHeight: `${height * 7}px`, minHeight: `${height * 7}px`, transform: `translateY(${height + 2}px)` }}>
+        <div className={classes.dropdown_content} style={{ maxHeight: `${height * 7}px`, transform: `translateY(${height + 2}px)`, right:'0' }}>
             <div className={classes.animation_box} style={{ width: '100%' }}>
                 {searchBar === true ?
                     <div className={classes.filter_items} style={{ minHeight: `${height}px` }}>

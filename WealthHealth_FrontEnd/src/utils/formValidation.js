@@ -1,4 +1,4 @@
-export function validatePersonnalInformations(object){
+export function validatePersonnalInformations(object) {
     const firstNameValidation = validateName(object.firstName);
     const lastNameValidation = validateName(object.lastName);
     const dateOfBirthValidation = validateDate(object.dateOfBirth, 18, 100);
@@ -57,9 +57,9 @@ export function validateAddress(object) {
     return validation;
 }
 
-export function validateWorkSituation(object) {
+export function validateWorkSituation(object, dateOfBirth) {
 
-    const startDateValidation = validateDate(object.startDate);
+    const startDateValidation = validateDate(object.startDate, false, false, dateOfBirth);
     const array = [startDateValidation];
 
     let isValid = true;
@@ -108,7 +108,7 @@ export function validateName(string) {
 
 //fonction pour valider les dates
 //Si c'est une date de naissance, on aura l'âge max et l'âge min à vérifier
-export function validateDate(string, ageMin, ageMax) {
+export function validateDate(string, ageMin, ageMax, dateOfBirth) {
     const date = new Date(string.trim());
     let response = false;
     let errorMsg = null;
@@ -122,14 +122,31 @@ export function validateDate(string, ageMin, ageMax) {
             const currentMonth = today.getMonth() + 1;
             const currentYear = today.getFullYear();
             let age = currentYear - date.getFullYear();
-
             if ((currentMonth < date.getMonth() + 1) || (currentMonth === date.getMonth() + 1 && currentDay < date.getDate() + 1)) {
                 age--;
             }
             if (age < ageMin) {
                 errorMsg = 'The employee is too young to work.';
-            } else if (age > ageMax) {
-                errorMsg = 'The employee is too old to work.';
+            } else if (age >= ageMax) {
+                errorMsg = 'The employee must be under 100 years old';
+            }
+        } else if (dateOfBirth) {
+            const DOB = new Date(dateOfBirth.trim());
+            console.log(DOB);
+            console.log(date);
+            const yearDifference = date.getFullYear() - DOB.getFullYear();
+            console.log(yearDifference);
+            if (yearDifference < 18) {
+                errorMsg = 'The employee must be at least 18 to start working';
+            } else if (yearDifference === 18) {
+                // If the year difference is exactly 18, check months and days
+                const birthMonth = DOB.getMonth();
+                const comparisonMonth = date.getMonth();
+                const birthDay = DOB.getDate();
+                const comparisonDay = date.getDate();
+                if (comparisonMonth < birthMonth || (comparisonMonth === birthMonth && comparisonDay < birthDay)) {
+                    errorMsg = 'The employee must be at least 18 to start working';
+                }
             }
         }
         const day = (date.getDate()).toString().padStart(2, '0');
@@ -138,7 +155,7 @@ export function validateDate(string, ageMin, ageMax) {
         const MMDDYYYYdate = `${month}/${day}/${year}`;
         response = MMDDYYYYdate;
     }
-    if (errorMsg){
+    if (errorMsg) {
         response = false;
     }
     let validation = {

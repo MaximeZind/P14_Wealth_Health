@@ -111,7 +111,7 @@ function Form({ getModalText }) {
             handleErrorMsgs(formValidation.errorMsg);
             //Dernière partie du formulaire
         } else if (form.className.includes('work_situation')) {
-            const formValidation = validateWorkSituation(formJson);
+            const formValidation = validateWorkSituation(formJson, personnalInformations.dateOfBirth);
             if (formValidation.isValid === true) {
                 const newEmployee = Object.assign(personnalInformations, employeeAddress, formValidation.data);
                 //Vérification que l'employé n'est pas déjà dans la liste 
