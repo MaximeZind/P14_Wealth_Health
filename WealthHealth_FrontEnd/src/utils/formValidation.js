@@ -132,10 +132,7 @@ export function validateDate(string, ageMin, ageMax, dateOfBirth) {
             }
         } else if (dateOfBirth) {
             const DOB = new Date(dateOfBirth.trim());
-            console.log(DOB);
-            console.log(date);
             const yearDifference = date.getFullYear() - DOB.getFullYear();
-            console.log(yearDifference);
             if (yearDifference < 18) {
                 errorMsg = 'The employee must be at least 18 to start working';
             } else if (yearDifference === 18) {
