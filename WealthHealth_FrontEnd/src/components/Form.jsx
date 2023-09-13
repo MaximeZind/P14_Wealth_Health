@@ -166,9 +166,9 @@ function Form({ getModalText }) {
                 action="#"
                 onSubmit={handleFormSubmit}
                 id="add_personnal_informations">
-                <Dropdown list={states} name='state' label='State' height={40} separatedBox={false} />
-                <Dropdown list={states} name='state' label='State' height={40} separatedBox={true} />
-                {/* <Dropdown list={states} name='state' label='State' placeholder='Select a state' height={40} separatedBox={false} /> */}
+                {/* <Dropdown list={states} name='state' label='State' height={40} separatedBox={false} />
+                <Dropdown list={states} name='state' label='State' height={40} separatedBox={true} searchBar={true} />
+                <Dropdown list={states} name='state' label='State'  height={40} separatedBox={true} /> */}
                 <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} />
                 <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} />
                 <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} />
@@ -181,7 +181,7 @@ function Form({ getModalText }) {
                 id="add_address">
                 <TextInput name='street' label='Street' errorMsg={streetErrorMsg} />
                 <TextInput name='city' label='City' errorMsg={cityErrorMsg} />
-                <Dropdown list={states} name='state' label='State' placeholder='Select a state' height={40} separatedBox={true} />
+                <Dropdown list={states} name='state' label='State' height={40} separatedBox={true} searchBar={true} />
                 <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg} />
                 <div className={classes.buttons}>
                     <Button text='Previous' value='employeeAddress' onClick={handleClickPrevious} />
@@ -191,7 +191,7 @@ function Form({ getModalText }) {
             <form
                 className={`${classes.work_situation} ${classes[workSituationStatus]}`}
                 onSubmit={handleFormSubmit}>
-                <Dropdown list={departments} name='department' label='Department' placeholder='Select a department' height={40} separatedBox={true} />
+                <Dropdown list={departments} name='department' label='Department' height={40} separatedBox={true} />
                 <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} />
                 <div className={classes.buttons}>
                     <Button text='Previous' value='workSituation' onClick={handleClickPrevious} />

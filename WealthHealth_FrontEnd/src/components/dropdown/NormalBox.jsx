@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import classes from '../../styles/Dropdown.module.css';
 import PropTypes from 'prop-types';
 import MagnifyingGlass from './icons/MagnifyingGlass';
 import { dropdownFilter } from '../../utils/searchScript';
 
 
-function Dropdown({ list, height, handleClick }) {
+function Dropdown({ list, height, handleClick, searchBar }) {
 
     // const [isOpen, setIsOpen] = useState(false);
     // const [selectedName, setSelectedName] = useState(placeholder ? placeholder : list[0].name);
@@ -40,22 +40,21 @@ function Dropdown({ list, height, handleClick }) {
     }
 
     return (
-        <div className={classes.dropdown_content} style={{ maxHeight: `${height * 7}px`, minHeight: `${height * 7}px`}}>
-            {/* <div className={classes.animation_box} style={{ width: '100%' }}> */}
+        <div className={classes.dropdown_content} style={{ maxHeight: `${height * 7}px`, minHeight: `${height * 7}px`, position:'relative', zIndex:'15' }}>
+            {searchBar === true ?
                 <div className={classes.filter_items} style={{ minHeight: `${height}px` }}>
                     <span className={classes.filter_items_icon}>
                         <MagnifyingGlass />
                     </span>
-                    <input className={classes.filter_items_input} type='text' placeholder='Search...' onChange={handleFilter} />
-                </div>
-                <div className={classes.dropdown_options} style={{ maxHeight: `${height * 6}px`, minHeight: `${height * 6}px` }}>
-                    {newList.map((item) => {
-                        return item.abbreviation ?
-                            <span key={item.name} className={classes.dropdown_option} value={item.abbreviation} style={{ minHeight: `${height}px` }} onClick={() => handleClick(item.name, item.abbreviation)}>{item.name}</span> :
-                            <span key={item.name} className={classes.dropdown_option} value={item.name} onClick={() => handleClick(item.name)}>{item.name}</span>
-                    })}
-                </div>
-            {/* </div> */}
+                    <input name='search_field' className={classes.filter_items_input} type='text' placeholder='Search...' onChange={handleFilter} />
+                </div> : null}
+            <div className={classes.dropdown_options} style={{ minHeight: `${height * 6}px` }}>
+                {newList.map((item) => {
+                    return item.abbreviation ?
+                        <span key={item.name} className={classes.dropdown_option} value={item.abbreviation} style={{ minHeight: `${height}px` }} onClick={() => handleClick(item.name, item.abbreviation)}>{item.name}</span> :
+                        <span key={item.name} className={classes.dropdown_option} value={item.name} onClick={() => handleClick(item.name)}>{item.name}</span>
+                })}
+            </div>
         </div>
     );
 }
@@ -68,7 +67,8 @@ Dropdown.propTypes = {
         })
     ).isRequired,
     height: PropTypes.number.isRequired,
-    handleClick: PropTypes.func.isRequired
+    handleClick: PropTypes.func.isRequired,
+    searchBar: PropTypes.bool
 }
 
 export default Dropdown;

@@ -5,12 +5,11 @@ import DropdownArrow from './icons/DropdownArrow';
 import SeparatedBox from './SeparatedBox';
 import NormalBox from './NormalBox';
 
-function Dropdown({ list, label, name, height, separatedBox }) {
+function Dropdown({ list, label, name, height, separatedBox, searchBar }) {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedName, setSelectedName] = useState('');
     const [selectedValue, setSelectedValue] = useState(list[0].abbreviation ? list[0].abbreviation : list[0].name);
-    // const [newList, setNewList] = useState(list);
     const dropdownMenu = useRef(null);
 
     //Pour que le dropdown se ferme lorsque l'utilisateur clique en dehors
@@ -46,25 +45,8 @@ function Dropdown({ list, label, name, height, separatedBox }) {
                             <DropdownArrow transform={isOpen ? 'rotate(180deg)' : ''} />
                         </span>
                     </div>
-                    {(separatedBox && isOpen ) ? <SeparatedBox list={list} height={height} handleClick={handleClick}/> : null}
-                    {(!separatedBox && isOpen ) ? <NormalBox list={list} height={height} handleClick={handleClick}/> : null}
-                    {/* <div className={separatedBox ? `${classes.dropdown_content} ${classes.separated}` : `${classes.dropdown_content} ${classes.normal}`} style={{ maxHeight: `${height * 7}px`, minHeight: `${height * 7}px`, transform: separatedBox && `translateY(${height + 2}px)` }}>
-                        <div className={separatedBox ? classes.animation_box : null} style={{width:'100%', display: (separatedBox && !isOpen) ? 'none' : 'block' }}> 
-                            <div className={separatedBox ? `${classes.filter_items} ${classes.separated}` : `${classes.filter_items} ${classes.normal}`} style={{ minHeight: `${height}px` }}>
-                                <span className={classes.filter_items_icon}>
-                                    <MagnifyingGlass />
-                                </span>
-                                <input className={classes.filter_items_input} type='text' placeholder='Search...' onChange={handleFilter} />
-                            </div>
-                            <div className={classes.dropdown_options} style={{ maxHeight: `${height * 6}px`, minHeight: `${height * 6}px` }}>
-                                {newList.map((item) => {
-                                    return item.abbreviation ?
-                                        <span key={item.name} className={classes.dropdown_option} value={item.abbreviation} style={{ minHeight: `${height}px` }} onClick={() => handleClick(item.name, item.abbreviation)}>{item.name}</span> :
-                                        <span key={item.name} className={classes.dropdown_option} value={item.name} onClick={() => handleClick(item.name)}>{item.name}</span>
-                                })}
-                            </div>
-                        </div>
-                    </div> */}
+                    {(separatedBox && isOpen ) ? <SeparatedBox list={list} height={height} handleClick={handleClick} searchBar={searchBar} /> : null}
+                    {(!separatedBox && isOpen ) ? <NormalBox list={list} height={height} handleClick={handleClick} searchBar={searchBar} /> : null}
                 </div>
             </div>
         </div>
@@ -82,7 +64,8 @@ Dropdown.propTypes = {
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     height: PropTypes.number.isRequired,
-    separatedBox: PropTypes.bool.isRequired
+    separatedBox: PropTypes.bool.isRequired,
+    searchBar: PropTypes.bool
 }
 
 export default Dropdown;
