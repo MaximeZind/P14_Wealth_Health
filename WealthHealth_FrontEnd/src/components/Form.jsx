@@ -192,7 +192,7 @@ function Form({ getModalText }) {
                 className={`${classes.work_situation} ${classes[workSituationStatus]}`}
                 onSubmit={handleFormSubmit}>
                 <Dropdown list={departments} name='department' label='Department' height={40} separatedBox={true} />
-                <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} />
+                <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} />
                 <div className={classes.buttons}>
                     <Button text='Previous' value='workSituation' onClick={handleClickPrevious} />
                     <Button text='Create Employee' value='submit' />
