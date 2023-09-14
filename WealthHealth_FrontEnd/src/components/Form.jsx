@@ -118,11 +118,11 @@ function Form({ getModalText }) {
                 const verification = doesEmployeeExist(EmployeeList, newEmployee);
                 if (verification === false) {
                     // Si l'employé n'existe pas, on l'ajoute au state
-                    getModalText('This employee was successfully created!');
+                    getModalText('This employee was successfully created!', true);
                     dispatch(addEmployee(newEmployee));
                 } else if (verification === true) {
                     // Sinon, un message d'erreur s'affiche dans la modale
-                    getModalText('This employee was already created.');
+                    getModalText('Error found: This employee already exists.', false);
                 }
             }
             handleErrorMsgs(formValidation.errorMsg);
@@ -166,10 +166,10 @@ function Form({ getModalText }) {
                 action="#"
                 onSubmit={handleFormSubmit}
                 id="add_personnal_informations">
+                {/* <Dropdown list={states} name='state' label='State' height={40} separatedBox={false} />
+                <Dropdown list={states} name='state' label='State' height={40} separatedBox={true} searchBar={true} />
                 <Dropdown list={states} name='state' label='State' height={40} separatedBox={false} />
-                {/* <Dropdown list={states} name='state' label='State' height={40} separatedBox={true} searchBar={true} /> */}
-                <Dropdown list={states} name='state' label='State' height={40} separatedBox={false} />
-                <Dropdown list={states} name='state' label='State'  height={40} separatedBox={true} />
+                <Dropdown list={states} name='state' label='State'  height={40} separatedBox={true} /> */}
                 <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} />
                 <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} />
                 <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} />
