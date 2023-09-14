@@ -67,7 +67,7 @@
 .hidden {
     height: 0;
     width: 0;
-    position: absolute;
+    position: fixed;
     left: -500px;
 }
 
