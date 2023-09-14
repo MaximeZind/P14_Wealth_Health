@@ -29,11 +29,13 @@ function Table({ employeeList }) {
 
     useEffect(() => {
         // Mise en place du nombre de pages
-        const updatedPages = Math.ceil(list.length / tableLength)
+        let updatedPages = Math.ceil(list.length / tableLength);
+        updatedPages = updatedPages < 1 ? 1 : updatedPages;
         setPages(updatedPages);
         // Si la page actuelle est trop élevée, on lui attribue la valeur maximale
         if ((currentPage * tableLength) > list.length) {
             setCurrentPage(updatedPages)
+            console.log(updatedPages);
         }
     }, [list, tableLength, currentPage]);
 
@@ -73,6 +75,8 @@ function Table({ employeeList }) {
         setCurrentPage(1);
     }
 
+    console.log(tableLength);
+    console.log(currentPage);
     return (
         employeeList &&
         <section className={classes.table_section}>
@@ -144,7 +148,7 @@ function Table({ employeeList }) {
                 </tbody>
             </table>
             <div className={classes.table_navigation}>
-                <p> Showing {(currentPage - 1) * tableLength + 1} to {currentPage * tableLength <= list.length ? currentPage * tableLength : list.length} of {list.length} entries</p>
+                <p> Showing {list.length === 0 ? 0 : (currentPage - 1) * tableLength + 1} to {currentPage * tableLength <= list.length ? currentPage * tableLength : list.length} of {list.length} entries</p>
                 {pages > 1 ? <div className={classes.pages}>
                     {currentPage > 1 ? <p onClick={() => setCurrentPage(currentPage-1)}>Previous</p> : null}
                     {Array.from(Array(pages).keys()).map((key) => {
