@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import classes from '../../styles/Dropdown.module.css';
+import classes from '../../styles/NormalBox.module.css';
 import PropTypes from 'prop-types';
 import MagnifyingGlass from './icons/MagnifyingGlass';
 import { dropdownFilter } from '../../utils/searchScript';
@@ -17,7 +17,7 @@ function Dropdown({ list, height, handleClick, searchBar }) {
     }
 
     return (
-        <div className={classes.dropdown_content} style={{ maxHeight: `${height * 7}px`, minHeight: `${height * 7}px`, position:'relative', zIndex:'15' }}>
+        <div className={classes.dropdown_content} style={{ maxHeight: `${height * 7}px`, minHeight: `${height * 7}px`}}>
             {searchBar === true ?
                 <div className={classes.filter_items} style={{ minHeight: `${height}px` }}>
                     <span className={classes.filter_items_icon}>
