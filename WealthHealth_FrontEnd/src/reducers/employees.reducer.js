@@ -5,6 +5,7 @@ const initialState = mockedData;
 
 // Format:
 // {
+//     id: null,
 //     firstName: null,
 //     lastName: null,
 //     startDate: null,
