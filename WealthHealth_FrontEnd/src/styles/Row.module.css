@@ -30,41 +30,42 @@ td{
 }
 
 .zipcode_container{
-    width: calc(100% + 40px);
     display: grid;
-    grid-template-columns: auto 40px;
-    transition: width .5s;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
 }
 
-.myrow:hover .zipcode_container {
-    width: 100%;
-    opacity: 1;
+.zipcode_container > p {
+    grid-row: 1;
+    grid-column: 1;
 }
 
 .myrow .icons{
+    grid-row: 1;
+    grid-column: 1;
     opacity: 0;
     transition: .5s;
 }
 
 .myrow:hover .icons{
     opacity: 1;
+    transform: translateX(calc(100% - 50px));
 }
 
 .icons{
+    transform: translateX(100%);
+    grid-row: 1;
+    grid-column: 1;
     display: flex;
     flex-direction: row;
     gap: 5px;
     align-items: center;
+    padding-left: 10px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
 }
-
-.icons > svg{
-    transition: transform .3s;
-}
-
 
 .icons > svg:hover{
-    transform: scale(1.1);
-    color: #FFFFFF;
     cursor: pointer;
 }
 

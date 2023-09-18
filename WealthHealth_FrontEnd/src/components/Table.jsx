@@ -75,8 +75,6 @@ function Table({ employeeList }) {
         setCurrentPage(1);
     }
 
-    console.log(tableLength);
-    console.log(currentPage);
     return (
         employeeList &&
         <section className={classes.table_section}>
