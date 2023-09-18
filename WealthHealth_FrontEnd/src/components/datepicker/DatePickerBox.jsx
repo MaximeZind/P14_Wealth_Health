@@ -5,7 +5,7 @@ import { useState } from 'react';
 import DoubleArrow from './icons/DoubleArrow';
 import Arrow from './icons/Arrow';
 
-function DatePickerBox({ position, handleValues, handleClose, startingDay, startingMonth, startingYear, yearsRangeMin, yearsRangeMax }) {
+function DatePickerBox({ position, handleValues, handleClose, startingDay, startingMonth, startingYear, yearsRangeMin, yearsRangeMax, roundYearHighlight }) {
 
     // Date d'aujourd'hui
     const today = new Date();
@@ -223,7 +223,7 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
                 <div className={classes.date_picker_years_grid}>
                     {
                         yearsArray.map((year, index) => {
-                            return <span key={index} className={classes.years_grid_year} onClick={() => handleSelectYear(year)}>{year}</span>
+                            return <span key={index} className={(roundYearHighlight && (year % 10 === 0)) ?`${classes.years_grid_year} ${classes.round_year}` : `${classes.years_grid_year}`} onClick={() => handleSelectYear(year)}>{year}</span>
                         })
                     }
                 </div>
@@ -240,7 +240,8 @@ DatePickerBox.propTypes = {
     startingMonth: PropTypes.number.isRequired,
     startingYear: PropTypes.number.isRequired,
     yearsRangeMin: PropTypes.number,
-    yearsRangeMax: PropTypes.number
+    yearsRangeMax: PropTypes.number,
+    roundYearHighlight: PropTypes.bool
 }
 
 

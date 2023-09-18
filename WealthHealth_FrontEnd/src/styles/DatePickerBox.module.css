@@ -98,11 +98,18 @@
 .date_picker_years_grid{
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 5px;
     font-family: 'Roboto Condensed', sans-serif;
     max-height: 215px;
     overflow-y: scroll;
+}
+
+.round_year{
+    background-color: rgb(238, 238, 238);
+    grid-column-start: 1;
+    grid-column-end: 4;
+    font-size: 1.5rem;
 }
 
 .date_picker_months_grid > span, .date_picker_years_grid > span {

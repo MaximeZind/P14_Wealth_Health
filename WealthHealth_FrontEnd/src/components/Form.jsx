@@ -172,7 +172,7 @@ function Form({ getModalText }) {
                 <Dropdown list={states} name='state' label='State'  height={40} separatedBox={true} /> */}
                 <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} />
                 <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} />
-                <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} />
+                <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
                 <Button text='Next' type='submit' value='personnalInformations' />
             </form>
             <form
@@ -193,7 +193,7 @@ function Form({ getModalText }) {
                 className={`${classes.work_situation} ${classes[workSituationStatus]}`}
                 onSubmit={handleFormSubmit}>
                 <Dropdown list={departments} name='department' label='Department' height={40} separatedBox={true} />
-                <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} />
+                <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
                 <div className={classes.buttons}>
                     <Button text='Previous' value='workSituation' onClick={handleClickPrevious} />
                     <Button text='Create Employee' value='submit' />
