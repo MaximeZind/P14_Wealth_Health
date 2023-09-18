@@ -11,8 +11,8 @@ function CrossIcon({ color, width, height }) {
 
 CrossIcon.propTypes = {
     color: PropTypes.string,
-    with: PropTypes.string,
-    height: PropTypes.string,
+    width: PropTypes.number,
+    height: PropTypes.number,
 }
 
 export default CrossIcon;
