@@ -82,6 +82,7 @@ Row.propTypes = {
     city: PropTypes.string.isRequired,
     state: PropTypes.string.isRequired,
     zipCode: PropTypes.string.isRequired,
+    employeeId: PropTypes.number.isRequired
 }
 
 export default Row;

@@ -23,6 +23,7 @@ Pencil.propTypes = {
     color: PropTypes.string.isRequired,
     height: PropTypes.string.isRequired,
     width: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired
 }
 
 export default Pencil;

@@ -13,6 +13,8 @@ function NewUserIcon({ color, width, height }) {
 
 NewUserIcon.propTypes = {
     color: PropTypes.string,
+    width: PropTypes.string,
+    height: PropTypes.string,
 }
 
 export default NewUserIcon;
