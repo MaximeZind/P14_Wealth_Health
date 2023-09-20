@@ -1,3 +1,4 @@
+// Fonction de validation des informations personnelles
 export function validatePersonnalInformations(object) {
     const firstNameValidation = validateName(object.firstName);
     const lastNameValidation = validateName(object.lastName);
@@ -26,6 +27,7 @@ export function validatePersonnalInformations(object) {
     return validation;
 }
 
+// Fonction de validation des informations de l'adresse
 export function validateAddress(object) {
 
     const streetValidation = validateStreet(object.street);
@@ -57,6 +59,7 @@ export function validateAddress(object) {
     return validation;
 }
 
+// Fonction de validation des informations relatives a l'entreprise
 export function validateWorkSituation(object, dateOfBirth) {
 
     const startDateValidation = validateDate(object.startDate, false, false, dateOfBirth);
@@ -108,6 +111,7 @@ export function validateName(string) {
 
 // fonction pour valider les dates
 // Si c'est une date de naissance, on aura l'âge max et l'âge min à vérifier
+// Si c'est la date d'embauche, on la compare a l'age de naissance
 export function validateDate(string, ageMin, ageMax, dateOfBirth) {
     const date = new Date(string.trim());
     let response = false;
@@ -130,13 +134,14 @@ export function validateDate(string, ageMin, ageMax, dateOfBirth) {
             } else if (age >= ageMax) {
                 errorMsg = 'The employee must be under 100 years old';
             }
+            // S'il y a une date de naissance fournie (pour comparer avec la date d'embauche)
         } else if (dateOfBirth) {
             const DOB = new Date(dateOfBirth.trim());
             const yearDifference = date.getFullYear() - DOB.getFullYear();
             if (yearDifference < 18) {
                 errorMsg = 'The employee must be at least 18 to start working';
             } else if (yearDifference === 18) {
-                // If the year difference is exactly 18, check months and days
+                // si la difference est exactement 18, on verifie les mois et annees
                 const birthMonth = DOB.getMonth();
                 const comparisonMonth = date.getMonth();
                 const birthDay = DOB.getDate();
@@ -162,7 +167,7 @@ export function validateDate(string, ageMin, ageMax, dateOfBirth) {
     return validation;
 }
 
-// Fonction pour valider la rue
+// Fonction pour valider la rue (min 5 caracteres valides)
 export function validateStreet(string) {
     const address = string.trim();
     let response = false;
@@ -188,7 +193,7 @@ export function validateStreet(string) {
     return validation;
 }
 
-// Fonction pour valider la ville
+// Fonction pour valider la ville (min 2 caracteres valides)
 export function validateCity(string) {
     const city = string.trim();
     let response = false;
