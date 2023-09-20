@@ -7,8 +7,8 @@ export function addEmployee(data){
     }
 }
 
-export function removeEmployee(data){
+export function deleteEmployee(data){
     return (dispatch) => {
-        dispatch({ type: DEL_EMPLOYEE});
+        dispatch({ type: DEL_EMPLOYEE, payload: data});
     }
 }

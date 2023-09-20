@@ -10,9 +10,6 @@ function EmployeeList() {
     const employeeList = useSelector((state) => state.employeesReducer);
     return (
         <main className={classes.main}>
-            {/* <div className={classes.title}> */}
-                {/* <h1>Current Employees</h1> */}
-            {/* </div> */}
             <Table employeeList={employeeList}/>
         </main>
     );

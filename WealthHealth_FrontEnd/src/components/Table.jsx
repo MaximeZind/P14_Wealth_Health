@@ -28,6 +28,10 @@ function Table({ employeeList }) {
     const tableLengths = [10, 25, 50, 100];
 
     useEffect(() => {
+        setList([...employeeList]);
+      }, [employeeList]);
+
+    useEffect(() => {
         // Mise en place du nombre de pages
         let updatedPages = Math.ceil(list.length / tableLength);
         updatedPages = updatedPages < 1 ? 1 : updatedPages;
@@ -35,7 +39,6 @@ function Table({ employeeList }) {
         // Si la page actuelle est trop élevée, on lui attribue la valeur maximale
         if ((currentPage * tableLength) > list.length) {
             setCurrentPage(updatedPages)
-            console.log(updatedPages);
         }
     }, [list, tableLength, currentPage]);
 
@@ -138,7 +141,8 @@ function Table({ employeeList }) {
                                 street={employee.street}
                                 city={employee.city}
                                 state={employee.state}
-                                zipCode={employee.zipCode} />)
+                                zipCode={employee.zipCode}
+                                employeeId={employee.id} />)
                         } else if (index >= tableLength) {
                             return null;
                         }
