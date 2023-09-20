@@ -1,0 +1,7 @@
+.update_form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #FFFFFF;
+    padding: 10px;
+}
