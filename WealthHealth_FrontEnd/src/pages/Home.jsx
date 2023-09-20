@@ -27,7 +27,7 @@ function Home() {
     return (
         <main className={classes.main}>
             {isModalOpen ?
-                <Modal closeModal={closeModal} cross={true}>
+                <Modal closeModal={closeModal}>
                     <NewEmployeeModalContent isCorrect={isCorrect} closeModal={closeModal}/>
                 </Modal>
                 :

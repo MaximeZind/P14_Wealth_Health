@@ -14,23 +14,6 @@
     animation-timing-function: ease;
 }
 
-/* .cross_icon{
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-
-.cross_icon:hover{
-    background-color: rgb(200, 200, 200, 0.2);
-    cursor: pointer;
-} */
-
 .modal_content{
     display: flex;
     flex-direction: column;

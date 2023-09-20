@@ -3,12 +3,12 @@ import classes from '../../styles/Modal.module.css';
 import PropTypes from 'prop-types';
 import CrossIcon from './icons/CrossIcon';
 
-function Modal({ children, closeModal, cross }) {
+function Modal({ children, closeModal }) {
 
     return (
         <div className={classes.modal_background}>
             <div className={classes.modal}>
-                {cross ? <span className={classes.cross_icon} onClick={closeModal}>
+                {closeModal ? <span className={classes.cross_icon} onClick={closeModal}>
                     <CrossIcon height={25} width={25} />
                 </span> : null}
                 {children}
@@ -20,7 +20,6 @@ function Modal({ children, closeModal, cross }) {
 Modal.propTypes = {
     children: PropTypes.node.isRequired,
     closeModal: PropTypes.func,
-    cross: PropTypes.bool,
 }
 
 export default Modal;
