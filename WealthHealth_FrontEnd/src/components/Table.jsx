@@ -27,6 +27,7 @@ function Table({ employeeList }) {
     // array de longueurs possible de tableau
     const tableLengths = [10, 25, 50, 100];
 
+    //On utilise useEffect pour re render le tableau lorsque la liste change
     useEffect(() => {
         setList([...employeeList]);
       }, [employeeList]);
