@@ -113,7 +113,9 @@ function Form({ openModal }) {
         } else if (form.className.includes('work_situation')) {
             const formValidation = validateWorkSituation(formJson, personnalInformations.dateOfBirth);
             if (formValidation.isValid === true) {
-                const newEmployee = Object.assign(personnalInformations, employeeAddress, formValidation.data);
+                // On attribue un id correspondant a la longueur de la liste + 1
+                const idObject = {id: EmployeeList.length + 1}
+                const newEmployee = Object.assign(personnalInformations, employeeAddress, formValidation.data, idObject);
                 // Vérification que l'employé n'est pas déjà dans la liste
                 const verification = doesEmployeeExist(EmployeeList, newEmployee);
                 if (verification === false) {
@@ -168,10 +170,6 @@ function Form({ openModal }) {
                 action="#"
                 onSubmit={handleFormSubmit}
                 id="add_personnal_informations">
-                {/* <Dropdown list={states} name='state' label='State' height={40} separatedBox={false}  searchBar={true}/>
-                <Dropdown list={states} name='state' label='State' height={40} separatedBox={true} searchBar={true} />
-                <Dropdown list={states} name='state' label='State' height={40} separatedBox={false} />
-                <Dropdown list={states} name='state' label='State'  height={40} separatedBox={true} /> */}
                 <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} />
                 <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} />
                 <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
