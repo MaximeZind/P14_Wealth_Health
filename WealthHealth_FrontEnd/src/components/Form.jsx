@@ -11,7 +11,7 @@ import Button from './button';
 import { doesEmployeeExist } from '../utils/utils';
 import PropTypes from 'prop-types';
 
-function Form({ getModalText }) {
+function Form({ openModal }) {
 
     const dispatch = useDispatch()
     const departments = getDepartments();
@@ -118,11 +118,13 @@ function Form({ getModalText }) {
                 const verification = doesEmployeeExist(EmployeeList, newEmployee);
                 if (verification === false) {
                     // Si l'employé n'existe pas, on l'ajoute au state
-                    getModalText('This employee was successfully created!', true);
+                    openModal(true);
+                    // getModalText('This employee was successfully created!', true);
                     dispatch(addEmployee(newEmployee));
                 } else if (verification === true) {
                     // Sinon, un message d'erreur s'affiche dans la modale
-                    getModalText('Error found: This employee already exists.', false);
+                    // getModalText('Error found: This employee already exists.', false);
+                    openModal(false);
                 }
             }
             handleErrorMsgs(formValidation.errorMsg);
@@ -204,7 +206,7 @@ function Form({ getModalText }) {
 }
 
 Form.propTypes = {
-    getModalText: PropTypes.func.isRequired,
+    openModal: PropTypes.func.isRequired,
 }
 
 export default Form;

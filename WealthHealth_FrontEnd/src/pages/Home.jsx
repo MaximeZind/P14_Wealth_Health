@@ -2,26 +2,39 @@ import React, { useState } from 'react';
 import classes from '../styles/Home.module.css';
 import Form from '../components/Form';
 import Modal from '../components/modal/Modal';
+import NewEmployeeModalContent from '../components/modal/modal_contents/NewEmployeeModalContent'
 
 function Home() {
 
     const pageTitle = 'Create an employee';
-    document.title =`Wealth Health HRnet - ${pageTitle}`;
-    const [modalText, setModalText] = useState(null);
+    document.title = `Wealth Health HRnet - ${pageTitle}`;
+
+    //L'utilisateur a ete cree ou non
     const [isCorrect, setIsCorrect] = useState(false);
-    function getModalText(text, isCorrect){
+    // Le modal est il ouvert ou non
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Fonction de fermeture du modal
+    function openModal(isCorrect) {
         setIsCorrect(isCorrect);
-        setModalText(text);
+        setIsModalOpen(true);
+    }
+
+    // Fonction d'ouverture du modal
+    function closeModal(){
+        setIsModalOpen(false);
     }
     return (
         <main className={classes.main}>
-            {modalText ?
-            <Modal modalText={modalText} getModalText={getModalText} isCorrect={isCorrect}/>
-            :
-            <div className={classes.container}>
-                <h2>Create Employee</h2>
-                <Form getModalText={getModalText}/>
-            </div>}
+            {isModalOpen ?
+                <Modal closeModal={closeModal} cross={true}>
+                    <NewEmployeeModalContent isCorrect={isCorrect} closeModal={closeModal}/>
+                </Modal>
+                :
+                <div className={classes.container}>
+                    <h2>Create Employee</h2>
+                    <Form openModal={openModal} />
+                </div>}
         </main>
     );
 }
