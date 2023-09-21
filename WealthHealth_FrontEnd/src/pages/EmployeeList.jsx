@@ -7,10 +7,10 @@ function EmployeeList() {
 
     const pageTitle = 'Employees list';
     document.title =`Wealth Health HRnet - ${pageTitle}`;
-    const employeeList = useSelector((state) => state.employeesReducer);
+    const employeesList = useSelector((state) => state.employeesReducer);
     return (
         <main className={classes.main}>
-            <Table employeeList={employeeList}/>
+            <Table employeesList={employeesList}/>
         </main>
     );
 }

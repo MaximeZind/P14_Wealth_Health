@@ -5,12 +5,12 @@ import DropdownArrow from './icons/DropdownArrow';
 import SeparatedBox from './SeparatedBox';
 import NormalBox from './NormalBox';
 
-function Dropdown({ list, label, name, height, separatedBox, searchBar }) {
+function Dropdown({ list, label, name, height, separatedBox, searchBar, defaultValue }) {
 
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownStatus, setDropdownStatus] = useState('closed')
-    const [selectedName, setSelectedName] = useState('');
-    const [selectedValue, setSelectedValue] = useState(list[0].abbreviation ? list[0].abbreviation : list[0].name);
+    const [selectedName, setSelectedName] = useState(defaultValue ? defaultValue : '');
+    const [selectedValue, setSelectedValue] = defaultValue ? useState(defaultValue) : useState(list[0].abbreviation ? list[0].abbreviation : list[0].name);
     const dropdownMenu = useRef(null);
 
     // Pour que le dropdown se ferme lorsque l'utilisateur clique en dehors
@@ -91,7 +91,8 @@ Dropdown.propTypes = {
     placeholder: PropTypes.string,
     height: PropTypes.number.isRequired,
     separatedBox: PropTypes.bool.isRequired,
-    searchBar: PropTypes.bool
+    searchBar: PropTypes.bool,
+    defaultValue: PropTypes.string,
 }
 
 export default Dropdown;

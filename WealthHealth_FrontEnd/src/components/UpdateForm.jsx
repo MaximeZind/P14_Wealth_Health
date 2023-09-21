@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 
 
-function UpdateForm({closeModal, updateEmployee}) {
+function UpdateForm({closeModal, updateEmployee, employee}) {
 
     const states = getStates();
     const departments = getDepartments();
@@ -23,29 +23,48 @@ function UpdateForm({closeModal, updateEmployee}) {
     const [cityErrorMsg, setCityErrorMsg] = useState('');
     const [zipCodeErrorMsg, setZipCodeErrorMsg] = useState('');
 
+    function handleUpdate(event){
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+        const formJson = Object.fromEntries(formData.entries());
+        console.log(formJson);
+    }
+
     return (
-        <form className={classes.update_form}>
+        <form className={classes.update_form} onSubmit={handleUpdate}>
             <h2> Update Employee</h2>
-            <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} />
-            <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} />
-            <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
-            <TextInput name='street' label='Street' errorMsg={streetErrorMsg} />
-            <TextInput name='city' label='City' errorMsg={cityErrorMsg} />
-            <Dropdown list={states} name='state' label='State' height={40} separatedBox={true} searchBar={true} />
-            <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg} />
-            <Dropdown list={departments} name='department' label='Department' height={40} separatedBox={true} />
-            <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
+            <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} defaultValue={employee.firstName} />
+            <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} defaultValue={employee.lastName} />
+            <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} defaultValue={employee.dateOfBirth} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
+            <TextInput name='street' label='Street' errorMsg={streetErrorMsg} defaultValue={employee.street} />
+            <TextInput name='city' label='City' errorMsg={cityErrorMsg} defaultValue={employee.city} />
+            <Dropdown list={states} name='state' label='State' height={40} separatedBox={true} searchBar={true} defaultValue={employee.state} />
+            <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg} defaultValue={employee.zipCode} />
+            <Dropdown list={departments} name='department' label='Department' height={40} separatedBox={true} defaultValue={employee.department} />
+            <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} defaultValue={employee.startDate} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
             <div className={classes.update_form_buttons}>   
                 <Button text='Cancel' value='cancel' onClick={closeModal} />
-                <Button text='Update' value='update' onClick={updateEmployee} />
+                <Button text='Update' value='submit' />
             </div>
         </form>
     );
 }
 
-Button.propTypes = {
+UpdateForm.propTypes = {
     closeModal: PropTypes.func.isRequired,
     updateEmployee: PropTypes.func.isRequired,
+    employee: PropTypes.shape({
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+        startDate: PropTypes.string.isRequired,
+        department: PropTypes.string.isRequired,
+        dateOfBirth: PropTypes.string.isRequired,
+        street: PropTypes.string.isRequired,
+        city: PropTypes.string.isRequired,
+        state: PropTypes.string.isRequired,
+        zipCode: PropTypes.string.isRequired,
+    }).isRequired,
   }
 
 

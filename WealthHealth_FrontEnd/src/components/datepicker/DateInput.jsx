@@ -5,11 +5,12 @@ import { useState, useRef } from 'react';
 import Calendar from './icons/Calendar';
 import DatePickerBox from './DatePickerBox';
 
-function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundYearHighlight }) {
+function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundYearHighlight, defaultValue }) {
 
-    const [day, setDay] = useState('DD');
-    const [month, setMonth] = useState('MM');
-    const [year, setYear] = useState('YYYY');
+    const defaultDate = new Date(defaultValue);
+    const [day, setDay] = useState((defaultValue && defaultDate) ? defaultDate.getDate() : 'DD');
+    const [month, setMonth] = useState((defaultValue && defaultDate) ? defaultDate.getMonth()+1 : 'MM');
+    const [year, setYear] = useState((defaultValue && defaultDate) ? defaultDate.getFullYear() : 'YYYY');
 
     // On définit les valeurs des départ pour le composant datePickerBox
     const today = new Date();
@@ -112,7 +113,8 @@ DateInput.propTypes = {
     errorMsg: PropTypes.string,
     yearsRangeMax: PropTypes.number,
     yearsRangeMin: PropTypes.number,
-    roundYearHighlight: PropTypes.bool
+    roundYearHighlight: PropTypes.bool,
+    defaultValue: PropTypes.string,
 }
 
 

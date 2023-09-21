@@ -6,11 +6,16 @@ import Arrow from './Arrow';
 import PropTypes from 'prop-types';
 import TextInput from './TextInput';
 import { search } from '../utils/searchScript';
+import Modal from './modal/Modal';
+import UpdateForm from './UpdateForm';
+import { getEmployeeById } from '../utils/utils';
 
-function Table({ employeeList }) {
+function Table({ employeesList }) {
 
     // initialisation des States
-    const [list, setList] = useState([...employeeList]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [employeeToUpdate, setEmployeeToUpdate] = useState(null);
+    const [list, setList] = useState([...employeesList]);
     const [selectedField, setSelectedField] = useState(null);
     const [isAscending, setIsAscending] = useState(false);
     const [tableLength, setTableLength] = useState(10);
@@ -29,8 +34,8 @@ function Table({ employeeList }) {
 
     // On utilise useEffect pour re render le tableau lorsque la liste change
     useEffect(() => {
-        setList([...employeeList]);
-      }, [employeeList]);
+        setList([...employeesList]);
+    }, [employeesList]);
 
     useEffect(() => {
         // Mise en place du nombre de pages
@@ -74,13 +79,30 @@ function Table({ employeeList }) {
     // Fonction qui gère le champ de recherche du tableau
     function handleSearch(event) {
         let array = event.target.value.split(' ');
-        const newList = search(array, employeeList);
+        const newList = search(array, employeesList);
         setList(newList);
         setCurrentPage(1);
     }
 
+    ///// Gestion du modal /////
+
+    function handlePencilClick(employeeId) {
+        const employee = getEmployeeById(employeeId, employeesList);
+        setEmployeeToUpdate(employee);
+        setIsModalOpen(true);
+    }
+
+    function handleCloseModal() {
+        setEmployeeToUpdate(null);
+        setIsModalOpen(false);
+    }
+
+    function handleUpdateEmployee(employee){
+        console.log(employee);
+    }
+
     return (
-        employeeList &&
+        employeesList &&
         <section className={classes.table_section}>
             <div className={classes.table_filters}>
                 <label>
@@ -143,7 +165,9 @@ function Table({ employeeList }) {
                                 city={employee.city}
                                 state={employee.state}
                                 zipCode={employee.zipCode}
-                                employeeId={employee.id} />)
+                                employeeId={employee.id}
+                                handlePencilClick={() => handlePencilClick(employee.id)} 
+                                />)
                         } else if (index >= tableLength) {
                             return null;
                         }
@@ -153,19 +177,26 @@ function Table({ employeeList }) {
             <div className={classes.table_navigation}>
                 <p> Showing {list.length === 0 ? 0 : (currentPage - 1) * tableLength + 1} to {currentPage * tableLength <= list.length ? currentPage * tableLength : list.length} of {list.length} entries</p>
                 {pages > 1 ? <div className={classes.pages}>
-                    {currentPage > 1 ? <p onClick={() => setCurrentPage(currentPage-1)}>Previous</p> : null}
+                    {currentPage > 1 ? <p onClick={() => setCurrentPage(currentPage - 1)}>Previous</p> : null}
                     {Array.from(Array(pages).keys()).map((key) => {
-                        return <p className={(key+1) === currentPage ? classes.active : null} onClick={() => setCurrentPage(key + 1)} key={key}>{key + 1}</p>
+                        return <p className={(key + 1) === currentPage ? classes.active : null} onClick={() => setCurrentPage(key + 1)} key={key}>{key + 1}</p>
                     })}
-                    {currentPage < pages ? <p onClick={() => setCurrentPage(currentPage+1)}>Next</p> : null}
+                    {currentPage < pages ? <p onClick={() => setCurrentPage(currentPage + 1)}>Next</p> : null}
                 </div> : null}
             </div>
+            {isModalOpen ?
+                <Modal>
+                    <UpdateForm
+                        closeModal={handleCloseModal}
+                        updateEmployee={handleUpdateEmployee}
+                        employee={employeeToUpdate} />
+                </Modal> : null}
         </section>
-    );
+    )
 }
 
 Table.propTypes = {
-    employeeList: PropTypes.arrayOf(
+    employeesList: PropTypes.arrayOf(
         PropTypes.shape({
             firstName: PropTypes.string.isRequired,
             lastName: PropTypes.string.isRequired,

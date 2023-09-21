@@ -1,11 +1,17 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classes from '../styles/TextInput.module.css';
 import PropTypes from 'prop-types';
 
-function TextInput({ name, label, errorMsg, onChange }) {
+function TextInput({ name, label, errorMsg, onChange, defaultValue }) {
 
     const input = useRef(null);
     const container = useRef(null);
+
+    useEffect(() => {
+        if (container.current && defaultValue){
+            container.current.classList.add(classes.focused);
+        }
+    }, [container]);
 
     // Focus l'input, et ajout la classe "focused" au conteneur
     function handleClick() {
@@ -37,7 +43,7 @@ function TextInput({ name, label, errorMsg, onChange }) {
     return (
         <div ref={container} className={classes.text_input} onClick={handleClick}>
             <label className={classes.label} htmlFor={name} style={{ top: '10px' }}>{label}</label>
-            <input ref={input} style={{ height: '40px' }} className={classes.input} type="text" id={name} name={name} onChange={onChange ? onChange : handleOnChange} />
+            <input defaultValue={defaultValue ? defaultValue : null} ref={input} style={{ height: '40px' }} className={classes.input} type="text" id={name} name={name} onChange={onChange ? onChange : handleOnChange} />
             {errorMsg ? <p className={classes.error_msg}>{errorMsg}</p> : null}
         </div>
     );
@@ -48,6 +54,7 @@ TextInput.propTypes = {
     label: PropTypes.string.isRequired,
     errorMsg: PropTypes.string,
     onChange: PropTypes.func,
+    defaultValue: PropTypes.string,
 }
 
 export default TextInput;

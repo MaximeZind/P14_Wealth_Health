@@ -10,3 +10,8 @@ export function doesEmployeeExist(employeesList, newEmployee) {
     });
     return doesEmployeeExist;
 }
+
+export function getEmployeeById(id, employeesList){
+    const employee = employeesList.find((employee) => employee.id === id)
+    return employee;
+}
