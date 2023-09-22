@@ -100,30 +100,40 @@ function Table({ employeesList }) {
 
     // Gestion du modal //
 
+    // Fonction appelee lors du clic sur le "crayon" d'une ligne
+    // Ouvre le formulaire de mise a jour des infos de l'employe
     function handlePencilClick(employee) {
         setEmployeeToUpdate(employee);
         setIsModalOpen(true);
         setIsFormOpen(true)
     }
 
+    // Fonction qui est appelee une fois que lq mise a jour des infos de l'employe est faite
+    // ouvre la modale de confirmation de mise a jour
     function handleUpdateClick() {
         setIsFormOpen(false);
         setIsConfirmationOfUpdateOpen(true);
     }
 
+    // Fonction appelee lors du clic sur la "poubelle" d'une ligne
+    // Ouvre la modale de demande de validation de suppression de l'employe du systeme
     function handleBinClick(employee) {
         setemployeeToDelete(employee);
         setIsModalOpen(true);
     }
 
+    // Fonction appelee lorsque la deletion est validee par l'utilisateur
+    // met a jour le state redux, puis ouvre la modale de confirmation de suppression
     function handleDelete(employeeId) {
         dispatch(deleteEmployee(employeeId));
         setemployeeToDelete(null);
         setIsConfirmationOfDeletionOpen(true);
     };
 
+    // Fonction qui sert a fermer la modale, et reset tous les states qui ont a voir avec la modale.
     function handleCloseModal() {
         setEmployeeToUpdate(null);
+        setemployeeToDelete(null);
         setIsModalOpen(false);
         setIsFormOpen(false);
         setIsConfirmationOfUpdateOpen(false);
