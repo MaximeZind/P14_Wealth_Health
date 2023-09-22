@@ -97,10 +97,6 @@ function Table({ employeesList }) {
         setIsModalOpen(false);
     }
 
-    function handleUpdateEmployee(employee){
-        console.log(employee);
-    }
-
     return (
         employeesList &&
         <section className={classes.table_section}>
@@ -188,7 +184,6 @@ function Table({ employeesList }) {
                 <Modal closeModal={handleCloseModal}>
                     <UpdateForm
                         closeModal={handleCloseModal}
-                        updateEmployee={handleUpdateEmployee}
                         employee={employeeToUpdate} />
                 </Modal> : null}
         </section>

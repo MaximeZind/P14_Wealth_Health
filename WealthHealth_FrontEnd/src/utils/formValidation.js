@@ -1,3 +1,48 @@
+export function validateEmployee(object){
+    const firstNameValidation = validateName(object.firstName);
+    const lastNameValidation = validateName(object.lastName);
+    const dateOfBirthValidation = validateDate(object.dateOfBirth, 18, 100);
+    const streetValidation = validateStreet(object.street);
+    const cityValidation = validateCity(object.city);
+    const zipCodeValidation = validateZipCode(object.zipCode);
+    const startDateValidation = validateDate(object.startDate, false, false, object.dateOfBirth);
+
+    const array = [firstNameValidation, lastNameValidation, dateOfBirthValidation, streetValidation, cityValidation, zipCodeValidation, startDateValidation];
+
+    let isValid = true;
+    array.map((item) => {
+        if (!item.response) {
+            isValid = false;
+            return;
+        }
+    });
+
+    const validation = {
+        isValid: isValid,
+        data: {
+            firstName: firstNameValidation.response,
+            lastName: lastNameValidation.response,
+            dateOfBirth: dateOfBirthValidation.response,
+            street: streetValidation.response,
+            city: cityValidation.response,
+            state: object.state,
+            zipCode: zipCodeValidation.response,
+            startDate: startDateValidation.response,
+            department: object.department
+        },
+        errorMsg: {
+            firstName: firstNameValidation.errorMsg,
+            lastName: lastNameValidation.errorMsg,
+            dateOfBirth: dateOfBirthValidation.errorMsg,
+            street: streetValidation.errorMsg,
+            city: cityValidation.errorMsg,
+            zipCode: zipCodeValidation.errorMsg,
+            startDate: startDateValidation.errorMsg,
+        }
+    }
+    return validation;
+}
+
 // Fonction de validation des informations personnelles
 export function validatePersonnalInformations(object) {
     const firstNameValidation = validateName(object.firstName);

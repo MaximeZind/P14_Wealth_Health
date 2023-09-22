@@ -1,5 +1,6 @@
 export const ADD_EMPLOYEE = 'ADD_EMPLOYEE';
-export const DEL_EMPLOYEE = 'DEL_EMPLOYEE';
+export const DELETE_EMPLOYEE = 'DELETE_EMPLOYEE';
+export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE';
 
 export function addEmployee(data){
     return (dispatch) => {
@@ -9,6 +10,12 @@ export function addEmployee(data){
 
 export function deleteEmployee(data){
     return (dispatch) => {
-        dispatch({ type: DEL_EMPLOYEE, payload: data});
+        dispatch({ type: DELETE_EMPLOYEE, payload: data});
+    }
+}
+
+export function updateEmployee(data){
+    return (dispatch) => {
+        dispatch({ type: UPDATE_EMPLOYEE, payload: data});
     }
 }

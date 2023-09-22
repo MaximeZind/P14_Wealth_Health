@@ -13,11 +13,11 @@ function Collapse({ title, children }) {
                 <h2>
                     {title}
                 </h2>
-                <Arrow size={20}/>
+                <Arrow size={20} />
             </header>
-            {isOpen ? <div className={classes.dropdown_content}>
+            <div className={isOpen ? `${classes.dropdown_content}` : `${classes.dropdown_content} ${classes.hidden}`}>
                 {children}
-            </div> : null}
+            </div>
         </div>
     );
 }

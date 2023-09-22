@@ -1,4 +1,4 @@
-import { ADD_EMPLOYEE, DEL_EMPLOYEE } from "../actions/employees.action";
+import { ADD_EMPLOYEE, DELETE_EMPLOYEE, UPDATE_EMPLOYEE } from "../actions/employees.action";
 import mockedData from '../data/initialState.json';
 
 const initialState = mockedData;
@@ -23,10 +23,18 @@ export default function employeesReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_EMPLOYEE:
             return [...state, action.payload];
-        case DEL_EMPLOYEE:
+        case DELETE_EMPLOYEE:
             const id = action.payload;
-            const updatedEmployees = state.filter((employee) => employee.id !== id);
-            return updatedEmployees;
+            const updatedEmployeesAfterDeletion = state.filter((employee) => employee.id !== id);
+            return updatedEmployeesAfterDeletion;
+        case UPDATE_EMPLOYEE:
+            const updatedEmployee = action.payload;
+            console.log(updatedEmployee);
+            const updatedEmployeesAfterUpdate = state.map((employee) =>
+                employee.id === updatedEmployee.id ? updatedEmployee : employee
+            );
+            console.log(updatedEmployeesAfterUpdate);
+            return updatedEmployeesAfterUpdate;
         default:
             return state;
     }
