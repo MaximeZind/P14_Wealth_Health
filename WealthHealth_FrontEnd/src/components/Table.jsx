@@ -185,7 +185,7 @@ function Table({ employeesList }) {
                 </div> : null}
             </div>
             {isModalOpen ?
-                <Modal>
+                <Modal closeModal={handleCloseModal}>
                     <UpdateForm
                         closeModal={handleCloseModal}
                         updateEmployee={handleUpdateEmployee}
