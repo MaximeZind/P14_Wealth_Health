@@ -5,7 +5,7 @@ import MagnifyingGlass from './icons/MagnifyingGlass';
 import { dropdownFilter } from '../../utils/searchScript';
 
 
-function Dropdown({ list, height, handleClick, searchBar }) {
+function NormalBox({ list, height, handleClick, searchBar }) {
 
     const [newList, setNewList] = useState(list);
 
@@ -36,7 +36,7 @@ function Dropdown({ list, height, handleClick, searchBar }) {
     );
 }
 
-Dropdown.propTypes = {
+NormalBox.propTypes = {
     list: PropTypes.arrayOf(
         PropTypes.shape({
             name: PropTypes.string.isRequired,
@@ -48,4 +48,4 @@ Dropdown.propTypes = {
     searchBar: PropTypes.bool
 }
 
-export default Dropdown;
+export default NormalBox;

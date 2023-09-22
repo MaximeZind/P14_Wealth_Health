@@ -5,7 +5,7 @@ import DropdownArrow from './icons/DropdownArrow';
 import SeparatedBox from './SeparatedBox';
 import NormalBox from './NormalBox';
 
-function Dropdown({ list, label, name, height, separatedBox, searchBar, defaultValue }) {
+function Dropdown({ list, label, name, height, maxWidth, separatedBox, searchBar, defaultValue, onChange }) {
 
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownStatus, setDropdownStatus] = useState('closed')
@@ -17,7 +17,7 @@ function Dropdown({ list, label, name, height, separatedBox, searchBar, defaultV
     // document.addEventListener('click', handleClickOutside);
     function handleClickOutside(event) {
         if (isOpen && dropdownMenu.current && !dropdownMenu.current.contains(event.target)) {
-            if (dropdownStatus === `opened`){
+            if (dropdownStatus === `opened`) {
                 handleClose();
             }
         }
@@ -30,6 +30,10 @@ function Dropdown({ list, label, name, height, separatedBox, searchBar, defaultV
         };
     }, [isOpen, dropdownStatus]);
 
+    useEffect(() => {
+        onChange(selectedValue);
+    }, [selectedValue]);
+
     // Fonction pour gérer le clique sur une des options
     function handleClick(name, value) {
         setSelectedName(name);
@@ -38,40 +42,41 @@ function Dropdown({ list, label, name, height, separatedBox, searchBar, defaultV
         } else if (!value) {
             setSelectedValue(name);
         }
+        onChange(selectedValue);
         handleClose();
     }
 
-    function handleClose(){
+    function handleClose() {
         setDropdownStatus(`closing`);
         setIsOpen(false);
         setTimeout(() => {
             setDropdownStatus(`closed`);
-        },300 )
+        }, 300)
     }
 
-    function handleOpen(){
-    setDropdownStatus(`opening`);
+    function handleOpen() {
+        setDropdownStatus(`opening`);
         setIsOpen(true);
         setTimeout(() => {
             setDropdownStatus(`opened`);
-        },300 )
+        }, 300)
     }
 
     return (
-        <div className={`${classes.component_container} ${classes[dropdownStatus]}`}>
+        <div className={`${classes.component_container} ${classes[dropdownStatus]}`} style={{maxWidth: `${maxWidth}px`}}>
             <label className={(isOpen || selectedName !== '') ? `${classes.label} ${classes.focused}` : classes.label} htmlFor={name} >{label}</label>
             <input className={classes.hidden} name={name} id={name} value={selectedValue} readOnly={true} />
             <div style={{ height: `${height}px` }}>
                 <div ref={dropdownMenu}
-                className={separatedBox ? `${classes.dropdown_container} ${classes.separated}` : `${classes.dropdown_container} ${classes.normal}`}
-                style={!separatedBox ? ((dropdownStatus === `closed`) || (dropdownStatus === `closing`)) ? { height: `${height}px` } : { height: `${height * 8}px` } : { height: `${height}px` }} >
-                    <div className={classes.dropdown_header} style={{ minHeight: `${height}px` }}>
+                    className={separatedBox ? `${classes.dropdown_container} ${classes.separated}` : `${classes.dropdown_container} ${classes.normal}`}
+                    style={!separatedBox ? ((dropdownStatus === `closed`) || (dropdownStatus === `closing`)) ? { height: `${height}px` } : { height: `${height * 8}px` } : { height: `${height}px` }} >
+                    <div className={classes.dropdown_header} style={{ minHeight: `${height}px` }}  onClick={() => isOpen ? handleClose() : handleOpen()}>
                         <span className={classes.selected_item}>{selectedName}</span>
-                        <span className={classes.dropdown_header_icon} onClick={() => isOpen ? handleClose() : handleOpen()}>
+                        <span className={classes.dropdown_header_icon}>
                             <DropdownArrow transform={isOpen ? 'rotate(180deg)' : ''} />
                         </span>
                     </div>
-                    {(separatedBox && isOpen ) ? <SeparatedBox list={list} height={height} handleClick={handleClick} searchBar={searchBar} /> : null}
+                    {(separatedBox && isOpen) ? <SeparatedBox list={list} height={height} handleClick={handleClick} searchBar={searchBar} /> : null}
                     {!separatedBox ? <NormalBox list={list} height={height} handleClick={handleClick} searchBar={searchBar} /> : null}
                 </div>
             </div>
@@ -81,18 +86,24 @@ function Dropdown({ list, label, name, height, separatedBox, searchBar, defaultV
 
 Dropdown.propTypes = {
     list: PropTypes.arrayOf(
-        PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            abbreviation: PropTypes.string,
-        })
+        PropTypes.oneOfType([
+            PropTypes.shape({
+                name: PropTypes.string.isRequired,
+                abbreviation: PropTypes.string,
+            }),
+            PropTypes.number,
+            PropTypes.string,
+        ])
     ).isRequired,
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     height: PropTypes.number.isRequired,
+    maxWidth: PropTypes.number,
     separatedBox: PropTypes.bool.isRequired,
     searchBar: PropTypes.bool,
     defaultValue: PropTypes.string,
+    handleOnChange: PropTypes.func,
 }
 
 export default Dropdown;

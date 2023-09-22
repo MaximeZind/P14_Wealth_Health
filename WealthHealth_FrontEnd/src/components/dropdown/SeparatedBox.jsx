@@ -25,11 +25,11 @@ function SeparatedBox({ list, height, handleClick, searchBar }) {
                         </span>
                         <input name='search_field' className={classes.filter_items_input} type='text' placeholder='Search...' onChange={handleFilter} />
                     </div> : null}
-                <div className={classes.dropdown_options} style={{ maxHeight: `${height * 6}px`, minHeight: `${height * 6}px` }}>
-                    {newList.map((item) => {
+                <div className={classes.dropdown_options} style={{ maxHeight: `${height * 6}px`}}>
+                    {newList.map((item, index) => {
                         return item.abbreviation ?
-                            <span key={item.name} className={classes.dropdown_option} value={item.abbreviation} style={{ minHeight: `${height}px` }} onClick={() => handleClick(item.name, item.abbreviation)}>{item.name}</span> :
-                            <span key={item.name} className={classes.dropdown_option} value={item.name} onClick={() => handleClick(item.name)}>{item.name}</span>
+                            <span key={item.name ? item.name : index} className={classes.dropdown_option} value={item.abbreviation ? item.abbreviation : item} style={{ minHeight: `${height}px` }} onClick={() => handleClick(item.name ? item.name : item, item.abbreviation)}>{item.name ? item.name : item}</span> :
+                            <span key={item.name ? item.name : index} className={classes.dropdown_option} value={item.name ? item.name : item} onClick={() => handleClick(item.name ? item.name : item)}>{item.name ? item.name : item}</span>
                     })}
                 </div>
             </div>
@@ -38,11 +38,21 @@ function SeparatedBox({ list, height, handleClick, searchBar }) {
 }
 
 SeparatedBox.propTypes = {
+    // list: PropTypes.arrayOf(
+    //     PropTypes.shape({
+    //         name: PropTypes.string.isRequired,
+    //         abbreviation: PropTypes.string,
+    //     })
+    // ).isRequired,
     list: PropTypes.arrayOf(
-        PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            abbreviation: PropTypes.string,
-        })
+        PropTypes.oneOfType([
+            PropTypes.shape({
+                name: PropTypes.string.isRequired,
+                abbreviation: PropTypes.string,
+            }),
+            PropTypes.number,
+            PropTypes.string,
+        ])
     ).isRequired,
     height: PropTypes.number.isRequired,
     handleClick: PropTypes.func.isRequired,

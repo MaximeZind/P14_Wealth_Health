@@ -10,6 +10,7 @@ import Modal from './modal/Modal';
 import UpdateForm from './UpdateForm';
 import { getEmployeeById } from '../utils/utils';
 import NewEmployeeModalContent from './modal/modal_contents/NewEmployeeModalContent';
+import Dropdown from './dropdown/Dropdown';
 
 function Table({ employeesList }) {
 
@@ -33,7 +34,7 @@ function Table({ employeesList }) {
     // ... Pour savoir lequel est sélectionné
     const highlightedField = selectedField ? camelFields.indexOf(selectedField) : null;
     // array de longueurs possible de tableau
-    const tableLengths = [10, 25, 50, 100];
+    const tableLengths = ['10', '25', '50', '100'];
 
     // On utilise useEffect pour re render le tableau lorsque la liste change
     useEffect(() => {
@@ -75,8 +76,8 @@ function Table({ employeesList }) {
     }
 
     // fonction qui gère la valeur reçue par le menu déroulant
-    function handleSelect(event) {
-        setTableLength(event.target.value);
+    function handleSelect(value) {
+        setTableLength(value);
     }
 
     // Fonction qui gère le champ de recherche du tableau
@@ -96,7 +97,7 @@ function Table({ employeesList }) {
         setIsFormOpen(true)
     }
 
-    function handleUpdateClick(employee){
+    function handleUpdateClick(employee) {
         setIsFormOpen(false);
         setIsConfirmationOpen(true);
     }
@@ -112,15 +113,14 @@ function Table({ employeesList }) {
         employeesList &&
         <section className={classes.table_section}>
             <div className={classes.table_filters}>
-                <label>
-                    Show
-                    <select className={classes.dropdown} name='employees_table_length' id='employees_table_length' onChange={(event) => handleSelect(event)}>
-                        {tableLengths.map((length) => {
-                            return <option className={classes.option} key={length} value={length}>{length}</option>
-                        })}
-                    </select>
-                    entries
-                </label>
+                <Dropdown label='Entries' 
+                list={tableLengths} 
+                height={40} 
+                maxWidth={100}
+                name='employees_table_length' 
+                id='employees_table_length' 
+                defaultValue={tableLengths[0]} 
+                onChange={handleSelect} separatedBox={true} />
                 <TextInput name='search' label='Search: ' onChange={handleSearch} />
             </div>
             <table id='employee_table' className={classes.table}>
@@ -173,8 +173,8 @@ function Table({ employeesList }) {
                                 state={employee.state}
                                 zipCode={employee.zipCode}
                                 employeeId={employee.id}
-                                handlePencilClick={() => handlePencilClick(employee.id)} 
-                                />)
+                                handlePencilClick={() => handlePencilClick(employee.id)}
+                            />)
                         } else if (index >= tableLength) {
                             return null;
                         }
@@ -194,12 +194,12 @@ function Table({ employeesList }) {
             {isModalOpen ?
                 <Modal closeModal={handleCloseModal}>
                     {isFormOpen ?
-                    <UpdateForm
-                        closeModal={handleCloseModal}
-                        handleUpdateClick={handleUpdateClick}
-                        employee={employeeToUpdate} /> :
-                        <NewEmployeeModalContent isCorrect={true} closeModal={handleCloseModal} action='updated'/>
-                        }
+                        <UpdateForm
+                            closeModal={handleCloseModal}
+                            handleUpdateClick={handleUpdateClick}
+                            employee={employeeToUpdate} /> :
+                        <NewEmployeeModalContent isCorrect={true} closeModal={handleCloseModal} action='updated' />
+                    }
                 </Modal> : null}
         </section>
     )

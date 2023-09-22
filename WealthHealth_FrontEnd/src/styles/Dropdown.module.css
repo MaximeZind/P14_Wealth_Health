@@ -73,6 +73,10 @@
     gap: 15px;
 }
 
+.dropdown_header:hover {
+    cursor: pointer;
+}
+
 .selected_item {
     width: 200px;
     overflow: hidden;
@@ -95,11 +99,7 @@
     transition: background-color .3s ease;
 }
 
-.dropdown_header_icon.normal {
-    border-left: 2px solid rgb(177, 196, 108, 0.4);
-}
-
-.dropdown_header_icon:hover {
+.dropdown_header:hover > .dropdown_header_icon {
     cursor: pointer;
     background-color: rgb(177, 196, 108, 0.2);
 }
