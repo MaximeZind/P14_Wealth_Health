@@ -8,17 +8,27 @@ import TextInput from './TextInput';
 import { search } from '../utils/searchScript';
 import Modal from './modal/Modal';
 import UpdateForm from './UpdateForm';
-import { getEmployeeById } from '../utils/utils';
 import NewEmployeeModalContent from './modal/modal_contents/NewEmployeeModalContent';
 import Dropdown from './dropdown/Dropdown';
+import ConfirmEmployeeDeletionModalContent from './modal/modal_contents/ConfirmEmployeeDeletionModalContent';
+import { useDispatch } from 'react-redux';
+import { deleteEmployee } from '../actions/employees.action';
 
 function Table({ employeesList }) {
 
+    const dispatch = useDispatch();
     // initialisation des States
+    // Modal
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Contenu du modal
     const [isFormOpen, setIsFormOpen] = useState(false);
-    const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+    const [isConfirmationOfUpdateOpen, setIsConfirmationOfUpdateOpen] = useState(false);
+    const [isConfirmationOfDeletionOpen, setIsConfirmationOfDeletionOpen] = useState(false);
+
     const [employeeToUpdate, setEmployeeToUpdate] = useState(null);
+    const [employeeToDelete, setemployeeToDelete] = useState(null);
+
     const [list, setList] = useState([...employeesList]);
     const [selectedField, setSelectedField] = useState(null);
     const [isAscending, setIsAscending] = useState(false);
@@ -90,8 +100,7 @@ function Table({ employeesList }) {
 
     // Gestion du modal //
 
-    function handlePencilClick(employeeId) {
-        const employee = getEmployeeById(employeeId, employeesList);
+    function handlePencilClick(employee) {
         setEmployeeToUpdate(employee);
         setIsModalOpen(true);
         setIsFormOpen(true)
@@ -99,14 +108,26 @@ function Table({ employeesList }) {
 
     function handleUpdateClick() {
         setIsFormOpen(false);
-        setIsConfirmationOpen(true);
+        setIsConfirmationOfUpdateOpen(true);
     }
+
+    function handleBinClick(employee) {
+        setemployeeToDelete(employee);
+        setIsModalOpen(true);
+    }
+
+    function handleDelete(employeeId) {
+        dispatch(deleteEmployee(employeeId));
+        setemployeeToDelete(null);
+        setIsConfirmationOfDeletionOpen(true);
+    };
 
     function handleCloseModal() {
         setEmployeeToUpdate(null);
         setIsModalOpen(false);
         setIsFormOpen(false);
-        setIsConfirmationOpen(false);
+        setIsConfirmationOfUpdateOpen(false);
+        setIsConfirmationOfDeletionOpen(false);
     }
 
     return (
@@ -173,7 +194,8 @@ function Table({ employeesList }) {
                                 state={employee.state}
                                 zipCode={employee.zipCode}
                                 employeeId={employee.id}
-                                handlePencilClick={() => handlePencilClick(employee.id)}
+                                handlePencilClick={() => handlePencilClick(employee)}
+                                handleBinClick={() => handleBinClick(employee)}
                             />)
                         } else if (index >= tableLength) {
                             return null;
@@ -198,8 +220,15 @@ function Table({ employeesList }) {
                             closeModal={handleCloseModal}
                             handleUpdateClick={handleUpdateClick}
                             employee={employeeToUpdate} />}
-                    {isConfirmationOpen &&
-                        <NewEmployeeModalContent isCorrect={true} closeModal={handleCloseModal} action='updated' />
+                    {isConfirmationOfUpdateOpen &&
+                        <NewEmployeeModalContent isCorrect={true} iconColor='rgb(0, 175, 95)' iconBackgroundColor='rgb(0, 175, 95, 0.5)' closeModal={handleCloseModal} text='This employee was successfully updated' />}
+                    {employeeToDelete &&
+                        <ConfirmEmployeeDeletionModalContent
+                            closeModal={handleCloseModal}
+                            confirm={() => handleDelete(employeeToDelete.id)}
+                            employee={employeeToDelete} />}
+                    {isConfirmationOfDeletionOpen && 
+                    <NewEmployeeModalContent isCorrect={false} iconColor='rgb(0, 175, 95)' iconBackgroundColor='rgb(0, 175, 95, 0.5)' closeModal={handleCloseModal} text='This employee was successfully removed from the system' />
                     }
                 </Modal> : null}
         </section>

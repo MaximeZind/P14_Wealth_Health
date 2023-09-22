@@ -5,17 +5,15 @@ import NewUserIcon from '../icons/NewUserIcon';
 import Button from '../../button';
 import WrongUserIcon from '../icons/WrongUserIcon';
 
-function NewEmployeeModalContent({ isCorrect, closeModal, action }) {
+function NewEmployeeModalContent({ isCorrect, iconColor, iconBackgroundColor, closeModal, text }) {
 
     const iconSize = '40px';
-    const text = isCorrect ? `This employee was successfully ${action}!` : 'Error found: This employee already exists.';
-
     return (
             <div className={classes.modal}>
                 <div className={classes.modal_content}>
-                    <span className={isCorrect ? `${classes.icon_container} ${classes.correct}` : `${classes.icon_container} ${classes.incorrect}`}>
-                        {isCorrect ? < NewUserIcon color={'rgb(0, 175, 95)'} width={iconSize} height={iconSize} /> :
-                            <WrongUserIcon color={'rgb(255, 0, 0)'} width={iconSize} height={iconSize} />}
+                    <span className={classes.icon_container} style={{backgroundColor: iconBackgroundColor}}>
+                        {isCorrect ? < NewUserIcon color={iconColor} width={iconSize} height={iconSize} /> :
+                            <WrongUserIcon color={iconColor} width={iconSize} height={iconSize} />}
                     </span>
                     <p className={classes.text}>{text}</p>
                 </div>
@@ -28,8 +26,10 @@ function NewEmployeeModalContent({ isCorrect, closeModal, action }) {
 
 NewEmployeeModalContent.propTypes = {
     isCorrect: PropTypes.bool.isRequired,
+    iconColor: PropTypes.string.isRequired,
+    iconBackgroundColor: PropTypes.string,
     closeModal: PropTypes.func.isRequired,
-    action: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
 }
 
 export default NewEmployeeModalContent;

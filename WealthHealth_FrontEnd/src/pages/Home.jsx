@@ -28,7 +28,10 @@ function Home() {
         <main className={classes.main}>
             {isModalOpen ?
                 <Modal closeModal={closeModal}>
-                    <NewEmployeeModalContent isCorrect={isCorrect} closeModal={closeModal} action='created'/>
+                    {isCorrect ?
+                    <NewEmployeeModalContent isCorrect={isCorrect} iconColor='rgb(0, 175, 95)' iconBackgroundColor='rgb(0, 175, 95, 0.5)' closeModal={closeModal} text='This employee was successfully created'/> :
+                    <NewEmployeeModalContent isCorrect={isCorrect} iconColor='rgb(255, 0, 0)' iconBackgroundColor='rgb(255, 0, 0, 0.5)' closeModal={closeModal} text='This employee already exists in the system'/>
+                    }
                 </Modal>
                 :
                 <div className={classes.container}>
