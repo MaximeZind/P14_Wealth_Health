@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import classes from '../styles/Row.module.css';
 import PropTypes from 'prop-types';
 import Pencil from './Pencil';
@@ -9,8 +9,6 @@ import { useDispatch } from 'react-redux';
 
 function Row({ delay, highlightedField, type, firstName, lastName, startDate, department, dateOfBirth, street, city, state, zipCode, employeeId, handlePencilClick }) {
 
-
-    const zipCodeRef = useRef();
     const dispatch = useDispatch();
     const animDelay = `${delay / 20}s`;
     const trStyle = {
@@ -57,7 +55,8 @@ Row.propTypes = {
     city: PropTypes.string.isRequired,
     state: PropTypes.string.isRequired,
     zipCode: PropTypes.string.isRequired,
-    employeeId: PropTypes.number.isRequired
+    employeeId: PropTypes.number.isRequired,
+    handlePencilClick: PropTypes.func.isRequired,
 }
 
 export default Row;

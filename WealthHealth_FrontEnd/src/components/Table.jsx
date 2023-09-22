@@ -88,7 +88,7 @@ function Table({ employeesList }) {
         setCurrentPage(1);
     }
 
-    ///// Gestion du modal /////
+    // Gestion du modal //
 
     function handlePencilClick(employeeId) {
         const employee = getEmployeeById(employeeId, employeesList);
@@ -97,7 +97,7 @@ function Table({ employeesList }) {
         setIsFormOpen(true)
     }
 
-    function handleUpdateClick(employee) {
+    function handleUpdateClick() {
         setIsFormOpen(false);
         setIsConfirmationOpen(true);
     }
@@ -113,14 +113,14 @@ function Table({ employeesList }) {
         employeesList &&
         <section className={classes.table_section}>
             <div className={classes.table_filters}>
-                <Dropdown label='Entries' 
-                list={tableLengths} 
-                height={40} 
-                maxWidth={100}
-                name='employees_table_length' 
-                id='employees_table_length' 
-                defaultValue={tableLengths[0]} 
-                onChange={handleSelect} separatedBox={true} />
+                <Dropdown label='Entries'
+                    list={tableLengths}
+                    height={40}
+                    maxWidth={100}
+                    name='employees_table_length'
+                    id='employees_table_length'
+                    defaultValue={tableLengths[0]}
+                    onChange={handleSelect} separatedBox={true} />
                 <TextInput name='search' label='Search: ' onChange={handleSearch} />
             </div>
             <table id='employee_table' className={classes.table}>
@@ -193,11 +193,12 @@ function Table({ employeesList }) {
             </div>
             {isModalOpen ?
                 <Modal closeModal={handleCloseModal}>
-                    {isFormOpen ?
+                    {isFormOpen &&
                         <UpdateForm
                             closeModal={handleCloseModal}
                             handleUpdateClick={handleUpdateClick}
-                            employee={employeeToUpdate} /> :
+                            employee={employeeToUpdate} />}
+                    {isConfirmationOpen &&
                         <NewEmployeeModalContent isCorrect={true} closeModal={handleCloseModal} action='updated' />
                     }
                 </Modal> : null}

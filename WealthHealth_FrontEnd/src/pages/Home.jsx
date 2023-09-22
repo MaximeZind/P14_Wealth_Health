@@ -9,7 +9,7 @@ function Home() {
     const pageTitle = 'Create an employee';
     document.title = `Wealth Health HRnet - ${pageTitle}`;
 
-    //L'utilisateur a ete cree ou non
+    // L'utilisateur a ete cree ou non
     const [isCorrect, setIsCorrect] = useState(false);
     // Le modal est il ouvert ou non
     const [isModalOpen, setIsModalOpen] = useState(false);

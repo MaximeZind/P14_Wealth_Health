@@ -24,6 +24,7 @@ function Collapse({ title, children }) {
 
 Collapse.propTypes = {
     title: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
 };
 
 export default Collapse;

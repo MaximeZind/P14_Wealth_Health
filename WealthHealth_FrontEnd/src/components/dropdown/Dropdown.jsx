@@ -30,8 +30,10 @@ function Dropdown({ list, label, name, height, maxWidth, separatedBox, searchBar
         };
     }, [isOpen, dropdownStatus]);
 
+    // Pour le cas ou on souhaite utiliser le dropdown sur un "onChange"
+    // plutot qu'au submit du formulaire
     useEffect(() => {
-        onChange(selectedValue);
+        onChange && onChange(selectedValue);
     }, [selectedValue]);
 
     // Fonction pour gérer le clique sur une des options
@@ -42,7 +44,6 @@ function Dropdown({ list, label, name, height, maxWidth, separatedBox, searchBar
         } else if (!value) {
             setSelectedValue(name);
         }
-        onChange(selectedValue);
         handleClose();
     }
 
@@ -103,7 +104,7 @@ Dropdown.propTypes = {
     separatedBox: PropTypes.bool.isRequired,
     searchBar: PropTypes.bool,
     defaultValue: PropTypes.string,
-    handleOnChange: PropTypes.func,
+    onChange: PropTypes.func,
 }
 
 export default Dropdown;

@@ -111,6 +111,7 @@ function UpdateForm({ closeModal, employee, handleUpdateClick }) {
 UpdateForm.propTypes = {
     closeModal: PropTypes.func.isRequired,
     employee: PropTypes.shape({
+        id: PropTypes.number.isRequired,
         firstName: PropTypes.string.isRequired,
         lastName: PropTypes.string.isRequired,
         startDate: PropTypes.string.isRequired,
@@ -121,6 +122,7 @@ UpdateForm.propTypes = {
         state: PropTypes.string.isRequired,
         zipCode: PropTypes.string.isRequired,
     }).isRequired,
+    handleUpdateClick: PropTypes.func.isRequired,
 }
 
 
