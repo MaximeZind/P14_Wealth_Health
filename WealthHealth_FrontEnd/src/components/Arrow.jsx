@@ -13,8 +13,8 @@ function Arrow({transform, color, size}) {
         viewBox="0 0 386.257 386.257"
         style={{ enableBackground: 'new 0 0 386.257 386.257', transform: transform, fill: color }}
         xmlSpace="preserve"
-        width={`${size}px`}
-        height={`${size}px`}
+        width={size ? `${size}px` : '10px'}
+        height={size ?`${size}px` : '10px'}
       >
         <polygon points="0,96.879 193.129,289.379 386.257,96.879" />
       </svg>

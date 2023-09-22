@@ -11,6 +11,8 @@
     flex-direction: column;
     gap: 30px;
     padding: 40px;
+    max-height: calc(80vh - 200px);
+    overflow-y: auto;
 }
 
 .form_section{
@@ -36,4 +38,5 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    gap: 10px;
 }
