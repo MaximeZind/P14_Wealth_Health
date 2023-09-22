@@ -1,5 +1,6 @@
 .modal_background{
     position: absolute;
+    z-index: 999;
     width: 100vw;
     height: 100vh;
     display: flex;

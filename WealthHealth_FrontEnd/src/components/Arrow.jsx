@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Arrow({transform, color}) {
+function Arrow({transform, color, size}) {
   return (
       <svg
         version="1.1"
@@ -13,6 +13,8 @@ function Arrow({transform, color}) {
         viewBox="0 0 386.257 386.257"
         style={{ enableBackground: 'new 0 0 386.257 386.257', transform: transform, fill: color }}
         xmlSpace="preserve"
+        width={`${size}px`}
+        height={`${size}px`}
       >
         <polygon points="0,96.879 193.129,289.379 386.257,96.879" />
       </svg>
@@ -20,8 +22,9 @@ function Arrow({transform, color}) {
 }
 
 Arrow.propTypes = {
-  transform: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
+  transform: PropTypes.string,
+  color: PropTypes.string,
+  size: PropTypes.number
 }
 
 export default Arrow;
