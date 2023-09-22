@@ -28,7 +28,7 @@ function Home() {
         <main className={classes.main}>
             {isModalOpen ?
                 <Modal closeModal={closeModal}>
-                    <NewEmployeeModalContent isCorrect={isCorrect} closeModal={closeModal}/>
+                    <NewEmployeeModalContent isCorrect={isCorrect} closeModal={closeModal} action='created'/>
                 </Modal>
                 :
                 <div className={classes.container}>

@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import NewUserIcon from '../icons/NewUserIcon';
 import Button from '../../button';
 import WrongUserIcon from '../icons/WrongUserIcon';
-// import CrossIcon from '../icons/CrossIcon';
 
-function NewEmployeeModalContent({ isCorrect, closeModal }) {
+function NewEmployeeModalContent({ isCorrect, closeModal, action }) {
 
     const iconSize = '40px';
-    const text = isCorrect ? 'This employee was successfully created!' : 'Error found: This employee already exists.';
+    const text = isCorrect ? `This employee was successfully ${action}!` : 'Error found: This employee already exists.';
 
     return (
             <div className={classes.modal}>
@@ -30,6 +29,7 @@ function NewEmployeeModalContent({ isCorrect, closeModal }) {
 NewEmployeeModalContent.propTypes = {
     isCorrect: PropTypes.bool.isRequired,
     closeModal: PropTypes.func.isRequired,
+    action: PropTypes.string.isRequired,
 }
 
 export default NewEmployeeModalContent;

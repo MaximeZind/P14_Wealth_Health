@@ -9,11 +9,14 @@ import { search } from '../utils/searchScript';
 import Modal from './modal/Modal';
 import UpdateForm from './UpdateForm';
 import { getEmployeeById } from '../utils/utils';
+import NewEmployeeModalContent from './modal/modal_contents/NewEmployeeModalContent';
 
 function Table({ employeesList }) {
 
     // initialisation des States
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isFormOpen, setIsFormOpen] = useState(false);
+    const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
     const [employeeToUpdate, setEmployeeToUpdate] = useState(null);
     const [list, setList] = useState([...employeesList]);
     const [selectedField, setSelectedField] = useState(null);
@@ -71,7 +74,7 @@ function Table({ employeesList }) {
         setList(sortedList);
     }
 
-    // fonciton qui gère la valeur reçue par le menu déroulant
+    // fonction qui gère la valeur reçue par le menu déroulant
     function handleSelect(event) {
         setTableLength(event.target.value);
     }
@@ -90,11 +93,19 @@ function Table({ employeesList }) {
         const employee = getEmployeeById(employeeId, employeesList);
         setEmployeeToUpdate(employee);
         setIsModalOpen(true);
+        setIsFormOpen(true)
+    }
+
+    function handleUpdateClick(employee){
+        setIsFormOpen(false);
+        setIsConfirmationOpen(true);
     }
 
     function handleCloseModal() {
         setEmployeeToUpdate(null);
         setIsModalOpen(false);
+        setIsFormOpen(false);
+        setIsConfirmationOpen(false);
     }
 
     return (
@@ -182,9 +193,13 @@ function Table({ employeesList }) {
             </div>
             {isModalOpen ?
                 <Modal closeModal={handleCloseModal}>
+                    {isFormOpen ?
                     <UpdateForm
                         closeModal={handleCloseModal}
-                        employee={employeeToUpdate} />
+                        handleUpdateClick={handleUpdateClick}
+                        employee={employeeToUpdate} /> :
+                        <NewEmployeeModalContent isCorrect={true} closeModal={handleCloseModal} action='updated'/>
+                        }
                 </Modal> : null}
         </section>
     )

@@ -12,7 +12,7 @@ import { updateEmployee } from '../actions/employees.action';
 import { validateEmployee } from '../utils/formValidation';
 
 
-function UpdateForm({ closeModal, employee }) {
+function UpdateForm({ closeModal, employee, handleUpdateClick }) {
 
     const states = getStates();
     const departments = getDepartments();
@@ -39,7 +39,7 @@ function UpdateForm({ closeModal, employee }) {
         const formValidation = validateEmployee(updatedFormJson);
         if (formValidation.isValid === true) {
             dispatch(updateEmployee(updatedFormJson));
-            closeModal();
+            handleUpdateClick(updatedFormJson);
         }
         handleErrorMsgs(formValidation.errorMsg);
     }
