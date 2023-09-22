@@ -14,7 +14,7 @@ import { validateEmployee } from '../utils/formValidation';
 
 function UpdateForm({ closeModal, employee, handleUpdateClick }) {
 
-    //On recupere les states et les departements
+    // On recupere les states et les departements
     const states = getStates();
     const departments = getDepartments();
 
@@ -36,7 +36,7 @@ function UpdateForm({ closeModal, employee, handleUpdateClick }) {
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
 
-        //On rajoute son id a l'employe
+        // On rajoute son id a l'employe
         const employeeId = employee.id;
         const updatedFormJson = { ...formJson, id: employeeId};
 
@@ -92,7 +92,7 @@ function UpdateForm({ closeModal, employee, handleUpdateClick }) {
                 <div className={`${classes.address} ${classes.form_section}`}>
                     <TextInput name='street' label='Street' errorMsg={streetErrorMsg} defaultValue={employee.street} />
                     <TextInput name='city' label='City' errorMsg={cityErrorMsg} defaultValue={employee.city} />
-                    <Dropdown list={states} name='state' label='State' height={40} separatedBox={true} searchBar={true} defaultValue={employee.state} />
+                    <Dropdown list={states} name='state' label='State' height={40} separatedBox={true} searchBar={true} defaultValue={states.find((state) => state.abbreviation === employee.state).name} />
                     <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg} defaultValue={employee.zipCode} />
                 </div>
                 </Collapse>

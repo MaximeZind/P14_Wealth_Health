@@ -237,8 +237,8 @@ function Table({ employeesList }) {
                             closeModal={handleCloseModal}
                             confirm={() => handleDelete(employeeToDelete.id)}
                             employee={employeeToDelete} />}
-                    {isConfirmationOfDeletionOpen && 
-                    <NewEmployeeModalContent isCorrect={false} iconColor='rgb(0, 175, 95)' iconBackgroundColor='rgb(0, 175, 95, 0.5)' closeModal={handleCloseModal} text='This employee was successfully removed from the system' />
+                    {isConfirmationOfDeletionOpen &&
+                        <NewEmployeeModalContent isCorrect={false} iconColor='rgb(0, 175, 95)' iconBackgroundColor='rgb(0, 175, 95, 0.5)' closeModal={handleCloseModal} text='This employee was successfully removed from the system' />
                     }
                 </Modal> : null}
         </section>

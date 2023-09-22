@@ -50,6 +50,7 @@ Row.propTypes = {
     state: PropTypes.string.isRequired,
     zipCode: PropTypes.string.isRequired,
     handlePencilClick: PropTypes.func.isRequired,
+    handleBinClick: PropTypes.func.isRequired,
 }
 
 export default Row;
