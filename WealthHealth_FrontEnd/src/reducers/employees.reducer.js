@@ -29,11 +29,9 @@ export default function employeesReducer(state = initialState, action) {
             return updatedEmployeesAfterDeletion;
         case UPDATE_EMPLOYEE:
             const updatedEmployee = action.payload;
-            console.log(updatedEmployee);
             const updatedEmployeesAfterUpdate = state.map((employee) =>
                 employee.id === updatedEmployee.id ? updatedEmployee : employee
             );
-            console.log(updatedEmployeesAfterUpdate);
             return updatedEmployeesAfterUpdate;
         default:
             return state;
