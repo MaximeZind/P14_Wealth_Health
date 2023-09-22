@@ -14,6 +14,7 @@ import { validateEmployee } from '../utils/formValidation';
 
 function UpdateForm({ closeModal, employee, handleUpdateClick }) {
 
+    //On recupere les states et les departements
     const states = getStates();
     const departments = getDepartments();
 
@@ -28,14 +29,17 @@ function UpdateForm({ closeModal, employee, handleUpdateClick }) {
     const [cityErrorMsg, setCityErrorMsg] = useState('');
     const [zipCodeErrorMsg, setZipCodeErrorMsg] = useState('');
 
+    // Fonction appelee lors de la mise a jour des informations d'un employe
     function handleUpdate(event) {
         event.preventDefault();
         const form = event.target;
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
+
+        //On rajoute son id a l'employe
         const employeeId = employee.id;
         const updatedFormJson = { ...formJson, id: employeeId};
-        console.log(updatedFormJson);
+
         const formValidation = validateEmployee(updatedFormJson);
         if (formValidation.isValid === true) {
             dispatch(updateEmployee(updatedFormJson));
@@ -44,7 +48,7 @@ function UpdateForm({ closeModal, employee, handleUpdateClick }) {
         handleErrorMsgs(formValidation.errorMsg);
     }
 
-        // fonction de gestion des messages d'erreur
+    // fonction de gestion des messages d'erreur
     // reçoit un objet type:
     // {
     //  dateOfBirth: "Enter a valid date"
