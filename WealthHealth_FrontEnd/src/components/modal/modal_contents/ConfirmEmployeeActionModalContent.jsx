@@ -3,10 +3,9 @@ import classes from '../../../styles/ConfirmEmployeeDeletionModalContent.module.
 import PropTypes from 'prop-types';
 import Button from '../../button';
 
-function ConfirmEmployeeDeletionModalContent({ closeModal, confirm, employee }) {
+function ConfirmEmployeeActionModalContent({ closeModal, confirm, update, text }) {
 
     const iconSize = '40px';
-    const text = `Are you sure that you wish to remove ${employee.firstName} ${employee.lastName} from the system?` ;
 
     return (
             <div className={classes.modal}>
@@ -21,25 +20,17 @@ function ConfirmEmployeeDeletionModalContent({ closeModal, confirm, employee }) 
                 <footer className={classes.modal_footer}>
                     <Button value='close' text='Close' onClick={closeModal} />
                     <Button value='confirm' text='Confirm' onClick={confirm} />
+                    <Button value='update' text='Update' onClick={update}/>
                 </footer>
             </div>
     );
 }
 
-ConfirmEmployeeDeletionModalContent.propTypes = {
+ConfirmEmployeeActionModalContent.propTypes = {
     closeModal: PropTypes.func.isRequired,
     confirm: PropTypes.func.isRequired,
-    employee: PropTypes.shape({
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        startDate: PropTypes.string.isRequired,
-        department: PropTypes.string.isRequired,
-        dateOfBirth: PropTypes.string.isRequired,
-        street: PropTypes.string.isRequired,
-        city: PropTypes.string.isRequired,
-        state: PropTypes.string.isRequired,
-        zipCode: PropTypes.string.isRequired,
-    })
+    update: PropTypes.func,
+    text: PropTypes.string.isRequired
 }
 
-export default ConfirmEmployeeDeletionModalContent;
+export default ConfirmEmployeeActionModalContent;

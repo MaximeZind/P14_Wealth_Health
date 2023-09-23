@@ -121,12 +121,10 @@ function Form({ openModal }) {
                 if (verification === false) {
                     // Si l'employé n'existe pas, on l'ajoute au state
                     openModal(true);
-                    // getModalText('This employee was successfully created!', true);
                     dispatch(addEmployee(newEmployee));
                 } else if (verification === true) {
                     // Sinon, un message d'erreur s'affiche dans la modale
-                    // getModalText('Error found: This employee already exists.', false);
-                    openModal(false);
+                    openModal(false, newEmployee);
                 }
             }
             handleErrorMsgs(formValidation.errorMsg);

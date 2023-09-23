@@ -10,7 +10,7 @@ import Modal from './modal/Modal';
 import UpdateForm from './UpdateForm';
 import NewEmployeeModalContent from './modal/modal_contents/NewEmployeeModalContent';
 import Dropdown from './dropdown/Dropdown';
-import ConfirmEmployeeDeletionModalContent from './modal/modal_contents/ConfirmEmployeeDeletionModalContent';
+import ConfirmEmployeeActionModalContent from './modal/modal_contents/ConfirmEmployeeActionModalContent';
 import { useDispatch } from 'react-redux';
 import { deleteEmployee } from '../actions/employees.action';
 
@@ -234,10 +234,10 @@ function Table({ employeesList }) {
                     {isConfirmationOfUpdateOpen &&
                         <NewEmployeeModalContent isCorrect={true} iconColor='rgb(0, 175, 95)' iconBackgroundColor='rgb(0, 175, 95, 0.5)' closeModal={handleCloseModal} text='This employee was successfully updated' />}
                     {employeeToDelete &&
-                        <ConfirmEmployeeDeletionModalContent
+                        <ConfirmEmployeeActionModalContent
                             closeModal={handleCloseModal}
                             confirm={() => handleDelete(employeeToDelete.id)}
-                            employee={employeeToDelete} />}
+                            text={`Are you sure that you wish to remove ${employeeToDelete.firstName} ${employeeToDelete.lastName} from the system?`} />}
                     {isConfirmationOfDeletionOpen &&
                         <NewEmployeeModalContent isCorrect={false} iconColor='rgb(0, 175, 95)' iconBackgroundColor='rgb(0, 175, 95, 0.5)' closeModal={handleCloseModal} text='This employee was successfully removed from the system' />
                     }

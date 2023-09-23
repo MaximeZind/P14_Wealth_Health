@@ -178,5 +178,17 @@
     "city": "New York",
     "state": "NY",
     "zipCode": "10001"
+  },  
+  {
+    "id": 16,
+    "firstName": "Maxime",
+    "lastName": "Zinderstein",
+    "startDate": "04/05/2001",
+    "department": "Sales",
+    "dateOfBirth": "05/05/1990",
+    "street": "999 Charity Lane",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001"
   }
 ]
