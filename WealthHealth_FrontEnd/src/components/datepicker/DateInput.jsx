@@ -82,7 +82,7 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundY
 
     return (
         <div className={isFocused ? `${classes.date_input_container} ${classes.focused}` : classes.date_input_container} ref={datePicker}>
-            <label style={{ top: '20px' }} className={classes.label} htmlFor={name} onClick={() => setIsOpen(!isOpen)}>{label}</label>
+            <label style={{ top: '10px' }} className={classes.label} htmlFor={name} onClick={() => setIsOpen(!isOpen)}>{label}</label>
             <input ref={hiddenInput} className={classes.hidden} name={name} id={name} value={selectedValue} onChange={handleOnChange}/>
             <div ref={input} className={classes.date_input} onClick={() => setIsOpen(!isOpen)}>
                 <p className={classes.selected_date}>{selectedValue}</p>

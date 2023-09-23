@@ -186,11 +186,12 @@ function Table({ employeesList }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {list.length > 0 && list.map((employee) => {
-                        const index = list.indexOf(employee);
+                    {list.length > 0 && list.map((employee, index) => {
+                        const indexWithinPage = index % tableLength;
                         const type = index % 2 ? 'even' : 'odd';
-                        if ((index >= (currentPage - 1) * tableLength) && (index < currentPage * tableLength)) {
-                            return (<Row delay={index}
+                        const isOnCurrentPage = (index >= (currentPage - 1) * tableLength) && (index < currentPage * tableLength)
+                        if (isOnCurrentPage) {
+                            return (<Row delay={indexWithinPage}
                                 highlightedField={highlightedField}
                                 key={index}
                                 type={type}

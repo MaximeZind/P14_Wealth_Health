@@ -1,5 +1,6 @@
 .date_input_container{
     width: 100%;
+    max-width: 300px;
     user-select: none;
     position: relative;
 }
@@ -37,7 +38,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 5px;
 }
 
 .selected_date{
