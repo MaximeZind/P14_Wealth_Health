@@ -8,7 +8,7 @@ import TextInput from './TextInput';
 import DateInput from './datepicker/DateInput';
 import Dropdown from './dropdown/Dropdown';
 import Button from './button';
-import { doesEmployeeExist } from '../utils/utils';
+import { doesEmployeeExist, generateUniqueID } from '../utils/utils';
 import PropTypes from 'prop-types';
 
 function Form({ openModal }) {
@@ -114,7 +114,7 @@ function Form({ openModal }) {
             const formValidation = validateWorkSituation(formJson, personnalInformations.dateOfBirth);
             if (formValidation.isValid === true) {
                 // On attribue un id correspondant a la longueur de la liste + 1
-                const idObject = {id: EmployeeList.length + 1}
+                const idObject = {id: generateUniqueID()}
                 const newEmployee = Object.assign(personnalInformations, employeeAddress, formValidation.data, idObject);
                 // Vérification que l'employé n'est pas déjà dans la liste
                 const verification = doesEmployeeExist(EmployeeList, newEmployee);

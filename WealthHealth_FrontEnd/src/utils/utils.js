@@ -10,6 +10,10 @@ export function doesEmployeeExist(employeesList, newEmployee) {
     });
     return doesEmployeeExist;
 }
+export function generateUniqueID() {
+    const timestamp = new Date().getTime();
+    return timestamp;
+  }
 
 export function getEmployeeById(id, employeesList){
     const employee = employeesList.find((employee) => employee.id === id)
