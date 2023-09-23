@@ -92,7 +92,15 @@ function UpdateForm({ closeModal, employee, handleUpdateClick }) {
                 <div className={`${classes.address} ${classes.form_section}`}>
                     <TextInput name='street' label='Street' errorMsg={streetErrorMsg} defaultValue={employee.street} />
                     <TextInput name='city' label='City' errorMsg={cityErrorMsg} defaultValue={employee.city} />
-                    <Dropdown list={states} name='state' label='State' height={40} separatedBox={true} searchBar={true} defaultValue={states.find((state) => state.abbreviation === employee.state).name} />
+                    <Dropdown 
+                    list={states} 
+                    name='state' 
+                    label='State' 
+                    height={40} 
+                    separatedBox={true} 
+                    searchBar={true} 
+                    defaultValue={states.find((state) => state.abbreviation === employee.state).abbreviation} 
+                    defaultName={states.find((state) => state.abbreviation === employee.state).name}/>
                     <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg} defaultValue={employee.zipCode} />
                 </div>
                 </Collapse>

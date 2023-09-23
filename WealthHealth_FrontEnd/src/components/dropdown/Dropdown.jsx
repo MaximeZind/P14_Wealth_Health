@@ -5,11 +5,12 @@ import DropdownArrow from './icons/DropdownArrow';
 import SeparatedBox from './SeparatedBox';
 import NormalBox from './NormalBox';
 
-function Dropdown({ list, label, name, height, maxWidth, separatedBox, searchBar, defaultValue, onChange }) {
+function Dropdown({ list, label, name, height, maxWidth, separatedBox, searchBar, defaultValue, defaultName, onChange }) {
+
 
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownStatus, setDropdownStatus] = useState('closed')
-    const [selectedName, setSelectedName] = useState(defaultValue ? defaultValue : '');
+    const [selectedName, setSelectedName] = defaultName ? useState(defaultName) : useState(defaultValue ? defaultValue : '');
     const [selectedValue, setSelectedValue] = defaultValue ? useState(defaultValue) : useState(list[0].abbreviation ? list[0].abbreviation : list[0].name);
     const dropdownMenu = useRef(null);
 
@@ -104,6 +105,7 @@ Dropdown.propTypes = {
     separatedBox: PropTypes.bool.isRequired,
     searchBar: PropTypes.bool,
     defaultValue: PropTypes.string,
+    defaultName: PropTypes.string,
     onChange: PropTypes.func,
 }
 
