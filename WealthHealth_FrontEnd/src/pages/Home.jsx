@@ -28,7 +28,7 @@ function Home() {
     function openModal(isCorrect, newEmployee) {
         setIsCorrect(isCorrect);
         setActionTaken('created');
-        if (!isCorrect && newEmployee){
+        if (!isCorrect && newEmployee) {
             setEmployeeToConfirm(newEmployee);
         }
         setIsModalOpen(true);
@@ -36,7 +36,7 @@ function Home() {
 
     // Fonction de creation d'un employe dans le systeme
     // met a jour les states qui gerent le contenu du modal
-    function handleConfirmEmployeeCreation(newEmployee){
+    function handleConfirmEmployeeCreation(newEmployee) {
         dispatch(addEmployee(newEmployee));
         setIsCorrect(true);
         setActionTaken('created');
@@ -45,7 +45,7 @@ function Home() {
 
     // Fonction de mise a jour de l'employe
     // met aussi a jour le contenu du modal
-    function handleUpdateEmployee(newEmployee){
+    function handleUpdateEmployee(newEmployee) {
         dispatch(updateEmployee(newEmployee));
         setActionTaken('updated');
         setIsCorrect(true);
@@ -53,31 +53,39 @@ function Home() {
 
     // Fonction de fermeture du modal
     // reset tous les states qui ont a voir avec le contenu du modal
-    function closeModal(){
+    function closeModal() {
         setIsModalOpen(false);
         setIsCorrect(false);
         setActionTaken('');
         setEmployeeToConfirm(null);
     }
     return (
-        <main className={classes.main} 
-        style={{backgroundColor: colorPalette.primaryColor}}>
+        <main className={classes.main}
+            style={{ backgroundColor: colorPalette.primaryColor }}>
             {isModalOpen ?
-                <Modal closeModal={closeModal} maxWidth={600}>
+                <Modal closeModal={closeModal}
+                    maxWidth={600}
+                    iconColor={colorPalette.tertiaryColor}
+                    hoveredIconBackgroundColor={colorPalette.senaryColor}>
                     {isCorrect ?
-                    <NewEmployeeModalContent isCorrect={isCorrect} iconColor='rgb(0, 175, 95)' iconBackgroundColor='rgb(0, 175, 95, 0.5)' closeModal={closeModal} text={`This employee was successfully ${actionTaken}.`}/> :
-                    // <NewEmployeeModalContent isCorrect={isCorrect} iconColor='rgb(255, 0, 0)' iconBackgroundColor='rgb(255, 0, 0, 0.5)' closeModal={closeModal} text='This employee already exists in the system'/>
-                    <ConfirmEmployeeActionModalContent
+                        <NewEmployeeModalContent isCorrect={isCorrect}
+                            iconColor='rgb(0, 175, 95)'
+                            iconBackgroundColor='rgb(0, 175, 95, 0.5)'
+                            closeModal={closeModal}
+                            text={`This employee was successfully ${actionTaken}.`}
+                            colorPalette={colorPalette} /> :
+                        <ConfirmEmployeeActionModalContent
                             closeModal={closeModal}
                             confirm={() => handleConfirmEmployeeCreation(employeeToConfirm)}
                             update={() => handleUpdateEmployee(employeeToConfirm)}
-                            text={`An employee named ${employeeToConfirm.firstName} ${employeeToConfirm.lastName} and born on ${employeeToConfirm.dateOfBirth} already exists in the system. Would you like to create a new employee with this name or update the existing one?`} />
+                            text={`An employee named ${employeeToConfirm.firstName} ${employeeToConfirm.lastName} and born on ${employeeToConfirm.dateOfBirth} already exists in the system. Would you like to create a new employee with this name or update the existing one?`} 
+                            colorPalette={colorPalette}/>
                     }
                 </Modal>
                 :
                 <div className={classes.container}>
                     <h2>Create Employee</h2>
-                    <Form openModal={openModal} colorPalette={colorPalette}/>
+                    <Form openModal={openModal} colorPalette={colorPalette} />
                 </div>}
         </main>
     );

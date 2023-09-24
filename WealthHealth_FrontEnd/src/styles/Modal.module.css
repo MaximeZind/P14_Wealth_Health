@@ -28,6 +28,7 @@
     animation-duration: 0.3s;
     animation-fill-mode: backwards;
     animation-timing-function: ease;
+    overflow: hidden;
 }
 
 .cross_icon{

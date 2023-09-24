@@ -3,7 +3,7 @@ import classes from '../styles/UpdateForm.module.css';
 import TextInput from '../components/TextInput';
 import DateInput from '../components/datepicker/DateInput';
 import Dropdown from '../components/dropdown/Dropdown';
-import Button from './button';
+import Button from './Button';
 import { getDepartments, getStates } from '../utils/fetchData';
 import PropTypes from 'prop-types';
 import Collapse from './Collapse';
@@ -38,7 +38,7 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
 
         // On rajoute son id a l'employe
         const employeeId = employee.id;
-        const updatedFormJson = { ...formJson, id: employeeId};
+        const updatedFormJson = { ...formJson, id: employeeId };
 
         const formValidation = validateEmployee(updatedFormJson);
         if (formValidation.isValid === true) {
@@ -83,74 +83,137 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
             <div className={classes.form_sections}>
                 <Collapse title={"Personnal Informations"}>
                     <div className={`${classes.personnal_informations} ${classes.form_section}`}>
-                        <TextInput name='firstName' 
-                        label='First Name' 
-                        errorMsg={firstNameErrorMsg} 
-                        defaultValue={employee.firstName}
-                        height={40}
-                        labelColor={colorPalette.quinaryColor}
-                        focusedLabelColor={colorPalette.tertiaryColor}
-                        boxShadowColor={colorPalette.senaryColor}
-                        fontColor={colorPalette.tertiaryColor} />
-                        <TextInput name='lastName' 
-                        label='Last Name' 
-                        errorMsg={lastNameErrorMsg} 
-                        defaultValue={employee.lastName} 
-                        height={40}
-                        labelColor={colorPalette.quinaryColor}
-                        focusedLabelColor={colorPalette.tertiaryColor}
-                        boxShadowColor={colorPalette.senaryColor}
-                        fontColor={colorPalette.tertiaryColor}/>
-                        <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} defaultValue={employee.dateOfBirth} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
+                        <TextInput name='firstName'
+                            label='First Name'
+                            errorMsg={firstNameErrorMsg}
+                            defaultValue={employee.firstName}
+                            height={40}
+                            labelColor={colorPalette.quinaryColor}
+                            focusedLabelColor={colorPalette.tertiaryColor}
+                            boxShadowColor={colorPalette.senaryColor}
+                            fontColor={colorPalette.tertiaryColor} />
+                        <TextInput name='lastName'
+                            label='Last Name'
+                            errorMsg={lastNameErrorMsg}
+                            defaultValue={employee.lastName}
+                            height={40}
+                            labelColor={colorPalette.quinaryColor}
+                            focusedLabelColor={colorPalette.tertiaryColor}
+                            boxShadowColor={colorPalette.senaryColor}
+                            fontColor={colorPalette.tertiaryColor} />
+                        <DateInput name='dateOfBirth'
+                            label='Date of Birth'
+                            errorMsg={dateOfBirthErrorMsg}
+                            defaultValue={employee.dateOfBirth}
+                            yearsRangeMin={1923}
+                            yearsRangeMax={2023}
+                            roundYearHighlight={true}
+                            labelColor={colorPalette.quinaryColor}
+                            focusedLabelColor={colorPalette.tertiaryColor}
+                            boxShadowColor={colorPalette.senaryColor}
+                            fontColor={colorPalette.tertiaryColor}
+                            selectedDayFontColor={colorPalette.secondaryColor}
+                            previousNextMonthFontColor={colorPalette.quinaryColor}
+                            iconColor={colorPalette.tertiaryColor}
+                            backgroundColor={colorPalette.secondaryColor}
+                            hoveredBackgroundColor={colorPalette.primaryColor}
+                            selectedDayBackgroundColor={colorPalette.quarternaryColor}
+                            selectedMonthYearBackgroundColor={colorPalette.senaryColor}
+                            todayBackgroundColor={colorPalette.senaryColor} />
                     </div>
                 </Collapse>
                 <Collapse title={'Address'}>
-                <div className={`${classes.address} ${classes.form_section}`}>
-                    <TextInput name='street' 
-                    label='Street' 
-                    errorMsg={streetErrorMsg} 
-                    defaultValue={employee.street} 
-                    height={40}
-                    labelColor={colorPalette.quinaryColor}
-                    focusedLabelColor={colorPalette.tertiaryColor}
-                    boxShadowColor={colorPalette.senaryColor}
-                    fontColor={colorPalette.tertiaryColor}/>
-                    <TextInput name='city' 
-                    label='City' 
-                    errorMsg={cityErrorMsg} 
-                    defaultValue={employee.city}
-                    height={40}
-                    labelColor={colorPalette.quinaryColor}
-                    focusedLabelColor={colorPalette.tertiaryColor}
-                    boxShadowColor={colorPalette.senaryColor}
-                    fontColor={colorPalette.tertiaryColor} />
-                    <Dropdown 
-                    list={states} 
-                    name='state' 
-                    label='State' 
-                    height={40} 
-                    backgroundColor={colorPalette.secondaryColor}
-                    hoveredBackgroundColor={colorPalette.primaryColor}
-                    fontColor={colorPalette.tertiaryColor}
-                    hoveredFontColor={colorPalette.tertiaryColor}
-                    separatedBox={true} 
-                    searchBar={true} 
-                    defaultValue={states.find((state) => state.abbreviation === employee.state).abbreviation} 
-                    defaultName={states.find((state) => state.abbreviation === employee.state).name}/>
-                    <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg} defaultValue={employee.zipCode} />
-                </div>
+                    <div className={`${classes.address} ${classes.form_section}`}>
+                        <TextInput name='street'
+                            label='Street'
+                            errorMsg={streetErrorMsg}
+                            defaultValue={employee.street}
+                            height={40}
+                            labelColor={colorPalette.quinaryColor}
+                            focusedLabelColor={colorPalette.tertiaryColor}
+                            boxShadowColor={colorPalette.senaryColor}
+                            fontColor={colorPalette.tertiaryColor} />
+                        <TextInput name='city'
+                            label='City'
+                            errorMsg={cityErrorMsg}
+                            defaultValue={employee.city}
+                            height={40}
+                            labelColor={colorPalette.quinaryColor}
+                            focusedLabelColor={colorPalette.tertiaryColor}
+                            boxShadowColor={colorPalette.senaryColor}
+                            fontColor={colorPalette.tertiaryColor} />
+                        <Dropdown
+                            list={states}
+                            name='state'
+                            label='State'
+                            height={40}
+                            backgroundColor={colorPalette.secondaryColor}
+                            hoveredBackgroundColor={colorPalette.primaryColor}
+                            fontColor={colorPalette.tertiaryColor}
+                            hoveredFontColor={colorPalette.tertiaryColor}
+                            separatedBox={true}
+                            searchBar={true}
+                            defaultValue={states.find((state) => state.abbreviation === employee.state).abbreviation}
+                            defaultName={states.find((state) => state.abbreviation === employee.state).name} />
+                        <TextInput name='zipCode'
+                            label='Zip Code'
+                            errorMsg={zipCodeErrorMsg}
+                            defaultValue={employee.zipCode}
+                            labelColor={colorPalette.quinaryColor}
+                            focusedLabelColor={colorPalette.tertiaryColor}
+                            boxShadowColor={colorPalette.senaryColor}
+                            fontColor={colorPalette.tertiaryColor} />
+                    </div>
                 </Collapse>
                 <Collapse title={'Work Informations'}>
-                <div className={`${classes.work_informations} ${classes.form_section}`}>
-                    <h3>Work informations</h3>
-                    <Dropdown list={departments} name='department' label='Department' height={40} separatedBox={true} defaultValue={employee.department} />
-                    <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} defaultValue={employee.startDate} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
-                </div>
+                    <div className={`${classes.work_informations} ${classes.form_section}`}>
+                        <h3>Work informations</h3>
+                        <Dropdown list={departments}
+                            name='department'
+                            label='Department'
+                            height={40}
+                            backgroundColor={colorPalette.secondaryColor}
+                            hoveredBackgroundColor={colorPalette.primaryColor}
+                            fontColor={colorPalette.tertiaryColor}
+                            hoveredFontColor={colorPalette.tertiaryColor}
+                            separatedBox={true}
+                            defaultValue={employee.department} />
+                        <DateInput name='startDate'
+                            label='Start Date'
+                            errorMsg={startDateErrorMsg}
+                            defaultValue={employee.startDate}
+                            yearsRangeMin={1923}
+                            yearsRangeMax={2023}
+                            roundYearHighlight={true}
+                            labelColor={colorPalette.quinaryColor}
+                            focusedLabelColor={colorPalette.tertiaryColor}
+                            boxShadowColor={colorPalette.senaryColor}
+                            fontColor={colorPalette.tertiaryColor}
+                            selectedDayFontColor={colorPalette.secondaryColor}
+                            previousNextMonthFontColor={colorPalette.quinaryColor}
+                            iconColor={colorPalette.tertiaryColor}
+                            backgroundColor={colorPalette.secondaryColor}
+                            hoveredBackgroundColor={colorPalette.primaryColor}
+                            selectedDayBackgroundColor={colorPalette.quarternaryColor}
+                            selectedMonthYearBackgroundColor={colorPalette.senaryColor}
+                            todayBackgroundColor={colorPalette.senaryColor} />
+                    </div>
                 </Collapse>
             </div>
             <div className={classes.update_form_buttons}>
-                <Button text='Cancel' value='cancel' onClick={closeModal} />
-                <Button text='Update' value='submit' />
+                <Button text='Cancel'
+                    value='cancel'
+                    onClick={closeModal}
+                    fontColor={colorPalette.secondaryColor}
+                    hoveredFontColor={colorPalette.quarternaryColor}
+                    backgroundColor={colorPalette.quarternaryColor}
+                    hoveredBackgroundColor={colorPalette.primaryColor} />
+                <Button text='Update'
+                    value='submit'
+                    fontColor={colorPalette.secondaryColor}
+                    hoveredFontColor={colorPalette.quarternaryColor}
+                    backgroundColor={colorPalette.quarternaryColor}
+                    hoveredBackgroundColor={colorPalette.primaryColor} />
             </div>
         </form>
     );

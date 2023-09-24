@@ -10,7 +10,8 @@ function ErrorPage() {
     let location = useLocation()
     const pageTitle = 'Error 404';
     document.title = `Wealth Health HRnet - ${pageTitle}`;
-
+    const colorPalette = useSelector((state) => state.colorPaletteReducer);
+    
     return (
         (location.pathname === '/404') ?
             <main className={classes.main}

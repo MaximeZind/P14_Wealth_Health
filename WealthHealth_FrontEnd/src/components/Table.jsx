@@ -139,35 +139,43 @@ function Table({ employeesList, colorPalette }) {
                     id='employees_table_length'
                     defaultValue={tableLengths[0]}
                     onChange={handleSelect} separatedBox={true} />
-                <TextInput name='search' label='Search: ' onChange={handleSearch} />
+                <TextInput name='search'
+                    label='Search: '
+                    onChange={handleSearch}
+                    labelColor={colorPalette.quinaryColor}
+                    focusedLabelColor={colorPalette.tertiaryColor}
+                    boxShadowColor={colorPalette.senaryColor}
+                    fontColor={colorPalette.tertiaryColor} />
             </div>
-            <DataTable list={list} 
-            currentPage={currentPage} 
-            tableLength={tableLength} 
-            setEmployeeToUpdate={setEmployeeToUpdate} 
-            setIsModalOpen={setIsModalOpen} 
-            setIsFormOpen={setIsFormOpen} 
-            setemployeeToDelete={setemployeeToDelete} 
-            tableBackgroundColor={colorPalette.secondaryColor}
-            oddBackgroundColor={colorPalette.primaryColor}
-            evenBackgroundColor={colorPalette.secondaryColor}
-            hoveredBackgroundColor={colorPalette.quarternaryColor}
-            fontColor={colorPalette.tertiaryColor}
-            hoveredFontColor={colorPalette.secondaryColor}
-            ArrowColor={colorPalette.quarternaryColor}
+            <DataTable list={list}
+                currentPage={currentPage}
+                tableLength={tableLength}
+                setEmployeeToUpdate={setEmployeeToUpdate}
+                setIsModalOpen={setIsModalOpen}
+                setIsFormOpen={setIsFormOpen}
+                setemployeeToDelete={setemployeeToDelete}
+                tableBackgroundColor={colorPalette.secondaryColor}
+                oddBackgroundColor={colorPalette.primaryColor}
+                evenBackgroundColor={colorPalette.secondaryColor}
+                hoveredBackgroundColor={colorPalette.quarternaryColor}
+                fontColor={colorPalette.tertiaryColor}
+                hoveredFontColor={colorPalette.secondaryColor}
+                ArrowColor={colorPalette.quarternaryColor}
             />
             <div className={classes.table_navigation}>
-                <p style={{color: colorPalette.tertiaryColor}}> Showing {list.length === 0 ? 0 : (currentPage - 1) * tableLength + 1} to {currentPage * tableLength <= list.length ? currentPage * tableLength : list.length} of {list.length} entries</p>
+                <p style={{ color: colorPalette.tertiaryColor }}> Showing {list.length === 0 ? 0 : (currentPage - 1) * tableLength + 1} to {currentPage * tableLength <= list.length ? currentPage * tableLength : list.length} of {list.length} entries</p>
                 {pages > 1 ? <div className={classes.pages}>
                     {currentPage > 1 ? <p onClick={() => setCurrentPage(currentPage - 1)}>Previous</p> : null}
                     {Array.from(Array(pages).keys()).map((key) => {
-                        return <p className={(key + 1) === currentPage ? classes.active : null} 
-                        onClick={() => setCurrentPage(key + 1)} 
-                        key={key}
-                        style={{backgroundColor: (key + 1) === currentPage && colorPalette.quarternaryColor,
-                        color: (key + 1) === currentPage ? colorPalette.secondaryColor : colorPalette.tertiaryColor}}>
+                        return <p className={(key + 1) === currentPage ? classes.active : null}
+                            onClick={() => setCurrentPage(key + 1)}
+                            key={key}
+                            style={{
+                                backgroundColor: (key + 1) === currentPage && colorPalette.quarternaryColor,
+                                color: (key + 1) === currentPage ? colorPalette.secondaryColor : colorPalette.tertiaryColor
+                            }}>
                             {key + 1}
-                            </p>
+                        </p>
                     })}
                     {currentPage < pages ? <p onClick={() => setCurrentPage(currentPage + 1)}>Next</p> : null}
                 </div> : null}
@@ -178,17 +186,28 @@ function Table({ employeesList, colorPalette }) {
                         <UpdateForm
                             closeModal={handleCloseModal}
                             handleUpdateClick={handleUpdateClick}
-                            employee={employeeToUpdate} 
-                            colorPalette={colorPalette}/>}
+                            employee={employeeToUpdate}
+                            colorPalette={colorPalette} />}
                     {isConfirmationOfUpdateOpen &&
-                        <NewEmployeeModalContent isCorrect={true} iconColor='rgb(0, 175, 95)' iconBackgroundColor='rgb(0, 175, 95, 0.5)' closeModal={handleCloseModal} text='This employee was successfully updated' />}
+                        <NewEmployeeModalContent isCorrect={true}
+                            iconColor='rgb(0, 175, 95)'
+                            iconBackgroundColor='rgb(0, 175, 95, 0.5)'
+                            closeModal={handleCloseModal}
+                            text='This employee was successfully updated' 
+                            colorPalette={colorPalette}/>}
                     {employeeToDelete &&
                         <ConfirmEmployeeActionModalContent
                             closeModal={handleCloseModal}
                             confirm={() => handleDelete(employeeToDelete.id)}
-                            text={`Are you sure that you wish to remove ${employeeToDelete.firstName} ${employeeToDelete.lastName} from the system?`} />}
+                            text={`Are you sure that you wish to remove ${employeeToDelete.firstName} ${employeeToDelete.lastName} from the system?`} 
+                            colorPalette={colorPalette}/>}
                     {isConfirmationOfDeletionOpen &&
-                        <NewEmployeeModalContent isCorrect={false} iconColor='rgb(0, 175, 95)' iconBackgroundColor='rgb(0, 175, 95, 0.5)' closeModal={handleCloseModal} text='This employee was successfully removed from the system' />
+                        <NewEmployeeModalContent isCorrect={false}
+                            iconColor='rgb(0, 175, 95)'
+                            iconBackgroundColor='rgb(0, 175, 95, 0.5)'
+                            closeModal={handleCloseModal}
+                            text='This employee was successfully removed from the system' 
+                            colorPalette={colorPalette}/>
                     }
                 </Modal> : null}
         </section>
@@ -209,13 +228,13 @@ Table.propTypes = {
             zipCode: PropTypes.string.isRequired,
         })
     ).isRequired,
-        colorPalette: PropTypes.shape({
-            primaryColor: PropTypes.string,
-            secondaryColor: PropTypes.string,
-            tertiaryColor: PropTypes.string,
-            quarternaryColor: PropTypes.string,
-            quinaryColor: PropTypes.string,
-        }),
+    colorPalette: PropTypes.shape({
+        primaryColor: PropTypes.string,
+        secondaryColor: PropTypes.string,
+        tertiaryColor: PropTypes.string,
+        quarternaryColor: PropTypes.string,
+        quinaryColor: PropTypes.string,
+    }),
 }
 
 export default Table;

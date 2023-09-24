@@ -203,13 +203,13 @@ function Form({ openModal, colorPalette }) {
                     selectedMonthYearBackgroundColor={colorPalette.senaryColor}
                     todayBackgroundColor={colorPalette.senaryColor}
                 />
-                <Button text='Next' 
-                type='submit' 
-                value='personnalInformations'
-                fontColor={colorPalette.secondaryColor}
-                hoveredFontColor={colorPalette.quarternaryColor}
-                backgroundColor={colorPalette.quarternaryColor}
-                hoveredBackgroundColor={colorPalette.primaryColor} />
+                <Button text='Next'
+                    type='submit'
+                    value='personnalInformations'
+                    fontColor={colorPalette.secondaryColor}
+                    hoveredFontColor={colorPalette.quarternaryColor}
+                    backgroundColor={colorPalette.quarternaryColor}
+                    hoveredBackgroundColor={colorPalette.primaryColor} />
             </form>
             <form
                 className={`${classes.address} ${classes[employeeAddressStatus]}`}
@@ -250,14 +250,19 @@ function Form({ openModal, colorPalette }) {
                     boxShadowColor={colorPalette.senaryColor}
                     fontColor={colorPalette.tertiaryColor} />
                 <div className={classes.buttons}>
-                    <Button text='Previous' 
+                    <Button text='Previous'
+                        value='employeeAddress'
+                        onClick={handleClickPrevious}
+                        fontColor={colorPalette.secondaryColor}
+                        hoveredFontColor={colorPalette.quarternaryColor}
+                        backgroundColor={colorPalette.quarternaryColor}
+                        hoveredBackgroundColor={colorPalette.primaryColor} />
+                    <Button text='Next' 
                     value='employeeAddress' 
-                    onClick={handleClickPrevious}
                     fontColor={colorPalette.secondaryColor}
                     hoveredFontColor={colorPalette.quarternaryColor}
                     backgroundColor={colorPalette.quarternaryColor}
-                    hoveredBackgroundColor={colorPalette.primaryColor} />
-                    <Button text='Next' value='employeeAddress' />
+                    hoveredBackgroundColor={colorPalette.primaryColor}/>
                 </div>
             </form>
             <form
@@ -274,19 +279,19 @@ function Form({ openModal, colorPalette }) {
                     separatedBox={true} />
                 <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
                 <div className={classes.buttons}>
-                    <Button text='Previous' 
-                    value='workSituation' 
-                    onClick={handleClickPrevious} 
-                    fontColor={colorPalette.secondaryColor}
-                    hoveredFontColor={colorPalette.quarternaryColor}
-                    backgroundColor={colorPalette.quarternaryColor}
-                    hoveredBackgroundColor={colorPalette.primaryColor}/>
-                    <Button text='Create Employee' 
-                    value='submit' 
-                    fontColor={colorPalette.secondaryColor}
-                    hoveredFontColor={colorPalette.quarternaryColor}
-                    backgroundColor={colorPalette.quarternaryColor}
-                    hoveredBackgroundColor={colorPalette.primaryColor}/>
+                    <Button text='Previous'
+                        value='workSituation'
+                        onClick={handleClickPrevious}
+                        fontColor={colorPalette.secondaryColor}
+                        hoveredFontColor={colorPalette.quarternaryColor}
+                        backgroundColor={colorPalette.quarternaryColor}
+                        hoveredBackgroundColor={colorPalette.primaryColor} />
+                    <Button text='Create Employee'
+                        value='submit'
+                        fontColor={colorPalette.secondaryColor}
+                        hoveredFontColor={colorPalette.quarternaryColor}
+                        backgroundColor={colorPalette.quarternaryColor}
+                        hoveredBackgroundColor={colorPalette.primaryColor} />
                 </div>
             </form>
         </div>
