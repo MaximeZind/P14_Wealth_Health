@@ -67,7 +67,7 @@ function Dropdown({ list, label, name, height, maxWidth, backgroundColor, hovere
 
     return (
         <div className={`${classes.component_container} ${classes[dropdownStatus]}`} 
-        style={{maxWidth: `${maxWidth}px`, backgroundColor: backgroundColor && backgroundColor}} 
+        style={{maxWidth: `${maxWidth}px`}} 
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}>
             <label className={(isOpen || selectedName !== '') ? `${classes.label} ${classes.focused}` : classes.label} htmlFor={name} >{label}</label>

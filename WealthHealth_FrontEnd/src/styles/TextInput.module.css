@@ -8,7 +8,6 @@
     position: absolute;
     left: 0;
     color: #999;
-    background-color: #fff;
     z-index: 2;
     transition: transform 150ms ease-out, font-size 150ms ease-out, color 150ms ease-out;
     padding-left: 3px;
@@ -31,18 +30,22 @@
     width: 100%;
     outline: 0;
     border: 0;
+    background-color: transparent;
     box-shadow: 0 1px 0 0 #e5e5e5;
-    transition: box-shadow 150ms ease-out !important;
+}
+
+input::slotted{
+    background-color: unset;
 }
 
 /* Empêcher le background bleu clair avec l'autofill */
+/* Prevent light blue background with autofill */
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 1px 0 0 #e5e5e5, 0 0 0 30px white inset !important;
+input:-webkit-autofill:active {
+    transition: background-color 9999s ease-in-out 0s;
 }
-
 .error_msg{
     margin: 0;
     font-size: 0.7rem;
