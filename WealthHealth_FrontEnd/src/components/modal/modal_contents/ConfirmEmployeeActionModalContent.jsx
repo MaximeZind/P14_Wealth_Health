@@ -20,7 +20,7 @@ function ConfirmEmployeeActionModalContent({ closeModal, confirm, update, text }
                 <footer className={classes.modal_footer}>
                     <Button value='close' text='Close' onClick={closeModal} />
                     <Button value='confirm' text='Confirm' onClick={confirm} />
-                    <Button value='update' text='Update' onClick={update}/>
+                    { update && <Button value='update' text='Update' onClick={update}/>}
                 </footer>
             </div>
     );
