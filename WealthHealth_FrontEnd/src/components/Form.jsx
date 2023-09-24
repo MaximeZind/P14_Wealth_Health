@@ -277,7 +277,24 @@ function Form({ openModal, colorPalette }) {
                     fontColor={colorPalette.tertiaryColor}
                     hoveredFontColor={colorPalette.tertiaryColor}
                     separatedBox={true} />
-                <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
+                <DateInput name='startDate' 
+                label='Start Date' 
+                errorMsg={startDateErrorMsg} 
+                yearsRangeMin={1923} 
+                yearsRangeMax={2023} 
+                roundYearHighlight={true}
+                labelColor={colorPalette.quinaryColor}
+                focusedLabelColor={colorPalette.tertiaryColor}
+                boxShadowColor={colorPalette.senaryColor}
+                fontColor={colorPalette.tertiaryColor}
+                selectedDayFontColor={colorPalette.secondaryColor}
+                previousNextMonthFontColor={colorPalette.quinaryColor}
+                iconColor={colorPalette.tertiaryColor}
+                backgroundColor={colorPalette.secondaryColor}
+                hoveredBackgroundColor={colorPalette.primaryColor}
+                selectedDayBackgroundColor={colorPalette.quarternaryColor}
+                selectedMonthYearBackgroundColor={colorPalette.senaryColor}
+                todayBackgroundColor={colorPalette.senaryColor} />
                 <div className={classes.buttons}>
                     <Button text='Previous'
                         value='workSituation'

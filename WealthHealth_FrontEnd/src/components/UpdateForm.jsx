@@ -81,7 +81,10 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
         <form className={classes.update_form} onSubmit={handleUpdate}>
             <h2> Update Employee</h2>
             <div className={classes.form_sections}>
-                <Collapse title={"Personnal Informations"}>
+                <Collapse title={"Personnal Informations"}
+                    headerBackgroundColor={colorPalette.primaryColor}
+                    fontColor={colorPalette.tertiaryColor}
+                    iconColor={colorPalette.tertiaryColor}>
                     <div className={`${classes.personnal_informations} ${classes.form_section}`}>
                         <TextInput name='firstName'
                             label='First Name'
@@ -122,7 +125,10 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
                             todayBackgroundColor={colorPalette.senaryColor} />
                     </div>
                 </Collapse>
-                <Collapse title={'Address'}>
+                <Collapse title={'Address'}
+                    headerBackgroundColor={colorPalette.primaryColor}
+                    fontColor={colorPalette.tertiaryColor}
+                    iconColor={colorPalette.tertiaryColor}>
                     <div className={`${classes.address} ${classes.form_section}`}>
                         <TextInput name='street'
                             label='Street'
@@ -165,7 +171,10 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
                             fontColor={colorPalette.tertiaryColor} />
                     </div>
                 </Collapse>
-                <Collapse title={'Work Informations'}>
+                <Collapse title={'Work Informations'}
+                    headerBackgroundColor={colorPalette.primaryColor}
+                    fontColor={colorPalette.tertiaryColor}
+                    iconColor={colorPalette.tertiaryColor}>
                     <div className={`${classes.work_informations} ${classes.form_section}`}>
                         <h3>Work informations</h3>
                         <Dropdown list={departments}
