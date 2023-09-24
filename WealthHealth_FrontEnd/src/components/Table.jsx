@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import classes from '../styles/Table.module.css';
-import Row from '../components/Row';
 import fields from '../data/fields.json';
-import Arrow from './Arrow';
 import PropTypes from 'prop-types';
 import TextInput from './TextInput';
 import { search } from '../utils/searchScript';
@@ -101,26 +99,11 @@ function Table({ employeesList, colorPalette }) {
 
     // Gestion du modal //
 
-    // Fonction appelee lors du clic sur le "crayon" d'une ligne
-    // Ouvre le formulaire de mise a jour des infos de l'employe
-    function handlePencilClick(employee) {
-        setEmployeeToUpdate(employee);
-        setIsModalOpen(true);
-        setIsFormOpen(true)
-    }
-
     // Fonction qui est appelee une fois que lq mise a jour des infos de l'employe est faite
     // ouvre la modale de confirmation de mise a jour
     function handleUpdateClick() {
         setIsFormOpen(false);
         setIsConfirmationOfUpdateOpen(true);
-    }
-
-    // Fonction appelee lors du clic sur la "poubelle" d'une ligne
-    // Ouvre la modale de demande de validation de suppression de l'employe du systeme
-    function handleBinClick(employee) {
-        setemployeeToDelete(employee);
-        setIsModalOpen(true);
     }
 
     // Fonction appelee lorsque la deletion est validee par l'utilisateur
@@ -174,11 +157,17 @@ function Table({ employeesList, colorPalette }) {
             ArrowColor={colorPalette.quarternaryColor}
             />
             <div className={classes.table_navigation}>
-                <p> Showing {list.length === 0 ? 0 : (currentPage - 1) * tableLength + 1} to {currentPage * tableLength <= list.length ? currentPage * tableLength : list.length} of {list.length} entries</p>
+                <p style={{color: colorPalette.tertiaryColor}}> Showing {list.length === 0 ? 0 : (currentPage - 1) * tableLength + 1} to {currentPage * tableLength <= list.length ? currentPage * tableLength : list.length} of {list.length} entries</p>
                 {pages > 1 ? <div className={classes.pages}>
                     {currentPage > 1 ? <p onClick={() => setCurrentPage(currentPage - 1)}>Previous</p> : null}
                     {Array.from(Array(pages).keys()).map((key) => {
-                        return <p className={(key + 1) === currentPage ? classes.active : null} onClick={() => setCurrentPage(key + 1)} key={key}>{key + 1}</p>
+                        return <p className={(key + 1) === currentPage ? classes.active : null} 
+                        onClick={() => setCurrentPage(key + 1)} 
+                        key={key}
+                        style={{backgroundColor: (key + 1) === currentPage && colorPalette.quarternaryColor,
+                        color: (key + 1) === currentPage ? colorPalette.secondaryColor : colorPalette.tertiaryColor}}>
+                            {key + 1}
+                            </p>
                     })}
                     {currentPage < pages ? <p onClick={() => setCurrentPage(currentPage + 1)}>Next</p> : null}
                 </div> : null}
