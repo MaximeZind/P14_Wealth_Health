@@ -133,7 +133,7 @@ Dropdown.propTypes = {
     defaultValue: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.string,
-    ]).isRequired,
+    ]),
     defaultName: PropTypes.string,
     onChange: PropTypes.func,
 }
