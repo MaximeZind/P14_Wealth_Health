@@ -60,7 +60,8 @@ function Home() {
         setEmployeeToConfirm(null);
     }
     return (
-        <main className={classes.main}>
+        <main className={classes.main} 
+        style={{backgroundColor: colorPalette.primaryColor}}>
             {isModalOpen ?
                 <Modal closeModal={closeModal} maxWidth={600}>
                     {isCorrect ?

@@ -10,7 +10,8 @@ function EmployeeList() {
     const employeesList = useSelector((state) => state.employeesReducer);
     const colorPalette = useSelector((state) => state.colorPaletteReducer);
     return (
-        <main className={classes.main}>
+        <main className={classes.main}
+        style={{backgroundColor: colorPalette.primaryColor}}>
             <Table employeesList={employeesList} colorPalette={colorPalette}/>
         </main>
     );

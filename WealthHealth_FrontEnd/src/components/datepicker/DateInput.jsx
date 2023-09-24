@@ -100,7 +100,7 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundY
                 onMouseLeave={() => setIsHovered(false)}>
                 <p className={classes.selected_date}>{selectedValue}</p>
                 <span className={classes.date_input_icon}
-                    style={{ backgroundColor: isHovered && hoveredBackgroundColor && hoveredBackgroundColor }}>
+                    style={{ backgroundColor: (isHovered || isOpen) ? hoveredBackgroundColor && hoveredBackgroundColor : '' }}>
                     <Calendar width={20} height={20} color={iconColor && iconColor} />
                 </span>
             </div>

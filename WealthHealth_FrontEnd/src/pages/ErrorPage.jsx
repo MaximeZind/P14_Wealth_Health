@@ -13,7 +13,8 @@ function ErrorPage() {
 
     return (
         (location.pathname === '/404') ?
-            <main className={classes.main}>
+            <main className={classes.main}
+            style={{backgroundColor: colorPalette.primaryColor}}>
                 <Modal>
                     <UpdateForm />
                 </Modal>
