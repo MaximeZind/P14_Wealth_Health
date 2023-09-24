@@ -5,7 +5,7 @@ import DropdownArrow from './icons/DropdownArrow';
 import SeparatedBox from './SeparatedBox';
 import NormalBox from './NormalBox';
 
-function Dropdown({ list, label, name, height, maxWidth, colorPalette, fontFamily, separatedBox, searchBar, defaultValue, defaultName, onChange }) {
+function Dropdown({ list, label, name, height, maxWidth, backgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, fontFamily, separatedBox, searchBar, defaultValue, defaultName, onChange }) {
 
 
     const [isOpen, setIsOpen] = useState(false);
@@ -75,7 +75,9 @@ function Dropdown({ list, label, name, height, maxWidth, colorPalette, fontFamil
     }
 
     return (
-        <div className={`${classes.component_container} ${classes[dropdownStatus]}`} style={{maxWidth: `${maxWidth}px`}} onMouseEnter={handleMouseEnter}
+        <div className={`${classes.component_container} ${classes[dropdownStatus]}`} 
+        style={{maxWidth: `${maxWidth}px`, backgroundColor: backgroundColor && backgroundColor}} 
+        onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}>
             <label className={(isOpen || selectedName !== '') ? `${classes.label} ${classes.focused}` : classes.label} htmlFor={name} >{label}</label>
             <input className={classes.hidden} name={name} id={name} value={selectedValue} readOnly={true} />
@@ -85,12 +87,29 @@ function Dropdown({ list, label, name, height, maxWidth, colorPalette, fontFamil
                     style={!separatedBox ? ((dropdownStatus === `closed`) || (dropdownStatus === `closing`)) ? { height: `${height}px` } : { height: `${height * 8}px` } : { height: `${height}px` }} >
                     <div className={classes.dropdown_header} style={{ minHeight: `${height}px` }}  onClick={() => isOpen ? handleClose() : handleOpen()}>
                         <span className={classes.selected_item}>{selectedName}</span>
-                        <span className={classes.dropdown_header_icon} style={{backgroundColor: (isHovered && colorPalette.primaryColor) && colorPalette.primaryColor}}>
+                        <span className={classes.dropdown_header_icon} style={{backgroundColor: (isHovered && hoveredBackgroundColor) && hoveredBackgroundColor}}>
                             <DropdownArrow transform={isOpen ? 'rotate(180deg)' : ''} />
                         </span>
                     </div>
-                    {(separatedBox && isOpen) ? <SeparatedBox list={list} height={height} colorPalette={colorPalette} handleClick={handleClick} searchBar={searchBar} /> : null}
-                    {!separatedBox ? <NormalBox list={list} height={height} primaryColor={primaryColor} secondaryColor={secondaryColor} handleClick={handleClick} searchBar={searchBar} /> : null}
+                    {(separatedBox && isOpen) ? 
+                    <SeparatedBox list={list} 
+                    height={height} 
+                    backgroundColor={backgroundColor}
+                    hoveredBackgroundColor={hoveredBackgroundColor}
+                    fontColor={fontColor}
+                    hoveredFontColor={hoveredFontColor}
+                    fontFamily={fontFamily}
+                    handleClick={handleClick} 
+                    searchBar={searchBar} /> : null}
+                    {!separatedBox ? 
+                    <NormalBox list={list} 
+                    height={height} 
+                    backgroundColor={backgroundColor}
+                    hoveredBackgroundColor={hoveredBackgroundColor}
+                    fontColor={fontColor}
+                    hoveredFontColor={hoveredFontColor}
+                    handleClick={handleClick} 
+                    searchBar={searchBar} /> : null}
                 </div>
             </div>
         </div>
@@ -113,13 +132,11 @@ Dropdown.propTypes = {
     placeholder: PropTypes.string,
     height: PropTypes.number.isRequired,
     maxWidth: PropTypes.number,
-    colorPalette: PropTypes.shape({
-        primaryColor: PropTypes.string.isRequired,
-        secondaryColor: PropTypes.string.isRequired,
-        tertiaryColor: PropTypes.string.isRequired,
-        quarternaryColor: PropTypes.string.isRequired,
-        quinaryColor: PropTypes.string.isRequired,
-    }).isRequired,
+    backgroundColor: PropTypes.string,
+    hoveredBackgroundColor: PropTypes.string,
+    fontColor: PropTypes.string,
+    hoveredFontColor: PropTypes.string,
+    fontFamily: PropTypes.string,
     separatedBox: PropTypes.bool.isRequired,
     searchBar: PropTypes.bool,
     defaultValue: PropTypes.string,

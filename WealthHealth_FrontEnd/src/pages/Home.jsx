@@ -5,12 +5,14 @@ import Modal from '../components/modal/Modal';
 import NewEmployeeModalContent from '../components/modal/modal_contents/NewEmployeeModalContent';
 import ConfirmEmployeeActionModalContent from '../components/modal/modal_contents/ConfirmEmployeeActionModalContent';
 import { addEmployee, updateEmployee } from '../actions/employees.action';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Home() {
 
     const pageTitle = 'Create an employee';
     document.title = `Wealth Health HRnet - ${pageTitle}`;
+
+    const colorPalette = useSelector((state) => state.colorPaletteReducer);
 
     const dispatch = useDispatch();
     // L'utilisateur a ete cree ou non
@@ -74,7 +76,7 @@ function Home() {
                 :
                 <div className={classes.container}>
                     <h2>Create Employee</h2>
-                    <Form openModal={openModal} />
+                    <Form openModal={openModal} colorPalette={colorPalette}/>
                 </div>}
         </main>
     );

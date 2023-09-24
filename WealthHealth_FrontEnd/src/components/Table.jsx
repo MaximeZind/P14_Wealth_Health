@@ -14,7 +14,7 @@ import ConfirmEmployeeActionModalContent from './modal/modal_contents/ConfirmEmp
 import { useDispatch } from 'react-redux';
 import { deleteEmployee } from '../actions/employees.action';
 
-function Table({ employeesList }) {
+function Table({ employeesList, colorPalette }) {
 
     const dispatch = useDispatch();
     // initialisation des States
@@ -148,6 +148,9 @@ function Table({ employeesList }) {
                     list={tableLengths}
                     height={40}
                     maxWidth={100}
+                    primaryColor={colorPalette.primaryColor}
+                    secondaryColor={colorPalette.secondaryColor}
+                    tertiaryColor={colorPalette.tertiaryColor}
                     name='employees_table_length'
                     id='employees_table_length'
                     defaultValue={tableLengths[0]}
@@ -230,7 +233,8 @@ function Table({ employeesList }) {
                         <UpdateForm
                             closeModal={handleCloseModal}
                             handleUpdateClick={handleUpdateClick}
-                            employee={employeeToUpdate} />}
+                            employee={employeeToUpdate} 
+                            colorPalette={colorPalette}/>}
                     {isConfirmationOfUpdateOpen &&
                         <NewEmployeeModalContent isCorrect={true} iconColor='rgb(0, 175, 95)' iconBackgroundColor='rgb(0, 175, 95, 0.5)' closeModal={handleCloseModal} text='This employee was successfully updated' />}
                     {employeeToDelete &&
@@ -260,6 +264,13 @@ Table.propTypes = {
             zipCode: PropTypes.string.isRequired,
         })
     ).isRequired,
+        colorPalette: PropTypes.shape({
+            primaryColor: PropTypes.string,
+            secondaryColor: PropTypes.string,
+            tertiaryColor: PropTypes.string,
+            quarternaryColor: PropTypes.string,
+            quinaryColor: PropTypes.string,
+        }),
 }
 
 export default Table;

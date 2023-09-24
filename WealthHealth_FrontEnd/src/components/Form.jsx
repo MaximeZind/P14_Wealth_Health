@@ -11,7 +11,7 @@ import Button from './button';
 import { doesEmployeeExist, generateUniqueID } from '../utils/utils';
 import PropTypes from 'prop-types';
 
-function Form({ openModal }) {
+function Form({ openModal, colorPalette }) {
 
     const dispatch = useDispatch()
     const departments = getDepartments();
@@ -180,7 +180,15 @@ function Form({ openModal }) {
                 id="add_address">
                 <TextInput name='street' label='Street' errorMsg={streetErrorMsg} />
                 <TextInput name='city' label='City' errorMsg={cityErrorMsg} />
-                <Dropdown list={states} name='state' label='State' height={40} separatedBox={true} searchBar={true} />
+                <Dropdown list={states} 
+                name='state' 
+                label='State' 
+                height={40} 
+                backgroundColor={colorPalette.secondaryColor}
+                hoveredBackgroundColor={colorPalette.primaryColor}
+                fontColor={colorPalette.tertiaryColor}
+                hoveredFontColor={colorPalette.tertiaryColor}
+                separatedBox={true} searchBar={true} />
                 <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg} />
                 <div className={classes.buttons}>
                     <Button text='Previous' value='employeeAddress' onClick={handleClickPrevious} />
@@ -190,7 +198,15 @@ function Form({ openModal }) {
             <form
                 className={`${classes.work_situation} ${classes[workSituationStatus]}`}
                 onSubmit={handleFormSubmit}>
-                <Dropdown list={departments} name='department' label='Department' height={40} separatedBox={true} />
+                <Dropdown list={departments} 
+                name='department' 
+                label='Department' 
+                height={40} 
+                backgroundColor={colorPalette.secondaryColor}
+                hoveredBackgroundColor={colorPalette.primaryColor}
+                fontColor={colorPalette.tertiaryColor}
+                hoveredFontColor={colorPalette.tertiaryColor}
+                separatedBox={true} />
                 <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
                 <div className={classes.buttons}>
                     <Button text='Previous' value='workSituation' onClick={handleClickPrevious} />
@@ -203,6 +219,13 @@ function Form({ openModal }) {
 
 Form.propTypes = {
     openModal: PropTypes.func.isRequired,
+    colorPalette: PropTypes.shape({
+        primaryColor: PropTypes.string,
+        secondaryColor: PropTypes.string,
+        tertiaryColor: PropTypes.string,
+        quarternaryColor: PropTypes.string,
+        quinaryColor: PropTypes.string,
+    }),
 }
 
 export default Form;

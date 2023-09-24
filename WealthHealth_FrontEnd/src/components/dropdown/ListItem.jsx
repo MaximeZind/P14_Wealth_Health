@@ -26,10 +26,13 @@ function ListItem({ item, index, height, fontFamily, backgroundColor, hoveredBac
 }
 
 ListItem.propTypes = {
-    item: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        abbreviation: PropTypes.string,
-    }).isRequired,
+    item: PropTypes.oneOfType([
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            abbreviation: PropTypes.string,
+        }),
+        PropTypes.string.isRequired,
+    ]).isRequired,
     index: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     fontFamily: PropTypes.string,

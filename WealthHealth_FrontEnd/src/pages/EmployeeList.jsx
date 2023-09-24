@@ -8,9 +8,10 @@ function EmployeeList() {
     const pageTitle = 'Employees list';
     document.title =`Wealth Health HRnet - ${pageTitle}`;
     const employeesList = useSelector((state) => state.employeesReducer);
+    const colorPalette = useSelector((state) => state.colorPaletteReducer);
     return (
         <main className={classes.main}>
-            <Table employeesList={employeesList}/>
+            <Table employeesList={employeesList} colorPalette={colorPalette}/>
         </main>
     );
 }

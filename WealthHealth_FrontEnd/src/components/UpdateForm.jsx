@@ -12,7 +12,7 @@ import { updateEmployee } from '../actions/employees.action';
 import { validateEmployee } from '../utils/formValidation';
 
 
-function UpdateForm({ closeModal, employee, handleUpdateClick }) {
+function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
 
     // On recupere les states et les departements
     const states = getStates();
@@ -97,7 +97,10 @@ function UpdateForm({ closeModal, employee, handleUpdateClick }) {
                     name='state' 
                     label='State' 
                     height={40} 
-                    primaryColor={'#000000'}
+                    backgroundColor={colorPalette.secondaryColor}
+                    hoveredBackgroundColor={colorPalette.primaryColor}
+                    fontColor={colorPalette.tertiaryColor}
+                    hoveredFontColor={colorPalette.tertiaryColor}
                     separatedBox={true} 
                     searchBar={true} 
                     defaultValue={states.find((state) => state.abbreviation === employee.state).abbreviation} 
@@ -136,6 +139,13 @@ UpdateForm.propTypes = {
         zipCode: PropTypes.string.isRequired,
     }).isRequired,
     handleUpdateClick: PropTypes.func.isRequired,
+    colorPalette: PropTypes.shape({
+        primaryColor: PropTypes.string,
+        secondaryColor: PropTypes.string,
+        tertiaryColor: PropTypes.string,
+        quarternaryColor: PropTypes.string,
+        quinaryColor: PropTypes.string,
+    }),
 }
 
 
