@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from '../styles/Row.module.css';
 import PropTypes from 'prop-types';
 import Pencil from './Pencil';
 import GarbageBin from './GarbageBin';
 
-function Row({ delay, highlightedField, type, firstName, lastName, startDate, department, dateOfBirth, street, city, state, zipCode, handlePencilClick, handleBinClick }) {
+function Row({ delay, highlightedField, type, firstName, lastName, startDate, department, dateOfBirth, street, city, state, zipCode, handlePencilClick, handleBinClick, backgroundColor, hoveredBackGroundColor, fontColor, hoveredFontColor }) {
 
-    const animDelay = `${delay / 20}s`;
+    const [isHovered, setIsHovered] = useState(false);
+    const animDelay = delay && `${delay / 20}s`;
     const trStyle = {
-        animationDelay: animDelay,
+        animationDelay: delay && animDelay,
+        backgroundColor: isHovered ? hoveredBackGroundColor && hoveredBackGroundColor : backgroundColor && backgroundColor,
+        color: isHovered ? hoveredFontColor && hoveredFontColor : fontColor && fontColor,
     };
     const className = type === 'odd' ? classes.odd : classes.even;
 
 
     return (
-        <tr role='row' className={`${className} ${classes.myrow}`} style={trStyle} id='row'>
+        <tr role='row' 
+        className={`${className} ${classes.myrow}`} 
+        style={trStyle} 
+        id='row'
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}>
             <td className={highlightedField === 0 ? classes.highlighted : null}>{firstName}</td>
             <td className={highlightedField === 1 ? classes.highlighted : null}>{lastName}</td>
             <td className={highlightedField === 2 ? classes.highlighted : null}>{startDate}</td>
@@ -51,6 +59,10 @@ Row.propTypes = {
     zipCode: PropTypes.string.isRequired,
     handlePencilClick: PropTypes.func.isRequired,
     handleBinClick: PropTypes.func.isRequired,
+    backgroundColor: PropTypes.string,
+    hoveredBackgroundColor: PropTypes.string, 
+    fontColor: PropTypes.string, 
+    hoveredFontColor: PropTypes.string,
 }
 
 export default Row;

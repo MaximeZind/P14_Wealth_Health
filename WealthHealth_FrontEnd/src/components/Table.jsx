@@ -13,6 +13,7 @@ import Dropdown from './dropdown/Dropdown';
 import ConfirmEmployeeActionModalContent from './modal/modal_contents/ConfirmEmployeeActionModalContent';
 import { useDispatch } from 'react-redux';
 import { deleteEmployee } from '../actions/employees.action';
+import DataTable from './DataTable';
 
 function Table({ employeesList, colorPalette }) {
 
@@ -44,7 +45,7 @@ function Table({ employeesList, colorPalette }) {
     // ... Pour savoir lequel est sélectionné
     const highlightedField = selectedField ? camelFields.indexOf(selectedField) : null;
     // array de longueurs possible de tableau
-    const tableLengths = ['10', '25', '50', '100'];
+    const tableLengths = [10, 25, 50, 100];
 
     // On utilise useEffect pour re render le tableau lorsque la liste change
     useEffect(() => {
@@ -157,66 +158,21 @@ function Table({ employeesList, colorPalette }) {
                     onChange={handleSelect} separatedBox={true} />
                 <TextInput name='search' label='Search: ' onChange={handleSearch} />
             </div>
-            <table id='employee_table' className={classes.table}>
-                <thead className={classes.table_header}>
-                    <tr role='row'>
-                        {fields.map((field) => {
-                            return (
-                                <th className={field.camelField === selectedField ? classes.selected_field : ''} key={fields.indexOf(field)} onClick={() => sortBy(field.camelField)}>
-                                    <div className={classes.field}>{field.field}
-                                        {selectedField !== field.camelField ?
-                                            <div className={classes.icons}>
-                                                <Arrow transform='rotate(180deg)' color='rgb(52,79,4,0.6)' />
-                                                <Arrow transform='rotate(0deg)' color='rgb(52,79,4,0.6)' />
-                                            </div> :
-                                            <div className={classes.icons}>
-                                                {isAscending ?
-                                                    <div className={classes.icons}>
-                                                        <Arrow transform='rotate(180deg)' color='#FFFFFF' />
-                                                        <Arrow transform='rotate(0deg)' color='rgb(255, 255, 255, 0)' />
-                                                    </div> :
-                                                    <div className={classes.icons}>
-                                                        <Arrow transform='rotate(180deg)' color='rgb(255, 255, 255, 0)' />
-                                                        <Arrow transform='rotate(0deg)' color='#FFFFFF' />
-                                                    </div>
-                                                }
-                                            </div>
-                                        }
-                                    </div>
-                                </th>
-                            )
-                        })}
-                    </tr>
-                </thead>
-                <tbody>
-                    {list.length > 0 && list.map((employee, index) => {
-                        const indexWithinPage = index % tableLength;
-                        const type = index % 2 ? 'even' : 'odd';
-                        const isOnCurrentPage = (index >= (currentPage - 1) * tableLength) && (index < currentPage * tableLength)
-                        if (isOnCurrentPage) {
-                            return (<Row delay={indexWithinPage}
-                                highlightedField={highlightedField}
-                                key={index}
-                                type={type}
-                                firstName={employee.firstName}
-                                lastName={employee.lastName}
-                                startDate={employee.startDate}
-                                department={employee.department}
-                                dateOfBirth={employee.dateOfBirth}
-                                street={employee.street}
-                                city={employee.city}
-                                state={employee.state}
-                                zipCode={employee.zipCode}
-                                employeeId={employee.id}
-                                handlePencilClick={() => handlePencilClick(employee)}
-                                handleBinClick={() => handleBinClick(employee)}
-                            />)
-                        } else if (index >= tableLength) {
-                            return null;
-                        }
-                    })}
-                </tbody>
-            </table>
+            <DataTable list={list} 
+            currentPage={currentPage} 
+            tableLength={tableLength} 
+            setEmployeeToUpdate={setEmployeeToUpdate} 
+            setIsModalOpen={setIsModalOpen} 
+            setIsFormOpen={setIsFormOpen} 
+            setemployeeToDelete={setemployeeToDelete} 
+            tableBackgroundColor={colorPalette.secondaryColor}
+            oddBackgroundColor={colorPalette.primaryColor}
+            evenBackgroundColor={colorPalette.secondaryColor}
+            hoveredBackgroundColor={colorPalette.quarternaryColor}
+            fontColor={colorPalette.tertiaryColor}
+            hoveredFontColor={colorPalette.secondaryColor}
+            ArrowColor={colorPalette.quarternaryColor}
+            />
             <div className={classes.table_navigation}>
                 <p> Showing {list.length === 0 ? 0 : (currentPage - 1) * tableLength + 1} to {currentPage * tableLength <= list.length ? currentPage * tableLength : list.length} of {list.length} entries</p>
                 {pages > 1 ? <div className={classes.pages}>

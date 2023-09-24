@@ -32,6 +32,7 @@ ListItem.propTypes = {
             abbreviation: PropTypes.string,
         }),
         PropTypes.string.isRequired,
+        PropTypes.number.isRequired,
     ]).isRequired,
     index: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,

@@ -15,15 +15,6 @@ function Dropdown({ list, label, name, height, maxWidth, backgroundColor, hovere
     const [selectedValue, setSelectedValue] = defaultValue ? useState(defaultValue) : useState(list[0].abbreviation ? list[0].abbreviation : list[0].name);
     const dropdownMenu = useRef(null);
 
-    function handleMouseEnter(){
-        setIsHovered(true);
-    }
-
-    function handleMouseLeave(){
-        setIsHovered(false);
-    }
-
-
     // Pour que le dropdown se ferme lorsque l'utilisateur clique en dehors
     // document.addEventListener('click', handleClickOutside);
     function handleClickOutside(event) {
@@ -77,8 +68,8 @@ function Dropdown({ list, label, name, height, maxWidth, backgroundColor, hovere
     return (
         <div className={`${classes.component_container} ${classes[dropdownStatus]}`} 
         style={{maxWidth: `${maxWidth}px`, backgroundColor: backgroundColor && backgroundColor}} 
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}>
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}>
             <label className={(isOpen || selectedName !== '') ? `${classes.label} ${classes.focused}` : classes.label} htmlFor={name} >{label}</label>
             <input className={classes.hidden} name={name} id={name} value={selectedValue} readOnly={true} />
             <div style={{ height: `${height}px` }}>
@@ -139,7 +130,10 @@ Dropdown.propTypes = {
     fontFamily: PropTypes.string,
     separatedBox: PropTypes.bool.isRequired,
     searchBar: PropTypes.bool,
-    defaultValue: PropTypes.string,
+    defaultValue: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+    ]).isRequired,
     defaultName: PropTypes.string,
     onChange: PropTypes.func,
 }
