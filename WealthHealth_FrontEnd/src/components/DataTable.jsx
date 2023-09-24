@@ -5,7 +5,7 @@ import fields from '../data/fields.json';
 import Arrow from './Arrow';
 import PropTypes from 'prop-types';
 
-function DataTable({ list, currentPage, tableLength, setEmployeeToUpdate, setIsModalOpen, setIsFormOpen, setemployeeToDelete, tableBackgroundColor, oddBackgroundColor, evenBackgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, ArrowColor }) {
+function DataTable({ list, currentPage, tableLength, setEmployeeToUpdate, setIsModalOpen, setIsFormOpen, setemployeeToDelete, setList, tableBackgroundColor, oddBackgroundColor, evenBackgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, ArrowColor }) {
 
     // initialisation des States
 
@@ -149,6 +149,7 @@ DataTable.propTypes = {
     setIsModalOpen: PropTypes.func.isRequired,
     setIsFormOpen: PropTypes.func.isRequired,
     setemployeeToDelete: PropTypes.func.isRequired,
+    setList: PropTypes.func.isRequired,
     tableBackgroundColor: PropTypes.string, 
     oddBackgroundColor: PropTypes.string, 
     evenBackgroundColor: PropTypes.string, 

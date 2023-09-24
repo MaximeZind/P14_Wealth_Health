@@ -155,6 +155,7 @@ function Table({ employeesList, colorPalette }) {
                 setIsModalOpen={setIsModalOpen}
                 setIsFormOpen={setIsFormOpen}
                 setemployeeToDelete={setemployeeToDelete}
+                setList={setList}
                 tableBackgroundColor={colorPalette.secondaryColor}
                 oddBackgroundColor={colorPalette.primaryColor}
                 evenBackgroundColor={colorPalette.secondaryColor}
