@@ -3,8 +3,9 @@ import classes from '../../styles/SeparatedBox.module.css';
 import PropTypes from 'prop-types';
 import MagnifyingGlass from './icons/MagnifyingGlass';
 import { dropdownFilter } from '../../utils/searchScript';
+import ListItem from './ListItem';
 
-function SeparatedBox({ list, height, handleClick, searchBar }) {
+function SeparatedBox({ list, height, colorPalette, handleClick, searchBar }) {
 
     const [newList, setNewList] = useState(list);
 
@@ -19,7 +20,7 @@ function SeparatedBox({ list, height, handleClick, searchBar }) {
         <div className={classes.dropdown_content} style={{ maxHeight: `${height * 7}px`, transform: `translateY(${height + 2}px)`, right:'0' }}>
             <div className={classes.animation_box} style={{ width: '100%' }}>
                 {searchBar === true ?
-                    <div className={classes.filter_items} style={{ minHeight: `${height}px` }}>
+                    <div className={classes.filter_items} style={{ minHeight: `${height}px`, backgroundColor: primaryColor && primaryColor }}>
                         <span className={classes.filter_items_icon}>
                             <MagnifyingGlass />
                         </span>
@@ -27,9 +28,12 @@ function SeparatedBox({ list, height, handleClick, searchBar }) {
                     </div> : null}
                 <div className={classes.dropdown_options} style={{ maxHeight: `${height * 6}px`}}>
                     {newList.map((item, index) => {
-                        return item.abbreviation ?
-                            <span key={item.name ? item.name : index} className={classes.dropdown_option} value={item.abbreviation ? item.abbreviation : item} style={{ minHeight: `${height}px` }} onClick={() => handleClick(item.name ? item.name : item, item.abbreviation)}>{item.name ? item.name : item}</span> :
-                            <span key={item.name ? item.name : index} className={classes.dropdown_option} value={item.name ? item.name : item} onClick={() => handleClick(item.name ? item.name : item)}>{item.name ? item.name : item}</span>
+                        return <ListItem key={item.name ? item.name : index} 
+                        item={item} 
+                        index={index} 
+                        height={height}
+                        colorPalette={colorPalette}
+                        handleClick={handleClick}/>
                     })}
                 </div>
             </div>
@@ -38,12 +42,6 @@ function SeparatedBox({ list, height, handleClick, searchBar }) {
 }
 
 SeparatedBox.propTypes = {
-    // list: PropTypes.arrayOf(
-    //     PropTypes.shape({
-    //         name: PropTypes.string.isRequired,
-    //         abbreviation: PropTypes.string,
-    //     })
-    // ).isRequired,
     list: PropTypes.arrayOf(
         PropTypes.oneOfType([
             PropTypes.shape({
@@ -55,6 +53,13 @@ SeparatedBox.propTypes = {
         ])
     ).isRequired,
     height: PropTypes.number.isRequired,
+    colorPalette: PropTypes.shape({
+        primaryColor: PropTypes.string.isRequired,
+        secondaryColor: PropTypes.string.isRequired,
+        tertiaryColor: PropTypes.string.isRequired,
+        quarternaryColor: PropTypes.string.isRequired,
+        quinaryColor: PropTypes.string.isRequired,
+    }).isRequired,
     handleClick: PropTypes.func.isRequired,
     searchBar: PropTypes.bool
 }

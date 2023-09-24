@@ -1,0 +1,10 @@
+import initialColorPalette from '../data/colorPalette.json';
+
+const initialState = initialColorPalette;
+
+export default function colorPaletteReducer(state = initialState, action) {
+    switch (action.type) {
+        default:
+            return state;
+    }
+}

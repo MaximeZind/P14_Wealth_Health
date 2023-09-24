@@ -97,6 +97,7 @@ function UpdateForm({ closeModal, employee, handleUpdateClick }) {
                     name='state' 
                     label='State' 
                     height={40} 
+                    primaryColor={'#000000'}
                     separatedBox={true} 
                     searchBar={true} 
                     defaultValue={states.find((state) => state.abbreviation === employee.state).abbreviation} 

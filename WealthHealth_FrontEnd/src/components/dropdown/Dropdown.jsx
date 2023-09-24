@@ -5,14 +5,24 @@ import DropdownArrow from './icons/DropdownArrow';
 import SeparatedBox from './SeparatedBox';
 import NormalBox from './NormalBox';
 
-function Dropdown({ list, label, name, height, maxWidth, separatedBox, searchBar, defaultValue, defaultName, onChange }) {
+function Dropdown({ list, label, name, height, maxWidth, colorPalette, fontFamily, separatedBox, searchBar, defaultValue, defaultName, onChange }) {
 
 
     const [isOpen, setIsOpen] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
     const [dropdownStatus, setDropdownStatus] = useState('closed')
     const [selectedName, setSelectedName] = defaultName ? useState(defaultName) : useState(defaultValue ? defaultValue : '');
     const [selectedValue, setSelectedValue] = defaultValue ? useState(defaultValue) : useState(list[0].abbreviation ? list[0].abbreviation : list[0].name);
     const dropdownMenu = useRef(null);
+
+    function handleMouseEnter(){
+        setIsHovered(true);
+    }
+
+    function handleMouseLeave(){
+        setIsHovered(false);
+    }
+
 
     // Pour que le dropdown se ferme lorsque l'utilisateur clique en dehors
     // document.addEventListener('click', handleClickOutside);
@@ -65,7 +75,8 @@ function Dropdown({ list, label, name, height, maxWidth, separatedBox, searchBar
     }
 
     return (
-        <div className={`${classes.component_container} ${classes[dropdownStatus]}`} style={{maxWidth: `${maxWidth}px`}}>
+        <div className={`${classes.component_container} ${classes[dropdownStatus]}`} style={{maxWidth: `${maxWidth}px`}} onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}>
             <label className={(isOpen || selectedName !== '') ? `${classes.label} ${classes.focused}` : classes.label} htmlFor={name} >{label}</label>
             <input className={classes.hidden} name={name} id={name} value={selectedValue} readOnly={true} />
             <div style={{ height: `${height}px` }}>
@@ -74,12 +85,12 @@ function Dropdown({ list, label, name, height, maxWidth, separatedBox, searchBar
                     style={!separatedBox ? ((dropdownStatus === `closed`) || (dropdownStatus === `closing`)) ? { height: `${height}px` } : { height: `${height * 8}px` } : { height: `${height}px` }} >
                     <div className={classes.dropdown_header} style={{ minHeight: `${height}px` }}  onClick={() => isOpen ? handleClose() : handleOpen()}>
                         <span className={classes.selected_item}>{selectedName}</span>
-                        <span className={classes.dropdown_header_icon}>
+                        <span className={classes.dropdown_header_icon} style={{backgroundColor: (isHovered && colorPalette.primaryColor) && colorPalette.primaryColor}}>
                             <DropdownArrow transform={isOpen ? 'rotate(180deg)' : ''} />
                         </span>
                     </div>
-                    {(separatedBox && isOpen) ? <SeparatedBox list={list} height={height} handleClick={handleClick} searchBar={searchBar} /> : null}
-                    {!separatedBox ? <NormalBox list={list} height={height} handleClick={handleClick} searchBar={searchBar} /> : null}
+                    {(separatedBox && isOpen) ? <SeparatedBox list={list} height={height} colorPalette={colorPalette} handleClick={handleClick} searchBar={searchBar} /> : null}
+                    {!separatedBox ? <NormalBox list={list} height={height} primaryColor={primaryColor} secondaryColor={secondaryColor} handleClick={handleClick} searchBar={searchBar} /> : null}
                 </div>
             </div>
         </div>
@@ -102,6 +113,13 @@ Dropdown.propTypes = {
     placeholder: PropTypes.string,
     height: PropTypes.number.isRequired,
     maxWidth: PropTypes.number,
+    colorPalette: PropTypes.shape({
+        primaryColor: PropTypes.string.isRequired,
+        secondaryColor: PropTypes.string.isRequired,
+        tertiaryColor: PropTypes.string.isRequired,
+        quarternaryColor: PropTypes.string.isRequired,
+        quinaryColor: PropTypes.string.isRequired,
+    }).isRequired,
     separatedBox: PropTypes.bool.isRequired,
     searchBar: PropTypes.bool,
     defaultValue: PropTypes.string,
