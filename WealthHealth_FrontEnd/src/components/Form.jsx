@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import TextInput from './TextInput';
 import DateInput from './datepicker/DateInput';
 import Dropdown from './dropdown/Dropdown';
-import Button from './button';
+import Button from './Button';
 import { doesEmployeeExist, generateUniqueID } from '../utils/utils';
 import PropTypes from 'prop-types';
 
@@ -114,7 +114,7 @@ function Form({ openModal, colorPalette }) {
             const formValidation = validateWorkSituation(formJson, personnalInformations.dateOfBirth);
             if (formValidation.isValid === true) {
                 // On attribue un id correspondant a la longueur de la liste + 1
-                const idObject = {id: generateUniqueID()}
+                const idObject = { id: generateUniqueID() }
                 const newEmployee = Object.assign(personnalInformations, employeeAddress, formValidation.data, idObject);
                 // Vérification que l'employé n'est pas déjà dans la liste
                 const verification = doesEmployeeExist(EmployeeList, newEmployee);
@@ -168,102 +168,125 @@ function Form({ openModal, colorPalette }) {
                 action="#"
                 onSubmit={handleFormSubmit}
                 id="add_personnal_informations">
-                <TextInput name='firstName' 
-                label='First Name' 
-                errorMsg={firstNameErrorMsg} 
-                height={40}
-                labelColor={colorPalette.quinaryColor}
-                focusedLabelColor={colorPalette.tertiaryColor}
-                boxShadowColor={colorPalette.senaryColor}
-                fontColor={colorPalette.tertiaryColor}/>
-                <TextInput name='lastName' 
-                label='Last Name' 
-                errorMsg={lastNameErrorMsg} 
-                height={40}
-                labelColor={colorPalette.quinaryColor}
-                focusedLabelColor={colorPalette.tertiaryColor}
-                boxShadowColor={colorPalette.senaryColor}
-                fontColor={colorPalette.tertiaryColor}/>
-                <DateInput name='dateOfBirth' 
-                label='Date of Birth' 
-                errorMsg={dateOfBirthErrorMsg} 
-                yearsRangeMin={1923} 
-                yearsRangeMax={2023} 
-                roundYearHighlight={true} 
-                labelColor={colorPalette.quinaryColor}
-                focusedLabelColor={colorPalette.tertiaryColor}
-                boxShadowColor={colorPalette.senaryColor}
-                fontColor={colorPalette.tertiaryColor}
-                selectedDayFontColor={colorPalette.secondaryColor}
-                previousNextMonthFontColor={colorPalette.quinaryColor}
-                iconColor={colorPalette.tertiaryColor}
-                backgroundColor={colorPalette.secondaryColor}
-                hoveredBackgroundColor={colorPalette.primaryColor}
-                selectedDayBackgroundColor={colorPalette.quarternaryColor}
-                selectedMonthYearBackgroundColor={colorPalette.senaryColor}
-                todayBackgroundColor={colorPalette.senaryColor}
+                <TextInput name='firstName'
+                    label='First Name'
+                    errorMsg={firstNameErrorMsg}
+                    height={40}
+                    labelColor={colorPalette.quinaryColor}
+                    focusedLabelColor={colorPalette.tertiaryColor}
+                    boxShadowColor={colorPalette.senaryColor}
+                    fontColor={colorPalette.tertiaryColor} />
+                <TextInput name='lastName'
+                    label='Last Name'
+                    errorMsg={lastNameErrorMsg}
+                    height={40}
+                    labelColor={colorPalette.quinaryColor}
+                    focusedLabelColor={colorPalette.tertiaryColor}
+                    boxShadowColor={colorPalette.senaryColor}
+                    fontColor={colorPalette.tertiaryColor} />
+                <DateInput name='dateOfBirth'
+                    label='Date of Birth'
+                    errorMsg={dateOfBirthErrorMsg}
+                    yearsRangeMin={1923}
+                    yearsRangeMax={2023}
+                    roundYearHighlight={true}
+                    labelColor={colorPalette.quinaryColor}
+                    focusedLabelColor={colorPalette.tertiaryColor}
+                    boxShadowColor={colorPalette.senaryColor}
+                    fontColor={colorPalette.tertiaryColor}
+                    selectedDayFontColor={colorPalette.secondaryColor}
+                    previousNextMonthFontColor={colorPalette.quinaryColor}
+                    iconColor={colorPalette.tertiaryColor}
+                    backgroundColor={colorPalette.secondaryColor}
+                    hoveredBackgroundColor={colorPalette.primaryColor}
+                    selectedDayBackgroundColor={colorPalette.quarternaryColor}
+                    selectedMonthYearBackgroundColor={colorPalette.senaryColor}
+                    todayBackgroundColor={colorPalette.senaryColor}
                 />
-                <Button text='Next' type='submit' value='personnalInformations' />
+                <Button text='Next' 
+                type='submit' 
+                value='personnalInformations'
+                fontColor={colorPalette.secondaryColor}
+                hoveredFontColor={colorPalette.quarternaryColor}
+                backgroundColor={colorPalette.quarternaryColor}
+                hoveredBackgroundColor={colorPalette.primaryColor} />
             </form>
             <form
                 className={`${classes.address} ${classes[employeeAddressStatus]}`}
                 action="#"
                 onSubmit={handleFormSubmit}
                 id="add_address">
-                <TextInput name='street' 
-                label='Street' 
-                errorMsg={streetErrorMsg}
-                height={40}
-                labelColor={colorPalette.quinaryColor}
-                focusedLabelColor={colorPalette.tertiaryColor}
-                boxShadowColor={colorPalette.senaryColor}
-                fontColor={colorPalette.tertiaryColor} />
-                <TextInput name='city' 
-                label='City' 
-                errorMsg={cityErrorMsg} 
-                height={40}
-                labelColor={colorPalette.quinaryColor}
-                focusedLabelColor={colorPalette.tertiaryColor}
-                boxShadowColor={colorPalette.senaryColor}
-                fontColor={colorPalette.tertiaryColor}/>
-                <Dropdown list={states} 
-                name='state' 
-                label='State' 
-                height={40} 
-                backgroundColor={colorPalette.secondaryColor}
-                hoveredBackgroundColor={colorPalette.primaryColor}
-                fontColor={colorPalette.tertiaryColor}
-                hoveredFontColor={colorPalette.tertiaryColor}
-                separatedBox={true} searchBar={true} />
-                <TextInput name='zipCode' 
-                label='Zip Code' 
-                errorMsg={zipCodeErrorMsg} 
-                height={40}
-                labelColor={colorPalette.quinaryColor}
-                focusedLabelColor={colorPalette.tertiaryColor}
-                boxShadowColor={colorPalette.senaryColor}
-                fontColor={colorPalette.tertiaryColor}/>
+                <TextInput name='street'
+                    label='Street'
+                    errorMsg={streetErrorMsg}
+                    height={40}
+                    labelColor={colorPalette.quinaryColor}
+                    focusedLabelColor={colorPalette.tertiaryColor}
+                    boxShadowColor={colorPalette.senaryColor}
+                    fontColor={colorPalette.tertiaryColor} />
+                <TextInput name='city'
+                    label='City'
+                    errorMsg={cityErrorMsg}
+                    height={40}
+                    labelColor={colorPalette.quinaryColor}
+                    focusedLabelColor={colorPalette.tertiaryColor}
+                    boxShadowColor={colorPalette.senaryColor}
+                    fontColor={colorPalette.tertiaryColor} />
+                <Dropdown list={states}
+                    name='state'
+                    label='State'
+                    height={40}
+                    backgroundColor={colorPalette.secondaryColor}
+                    hoveredBackgroundColor={colorPalette.primaryColor}
+                    fontColor={colorPalette.tertiaryColor}
+                    hoveredFontColor={colorPalette.tertiaryColor}
+                    separatedBox={true} searchBar={true} />
+                <TextInput name='zipCode'
+                    label='Zip Code'
+                    errorMsg={zipCodeErrorMsg}
+                    height={40}
+                    labelColor={colorPalette.quinaryColor}
+                    focusedLabelColor={colorPalette.tertiaryColor}
+                    boxShadowColor={colorPalette.senaryColor}
+                    fontColor={colorPalette.tertiaryColor} />
                 <div className={classes.buttons}>
-                    <Button text='Previous' value='employeeAddress' onClick={handleClickPrevious} />
+                    <Button text='Previous' 
+                    value='employeeAddress' 
+                    onClick={handleClickPrevious}
+                    fontColor={colorPalette.secondaryColor}
+                    hoveredFontColor={colorPalette.quarternaryColor}
+                    backgroundColor={colorPalette.quarternaryColor}
+                    hoveredBackgroundColor={colorPalette.primaryColor} />
                     <Button text='Next' value='employeeAddress' />
                 </div>
             </form>
             <form
                 className={`${classes.work_situation} ${classes[workSituationStatus]}`}
                 onSubmit={handleFormSubmit}>
-                <Dropdown list={departments} 
-                name='department' 
-                label='Department' 
-                height={40} 
-                backgroundColor={colorPalette.secondaryColor}
-                hoveredBackgroundColor={colorPalette.primaryColor}
-                fontColor={colorPalette.tertiaryColor}
-                hoveredFontColor={colorPalette.tertiaryColor}
-                separatedBox={true} />
+                <Dropdown list={departments}
+                    name='department'
+                    label='Department'
+                    height={40}
+                    backgroundColor={colorPalette.secondaryColor}
+                    hoveredBackgroundColor={colorPalette.primaryColor}
+                    fontColor={colorPalette.tertiaryColor}
+                    hoveredFontColor={colorPalette.tertiaryColor}
+                    separatedBox={true} />
                 <DateInput name='startDate' label='Start Date' errorMsg={startDateErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
                 <div className={classes.buttons}>
-                    <Button text='Previous' value='workSituation' onClick={handleClickPrevious} />
-                    <Button text='Create Employee' value='submit' />
+                    <Button text='Previous' 
+                    value='workSituation' 
+                    onClick={handleClickPrevious} 
+                    fontColor={colorPalette.secondaryColor}
+                    hoveredFontColor={colorPalette.quarternaryColor}
+                    backgroundColor={colorPalette.quarternaryColor}
+                    hoveredBackgroundColor={colorPalette.primaryColor}/>
+                    <Button text='Create Employee' 
+                    value='submit' 
+                    fontColor={colorPalette.secondaryColor}
+                    hoveredFontColor={colorPalette.quarternaryColor}
+                    backgroundColor={colorPalette.quarternaryColor}
+                    hoveredBackgroundColor={colorPalette.primaryColor}/>
                 </div>
             </form>
         </div>
