@@ -6,6 +6,7 @@
 
 .label{
     position: absolute;
+    top: 10px;
     left: 0;
     color: #999;
     z-index: 2;
@@ -27,15 +28,12 @@
 .input{
     position: relative;
     padding: 12px 0px 5px 0;
+    height: 40px;
     width: 100%;
     outline: 0;
     border: 0;
     background-color: transparent;
     box-shadow: 0 1px 0 0 #e5e5e5;
-}
-
-input::slotted{
-    background-color: unset;
 }
 
 /* Empêcher le background bleu clair avec l'autofill */

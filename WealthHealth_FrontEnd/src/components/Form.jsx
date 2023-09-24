@@ -168,8 +168,22 @@ function Form({ openModal, colorPalette }) {
                 action="#"
                 onSubmit={handleFormSubmit}
                 id="add_personnal_informations">
-                <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} />
-                <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} />
+                <TextInput name='firstName' 
+                label='First Name' 
+                errorMsg={firstNameErrorMsg} 
+                height={40}
+                labelColor={colorPalette.quinaryColor}
+                focusedLabelColor={colorPalette.tertiaryColor}
+                boxShadowColor={colorPalette.senaryColor}
+                fontColor={colorPalette.tertiaryColor}/>
+                <TextInput name='lastName' 
+                label='Last Name' 
+                errorMsg={lastNameErrorMsg} 
+                height={40}
+                labelColor={colorPalette.quinaryColor}
+                focusedLabelColor={colorPalette.tertiaryColor}
+                boxShadowColor={colorPalette.senaryColor}
+                fontColor={colorPalette.tertiaryColor}/>
                 <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
                 <Button text='Next' type='submit' value='personnalInformations' />
             </form>
@@ -178,8 +192,22 @@ function Form({ openModal, colorPalette }) {
                 action="#"
                 onSubmit={handleFormSubmit}
                 id="add_address">
-                <TextInput name='street' label='Street' errorMsg={streetErrorMsg} />
-                <TextInput name='city' label='City' errorMsg={cityErrorMsg} />
+                <TextInput name='street' 
+                label='Street' 
+                errorMsg={streetErrorMsg}
+                height={40}
+                labelColor={colorPalette.quinaryColor}
+                focusedLabelColor={colorPalette.tertiaryColor}
+                boxShadowColor={colorPalette.senaryColor}
+                fontColor={colorPalette.tertiaryColor} />
+                <TextInput name='city' 
+                label='City' 
+                errorMsg={cityErrorMsg} 
+                height={40}
+                labelColor={colorPalette.quinaryColor}
+                focusedLabelColor={colorPalette.tertiaryColor}
+                boxShadowColor={colorPalette.senaryColor}
+                fontColor={colorPalette.tertiaryColor}/>
                 <Dropdown list={states} 
                 name='state' 
                 label='State' 
@@ -189,7 +217,14 @@ function Form({ openModal, colorPalette }) {
                 fontColor={colorPalette.tertiaryColor}
                 hoveredFontColor={colorPalette.tertiaryColor}
                 separatedBox={true} searchBar={true} />
-                <TextInput name='zipCode' label='Zip Code' errorMsg={zipCodeErrorMsg} />
+                <TextInput name='zipCode' 
+                label='Zip Code' 
+                errorMsg={zipCodeErrorMsg} 
+                height={40}
+                labelColor={colorPalette.quinaryColor}
+                focusedLabelColor={colorPalette.tertiaryColor}
+                boxShadowColor={colorPalette.senaryColor}
+                fontColor={colorPalette.tertiaryColor}/>
                 <div className={classes.buttons}>
                     <Button text='Previous' value='employeeAddress' onClick={handleClickPrevious} />
                     <Button text='Next' value='employeeAddress' />

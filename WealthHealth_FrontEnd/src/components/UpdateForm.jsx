@@ -83,15 +83,47 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
             <div className={classes.form_sections}>
                 <Collapse title={"Personnal Informations"}>
                     <div className={`${classes.personnal_informations} ${classes.form_section}`}>
-                        <TextInput name='firstName' label='First Name' errorMsg={firstNameErrorMsg} defaultValue={employee.firstName} />
-                        <TextInput name='lastName' label='Last Name' errorMsg={lastNameErrorMsg} defaultValue={employee.lastName} />
+                        <TextInput name='firstName' 
+                        label='First Name' 
+                        errorMsg={firstNameErrorMsg} 
+                        defaultValue={employee.firstName}
+                        height={40}
+                        labelColor={colorPalette.quinaryColor}
+                        focusedLabelColor={colorPalette.tertiaryColor}
+                        boxShadowColor={colorPalette.senaryColor}
+                        fontColor={colorPalette.tertiaryColor} />
+                        <TextInput name='lastName' 
+                        label='Last Name' 
+                        errorMsg={lastNameErrorMsg} 
+                        defaultValue={employee.lastName} 
+                        height={40}
+                        labelColor={colorPalette.quinaryColor}
+                        focusedLabelColor={colorPalette.tertiaryColor}
+                        boxShadowColor={colorPalette.senaryColor}
+                        fontColor={colorPalette.tertiaryColor}/>
                         <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} defaultValue={employee.dateOfBirth} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
                     </div>
                 </Collapse>
                 <Collapse title={'Address'}>
                 <div className={`${classes.address} ${classes.form_section}`}>
-                    <TextInput name='street' label='Street' errorMsg={streetErrorMsg} defaultValue={employee.street} />
-                    <TextInput name='city' label='City' errorMsg={cityErrorMsg} defaultValue={employee.city} />
+                    <TextInput name='street' 
+                    label='Street' 
+                    errorMsg={streetErrorMsg} 
+                    defaultValue={employee.street} 
+                    height={40}
+                    labelColor={colorPalette.quinaryColor}
+                    focusedLabelColor={colorPalette.tertiaryColor}
+                    boxShadowColor={colorPalette.senaryColor}
+                    fontColor={colorPalette.tertiaryColor}/>
+                    <TextInput name='city' 
+                    label='City' 
+                    errorMsg={cityErrorMsg} 
+                    defaultValue={employee.city}
+                    height={40}
+                    labelColor={colorPalette.quinaryColor}
+                    focusedLabelColor={colorPalette.tertiaryColor}
+                    boxShadowColor={colorPalette.senaryColor}
+                    fontColor={colorPalette.tertiaryColor} />
                     <Dropdown 
                     list={states} 
                     name='state' 
