@@ -4,7 +4,7 @@ import { useState } from 'react';
 import classes from '../styles/Span.module.css';
 
 
-function Span({ children, text, onClick, backgroundColor, hoveredBackgroundColor, fontColor, lineHeight, gridColumnStart, gridColumnEnd, fontSize, size, borderRadius }) {
+function Span({ children, text, onClick, backgroundColor, hoveredBackgroundColor, fontColor, lineHeight, gridColumnStart, gridColumnEnd, fontSize, size, borderRadius, padding }) {
 
     const [isHovered, setIsHovered] = useState(false);
 
@@ -21,6 +21,8 @@ function Span({ children, text, onClick, backgroundColor, hoveredBackgroundColor
                 height: size && `${size}px`,
                 width: size && `${size}px`,
                 borderRadius: borderRadius && borderRadius,
+                paddingLeft: padding && padding,
+                paddingRight: padding && padding,
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}>
@@ -52,6 +54,7 @@ Span.propTypes = {
     fontSize: PropTypes.string,
     size: PropTypes.number,
     borderRadius: PropTypes.string,
+    padding: PropTypes.number,
 }
 
 

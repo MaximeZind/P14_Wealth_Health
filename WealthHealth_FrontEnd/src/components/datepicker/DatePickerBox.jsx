@@ -175,18 +175,18 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
                     <Arrow rotate={90} color={iconColor && iconColor} size={11} />
                 </Span>
                 <div className={classes.date_picker_month_year}>
-                    <div className={arrayType === 'months' ? `${classes.date_picker_month} ${classes.selected}` : classes.date_picker_month} onClick={() => arrayType === 'months' ? setArrayType('days') : setArrayType('months')}>
-                        <p style={{
-                            color: fontColor && fontColor,
-                            backgroundColor: arrayType === 'months' && (selectedMonthYearBackgroundColor && selectedMonthYearBackgroundColor),
-                        }}>{monthMapping[month]}</p>
-                    </div>
-                    <div className={arrayType === 'years' ? `${classes.date_picker_year} ${classes.selected}` : classes.date_picker_year} onClick={() => arrayType === 'years' ? setArrayType('days') : setArrayType('years')}>
-                        <p style={{
-                            color: fontColor && fontColor,
-                            backgroundColor: arrayType === 'years' && (selectedMonthYearBackgroundColor && selectedMonthYearBackgroundColor)
-                        }}>{year}</p>
-                    </div>
+                    <Span text={monthMapping[month]} 
+                    onClick={() => arrayType === 'months' ? setArrayType('days') : setArrayType('months')}
+                    fontColor={fontColor}
+                    backgroundColor={arrayType === 'years' ? selectedMonthYearBackgroundColor : ''}  
+                    padding={4}      
+                    />
+                    <Span text={year} 
+                    onClick={() => arrayType === 'years' ? setArrayType('days') : setArrayType('years')}
+                    fontColor={fontColor}
+                    backgroundColor={arrayType === 'years' ? selectedMonthYearBackgroundColor : ''}
+                    padding={4}    
+                    />
                 </div>
                 <Span onClick={handleNextMonth} 
                 hoveredBackgroundColor={hoveredBackgroundColor}

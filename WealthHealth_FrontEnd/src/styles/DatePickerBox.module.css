@@ -45,6 +45,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 5px;
 }
 
 .date_picker_month, .date_picker_year{
@@ -53,11 +54,11 @@
     padding-right: 5px;
 }
 
-.date_picker_month:hover, .date_picker_year:hover{
+/* .date_picker_month:hover, .date_picker_year:hover{
     cursor: pointer;
     background-color: rgb(177,196,108, 0.2);
     border-radius: 5px;
-}
+} */
 
 .selected{
     background-color: rgb(238, 238, 238);
