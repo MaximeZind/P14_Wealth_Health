@@ -5,16 +5,21 @@
     position: relative;
 }
 
+.date_input_container:hover{
+    cursor: pointer;
+}
+
 .date_input:hover{
     cursor: pointer;
 }
 
-.date_input:hover > .date_input_icon {
+.date_input_container:hover > .date_input > .date_input_icon {
     background-color: rgb(177,196,108, 0.2);
 }
 
 .label{
     position: absolute;
+    top: 10px;
     left: 0;
     color: #999;
     z-index: 2;
@@ -23,10 +28,18 @@
     padding-right: 3px;
 }
 
+.label:hover{
+    cursor: pointer;
+}
+
 .focused .label{
     transform: translateY(-150%);
     font-size: .75em;
     color: #000000;
+}
+
+.focused .label:hover{
+    cursor: auto;
 }
 
 .date_input{

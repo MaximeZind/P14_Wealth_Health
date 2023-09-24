@@ -184,7 +184,25 @@ function Form({ openModal, colorPalette }) {
                 focusedLabelColor={colorPalette.tertiaryColor}
                 boxShadowColor={colorPalette.senaryColor}
                 fontColor={colorPalette.tertiaryColor}/>
-                <DateInput name='dateOfBirth' label='Date of Birth' errorMsg={dateOfBirthErrorMsg} yearsRangeMin={1923} yearsRangeMax={2023} roundYearHighlight={true} />
+                <DateInput name='dateOfBirth' 
+                label='Date of Birth' 
+                errorMsg={dateOfBirthErrorMsg} 
+                yearsRangeMin={1923} 
+                yearsRangeMax={2023} 
+                roundYearHighlight={true} 
+                labelColor={colorPalette.quinaryColor}
+                focusedLabelColor={colorPalette.tertiaryColor}
+                boxShadowColor={colorPalette.senaryColor}
+                fontColor={colorPalette.tertiaryColor}
+                selectedDayFontColor={colorPalette.secondaryColor}
+                previousNextMonthFontColor={colorPalette.quinaryColor}
+                iconColor={colorPalette.tertiaryColor}
+                backgroundColor={colorPalette.secondaryColor}
+                hoveredBackgroundColor={colorPalette.primaryColor}
+                selectedDayBackgroundColor={colorPalette.quarternaryColor}
+                selectedMonthYearBackgroundColor={colorPalette.senaryColor}
+                todayBackgroundColor={colorPalette.senaryColor}
+                />
                 <Button text='Next' type='submit' value='personnalInformations' />
             </form>
             <form

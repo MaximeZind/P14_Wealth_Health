@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import DoubleArrow from './icons/DoubleArrow';
 import Arrow from './icons/Arrow';
+import Span from '../Span';
 
-function DatePickerBox({ position, handleValues, handleClose, startingDay, startingMonth, startingYear, yearsRangeMin, yearsRangeMax, roundYearHighlight }) {
+function DatePickerBox({ position, handleValues, handleClose, startingDay, startingMonth, startingYear, yearsRangeMin, yearsRangeMax, roundYearHighlight, backgroundColor, fontColor, selectedDayFontColor, selectedMonthYearBackgroundColor, hoveredBackgroundColor, selectedDayBackgroundColor, todayBackgroundColor, previousNextMonthFontColor, iconColor }) {
 
+    const navSpanSize = 25;
     // Date d'aujourd'hui
     const today = new Date();
 
@@ -61,7 +63,7 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
             year: year
         }
         handleValues(result);
-        if (close){
+        if (close) {
             handleClose();
         }
     }
@@ -154,67 +156,111 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
     }
 
     return (
-        <div className={classes.date_picker} style={position === 'above' ? { transform: 'translateY(-355px)' } : {}}>
+        <div className={classes.date_picker}
+            style={{
+                transform: position === 'above' && 'translateY(-355px)',
+                backgroundColor: backgroundColor && backgroundColor
+            }}>
             <header className={classes.date_picker_header}>
-                <div className={classes.date_picker_nav} onClick={() => setYear(year - 1)}>
-                    <DoubleArrow rotate={90} />
-                </div>
-                <div className={classes.date_picker_nav} onClick={handlePreviousMonth}>
-                    <Arrow rotate={90} />
-                </div>
+                <Span onClick={() => setYear(year - 1)} 
+                hoveredBackgroundColor={hoveredBackgroundColor}
+                size={navSpanSize}
+                borderRadius='50%'>
+                    <DoubleArrow rotate={90} color={iconColor && iconColor} size={18} />
+                </Span>
+                <Span onClick={handlePreviousMonth} 
+                hoveredBackgroundColor={hoveredBackgroundColor}
+                size={navSpanSize}
+                borderRadius='50%'>
+                    <Arrow rotate={90} color={iconColor && iconColor} size={11} />
+                </Span>
                 <div className={classes.date_picker_month_year}>
                     <div className={arrayType === 'months' ? `${classes.date_picker_month} ${classes.selected}` : classes.date_picker_month} onClick={() => arrayType === 'months' ? setArrayType('days') : setArrayType('months')}>
-                        <p>{monthMapping[month]}</p>
+                        <p style={{
+                            color: fontColor && fontColor,
+                            backgroundColor: arrayType === 'months' && (selectedMonthYearBackgroundColor && selectedMonthYearBackgroundColor),
+                        }}>{monthMapping[month]}</p>
                     </div>
                     <div className={arrayType === 'years' ? `${classes.date_picker_year} ${classes.selected}` : classes.date_picker_year} onClick={() => arrayType === 'years' ? setArrayType('days') : setArrayType('years')}>
-                        <p>{year}</p>
+                        <p style={{
+                            color: fontColor && fontColor,
+                            backgroundColor: arrayType === 'years' && (selectedMonthYearBackgroundColor && selectedMonthYearBackgroundColor)
+                        }}>{year}</p>
                     </div>
                 </div>
-                <div className={classes.date_picker_nav} onClick={handleNextMonth}>
-                    <Arrow rotate={-90} />
-                </div>
-                <div className={classes.date_picker_nav} onClick={() => setYear(year + 1)}>
-                    <DoubleArrow rotate={-90} />
-                </div>
+                <Span onClick={handleNextMonth} 
+                hoveredBackgroundColor={hoveredBackgroundColor}
+                size={navSpanSize}
+                borderRadius='50%'>
+                    <Arrow rotate={-90} color={iconColor && iconColor} size={11} />
+                </Span>
+                <Span onClick={() => setYear(year + 1)} 
+                hoveredBackgroundColor={hoveredBackgroundColor}
+                size={navSpanSize}
+                borderRadius='50%'>
+                    <DoubleArrow rotate={-90} color={iconColor && iconColor} size={18} />
+                </Span>
             </header>
             {arrayType === 'days' &&
                 <div className={classes.date_picker_days}>
                     <header className={classes.date_picker_days_grid_header}>
-                        {week.map((gridDay) => {
-                            return <p key={gridDay}>{gridDay}</p>
-                        })}
+                        {
+                        week.map((gridDay) => {
+                            return <p key={gridDay} style={{ color: fontColor && fontColor }}>{gridDay}</p>
+                        })
+                        }
                     </header>
                     <div className={classes.date_picker_days_grid}>
-                        {gridArray.previous.map((gridDay, index) => {
+                        {
+                        gridArray.previous.map((gridDay, index) => {
                             const previousMonth = month > 1 ? month - 1 : 12;
                             const updatedYear = month > 1 ? year : year - 1;
-                            return <span
-                                className={((gridDay === selectedDay) && (selectedMonth === previousMonth) && (selectedYear === updatedYear)) ? `${classes.previous} ${classes.selected_day}` : classes.previous}
-                                key={index}
-                                onClick={() => sendData(gridDay, month - 1, year, true)}>{gridDay}</span>
-                        })}
-                        {gridArray.current.map((gridDay, index) => {
-                            return <span
-                                style={(today.getDate() === gridDay && today.getMonth() + 1 === month && today.getFullYear() === year) ? { border: '1px solid rgba(147, 173, 24, 0.65)' } : {}}
-                                className={((gridDay === selectedDay) && (month === selectedMonth) && (year === selectedYear)) ? `${classes.current} ${classes.selected_day}` : classes.current}
-                                key={index}
-                                onClick={() => sendData(gridDay, month, year, true)}>{gridDay}</span>
-                        })}
-                        {gridArray.next.map((gridDay, index) => {
+                            const isSelectedDay = ((gridDay === selectedDay) && (selectedMonth === previousMonth) && (selectedYear === updatedYear));
+                            return <Span key={index}
+                                text={gridDay}
+                                onClick={() => sendData(gridDay, month - 1, year, true)}
+                                hoveredBackgroundColor={hoveredBackgroundColor}
+                                backgroundColor={isSelectedDay ? selectedDayBackgroundColor : ''}
+                                fontColor={isSelectedDay ? selectedDayFontColor : previousNextMonthFontColor}/>
+                        })
+                        }
+                        {
+                        gridArray.current.map((gridDay, index) => {
+                            const isToday = (today.getDate() === gridDay && today.getMonth() + 1 === month && today.getFullYear() === year);
+                            const isSelectedDay = (gridDay === selectedDay) && (month === selectedMonth) && (year === selectedYear);
+                            return <Span key={index}
+                                text={gridDay}
+                                onClick={() => sendData(gridDay, month, year, true)}
+                                hoveredBackgroundColor={isSelectedDay ? selectedDayBackgroundColor : (isToday ? todayBackgroundColor : hoveredBackgroundColor)}
+                                backgroundColor={isSelectedDay ? selectedDayBackgroundColor : (isToday ? todayBackgroundColor : '')}
+                                fontColor={isSelectedDay ? selectedDayFontColor : fontColor}/>
+                        })
+                        }
+                        {
+                        gridArray.next.map((gridDay, index) => {
                             const nextMonth = month < 12 ? month + 1 : 1;
                             const updatedYear = month < 12 ? year : year + 1;
-                            return <span
-                            className={((gridDay === selectedDay) && (selectedMonth === nextMonth) && (selectedYear === updatedYear)) ? `${classes.next} ${classes.selected_day}` : classes.next}
-                                key={index}
-                                onClick={() => sendData(gridDay, month + 1, year, true)}>{gridDay}</span>
-                        })}
+                            const isSelectedDay = ((gridDay === selectedDay) && (selectedMonth === nextMonth) && (selectedYear === updatedYear));
+                            return  <Span key={index}
+                            text={gridDay}
+                            onClick={() => sendData(gridDay, month + 1, year, true)}
+                            hoveredBackgroundColor={hoveredBackgroundColor}
+                            backgroundColor={isSelectedDay ? selectedDayBackgroundColor : ''}
+                            fontColor={isSelectedDay ? selectedDayFontColor : previousNextMonthFontColor}/>
+                        })
+                        }
                     </div>
                 </div>
             }{arrayType === 'months' &&
                 <div className={classes.date_picker_months_grid}>
                     {
                         monthsArray.map((month, index) => {
-                            return <span key={index} className={classes.months_grid_month} onClick={() => handleSelectMonth(index + 1)}>{month}</span>
+                            return <Span key={index}
+                            text={month}
+                            onClick={() => handleSelectMonth(index + 1)} 
+                            hoveredBackgroundColor={hoveredBackgroundColor}
+                            fontColor={fontColor}
+                            lineHeight='inherit'/>
                         })
                     }
                 </div>
@@ -223,7 +269,16 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
                 <div className={classes.date_picker_years_grid}>
                     {
                         yearsArray.map((year, index) => {
-                            return <span key={index} className={(roundYearHighlight && (year % 10 === 0)) ?`${classes.years_grid_year} ${classes.round_year}` : `${classes.years_grid_year}`} onClick={() => handleSelectYear(year)}>{year}</span>
+                            const isRoundYear = (year % 10 === 0);
+                            return <Span key={index}
+                            text={year}
+                            onClick={() => handleSelectYear(year)}
+                            backgroundColor={isRoundYear ? selectedMonthYearBackgroundColor : ''}
+                            hoveredBackgroundColor={hoveredBackgroundColor}
+                            gridColumnStart={isRoundYear ? 1 : 'auto'}
+                            gridColumnEnd={isRoundYear ? 4 : 'auto'}
+                            fontSize={isRoundYear ? '1.5rem' : 'auto'}
+                            />
                         })
                     }
                 </div>
@@ -241,7 +296,15 @@ DatePickerBox.propTypes = {
     startingYear: PropTypes.number.isRequired,
     yearsRangeMin: PropTypes.number,
     yearsRangeMax: PropTypes.number,
-    roundYearHighlight: PropTypes.bool
+    roundYearHighlight: PropTypes.bool,
+    backgroundColor: PropTypes.string,
+    fontColor: PropTypes.string,
+    hoveredBackgroundColor: PropTypes.string,
+    selectedMonthYearBackgroundColor: PropTypes.string,
+    selectedDayFontColor: PropTypes.string,
+    selectedDayBackgroundColor: PropTypes.string,
+    todayBackgroundColor: PropTypes.string,
+    iconColor: PropTypes.string,
 }
 
 

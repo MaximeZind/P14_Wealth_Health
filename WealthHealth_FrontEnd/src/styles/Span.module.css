@@ -1,0 +1,12 @@
+.span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: normal;
+}
+
+.span:hover{
+    cursor: pointer;
+    background-color: rgb(177,196,108, 0.2);
+    border-radius: 5px;
+}

@@ -5,11 +5,11 @@ import { useState, useRef } from 'react';
 import Calendar from './icons/Calendar';
 import DatePickerBox from './DatePickerBox';
 
-function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundYearHighlight, defaultValue }) {
+function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundYearHighlight, defaultValue, labelColor, focusedLabelColor, boxShadowColor, fontColor, selectedDayFontColor, previousNextMonthFontColor, iconColor, backgroundColor, hoveredBackgroundColor, selectedDayBackgroundColor, todayBackgroundColor, selectedMonthYearBackgroundColor }) {
 
     const defaultDate = new Date(defaultValue);
     const [day, setDay] = useState((defaultValue && defaultDate) ? defaultDate.getDate() : 'DD');
-    const [month, setMonth] = useState((defaultValue && defaultDate) ? defaultDate.getMonth()+1 : 'MM');
+    const [month, setMonth] = useState((defaultValue && defaultDate) ? defaultDate.getMonth() + 1 : 'MM');
     const [year, setYear] = useState((defaultValue && defaultDate) ? defaultDate.getFullYear() : 'YYYY');
 
     // On définit les valeurs des départ pour le composant datePickerBox
@@ -20,6 +20,7 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundY
 
     const [isOpen, setIsOpen] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
     const [position, setPosition] = useState('below');
 
     const datePicker = useRef(null);
@@ -27,7 +28,7 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundY
     const hiddenInput = useRef(null);
     const selectedValue = `${month}/${day}/${year}`;
 
-    function handleClose(){
+    function handleClose() {
         setIsOpen(false);
     }
 
@@ -66,41 +67,63 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundY
 
     useEffect(() => {
         handleOnChange();
-      }, [selectedValue, isOpen]);
+    }, [selectedValue, isOpen]);
 
     function handleOnChange() {
         if (hiddenInput.current.value !== "MM/DD/YYYY") {
             setIsFocused(true);
         } else if (hiddenInput.current.value === "MM/DD/YYYY") {
-            if (isOpen){
+            if (isOpen) {
                 setIsFocused(true);
-            } else if (!isOpen){
+            } else if (!isOpen) {
                 setIsFocused(false);
             }
         }
     }
 
     return (
-        <div className={isFocused ? `${classes.date_input_container} ${classes.focused}` : classes.date_input_container} ref={datePicker}>
-            <label style={{ top: '10px' }} className={classes.label} htmlFor={name} onClick={() => setIsOpen(!isOpen)}>{label}</label>
-            <input ref={hiddenInput} className={classes.hidden} name={name} id={name} value={selectedValue} onChange={handleOnChange}/>
-            <div ref={input} className={classes.date_input} onClick={() => setIsOpen(!isOpen)}>
+        <div className={isFocused ? `${classes.date_input_container} ${classes.focused}` : classes.date_input_container}
+            ref={datePicker}>
+            <label style={{ color: isFocused ? focusedLabelColor && focusedLabelColor : labelColor && labelColor }}
+                className={classes.label} htmlFor={name} onClick={() => setIsOpen(!isOpen)}>
+                {label}
+            </label>
+            <input ref={hiddenInput} className={classes.hidden} name={name} id={name} value={selectedValue} onChange={handleOnChange} />
+            <div ref={input}
+                className={classes.date_input}
+                onClick={() => setIsOpen(!isOpen)}
+                style={{
+                    boxShadow: boxShadowColor && `0 1px 0 0 ${boxShadowColor}`,
+                    color: fontColor && fontColor
+                }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}>
                 <p className={classes.selected_date}>{selectedValue}</p>
-                <span className={classes.date_input_icon}>
-                    <Calendar width={20} height={20} />
+                <span className={classes.date_input_icon}
+                    style={{ backgroundColor: isHovered && hoveredBackgroundColor && hoveredBackgroundColor }}>
+                    <Calendar width={20} height={20} color={iconColor && iconColor} />
                 </span>
             </div>
             {isOpen ?
                 <DatePickerBox
-                position={position}
-                handleValues={handleValues}
-                handleClose={handleClose}
-                startingDay={startingDay}
-                startingMonth={startingMonth}
-                startingYear={startingYear}
-                yearsRangeMin={yearsRangeMin}
-                yearsRangeMax={yearsRangeMax}
-                roundYearHighlight={roundYearHighlight} /> : null
+                    position={position}
+                    handleValues={handleValues}
+                    handleClose={handleClose}
+                    startingDay={startingDay}
+                    startingMonth={startingMonth}
+                    startingYear={startingYear}
+                    yearsRangeMin={yearsRangeMin}
+                    yearsRangeMax={yearsRangeMax}
+                    roundYearHighlight={roundYearHighlight}
+                    backgroundColor={backgroundColor}
+                    fontColor={fontColor}
+                    selectedDayFontColor={selectedDayFontColor}
+                    selectedMonthYearBackgroundColor={selectedMonthYearBackgroundColor}
+                    hoveredBackgroundColor={hoveredBackgroundColor}
+                    selectedDayBackgroundColor={selectedDayBackgroundColor}
+                    todayBackgroundColor={todayBackgroundColor}
+                    previousNextMonthFontColor={previousNextMonthFontColor}
+                    iconColor={iconColor} /> : null
             }
             {errorMsg ? <p className={classes.error_msg}>{errorMsg}</p> : null}
         </div>
@@ -115,6 +138,18 @@ DateInput.propTypes = {
     yearsRangeMin: PropTypes.number,
     roundYearHighlight: PropTypes.bool,
     defaultValue: PropTypes.string,
+    labelColor: PropTypes.string,
+    focusedLabelColor: PropTypes.string,
+    boxShadowColor: PropTypes.string,
+    fontColor: PropTypes.string,
+    selectedDayFontColor: PropTypes.string,
+    previousNextMonthFontColor: PropTypes.string,
+    iconColor: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    hoveredBackgroundColor: PropTypes.string,
+    selectedDayBackgroundColor: PropTypes.string,
+    selectedMonthYearBackgroundColor: PropTypes.string,
+    todayBackgroundColor: PropTypes.string,
 }
 
 
