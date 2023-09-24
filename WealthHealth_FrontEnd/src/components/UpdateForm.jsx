@@ -79,7 +79,7 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
 
     return (
         <form className={classes.update_form} onSubmit={handleUpdate}>
-            <h2> Update Employee</h2>
+            <h2 style={{color: colorPalette.tertiaryColor}}> Update Employee</h2>
             <div className={classes.form_sections}>
                 <Collapse title={"Personnal Informations"}
                     headerBackgroundColor={colorPalette.primaryColor}

@@ -9,7 +9,8 @@ function Nav() {
     const colorPalette = useSelector((state) => state.colorPaletteReducer);
     return (
         <header className={classes.header}
-        style={{backgroundColor: colorPalette.secondaryColor}}>
+        style={{backgroundColor: colorPalette.secondaryColor,
+        borderBottom: `1px solid ${colorPalette.quinaryColor}`}}>
             <NavLink to="/">
                 <img src={logo} className={classes.header_logo} alt='logo de Health Wealth'></img>
             </NavLink>

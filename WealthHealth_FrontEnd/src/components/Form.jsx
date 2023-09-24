@@ -167,7 +167,11 @@ function Form({ openModal, colorPalette }) {
                 className={`${classes.personnal_informations} ${classes[personnalInformationsStatus]}`}
                 action="#"
                 onSubmit={handleFormSubmit}
-                id="add_personnal_informations">
+                id="add_personnal_informations"
+                style={{
+                    backgroundColor: colorPalette.secondaryColor,
+                    border: `1px solid ${colorPalette.quinaryColor}`,
+                }}>
                 <TextInput name='firstName'
                     label='First Name'
                     errorMsg={firstNameErrorMsg}
@@ -215,7 +219,11 @@ function Form({ openModal, colorPalette }) {
                 className={`${classes.address} ${classes[employeeAddressStatus]}`}
                 action="#"
                 onSubmit={handleFormSubmit}
-                id="add_address">
+                id="add_address"
+                style={{
+                    backgroundColor: colorPalette.secondaryColor,
+                    border: `1px solid ${colorPalette.quinaryColor}`,
+                }}>
                 <TextInput name='street'
                     label='Street'
                     errorMsg={streetErrorMsg}
@@ -257,17 +265,21 @@ function Form({ openModal, colorPalette }) {
                         hoveredFontColor={colorPalette.quarternaryColor}
                         backgroundColor={colorPalette.quarternaryColor}
                         hoveredBackgroundColor={colorPalette.primaryColor} />
-                    <Button text='Next' 
-                    value='employeeAddress' 
-                    fontColor={colorPalette.secondaryColor}
-                    hoveredFontColor={colorPalette.quarternaryColor}
-                    backgroundColor={colorPalette.quarternaryColor}
-                    hoveredBackgroundColor={colorPalette.primaryColor}/>
+                    <Button text='Next'
+                        value='employeeAddress'
+                        fontColor={colorPalette.secondaryColor}
+                        hoveredFontColor={colorPalette.quarternaryColor}
+                        backgroundColor={colorPalette.quarternaryColor}
+                        hoveredBackgroundColor={colorPalette.primaryColor} />
                 </div>
             </form>
             <form
                 className={`${classes.work_situation} ${classes[workSituationStatus]}`}
-                onSubmit={handleFormSubmit}>
+                onSubmit={handleFormSubmit}
+                style={{
+                    backgroundColor: colorPalette.secondaryColor,
+                    border: `1px solid ${colorPalette.quinaryColor}`,
+                }}>
                 <Dropdown list={departments}
                     name='department'
                     label='Department'
@@ -277,24 +289,24 @@ function Form({ openModal, colorPalette }) {
                     fontColor={colorPalette.tertiaryColor}
                     hoveredFontColor={colorPalette.tertiaryColor}
                     separatedBox={true} />
-                <DateInput name='startDate' 
-                label='Start Date' 
-                errorMsg={startDateErrorMsg} 
-                yearsRangeMin={1923} 
-                yearsRangeMax={2023} 
-                roundYearHighlight={true}
-                labelColor={colorPalette.quinaryColor}
-                focusedLabelColor={colorPalette.tertiaryColor}
-                boxShadowColor={colorPalette.senaryColor}
-                fontColor={colorPalette.tertiaryColor}
-                selectedDayFontColor={colorPalette.secondaryColor}
-                previousNextMonthFontColor={colorPalette.quinaryColor}
-                iconColor={colorPalette.tertiaryColor}
-                backgroundColor={colorPalette.secondaryColor}
-                hoveredBackgroundColor={colorPalette.primaryColor}
-                selectedDayBackgroundColor={colorPalette.quarternaryColor}
-                selectedMonthYearBackgroundColor={colorPalette.senaryColor}
-                todayBackgroundColor={colorPalette.senaryColor} />
+                <DateInput name='startDate'
+                    label='Start Date'
+                    errorMsg={startDateErrorMsg}
+                    yearsRangeMin={1923}
+                    yearsRangeMax={2023}
+                    roundYearHighlight={true}
+                    labelColor={colorPalette.quinaryColor}
+                    focusedLabelColor={colorPalette.tertiaryColor}
+                    boxShadowColor={colorPalette.senaryColor}
+                    fontColor={colorPalette.tertiaryColor}
+                    selectedDayFontColor={colorPalette.secondaryColor}
+                    previousNextMonthFontColor={colorPalette.quinaryColor}
+                    iconColor={colorPalette.tertiaryColor}
+                    backgroundColor={colorPalette.secondaryColor}
+                    hoveredBackgroundColor={colorPalette.primaryColor}
+                    selectedDayBackgroundColor={colorPalette.quarternaryColor}
+                    selectedMonthYearBackgroundColor={colorPalette.senaryColor}
+                    todayBackgroundColor={colorPalette.senaryColor} />
                 <div className={classes.buttons}>
                     <Button text='Previous'
                         value='workSituation'

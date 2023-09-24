@@ -13,7 +13,6 @@ function Home() {
     document.title = `Wealth Health HRnet - ${pageTitle}`;
 
     const colorPalette = useSelector((state) => state.colorPaletteReducer);
-
     const dispatch = useDispatch();
     // L'utilisateur a ete cree ou non
     const [isCorrect, setIsCorrect] = useState(false);
@@ -84,7 +83,7 @@ function Home() {
                 </Modal>
                 :
                 <div className={classes.container}>
-                    <h2>Create Employee</h2>
+                    <h2 style={{color: colorPalette.tertiaryColor}}>Create Employee</h2>
                     <Form openModal={openModal} colorPalette={colorPalette} />
                 </div>}
         </main>

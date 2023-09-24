@@ -126,7 +126,8 @@ function Table({ employeesList, colorPalette }) {
 
     return (
         employeesList &&
-        <section className={classes.table_section}>
+        <section className={classes.table_section}
+        style={{backgroundColor: colorPalette.secondaryColor}}>
             <div className={classes.table_filters}>
                 <Dropdown label='Entries'
                     list={tableLengths}
