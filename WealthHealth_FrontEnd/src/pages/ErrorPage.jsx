@@ -17,14 +17,16 @@ function ErrorPage() {
         (location.pathname === '/404') ?
             <main className={classes.main}
                 style={{ backgroundColor: colorPalette.primaryColor }}>
-                <h1 style={{
-                    color: colorPalette.tertiaryColor,
-                }}>
+                <h1 className={classes.error_name}
+                    style={{
+                        color: colorPalette.tertiaryColor,
+                    }}>
                     404
                 </h1>
-                <p style={{
-                    color: colorPalette.tertiaryColor,
-                }}>
+                <p className={classes.error_text}
+                    style={{
+                        color: colorPalette.tertiaryColor,
+                    }}>
                     {errorText}
                 </p>
             </main> : <Navigate to={'/404'} />
