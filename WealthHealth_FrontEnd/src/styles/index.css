@@ -18,6 +18,7 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  transition: background-color .4s ease;
 }
 
 #root{

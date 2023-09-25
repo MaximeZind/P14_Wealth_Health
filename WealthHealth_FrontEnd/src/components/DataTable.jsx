@@ -58,7 +58,7 @@ function DataTable({ list, currentPage, tableLength, setEmployeeToUpdate, setIsM
         setemployeeToDelete(employee);
         setIsModalOpen(true);
     }
-    console.log(hoveredFontColor, hoveredBackgroundColor);
+
     return (
         <table id='employee_table' className={classes.table} style={{ backgroundColor: tableBackgroundColor && tableBackgroundColor }}>
             <thead className={classes.table_header}

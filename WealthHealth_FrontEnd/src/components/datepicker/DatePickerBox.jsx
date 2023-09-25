@@ -154,7 +154,7 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
             setMonth(month - 1);
         }
     }
-    console.log(iconColor);
+
     return (
         <div className={classes.date_picker}
             style={{

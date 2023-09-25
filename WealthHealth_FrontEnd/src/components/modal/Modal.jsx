@@ -7,7 +7,10 @@ import Span from '../Span';
 function Modal({ children, closeModal, maxWidth, modalBackgroundColor, iconColor, hoveredIconBackgroundColor }) {
 
     return (
-        <div className={classes.modal_background}>
+        <div className={classes.modal_background}
+        style={{
+            backgroundColor: modalBackgroundColor == 'rgb(255,255,255)' ? 'rgb(255,255,255, 0.6)' : 'rgb(0,0,0, 0.7)',
+        }}>
             <div className={classes.modal}
                 style={{
                     maxWidth: maxWidth &&  `${maxWidth}px`,

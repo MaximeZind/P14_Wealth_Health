@@ -23,7 +23,8 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    box-shadow: 0 4px 8px 0 rgba(169, 169, 169, 0.4), 0 6px 20px 0 rgba(169, 169, 169, 0.35);
     animation-name: fade_slide_in;
     animation-duration: 0.3s;
     animation-fill-mode: backwards;
