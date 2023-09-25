@@ -1,4 +1,4 @@
-import initialColorPalette from '../data/darkModeColorPalette.json'
+import initialColorPalette from '../data/darkModeColorPalette.json';
 const initialState = initialColorPalette;
 
 export default function colorPaletteReducer(state = initialState, action) {

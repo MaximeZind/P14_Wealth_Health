@@ -9,7 +9,6 @@ function EmployeeList() {
     document.title =`Wealth Health HRnet - ${pageTitle}`;
     const employeesList = useSelector((state) => state.employeesReducer);
     const colorPalette = useSelector((state) => state.colorPaletteReducer);
-    console.log(colorPalette);
     return (
         <main className={classes.main}
         style={{backgroundColor: colorPalette.primaryColor}}>

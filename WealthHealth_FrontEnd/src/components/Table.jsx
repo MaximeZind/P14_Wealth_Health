@@ -127,7 +127,10 @@ function Table({ employeesList, colorPalette }) {
     return (
         employeesList &&
         <section className={classes.table_section}
-        style={{backgroundColor: colorPalette.secondaryColor}}>
+            style={{
+                backgroundColor: colorPalette.secondaryColor,
+                borderColor: colorPalette.quarternaryColor
+            }}>
             <div className={classes.table_filters}>
                 <Dropdown label='Entries'
                     list={tableLengths}
@@ -167,7 +170,10 @@ function Table({ employeesList, colorPalette }) {
             <div className={classes.table_navigation}>
                 <p style={{ color: colorPalette.tertiaryColor }}> Showing {list.length === 0 ? 0 : (currentPage - 1) * tableLength + 1} to {currentPage * tableLength <= list.length ? currentPage * tableLength : list.length} of {list.length} entries</p>
                 {pages > 1 ? <div className={classes.pages}>
-                    {currentPage > 1 ? <p onClick={() => setCurrentPage(currentPage - 1)}>Previous</p> : null}
+                    {currentPage > 1 ? <p onClick={() => setCurrentPage(currentPage - 1)}
+                        style={{ color: colorPalette.tertiaryColor }}>
+                        Previous
+                    </p> : null}
                     {Array.from(Array(pages).keys()).map((key) => {
                         return <p className={(key + 1) === currentPage ? classes.active : null}
                             onClick={() => setCurrentPage(key + 1)}
@@ -179,11 +185,17 @@ function Table({ employeesList, colorPalette }) {
                             {key + 1}
                         </p>
                     })}
-                    {currentPage < pages ? <p onClick={() => setCurrentPage(currentPage + 1)}>Next</p> : null}
+                    {currentPage < pages ? <p onClick={() => setCurrentPage(currentPage + 1)}
+                        style={{ color: colorPalette.tertiaryColor }}>
+                        Next
+                    </p> : null}
                 </div> : null}
             </div>
             {isModalOpen ?
-                <Modal closeModal={handleCloseModal}>
+                <Modal closeModal={handleCloseModal}
+                    modalBackgroundColor={colorPalette.secondaryColor}
+                    hoveredIconBackgroundColor={colorPalette.secondaryColor}
+                    iconColor={colorPalette.tertiaryColor}>
                     {isFormOpen &&
                         <UpdateForm
                             closeModal={handleCloseModal}
@@ -195,21 +207,21 @@ function Table({ employeesList, colorPalette }) {
                             iconColor='rgb(0, 175, 95)'
                             iconBackgroundColor='rgb(0, 175, 95, 0.5)'
                             closeModal={handleCloseModal}
-                            text='This employee was successfully updated' 
-                            colorPalette={colorPalette}/>}
+                            text='This employee was successfully updated'
+                            colorPalette={colorPalette} />}
                     {employeeToDelete &&
                         <ConfirmEmployeeActionModalContent
                             closeModal={handleCloseModal}
                             confirm={() => handleDelete(employeeToDelete.id)}
-                            text={`Are you sure that you wish to remove ${employeeToDelete.firstName} ${employeeToDelete.lastName} from the system?`} 
-                            colorPalette={colorPalette}/>}
+                            text={`Are you sure that you wish to remove ${employeeToDelete.firstName} ${employeeToDelete.lastName} from the system?`}
+                            colorPalette={colorPalette} />}
                     {isConfirmationOfDeletionOpen &&
                         <NewEmployeeModalContent isCorrect={false}
                             iconColor='rgb(0, 175, 95)'
                             iconBackgroundColor='rgb(0, 175, 95, 0.5)'
                             closeModal={handleCloseModal}
-                            text='This employee was successfully removed from the system' 
-                            colorPalette={colorPalette}/>
+                            text='This employee was successfully removed from the system'
+                            colorPalette={colorPalette} />
                     }
                 </Modal> : null}
         </section>

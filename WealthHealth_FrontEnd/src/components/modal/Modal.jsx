@@ -4,11 +4,15 @@ import PropTypes from 'prop-types';
 import CrossIcon from './icons/CrossIcon';
 import Span from '../Span';
 
-function Modal({ children, closeModal, maxWidth, iconColor, hoveredIconBackgroundColor }) {
-
+function Modal({ children, closeModal, maxWidth, modalBackgroundColor, iconColor, hoveredIconBackgroundColor }) {
+    console.log(modalBackgroundColor);
     return (
         <div className={classes.modal_background}>
-            <div className={classes.modal} style={maxWidth && { maxWidth: `${maxWidth}px` }}>
+            <div className={classes.modal}
+                style={{
+                    maxWidth: maxWidth &&  `${maxWidth}px`,
+                    backgroundColor: modalBackgroundColor && modalBackgroundColor,
+                }}>
                 {closeModal &&
                     <Span borderRadius={'50%'}
                         onClick={closeModal}
@@ -31,6 +35,7 @@ Modal.propTypes = {
     children: PropTypes.node.isRequired,
     closeModal: PropTypes.func,
     maxWidth: PropTypes.number,
+    modalBackgroundColor: PropTypes.string,
     iconColor: PropTypes.string,
     hoveredIconBackgroundColor: PropTypes.string,
 }

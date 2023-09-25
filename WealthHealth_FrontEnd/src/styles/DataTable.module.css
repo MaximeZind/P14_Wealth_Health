@@ -20,17 +20,7 @@
     border-spacing: 0;
 }
 
-.table_header{
-    background-color: #FFFFFF;
-}
-
-.table_header > tr:hover{
-    background-color: #FFFFFF;
-    color:#000000;
-}
-
 .table_header:hover{
-    background-color: #FFFFFF;
     cursor: pointer;
 }
 

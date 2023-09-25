@@ -78,7 +78,9 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
     }
 
     return (
-        <form className={classes.update_form} onSubmit={handleUpdate}>
+        <form className={classes.update_form} 
+        onSubmit={handleUpdate}
+        style={{ backgroundColor: colorPalette.secondaryColor}}>
             <h2 style={{color: colorPalette.tertiaryColor}}> Update Employee</h2>
             <div className={classes.form_sections}>
                 <Collapse title={"Personnal Informations"}
@@ -176,7 +178,6 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
                     fontColor={colorPalette.tertiaryColor}
                     iconColor={colorPalette.tertiaryColor}>
                     <div className={`${classes.work_informations} ${classes.form_section}`}>
-                        <h3>Work informations</h3>
                         <Dropdown list={departments}
                             name='department'
                             label='Department'
