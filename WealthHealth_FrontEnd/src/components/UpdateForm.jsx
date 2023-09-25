@@ -78,10 +78,10 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
     }
 
     return (
-        <form className={classes.update_form} 
-        onSubmit={handleUpdate}
-        style={{ backgroundColor: colorPalette.secondaryColor}}>
-            <h2 style={{color: colorPalette.tertiaryColor}}> Update Employee</h2>
+        <form className={classes.update_form}
+            onSubmit={handleUpdate}
+            style={{ backgroundColor: colorPalette.secondaryColor }}>
+            <h2 style={{ color: colorPalette.tertiaryColor }}> Update Employee</h2>
             <div className={classes.form_sections}>
                 <Collapse title={"Personnal Informations"}
                     headerBackgroundColor={colorPalette.primaryColor}
@@ -210,20 +210,25 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
                     </div>
                 </Collapse>
             </div>
-            <div className={classes.update_form_buttons}>
+            <div className={classes.update_form_buttons}
+                style={{ backgroundColor: colorPalette.senaryColor }}>
                 <Button text='Cancel'
                     value='cancel'
                     onClick={closeModal}
                     fontColor={colorPalette.secondaryColor}
                     hoveredFontColor={colorPalette.quarternaryColor}
                     backgroundColor={colorPalette.quarternaryColor}
-                    hoveredBackgroundColor={colorPalette.primaryColor} />
+                    hoveredBackgroundColor={colorPalette.primaryColor}
+                    borderColor={colorPalette.quarternaryColor}
+                    hoveredBorderColor={colorPalette.quarternaryColor} />
                 <Button text='Update'
                     value='submit'
                     fontColor={colorPalette.secondaryColor}
                     hoveredFontColor={colorPalette.quarternaryColor}
                     backgroundColor={colorPalette.quarternaryColor}
-                    hoveredBackgroundColor={colorPalette.primaryColor} />
+                    hoveredBackgroundColor={colorPalette.primaryColor}
+                    borderColor={colorPalette.quarternaryColor}
+                    hoveredBorderColor={colorPalette.quarternaryColor} />
             </div>
         </form>
     );

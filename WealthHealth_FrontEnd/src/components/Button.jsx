@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import classes from '../styles/Button.module.css';
 import PropTypes from 'prop-types';
 
-function Button({ value, text, onClick, fontColor, hoveredFontColor, backgroundColor, hoveredBackgroundColor }) {
+function Button({ value, text, onClick, fontColor, hoveredFontColor, backgroundColor, hoveredBackgroundColor, borderColor, hoveredBorderColor }) {
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -10,8 +10,12 @@ function Button({ value, text, onClick, fontColor, hoveredFontColor, backgroundC
     <button className={classes.button}
       value={value}
       onClick={onClick}
-      style={{color: isHovered ? hoveredFontColor && hoveredFontColor : fontColor && fontColor,
-      backgroundColor: isHovered ? hoveredBackgroundColor && hoveredBackgroundColor : backgroundColor && backgroundColor}}
+      style={{
+        color: isHovered ? hoveredFontColor && hoveredFontColor : fontColor && fontColor,
+        backgroundColor: isHovered ? hoveredBackgroundColor && hoveredBackgroundColor : backgroundColor && backgroundColor,
+        borderColor: isHovered ? hoveredBorderColor && hoveredBorderColor : borderColor && borderColor
+      }}
+
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -28,6 +32,8 @@ Button.propTypes = {
   hoveredFontColor: PropTypes.string,
   backgroundColor: PropTypes.string,
   hoveredBackgroundColor: PropTypes.string,
+  borderColor: PropTypes.string,
+  hoveredBorderColor: PropTypes.string,
 }
 
 export default Button;

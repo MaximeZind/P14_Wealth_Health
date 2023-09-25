@@ -4,5 +4,5 @@
     "tertiaryColor": "rgb(255,255,255)",
     "quarternaryColor": "rgb(220,220,220)",
     "quinaryColor": "#999",
-    "senaryColor": "#e5e5e5"
+    "senaryColor": "rgba(68, 68, 68, 0.6)"
 }

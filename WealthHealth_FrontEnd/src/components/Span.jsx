@@ -7,7 +7,6 @@ import classes from '../styles/Span.module.css';
 function Span({ children, text, onClick, backgroundColor, hoveredBackgroundColor, fontColor, lineHeight, gridColumnStart, gridColumnEnd, fontSize, size, borderRadius, padding, position, top, right, zIndex }) {
 
     const [isHovered, setIsHovered] = useState(false);
-    console.log(hoveredBackgroundColor);
     return (
         <span className={classes.span}
             onClick={onClick}

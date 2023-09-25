@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Calendar({ color, height, width }) {
-    const style = {fill: 'none', stroke:'#000', strokeLinecap:'round', strokeLinejoin:'round', strokeWidth: '2px'};
+    const style = {fill: 'none', stroke: color && color, strokeLinecap:'round', strokeLinejoin:'round', strokeWidth: '2px'};
     return (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" color={color} style={{transition: "0.3s ease"}} height={height} width={width}>
             <g id="_68.calendar" data-name="68.calendar">

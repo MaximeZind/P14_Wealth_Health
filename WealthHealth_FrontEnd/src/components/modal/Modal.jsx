@@ -5,7 +5,7 @@ import CrossIcon from './icons/CrossIcon';
 import Span from '../Span';
 
 function Modal({ children, closeModal, maxWidth, modalBackgroundColor, iconColor, hoveredIconBackgroundColor }) {
-    console.log(modalBackgroundColor);
+
     return (
         <div className={classes.modal_background}>
             <div className={classes.modal}

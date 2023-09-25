@@ -19,8 +19,22 @@ function ListItem({ item, index, height, fontFamily, backgroundColor, hoveredBac
                 onClick={() => handleClick(item.name ? item.name : item, item.abbreviation)}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-            >{item.name ? item.name : item}</span> :
-            <span key={item.name ? item.name : index} className={classes.dropdown_option} value={item.name ? item.name : item} onClick={() => handleClick(item.name ? item.name : item)}>{item.name ? item.name : item}</span>
+            >
+                {item.name ? item.name : item}
+            </span> :
+            <span key={item.name ? item.name : index}
+                className={classes.dropdown_option}
+                value={item.name ? item.name : item}
+                style={{
+                    minHeight: `${height}px`, fontFamily: fontFamily && fontFamily,
+                    backgroundColor: isHovered ? hoveredBackgroundColor && hoveredBackgroundColor : backgroundColor && backgroundColor,
+                    color: isHovered ? hoveredFontColor && hoveredFontColor : fontColor && fontColor
+                }}
+                onClick={() => handleClick(item.name ? item.name : item)}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}>
+                {item.name ? item.name : item}
+            </span>
 
     );
 }

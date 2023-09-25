@@ -154,7 +154,7 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
             setMonth(month - 1);
         }
     }
-
+    console.log(iconColor);
     return (
         <div className={classes.date_picker}
             style={{
@@ -178,13 +178,15 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
                     <Span text={monthMapping[month]} 
                     onClick={() => arrayType === 'months' ? setArrayType('days') : setArrayType('months')}
                     fontColor={fontColor}
-                    backgroundColor={arrayType === 'years' ? selectedMonthYearBackgroundColor : ''}  
+                    backgroundColor={arrayType === 'months' ? selectedMonthYearBackgroundColor : ''}
+                    hoveredBackgroundColor={hoveredBackgroundColor}  
                     padding={4}      
                     />
                     <Span text={year} 
                     onClick={() => arrayType === 'years' ? setArrayType('days') : setArrayType('years')}
                     fontColor={fontColor}
                     backgroundColor={arrayType === 'years' ? selectedMonthYearBackgroundColor : ''}
+                    hoveredBackgroundColor={hoveredBackgroundColor}
                     padding={4}    
                     />
                 </div>
@@ -273,6 +275,7 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
                             return <Span key={index}
                             text={year}
                             onClick={() => handleSelectYear(year)}
+                            fontColor={fontColor}
                             backgroundColor={isRoundYear ? selectedMonthYearBackgroundColor : ''}
                             hoveredBackgroundColor={hoveredBackgroundColor}
                             gridColumnStart={isRoundYear ? 1 : 'auto'}

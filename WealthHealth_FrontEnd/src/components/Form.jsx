@@ -179,7 +179,8 @@ function Form({ openModal, colorPalette }) {
                     labelColor={colorPalette.quinaryColor}
                     focusedLabelColor={colorPalette.tertiaryColor}
                     boxShadowColor={colorPalette.senaryColor}
-                    fontColor={colorPalette.tertiaryColor} />
+                    fontColor={colorPalette.tertiaryColor}
+                    borderBottomColor={colorPalette.senaryColor} />
                 <TextInput name='lastName'
                     label='Last Name'
                     errorMsg={lastNameErrorMsg}
@@ -187,7 +188,8 @@ function Form({ openModal, colorPalette }) {
                     labelColor={colorPalette.quinaryColor}
                     focusedLabelColor={colorPalette.tertiaryColor}
                     boxShadowColor={colorPalette.senaryColor}
-                    fontColor={colorPalette.tertiaryColor} />
+                    fontColor={colorPalette.tertiaryColor}
+                    borderBottomColor={colorPalette.senaryColor} />
                 <DateInput name='dateOfBirth'
                     label='Date of Birth'
                     errorMsg={dateOfBirthErrorMsg}
@@ -206,6 +208,7 @@ function Form({ openModal, colorPalette }) {
                     selectedDayBackgroundColor={colorPalette.quarternaryColor}
                     selectedMonthYearBackgroundColor={colorPalette.senaryColor}
                     todayBackgroundColor={colorPalette.senaryColor}
+                    borderBottomColor={colorPalette.senaryColor}
                 />
                 <Button text='Next'
                     type='submit'
@@ -213,7 +216,9 @@ function Form({ openModal, colorPalette }) {
                     fontColor={colorPalette.secondaryColor}
                     hoveredFontColor={colorPalette.quarternaryColor}
                     backgroundColor={colorPalette.quarternaryColor}
-                    hoveredBackgroundColor={colorPalette.primaryColor} />
+                    hoveredBackgroundColor={colorPalette.primaryColor}
+                    borderColor={colorPalette.quarternaryColor}
+                    hoveredBorderColor={colorPalette.quarternaryColor} />
             </form>
             <form
                 className={`${classes.address} ${classes[employeeAddressStatus]}`}
@@ -231,7 +236,8 @@ function Form({ openModal, colorPalette }) {
                     labelColor={colorPalette.quinaryColor}
                     focusedLabelColor={colorPalette.tertiaryColor}
                     boxShadowColor={colorPalette.senaryColor}
-                    fontColor={colorPalette.tertiaryColor} />
+                    fontColor={colorPalette.tertiaryColor} 
+                    borderBottomColor={colorPalette.senaryColor}/>
                 <TextInput name='city'
                     label='City'
                     errorMsg={cityErrorMsg}
@@ -239,15 +245,19 @@ function Form({ openModal, colorPalette }) {
                     labelColor={colorPalette.quinaryColor}
                     focusedLabelColor={colorPalette.tertiaryColor}
                     boxShadowColor={colorPalette.senaryColor}
-                    fontColor={colorPalette.tertiaryColor} />
+                    fontColor={colorPalette.tertiaryColor}
+                    borderBottomColor={colorPalette.senaryColor} />
                 <Dropdown list={states}
                     name='state'
                     label='State'
                     height={40}
+                    labelColor={colorPalette.quinaryColor}
+                    focusedLabelColor={colorPalette.tertiaryColor}
                     backgroundColor={colorPalette.secondaryColor}
                     hoveredBackgroundColor={colorPalette.primaryColor}
                     fontColor={colorPalette.tertiaryColor}
                     hoveredFontColor={colorPalette.tertiaryColor}
+                    borderBottomColor={colorPalette.senaryColor}
                     separatedBox={true} searchBar={true} />
                 <TextInput name='zipCode'
                     label='Zip Code'
@@ -256,7 +266,8 @@ function Form({ openModal, colorPalette }) {
                     labelColor={colorPalette.quinaryColor}
                     focusedLabelColor={colorPalette.tertiaryColor}
                     boxShadowColor={colorPalette.senaryColor}
-                    fontColor={colorPalette.tertiaryColor} />
+                    fontColor={colorPalette.tertiaryColor} 
+                    borderBottomColor={colorPalette.senaryColor}/>
                 <div className={classes.buttons}>
                     <Button text='Previous'
                         value='employeeAddress'
@@ -264,13 +275,17 @@ function Form({ openModal, colorPalette }) {
                         fontColor={colorPalette.secondaryColor}
                         hoveredFontColor={colorPalette.quarternaryColor}
                         backgroundColor={colorPalette.quarternaryColor}
-                        hoveredBackgroundColor={colorPalette.primaryColor} />
+                        hoveredBackgroundColor={colorPalette.primaryColor} 
+                        borderColor={colorPalette.quarternaryColor}
+                        hoveredBorderColor={colorPalette.quarternaryColor}/>
                     <Button text='Next'
                         value='employeeAddress'
                         fontColor={colorPalette.secondaryColor}
                         hoveredFontColor={colorPalette.quarternaryColor}
                         backgroundColor={colorPalette.quarternaryColor}
-                        hoveredBackgroundColor={colorPalette.primaryColor} />
+                        hoveredBackgroundColor={colorPalette.primaryColor} 
+                        borderColor={colorPalette.quarternaryColor}
+                        hoveredBorderColor={colorPalette.quarternaryColor}/>
                 </div>
             </form>
             <form
@@ -284,10 +299,13 @@ function Form({ openModal, colorPalette }) {
                     name='department'
                     label='Department'
                     height={40}
+                    labelColor={colorPalette.quinaryColor}
+                    focusedLabelColor={colorPalette.tertiaryColor}
                     backgroundColor={colorPalette.secondaryColor}
                     hoveredBackgroundColor={colorPalette.primaryColor}
                     fontColor={colorPalette.tertiaryColor}
                     hoveredFontColor={colorPalette.tertiaryColor}
+                    borderBottomColor={colorPalette.senaryColor}
                     separatedBox={true} />
                 <DateInput name='startDate'
                     label='Start Date'
@@ -306,7 +324,8 @@ function Form({ openModal, colorPalette }) {
                     hoveredBackgroundColor={colorPalette.primaryColor}
                     selectedDayBackgroundColor={colorPalette.quarternaryColor}
                     selectedMonthYearBackgroundColor={colorPalette.senaryColor}
-                    todayBackgroundColor={colorPalette.senaryColor} />
+                    todayBackgroundColor={colorPalette.senaryColor}
+                    borderBottomColor={colorPalette.senaryColor}/>
                 <div className={classes.buttons}>
                     <Button text='Previous'
                         value='workSituation'
@@ -314,13 +333,17 @@ function Form({ openModal, colorPalette }) {
                         fontColor={colorPalette.secondaryColor}
                         hoveredFontColor={colorPalette.quarternaryColor}
                         backgroundColor={colorPalette.quarternaryColor}
-                        hoveredBackgroundColor={colorPalette.primaryColor} />
+                        hoveredBackgroundColor={colorPalette.primaryColor}
+                        borderColor={colorPalette.quarternaryColor}
+                        hoveredBorderColor={colorPalette.quarternaryColor} />
                     <Button text='Create Employee'
                         value='submit'
                         fontColor={colorPalette.secondaryColor}
                         hoveredFontColor={colorPalette.quarternaryColor}
                         backgroundColor={colorPalette.quarternaryColor}
-                        hoveredBackgroundColor={colorPalette.primaryColor} />
+                        hoveredBackgroundColor={colorPalette.primaryColor}
+                        borderColor={colorPalette.quarternaryColor}
+                        hoveredBorderColor={colorPalette.quarternaryColor} />
                 </div>
             </form>
         </div>

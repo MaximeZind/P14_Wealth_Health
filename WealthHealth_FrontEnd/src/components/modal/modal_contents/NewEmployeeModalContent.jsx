@@ -18,14 +18,16 @@ function NewEmployeeModalContent({ isCorrect, iconColor, iconBackgroundColor, cl
                 <p className={classes.text}>{text}</p>
             </div>
             <footer className={classes.modal_footer}
-                style={{ background: colorPalette.senaryColor }}>
+                style={{ backgroundColor: colorPalette.senaryColor }}>
                 <Button value='close'
                     text='Close'
                     onClick={closeModal}
                     fontColor={colorPalette.secondaryColor}
                     hoveredFontColor={colorPalette.quarternaryColor}
                     backgroundColor={colorPalette.quarternaryColor}
-                    hoveredBackgroundColor={colorPalette.primaryColor} />
+                    hoveredBackgroundColor={colorPalette.primaryColor}
+                    borderColor={colorPalette.quarternaryColor}
+                    hoveredBorderColor={colorPalette.quarternaryColor} />
             </footer>
         </div>
     );

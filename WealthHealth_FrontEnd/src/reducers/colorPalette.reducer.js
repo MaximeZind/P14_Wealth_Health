@@ -1,3 +1,4 @@
+// import initialColorPalette from '../data/colorPalette.json';
 import initialColorPalette from '../data/darkModeColorPalette.json';
 const initialState = initialColorPalette;
 

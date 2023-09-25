@@ -17,8 +17,10 @@ function SeparatedBox({ list, height, backgroundColor, hoveredBackgroundColor, f
     }
 
     return (
-        <div className={classes.dropdown_content} style={{ maxHeight: `${height * 7}px`, transform: `translateY(${height + 2}px)`, right:'0' }}>
-            <div className={classes.animation_box} style={{ width: '100%' }}>
+        <div className={classes.dropdown_content}
+        style={{ maxHeight: `${height * 7}px`, transform: `translateY(${height + 2}px)`, right: '0' }}>
+            <div className={classes.animation_box} 
+            style={{ width: '100%'}}>
                 {searchBar === true ?
                     <div className={classes.filter_items} style={{ minHeight: `${height}px`, backgroundColor: hoveredBackgroundColor && hoveredBackgroundColor }}>
                         <span className={classes.filter_items_icon}>
@@ -26,18 +28,22 @@ function SeparatedBox({ list, height, backgroundColor, hoveredBackgroundColor, f
                         </span>
                         <input name='search_field' className={classes.filter_items_input} type='text' placeholder='Search...' onChange={handleFilter} />
                     </div> : null}
-                <div className={classes.dropdown_options} style={{ maxHeight: `${height * 6}px`}}>
+                <div className={classes.dropdown_options}
+                    style={{
+                        maxHeight: `${height * 6}px`,
+                        backgroundColor: backgroundColor
+                    }}>
                     {newList.map((item, index) => {
-                        return <ListItem key={item.name ? item.name : index} 
-                        item={item} 
-                        index={index} 
-                        height={height}
-                        backgroundColor={backgroundColor}
-                        hoveredBackgroundColor={hoveredBackgroundColor}
-                        fontColor={fontColor}
-                        hoveredFontColor={hoveredFontColor}
-                        fontFamily={fontFamily}
-                        handleClick={handleClick}/>
+                        return <ListItem key={item.name ? item.name : index}
+                            item={item}
+                            index={index}
+                            height={height}
+                            backgroundColor={backgroundColor}
+                            hoveredBackgroundColor={hoveredBackgroundColor}
+                            fontColor={fontColor}
+                            hoveredFontColor={hoveredFontColor}
+                            fontFamily={fontFamily}
+                            handleClick={handleClick} />
                     })}
                 </div>
             </div>

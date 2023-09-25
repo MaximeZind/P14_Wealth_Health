@@ -40,8 +40,7 @@ function Table({ employeesList, colorPalette }) {
     fields.map((field) => {
         camelFields.push(field.camelField);
     })
-    // ... Pour savoir lequel est sélectionné
-    const highlightedField = selectedField ? camelFields.indexOf(selectedField) : null;
+
     // array de longueurs possible de tableau
     const tableLengths = [10, 25, 50, 100];
 
@@ -123,7 +122,6 @@ function Table({ employeesList, colorPalette }) {
         setIsConfirmationOfUpdateOpen(false);
         setIsConfirmationOfDeletionOpen(false);
     }
-
     return (
         employeesList &&
         <section className={classes.table_section}
@@ -136,13 +134,18 @@ function Table({ employeesList, colorPalette }) {
                     list={tableLengths}
                     height={40}
                     maxWidth={100}
-                    primaryColor={colorPalette.primaryColor}
-                    secondaryColor={colorPalette.secondaryColor}
-                    tertiaryColor={colorPalette.tertiaryColor}
+                    labelColor={colorPalette.quinaryColor}
+                    focusedLabelColor={colorPalette.tertiaryColor}
+                    backgroundColor={colorPalette.secondaryColor}
+                    hoveredBackgroundColor={colorPalette.primaryColor}
+                    fontColor={colorPalette.tertiaryColor}
+                    hoveredFontColor={colorPalette.tertiaryColor}
+                    borderBottomColor={colorPalette.senaryColor}
                     name='employees_table_length'
                     id='employees_table_length'
                     defaultValue={tableLengths[0]}
-                    onChange={handleSelect} separatedBox={true} />
+                    onChange={handleSelect}
+                     separatedBox={true} />
                 <TextInput name='search'
                     label='Search: '
                     onChange={handleSearch}
@@ -166,6 +169,9 @@ function Table({ employeesList, colorPalette }) {
                 fontColor={colorPalette.tertiaryColor}
                 hoveredFontColor={colorPalette.secondaryColor}
                 ArrowColor={colorPalette.quarternaryColor}
+                iconBoxBackgroundColor={colorPalette.secondaryColor}
+                iconColor={colorPalette.tertiaryColor}
+                highlightedBackgroundColor={colorPalette.senaryColor}
             />
             <div className={classes.table_navigation}>
                 <p style={{ color: colorPalette.tertiaryColor }}> Showing {list.length === 0 ? 0 : (currentPage - 1) * tableLength + 1} to {currentPage * tableLength <= list.length ? currentPage * tableLength : list.length} of {list.length} entries</p>

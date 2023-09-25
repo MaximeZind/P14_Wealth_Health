@@ -5,12 +5,13 @@ import fields from '../data/fields.json';
 import Arrow from './Arrow';
 import PropTypes from 'prop-types';
 
-function DataTable({ list, currentPage, tableLength, setEmployeeToUpdate, setIsModalOpen, setIsFormOpen, setemployeeToDelete, setList, tableBackgroundColor, oddBackgroundColor, evenBackgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, ArrowColor }) {
+function DataTable({ list, currentPage, tableLength, setEmployeeToUpdate, setIsModalOpen, setIsFormOpen, setemployeeToDelete, setList, tableBackgroundColor, oddBackgroundColor, evenBackgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, ArrowColor, iconBoxBackgroundColor, iconColor, highlightedBackgroundColor }) {
 
     // initialisation des States
 
     const [selectedField, setSelectedField] = useState(null);
     const [isAscending, setIsAscending] = useState(false);
+    const [isHeaderHovered, setIsHeaderHovered] = useState(false);
 
     // On crée une array de fields en camelCase
     let camelFields = []
@@ -57,74 +58,97 @@ function DataTable({ list, currentPage, tableLength, setEmployeeToUpdate, setIsM
         setemployeeToDelete(employee);
         setIsModalOpen(true);
     }
-
+    console.log(hoveredFontColor, hoveredBackgroundColor);
     return (
-            <table id='employee_table' className={classes.table} style={{backgroundColor: tableBackgroundColor && tableBackgroundColor}}>
-                <thead className={classes.table_header}>
-                    <tr role='row'>
-                        {fields.map((field) => {
-                            return (
-                                <th className={field.camelField === selectedField ? classes.selected_field : ''} key={fields.indexOf(field)} onClick={() => sortBy(field.camelField)}>
-                                    <div className={classes.field} style={{color: field.camelField === selectedField ? hoveredFontColor && hoveredFontColor : fontColor && fontColor}}>{field.field}
-                                        {selectedField !== field.camelField ?
-                                            <div className={classes.icons}>
-                                                <Arrow transform='rotate(180deg)' color={ArrowColor ? ArrowColor : 'rgb(52,79,4,0.6)'} />
-                                                <Arrow transform='rotate(0deg)' color={ArrowColor ? ArrowColor : '  rgb(52,79,4,0.6)'} />
-                                            </div> :
-                                            <div className={classes.icons}>
-                                                {isAscending ?
-                                                    <div className={classes.icons}>
-                                                        <Arrow transform='rotate(180deg)' color={hoveredFontColor ? hoveredFontColor : '#FFFFFF'} />
-                                                        <Arrow transform='rotate(0deg)' color='rgb(255, 255, 255, 0)' />
-                                                    </div> :
-                                                    <div className={classes.icons}>
-                                                        <Arrow transform='rotate(180deg)' color='rgb(255, 255, 255, 0)' />
-                                                        <Arrow transform='rotate(0deg)' color={hoveredFontColor ? hoveredFontColor : '#FFFFFF'} />
-                                                    </div>
-                                                }
-                                            </div>
-                                        }
-                                    </div>
-                                </th>
-                            )
-                        })}
-                    </tr>
-                </thead>
-                <tbody>
-                    {list.length > 0 && list.map((employee, index) => {
-                        const indexWithinPage = index % tableLength;
-                        const type = index % 2 ? 'even' : 'odd';
-                        const isOnCurrentPage = (index >= (currentPage - 1) * tableLength) && (index < currentPage * tableLength)
-                        const rowBackgroundColor = type === 'odd' ? oddBackgroundColor : evenBackgroundColor;
-                        
-                        if (isOnCurrentPage) {
-                            return (<Row delay={indexWithinPage}
-                                highlightedField={highlightedField}
-                                key={index}
-                                type={type}
-                                firstName={employee.firstName}
-                                lastName={employee.lastName}
-                                startDate={employee.startDate}
-                                department={employee.department}
-                                dateOfBirth={employee.dateOfBirth}
-                                street={employee.street}
-                                city={employee.city}
-                                state={employee.state}
-                                zipCode={employee.zipCode}
-                                employeeId={employee.id}
-                                handlePencilClick={() => handlePencilClick(employee)}
-                                handleBinClick={() => handleBinClick(employee)}
-                                backgroundColor={rowBackgroundColor}
-                                hoveredBackgroundColor={hoveredBackgroundColor}
-                                fontColor={fontColor}
-                                hoveredFontColor={hoveredFontColor}
-                            />)
-                        } else if (index >= tableLength) {
-                            return null;
-                        }
+        <table id='employee_table' className={classes.table} style={{ backgroundColor: tableBackgroundColor && tableBackgroundColor }}>
+            <thead className={classes.table_header}
+                onMouseEnter={() => setIsHeaderHovered(true)}
+                onMouseLeave={() => setIsHeaderHovered(false)}>
+                <tr role='row'
+                    style={{
+                        backgroundColor: isHeaderHovered ? hoveredBackgroundColor : '',
+                    }}>
+                    {fields.map((field) => {
+                        return (
+                            <th className={field.camelField === selectedField ? classes.selected_field : ''} 
+                            key={fields.indexOf(field)} 
+                            onClick={() => sortBy(field.camelField)}
+                            style={{
+                                backgroundColor: field.camelField === selectedField ? hoveredBackgroundColor : '',
+                            }}>
+                                <div className={classes.field}
+                                    style={{ color: (field.camelField === selectedField) ? hoveredFontColor && hoveredFontColor : isHeaderHovered ?  hoveredFontColor : fontColor,
+                                    backgroundColor: field.camelField === selectedField ? highlightedBackgroundColor : '' }}
+                                >
+                                    {field.field}
+                                    {selectedField !== field.camelField ?
+                                        <div className={classes.icons}>
+                                            <Arrow transform='rotate(180deg)' 
+                                            color={isHeaderHovered ? hoveredFontColor : fontColor} />
+                                            <Arrow transform='rotate(0deg)' 
+                                            color={isHeaderHovered ? hoveredFontColor : fontColor} />
+                                        </div> :
+                                        <div className={classes.icons}>
+                                            {isAscending ?
+                                                <div className={classes.icons}>
+                                                    <Arrow transform='rotate(180deg)' 
+                                                    color={fontColor} />
+                                                    <Arrow transform='rotate(0deg)' 
+                                                    color='rgb(255, 255, 255, 0)' />
+                                                </div> :
+                                                <div className={classes.icons}>
+                                                    <Arrow transform='rotate(180deg)' 
+                                                    color='rgb(255, 255, 255, 0)' />
+                                                    <Arrow transform='rotate(0deg)' 
+                                                    color={fontColor} />
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </th>
+                        )
                     })}
-                </tbody>
-            </table>
+                </tr>
+            </thead>
+            <tbody>
+                {list.length > 0 && list.map((employee, index) => {
+                    const indexWithinPage = index % tableLength;
+                    const type = index % 2 ? 'even' : 'odd';
+                    const isOnCurrentPage = (index >= (currentPage - 1) * tableLength) && (index < currentPage * tableLength)
+                    const rowBackgroundColor = type === 'odd' ? oddBackgroundColor : evenBackgroundColor;
+
+                    if (isOnCurrentPage) {
+                        return (<Row delay={indexWithinPage}
+                            highlightedField={highlightedField}
+                            key={index}
+                            type={type}
+                            firstName={employee.firstName}
+                            lastName={employee.lastName}
+                            startDate={employee.startDate}
+                            department={employee.department}
+                            dateOfBirth={employee.dateOfBirth}
+                            street={employee.street}
+                            city={employee.city}
+                            state={employee.state}
+                            zipCode={employee.zipCode}
+                            employeeId={employee.id}
+                            handlePencilClick={() => handlePencilClick(employee)}
+                            handleBinClick={() => handleBinClick(employee)}
+                            backgroundColor={rowBackgroundColor}
+                            hoveredBackgroundColor={hoveredBackgroundColor}
+                            fontColor={fontColor}
+                            hoveredFontColor={hoveredFontColor}
+                            iconBoxBackgroundColor={iconBoxBackgroundColor}
+                            iconColor={iconColor}
+                            highlightedBackgroundColor={highlightedBackgroundColor}
+                        />)
+                    } else if (index >= tableLength) {
+                        return null;
+                    }
+                })}
+            </tbody>
+        </table>
     )
 }
 
@@ -150,13 +174,16 @@ DataTable.propTypes = {
     setIsFormOpen: PropTypes.func.isRequired,
     setemployeeToDelete: PropTypes.func.isRequired,
     setList: PropTypes.func.isRequired,
-    tableBackgroundColor: PropTypes.string, 
-    oddBackgroundColor: PropTypes.string, 
-    evenBackgroundColor: PropTypes.string, 
-    hoveredBackgroundColor: PropTypes.string, 
-    fontColor: PropTypes.string, 
+    tableBackgroundColor: PropTypes.string,
+    oddBackgroundColor: PropTypes.string,
+    evenBackgroundColor: PropTypes.string,
+    hoveredBackgroundColor: PropTypes.string,
+    fontColor: PropTypes.string,
     hoveredFontColor: PropTypes.string,
     ArrowColor: PropTypes.string,
+    iconBoxBackgroundColor: PropTypes.string,
+    iconColor: PropTypes.string,
+    highlightedBackgroundColor: PropTypes.string,
 }
 
 export default DataTable;
