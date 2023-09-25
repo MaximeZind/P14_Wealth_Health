@@ -1,8 +1,7 @@
 import React from 'react';
 import classes from '../styles/ErrorPage.module.css';
 import { useLocation, Navigate } from 'react-router-dom';
-import UpdateForm from '../components/UpdateForm';
-import Modal from '../components/modal/Modal';
+import { useSelector } from 'react-redux';
 
 
 function ErrorPage() {
@@ -11,14 +10,23 @@ function ErrorPage() {
     const pageTitle = 'Error 404';
     document.title = `Wealth Health HRnet - ${pageTitle}`;
     const colorPalette = useSelector((state) => state.colorPaletteReducer);
-    
+    const errorText = `Oups! Cette page n'existe pas.`;
+    const linkText = `Retourner sur la page d'accueil`;
+
     return (
         (location.pathname === '/404') ?
             <main className={classes.main}
-            style={{backgroundColor: colorPalette.primaryColor}}>
-                <Modal>
-                    <UpdateForm />
-                </Modal>
+                style={{ backgroundColor: colorPalette.primaryColor }}>
+                <h1 style={{
+                    color: colorPalette.tertiaryColor,
+                }}>
+                    404
+                </h1>
+                <p style={{
+                    color: colorPalette.tertiaryColor,
+                }}>
+                    {errorText}
+                </p>
             </main> : <Navigate to={'/404'} />
     );
 }
