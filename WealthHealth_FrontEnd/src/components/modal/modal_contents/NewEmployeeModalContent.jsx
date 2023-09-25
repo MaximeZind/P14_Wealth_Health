@@ -10,12 +10,16 @@ function NewEmployeeModalContent({ isCorrect, iconColor, iconBackgroundColor, cl
     const iconSize = '40px';
     return (
         <div className={classes.modal}>
-            <div className={classes.modal_content}>
+            <div className={classes.modal_content}
+            style={{backgroundColor: colorPalette.secondaryColor}}>
                 <span className={classes.icon_container} style={{ backgroundColor: iconBackgroundColor }}>
                     {isCorrect ? < NewUserIcon color={iconColor} width={iconSize} height={iconSize} /> :
                         <WrongUserIcon color={iconColor} width={iconSize} height={iconSize} />}
                 </span>
-                <p className={classes.text}>{text}</p>
+                <p className={classes.text}
+                style={{
+                    color: colorPalette.tertiaryColor,
+                }}>{text}</p>
             </div>
             <footer className={classes.modal_footer}
                 style={{ backgroundColor: colorPalette.senaryColor }}>
