@@ -40,10 +40,12 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
         const employeeId = employee.id;
         const updatedFormJson = { ...formJson, id: employeeId };
 
+        // Validation
         const formValidation = validateEmployee(updatedFormJson);
+
         if (formValidation.isValid === true) {
-            dispatch(updateEmployee(updatedFormJson));
-            handleUpdateClick(updatedFormJson);
+            dispatch(updateEmployee(formValidation.data));
+            handleUpdateClick(formValidation.data);
         }
         handleErrorMsgs(formValidation.errorMsg);
     }
@@ -96,7 +98,8 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
                             labelColor={colorPalette.quinaryColor}
                             focusedLabelColor={colorPalette.tertiaryColor}
                             boxShadowColor={colorPalette.senaryColor}
-                            fontColor={colorPalette.tertiaryColor} />
+                            fontColor={colorPalette.tertiaryColor}
+                            borderBottomColor={colorPalette.senaryColor} />
                         <TextInput name='lastName'
                             label='Last Name'
                             errorMsg={lastNameErrorMsg}
@@ -105,7 +108,8 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
                             labelColor={colorPalette.quinaryColor}
                             focusedLabelColor={colorPalette.tertiaryColor}
                             boxShadowColor={colorPalette.senaryColor}
-                            fontColor={colorPalette.tertiaryColor} />
+                            fontColor={colorPalette.tertiaryColor}
+                            borderBottomColor={colorPalette.senaryColor} />
                         <DateInput name='dateOfBirth'
                             label='Date of Birth'
                             errorMsg={dateOfBirthErrorMsg}
@@ -124,7 +128,8 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
                             hoveredBackgroundColor={colorPalette.primaryColor}
                             selectedDayBackgroundColor={colorPalette.quarternaryColor}
                             selectedMonthYearBackgroundColor={colorPalette.senaryColor}
-                            todayBackgroundColor={colorPalette.senaryColor} />
+                            todayBackgroundColor={colorPalette.senaryColor}
+                            borderBottomColor={colorPalette.senaryColor} />
                     </div>
                 </Collapse>
                 <Collapse title={'Address'}
@@ -140,7 +145,8 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
                             labelColor={colorPalette.quinaryColor}
                             focusedLabelColor={colorPalette.tertiaryColor}
                             boxShadowColor={colorPalette.senaryColor}
-                            fontColor={colorPalette.tertiaryColor} />
+                            fontColor={colorPalette.tertiaryColor}
+                            borderBottomColor={colorPalette.senaryColor}/>
                         <TextInput name='city'
                             label='City'
                             errorMsg={cityErrorMsg}
@@ -149,16 +155,20 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
                             labelColor={colorPalette.quinaryColor}
                             focusedLabelColor={colorPalette.tertiaryColor}
                             boxShadowColor={colorPalette.senaryColor}
-                            fontColor={colorPalette.tertiaryColor} />
+                            fontColor={colorPalette.tertiaryColor}
+                            borderBottomColor={colorPalette.senaryColor} />
                         <Dropdown
                             list={states}
                             name='state'
                             label='State'
                             height={40}
+                            labelColor={colorPalette.quinaryColor}
+                            focusedLabelColor={colorPalette.tertiaryColor}
                             backgroundColor={colorPalette.secondaryColor}
                             hoveredBackgroundColor={colorPalette.primaryColor}
                             fontColor={colorPalette.tertiaryColor}
                             hoveredFontColor={colorPalette.tertiaryColor}
+                            borderBottomColor={colorPalette.senaryColor}
                             separatedBox={true}
                             searchBar={true}
                             defaultValue={states.find((state) => state.abbreviation === employee.state).abbreviation}
@@ -170,7 +180,8 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
                             labelColor={colorPalette.quinaryColor}
                             focusedLabelColor={colorPalette.tertiaryColor}
                             boxShadowColor={colorPalette.senaryColor}
-                            fontColor={colorPalette.tertiaryColor} />
+                            fontColor={colorPalette.tertiaryColor}
+                            borderBottomColor={colorPalette.senaryColor} />
                     </div>
                 </Collapse>
                 <Collapse title={'Work Informations'}
@@ -182,10 +193,13 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
                             name='department'
                             label='Department'
                             height={40}
+                            labelColor={colorPalette.quinaryColor}
+                            focusedLabelColor={colorPalette.tertiaryColor}
                             backgroundColor={colorPalette.secondaryColor}
                             hoveredBackgroundColor={colorPalette.primaryColor}
                             fontColor={colorPalette.tertiaryColor}
                             hoveredFontColor={colorPalette.tertiaryColor}
+                            borderBottomColor={colorPalette.senaryColor}
                             separatedBox={true}
                             defaultValue={employee.department} />
                         <DateInput name='startDate'
@@ -206,7 +220,8 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
                             hoveredBackgroundColor={colorPalette.primaryColor}
                             selectedDayBackgroundColor={colorPalette.quarternaryColor}
                             selectedMonthYearBackgroundColor={colorPalette.senaryColor}
-                            todayBackgroundColor={colorPalette.senaryColor} />
+                            todayBackgroundColor={colorPalette.senaryColor}
+                            borderBottomColor={colorPalette.senaryColor} />
                     </div>
                 </Collapse>
             </div>

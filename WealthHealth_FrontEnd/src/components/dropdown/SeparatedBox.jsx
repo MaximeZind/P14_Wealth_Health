@@ -20,7 +20,8 @@ function SeparatedBox({ list, height, backgroundColor, hoveredBackgroundColor, f
         <div className={classes.dropdown_content}
         style={{ maxHeight: `${height * 7}px`, transform: `translateY(${height + 2}px)`, right: '0' }}>
             <div className={classes.animation_box} 
-            style={{ width: '100%'}}>
+            style={{ width: '100%',
+            backgroundColor: backgroundColor}}>
                 {searchBar === true ?
                     <div className={classes.filter_items} style={{ minHeight: `${height}px`, backgroundColor: hoveredBackgroundColor && hoveredBackgroundColor }}>
                         <span className={classes.filter_items_icon}>

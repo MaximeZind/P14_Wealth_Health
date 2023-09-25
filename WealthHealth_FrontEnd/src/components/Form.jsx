@@ -25,7 +25,9 @@ function Form({ openModal, colorPalette }) {
     const [startDateErrorMsg, setStartDateErrorMsg] = useState('');
     const [streetErrorMsg, setStreetErrorMsg] = useState('');
     const [cityErrorMsg, setCityErrorMsg] = useState('');
+    const [stateErrorMsg, setStateErrorMsg] = useState('');
     const [zipCodeErrorMsg, setZipCodeErrorMsg] = useState('');
+    const [departmentErrorMsg, setDepartmentErrorMsg] = useState('');
 
     // States avec nos données
     const [personnalInformations, setPersonnalInformations] = useState(null);
@@ -146,7 +148,9 @@ function Form({ openModal, colorPalette }) {
             startDate: setStartDateErrorMsg,
             street: setStreetErrorMsg,
             city: setCityErrorMsg,
+            state: setStateErrorMsg,
             zipCode: setZipCodeErrorMsg,
+            department: setDepartmentErrorMsg,
         };
 
         Object.entries(errorMsgs).map(([field, errorMsg]) => {
@@ -250,6 +254,7 @@ function Form({ openModal, colorPalette }) {
                 <Dropdown list={states}
                     name='state'
                     label='State'
+                    errorMsg={stateErrorMsg}
                     height={40}
                     labelColor={colorPalette.quinaryColor}
                     focusedLabelColor={colorPalette.tertiaryColor}
@@ -298,6 +303,7 @@ function Form({ openModal, colorPalette }) {
                 <Dropdown list={departments}
                     name='department'
                     label='Department'
+                    errorMsg={departmentErrorMsg}
                     height={40}
                     labelColor={colorPalette.quinaryColor}
                     focusedLabelColor={colorPalette.tertiaryColor}

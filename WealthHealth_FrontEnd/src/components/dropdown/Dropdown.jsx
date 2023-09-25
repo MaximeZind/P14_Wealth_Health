@@ -5,13 +5,13 @@ import DropdownArrow from './icons/DropdownArrow';
 import SeparatedBox from './SeparatedBox';
 import NormalBox from './NormalBox';
 
-function Dropdown({ list, label, name, separatedBox, searchBar, defaultValue, defaultName, onChange, height, maxWidth, labelColor, focusedLabelColor, backgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, fontFamily, borderBottomColor, boxShadowColor}) {
+function Dropdown({ list, label, name, errorMsg, separatedBox, searchBar, defaultValue, defaultName, onChange, height, maxWidth, labelColor, focusedLabelColor, backgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, fontFamily, borderBottomColor, boxShadowColor}) {
 
     const [isOpen, setIsOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [dropdownStatus, setDropdownStatus] = useState('closed')
     const [selectedName, setSelectedName] = defaultName ? useState(defaultName) : useState(defaultValue ? defaultValue : '');
-    const [selectedValue, setSelectedValue] = defaultValue ? useState(defaultValue) : useState(list[0].abbreviation ? list[0].abbreviation : list[0].name);
+    const [selectedValue, setSelectedValue] = defaultValue ? useState(defaultValue) : useState('');
     const dropdownMenu = useRef(null);
 
     // Pour que le dropdown se ferme lorsque l'utilisateur clique en dehors
@@ -112,6 +112,7 @@ function Dropdown({ list, label, name, separatedBox, searchBar, defaultValue, de
                             searchBar={searchBar} /> : null}
                 </div>
             </div>
+            {errorMsg ? <p className={classes.error_msg}>{errorMsg}</p> : null}
         </div>
     );
 }
@@ -129,6 +130,7 @@ Dropdown.propTypes = {
     ).isRequired,
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    errorMsg: PropTypes.string,
     placeholder: PropTypes.string,
     height: PropTypes.number.isRequired,
     maxWidth: PropTypes.number,

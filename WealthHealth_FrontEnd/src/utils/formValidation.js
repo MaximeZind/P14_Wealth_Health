@@ -1,13 +1,18 @@
+import { getDepartments, getStates } from "./fetchData";
+
 export function validateEmployee(object){
+
     const firstNameValidation = validateName(object.firstName);
     const lastNameValidation = validateName(object.lastName);
     const dateOfBirthValidation = validateDate(object.dateOfBirth, 18, 100);
     const streetValidation = validateStreet(object.street);
     const cityValidation = validateCity(object.city);
+    const stateValidation = validateState(object.state);
     const zipCodeValidation = validateZipCode(object.zipCode);
+    const departmentValidation = validateDepartment(object.department);
     const startDateValidation = validateDate(object.startDate, false, false, object.dateOfBirth);
 
-    const array = [firstNameValidation, lastNameValidation, dateOfBirthValidation, streetValidation, cityValidation, zipCodeValidation, startDateValidation];
+    const array = [firstNameValidation, lastNameValidation, dateOfBirthValidation, streetValidation, cityValidation, stateValidation, zipCodeValidation, departmentValidation, startDateValidation];
 
     let isValid = true;
     array.map((item) => {
@@ -20,15 +25,16 @@ export function validateEmployee(object){
     const validation = {
         isValid: isValid,
         data: {
+            id: object.id,
             firstName: firstNameValidation.response,
             lastName: lastNameValidation.response,
             dateOfBirth: dateOfBirthValidation.response,
             street: streetValidation.response,
             city: cityValidation.response,
-            state: object.state,
+            state: stateValidation.response,
             zipCode: zipCodeValidation.response,
             startDate: startDateValidation.response,
-            department: object.department
+            department: departmentValidation.response,
         },
         errorMsg: {
             firstName: firstNameValidation.errorMsg,
@@ -36,7 +42,9 @@ export function validateEmployee(object){
             dateOfBirth: dateOfBirthValidation.errorMsg,
             street: streetValidation.errorMsg,
             city: cityValidation.errorMsg,
+            state: stateValidation.errorMsg,
             zipCode: zipCodeValidation.errorMsg,
+            department: departmentValidation.errorMsg,
             startDate: startDateValidation.errorMsg,
         }
     }
@@ -77,8 +85,9 @@ export function validateAddress(object) {
 
     const streetValidation = validateStreet(object.street);
     const cityValidation = validateCity(object.city);
+    const stateValidation = validateState(object.state);
     const zipCodeValidation = validateZipCode(object.zipCode);
-    const array = [streetValidation, cityValidation, zipCodeValidation];
+    const array = [streetValidation, cityValidation, stateValidation, zipCodeValidation];
 
     let isValid = true;
     array.map((item) => {
@@ -92,12 +101,13 @@ export function validateAddress(object) {
         data: {
             street: streetValidation.response,
             city: cityValidation.response,
-            state: object.state,
+            state: stateValidation.response,
             zipCode: zipCodeValidation.response,
         },
         errorMsg: {
             street: streetValidation.errorMsg,
             city: cityValidation.errorMsg,
+            state: stateValidation.errorMsg,
             zipCode: zipCodeValidation.errorMsg
         }
     }
@@ -107,8 +117,9 @@ export function validateAddress(object) {
 // Fonction de validation des informations relatives a l'entreprise
 export function validateWorkSituation(object, dateOfBirth) {
 
+    const departmentValidation = validateDepartment(object.department);
     const startDateValidation = validateDate(object.startDate, false, false, dateOfBirth);
-    const array = [startDateValidation];
+    const array = [departmentValidation, startDateValidation];
 
     let isValid = true;
     array.map((item) => {
@@ -117,13 +128,15 @@ export function validateWorkSituation(object, dateOfBirth) {
             return;
         }
     });
+
     const validation = {
         isValid: isValid,
         data: {
             startDate: startDateValidation.response,
-            department: object.department
+            department: departmentValidation.response,
         },
         errorMsg: {
+            department: departmentValidation.errorMsg,
             startDate: startDateValidation.errorMsg,
         }
     }
@@ -199,6 +212,7 @@ export function validateDate(string, ageMin, ageMax, dateOfBirth) {
         const day = (date.getDate()).toString().padStart(2, '0');
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
         const year = date.getFullYear();
+        
         const MMDDYYYYdate = `${month}/${day}/${year}`;
         response = MMDDYYYYdate;
     }
@@ -264,6 +278,31 @@ export function validateCity(string) {
     return validation;
 }
 
+export function validateState(string){
+    const states = getStates();
+    let response = false;
+    let errorMsg = null;
+    if(string.length === 0){
+        errorMsg = 'Please select a state in the list';
+    } else if (string.length > 0){
+        let count = 0;
+        states.map((state) => {
+            (state.abbreviation === string) && count++;
+        });
+        if (count === 0){
+            errorMsg = 'Please select a valid value in the list';
+        } else if (count === 1 ){
+            response = string;
+        }
+    }
+
+    let validation = {
+        response: response,
+        errorMsg: errorMsg
+    }
+    return validation;
+}
+
 // Fonction pour valider le zipcode
 export function validateZipCode(string) {
     const zipCode = string.trim();
@@ -278,6 +317,30 @@ export function validateZipCode(string) {
         errorMsg = 'The Zip Code is invalid.'
     }
 
+    let validation = {
+        response: response,
+        errorMsg: errorMsg
+    }
+    return validation;
+}
+
+export function validateDepartment(string){
+    const departments = getDepartments();
+    let response = false;
+    let errorMsg = null;
+    if(string.length === 0){
+        errorMsg = 'Please select a department in the list';
+    } else if (string.length > 0){
+        let count = 0;
+        departments.map((department) => {
+            (department.name === string) && count++;
+        });
+        if (count === 0){
+            errorMsg = 'Please select a valid department in the list';
+        } else if (count === 1 ){
+            response = string;
+        }
+    }
     let validation = {
         response: response,
         errorMsg: errorMsg
