@@ -150,14 +150,16 @@ export function validateName(string) {
     let response = false;
     let errorMsg = null;
 
-    if (nameValue.length >= 2) { // plus de 2 caractères
+    if (nameValue.length >= 1 && nameValue.length < 255) { // entre 2 et 255 caractères
         if ((regex.test(nameValue)) && (!nameValue.includes(",,")) && (!nameValue.includes("..")) && (!nameValue.includes("''")) && (!nameValue.includes("--")) && (!nameValue.trim().includes("  "))) {
             response = nameValue.charAt(0).toUpperCase() + nameValue.slice(1).toLowerCase();
         } else if ((regex.test(nameValue) === false) || (nameValue.includes(",,")) || (nameValue.includes("..")) || (nameValue.includes("''")) || (nameValue.includes("--")) || nameValue.trim().includes("  ")) {
-            errorMsg = "The name is invalid."
+            errorMsg = "The name is invalid.";
         }
-    } else if (nameValue.length < 2) {
-        errorMsg = "The name should be at least 2 characters."
+    } else if (nameValue.length === 0) {
+        errorMsg = "Please enter a name";
+    } else if (nameValue.length >= 255){
+        errorMsg = "The name you entered is too long";
     }
 
     let validation = {
@@ -234,7 +236,7 @@ export function validateStreet(string) {
     const minLength = 5;
     const regex = /^[a-zA-Z0-9\s'.,-]*$/;
     if (address.length === 0) {
-        errorMsg = "This field is empty.";
+        errorMsg = "Please enter an address.";
     } else if (address.length !== 0 && address.length < minLength) {
         errorMsg = "This address is too short.";
     } else if (address.length >= minLength) {
@@ -260,7 +262,7 @@ export function validateCity(string) {
     const minLength = 2;
     const regex = /^[a-zA-Z\s.,-]*$/;
     if (city.length === 0) {
-        errorMsg = "This field is empty.";
+        errorMsg = "Please enter a city.";
     } else if (city.length !== 0 && city.length < minLength) {
         errorMsg = "This city name is too short.";
     } else if (city.length >= minLength) {
