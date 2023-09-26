@@ -240,8 +240,8 @@ function Form({ openModal, colorPalette }) {
                     labelColor={colorPalette.quinaryColor}
                     focusedLabelColor={colorPalette.tertiaryColor}
                     boxShadowColor={colorPalette.senaryColor}
-                    fontColor={colorPalette.tertiaryColor} 
-                    borderBottomColor={colorPalette.senaryColor}/>
+                    fontColor={colorPalette.tertiaryColor}
+                    borderBottomColor={colorPalette.senaryColor} />
                 <TextInput name='city'
                     label='City'
                     errorMsg={cityErrorMsg}
@@ -271,8 +271,8 @@ function Form({ openModal, colorPalette }) {
                     labelColor={colorPalette.quinaryColor}
                     focusedLabelColor={colorPalette.tertiaryColor}
                     boxShadowColor={colorPalette.senaryColor}
-                    fontColor={colorPalette.tertiaryColor} 
-                    borderBottomColor={colorPalette.senaryColor}/>
+                    fontColor={colorPalette.tertiaryColor}
+                    borderBottomColor={colorPalette.senaryColor} />
                 <div className={classes.buttons}>
                     <Button text='Previous'
                         value='employeeAddress'
@@ -280,17 +280,17 @@ function Form({ openModal, colorPalette }) {
                         fontColor={colorPalette.secondaryColor}
                         hoveredFontColor={colorPalette.quarternaryColor}
                         backgroundColor={colorPalette.quarternaryColor}
-                        hoveredBackgroundColor={colorPalette.primaryColor} 
+                        hoveredBackgroundColor={colorPalette.primaryColor}
                         borderColor={colorPalette.quarternaryColor}
-                        hoveredBorderColor={colorPalette.quarternaryColor}/>
+                        hoveredBorderColor={colorPalette.quarternaryColor} />
                     <Button text='Next'
                         value='employeeAddress'
                         fontColor={colorPalette.secondaryColor}
                         hoveredFontColor={colorPalette.quarternaryColor}
                         backgroundColor={colorPalette.quarternaryColor}
-                        hoveredBackgroundColor={colorPalette.primaryColor} 
+                        hoveredBackgroundColor={colorPalette.primaryColor}
                         borderColor={colorPalette.quarternaryColor}
-                        hoveredBorderColor={colorPalette.quarternaryColor}/>
+                        hoveredBorderColor={colorPalette.quarternaryColor} />
                 </div>
             </form>
             <form
@@ -331,7 +331,7 @@ function Form({ openModal, colorPalette }) {
                     selectedDayBackgroundColor={colorPalette.quarternaryColor}
                     selectedMonthYearBackgroundColor={colorPalette.senaryColor}
                     todayBackgroundColor={colorPalette.senaryColor}
-                    borderBottomColor={colorPalette.senaryColor}/>
+                    borderBottomColor={colorPalette.senaryColor} />
                 <div className={classes.buttons}>
                     <Button text='Previous'
                         value='workSituation'
@@ -364,7 +364,8 @@ Form.propTypes = {
         tertiaryColor: PropTypes.string,
         quarternaryColor: PropTypes.string,
         quinaryColor: PropTypes.string,
-    }),
+        senaryColor: PropTypes.string,
+    }).isRequired,
 }
 
 export default Form;

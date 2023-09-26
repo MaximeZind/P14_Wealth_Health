@@ -11,7 +11,6 @@ function ErrorPage() {
     document.title = `Wealth Health HRnet - ${pageTitle}`;
     const colorPalette = useSelector((state) => state.colorPaletteReducer);
     const errorText = `Oups! Cette page n'existe pas.`;
-    const linkText = `Retourner sur la page d'accueil`;
 
     return (
         (location.pathname === '/404') ?

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import classes from '../styles/Home.module.css';
+import classes from '../styles/CreateEmployee.module.css';
 import Form from '../components/Form';
 import Modal from '../components/modal/Modal';
 import NewEmployeeModalContent from '../components/modal/modal_contents/NewEmployeeModalContent';
@@ -7,7 +7,7 @@ import ConfirmEmployeeActionModalContent from '../components/modal/modal_content
 import { addEmployee, updateEmployee } from '../actions/employees.action';
 import { useDispatch, useSelector } from 'react-redux';
 
-function Home() {
+function CreateEmployee() {
 
     const pageTitle = 'Create an employee';
     document.title = `Wealth Health HRnet - ${pageTitle}`;
@@ -77,17 +77,19 @@ function Home() {
                             closeModal={closeModal}
                             confirm={() => handleConfirmEmployeeCreation(employeeToConfirm)}
                             update={() => handleUpdateEmployee(employeeToConfirm)}
-                            text={`An employee named ${employeeToConfirm.firstName} ${employeeToConfirm.lastName} and born on ${employeeToConfirm.dateOfBirth} already exists in the system. Would you like to create a new employee with this name or update the existing one?`} 
-                            colorPalette={colorPalette}/>
+                            text={`An employee named ${employeeToConfirm.firstName} ${employeeToConfirm.lastName} 
+                            and born on ${employeeToConfirm.dateOfBirth} already exists in the system. 
+                            Would you like to create a new employee with this name or update the existing one?`}
+                            colorPalette={colorPalette} />
                     }
                 </Modal>
                 :
                 <div className={classes.container}>
-                    <h2 style={{color: colorPalette.tertiaryColor}}>Create Employee</h2>
+                    <h2 style={{ color: colorPalette.tertiaryColor }}>Create Employee</h2>
                     <Form openModal={openModal} colorPalette={colorPalette} />
                 </div>}
         </main>
     );
 }
 
-export default Home;
+export default CreateEmployee;

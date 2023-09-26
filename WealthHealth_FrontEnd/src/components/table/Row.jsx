@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import classes from '../styles/Row.module.css';
+import classes from './styles/Row.module.css';
 import PropTypes from 'prop-types';
-import Pencil from './Pencil';
-import GarbageBin from './GarbageBin';
+import Pencil from '../Pencil';
+import GarbageBin from '../GarbageBin';
 
 function Row({ delay, highlightedField, type, firstName, lastName, startDate, department, dateOfBirth, street, city, state, zipCode, handlePencilClick, handleBinClick, backgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, iconBoxBackgroundColor, iconColor, highlightedBackgroundColor }) {
 

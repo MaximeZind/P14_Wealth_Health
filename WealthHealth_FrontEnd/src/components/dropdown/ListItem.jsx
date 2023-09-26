@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import classes from '../../styles/ListItem.module.css';
+import classes from './styles/ListItem.module.css';
 import PropTypes from 'prop-types';
 
 

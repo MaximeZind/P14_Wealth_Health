@@ -270,7 +270,8 @@ UpdateForm.propTypes = {
         tertiaryColor: PropTypes.string,
         quarternaryColor: PropTypes.string,
         quinaryColor: PropTypes.string,
-    }),
+        senaryColor: PropTypes.string,
+    }).isRequired,
 }
 
 

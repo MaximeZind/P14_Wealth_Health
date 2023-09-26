@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import classes from '../styles/DataTable.module.css';
-import Row from '../components/Row';
-import fields from '../data/fields.json';
-import Arrow from './Arrow';
+import classes from './styles/DataTable.module.css';
+import Row from './Row';
+import fields from '../../data/fields.json';
+import Arrow from '../Arrow';
 import PropTypes from 'prop-types';
 
-function DataTable({ list, currentPage, tableLength, setEmployeeToUpdate, setIsModalOpen, setIsFormOpen, setemployeeToDelete, setList, tableBackgroundColor, oddBackgroundColor, evenBackgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, ArrowColor, iconBoxBackgroundColor, iconColor, highlightedBackgroundColor }) {
+function DataTable({ list, currentPage, tableLength, setEmployeeToUpdate, setIsModalOpen, setIsFormOpen, setemployeeToDelete, setList, tableBackgroundColor, oddBackgroundColor, evenBackgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, iconBoxBackgroundColor, iconColor, highlightedBackgroundColor }) {
 
     // initialisation des States
 
@@ -70,37 +70,39 @@ function DataTable({ list, currentPage, tableLength, setEmployeeToUpdate, setIsM
                     }}>
                     {fields.map((field) => {
                         return (
-                            <th className={field.camelField === selectedField ? classes.selected_field : ''} 
-                            key={fields.indexOf(field)} 
-                            onClick={() => sortBy(field.camelField)}
-                            style={{
-                                backgroundColor: field.camelField === selectedField ? hoveredBackgroundColor : '',
-                            }}>
+                            <th className={field.camelField === selectedField ? classes.selected_field : ''}
+                                key={fields.indexOf(field)}
+                                onClick={() => sortBy(field.camelField)}
+                                style={{
+                                    backgroundColor: field.camelField === selectedField ? hoveredBackgroundColor : '',
+                                }}>
                                 <div className={classes.field}
-                                    style={{ color: (field.camelField === selectedField) ? hoveredFontColor && hoveredFontColor : isHeaderHovered ?  hoveredFontColor : fontColor,
-                                    backgroundColor: field.camelField === selectedField ? highlightedBackgroundColor : '' }}
+                                    style={{
+                                        color: (field.camelField === selectedField) ? hoveredFontColor && hoveredFontColor : isHeaderHovered ? hoveredFontColor : fontColor,
+                                        backgroundColor: field.camelField === selectedField ? highlightedBackgroundColor : ''
+                                    }}
                                 >
                                     {field.field}
                                     {selectedField !== field.camelField ?
                                         <div className={classes.icons}>
-                                            <Arrow transform='rotate(180deg)' 
-                                            color={isHeaderHovered ? hoveredFontColor : fontColor} />
-                                            <Arrow transform='rotate(0deg)' 
-                                            color={isHeaderHovered ? hoveredFontColor : fontColor} />
+                                            <Arrow transform='rotate(180deg)'
+                                                color={isHeaderHovered ? hoveredFontColor : fontColor} />
+                                            <Arrow transform='rotate(0deg)'
+                                                color={isHeaderHovered ? hoveredFontColor : fontColor} />
                                         </div> :
                                         <div className={classes.icons}>
                                             {isAscending ?
                                                 <div className={classes.icons}>
-                                                    <Arrow transform='rotate(180deg)' 
-                                                    color={fontColor} />
-                                                    <Arrow transform='rotate(0deg)' 
-                                                    color='rgb(255, 255, 255, 0)' />
+                                                    <Arrow transform='rotate(180deg)'
+                                                        color={fontColor} />
+                                                    <Arrow transform='rotate(0deg)'
+                                                        color='rgb(255, 255, 255, 0)' />
                                                 </div> :
                                                 <div className={classes.icons}>
-                                                    <Arrow transform='rotate(180deg)' 
-                                                    color='rgb(255, 255, 255, 0)' />
-                                                    <Arrow transform='rotate(0deg)' 
-                                                    color={fontColor} />
+                                                    <Arrow transform='rotate(180deg)'
+                                                        color='rgb(255, 255, 255, 0)' />
+                                                    <Arrow transform='rotate(0deg)'
+                                                        color={fontColor} />
                                                 </div>
                                             }
                                         </div>
@@ -180,7 +182,6 @@ DataTable.propTypes = {
     hoveredBackgroundColor: PropTypes.string,
     fontColor: PropTypes.string,
     hoveredFontColor: PropTypes.string,
-    ArrowColor: PropTypes.string,
     iconBoxBackgroundColor: PropTypes.string,
     iconColor: PropTypes.string,
     highlightedBackgroundColor: PropTypes.string,

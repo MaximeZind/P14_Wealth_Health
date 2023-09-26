@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import classes from '../../styles/Dropdown.module.css';
+import classes from './styles/Dropdown.module.css';
 import PropTypes from 'prop-types';
 import DropdownArrow from './icons/DropdownArrow';
 import SeparatedBox from './SeparatedBox';

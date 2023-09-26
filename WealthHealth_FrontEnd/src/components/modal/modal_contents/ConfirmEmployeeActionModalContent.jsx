@@ -1,15 +1,14 @@
 import React from 'react';
-import classes from '../../../styles/ConfirmEmployeeDeletionModalContent.module.css';
+import classes from '../styles/ConfirmEmployeeDeletionModalContent.module.css';
 import PropTypes from 'prop-types';
 import Button from '../../Button';
 
 function ConfirmEmployeeActionModalContent({ closeModal, confirm, update, text, colorPalette }) {
 
     const iconSize = '40px';
-console.log(colorPalette.senaryColor);
     return (
-        <div className={classes.modal} 
-        style={{backgroundColor: colorPalette.secondaryColor}}>
+        <div className={classes.modal}
+            style={{ backgroundColor: colorPalette.secondaryColor }}>
             <div className={classes.modal_content}>
                 <span className={classes.icon_container} style={{ backgroundColor: 'rgb(65, 105, 225, 0.5)' }}>
                     <p className={classes.interrogation_point} style={{ color: 'rgb(65, 105, 225)', fontSize: iconSize }}>
@@ -17,10 +16,10 @@ console.log(colorPalette.senaryColor);
                     </p>
                 </span>
                 <p className={classes.text}
-                style={{color: colorPalette.tertiaryColor}}>{text}</p>
+                    style={{ color: colorPalette.tertiaryColor }}>{text}</p>
             </div>
-            <footer className={classes.modal_footer} 
-            style={{backgroundColor: colorPalette.senaryColor}}>
+            <footer className={classes.modal_footer}
+                style={{ backgroundColor: colorPalette.senaryColor }}>
                 <Button value='close'
                     text='Close'
                     onClick={closeModal}
@@ -64,7 +63,8 @@ ConfirmEmployeeActionModalContent.propTypes = {
         tertiaryColor: PropTypes.string,
         quarternaryColor: PropTypes.string,
         quinaryColor: PropTypes.string,
-    }),
+        senaryColor: PropTypes.string,
+    }).isRequired,
 }
 
 export default ConfirmEmployeeActionModalContent;

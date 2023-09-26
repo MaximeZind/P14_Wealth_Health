@@ -42,6 +42,7 @@ Span.propTypes = {
         PropTypes.string,
         PropTypes.number,
     ]),
+    onClick: PropTypes.func,
     backgroundColor: PropTypes.string,
     hoveredBackgroundColor: PropTypes.string,
     fontColor: PropTypes.string,

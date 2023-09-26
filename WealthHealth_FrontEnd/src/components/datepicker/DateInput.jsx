@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import classes from '../../styles/DateInput.module.css';
+import classes from './styles/DateInput.module.css';
 import PropTypes from 'prop-types';
 import { useState, useRef } from 'react';
 import Calendar from './icons/Calendar';

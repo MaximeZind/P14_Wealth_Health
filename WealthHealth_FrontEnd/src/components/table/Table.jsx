@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import classes from '../styles/Table.module.css';
-import fields from '../data/fields.json';
 import PropTypes from 'prop-types';
-import TextInput from './TextInput';
-import { search } from '../utils/searchScript';
-import Modal from './modal/Modal';
-import UpdateForm from './UpdateForm';
-import NewEmployeeModalContent from './modal/modal_contents/NewEmployeeModalContent';
-import Dropdown from './dropdown/Dropdown';
-import ConfirmEmployeeActionModalContent from './modal/modal_contents/ConfirmEmployeeActionModalContent';
 import { useDispatch } from 'react-redux';
-import { deleteEmployee } from '../actions/employees.action';
+import { deleteEmployee } from '../../actions/employees.action';
+import fields from '../../data/fields.json';
+import { search } from '../../utils/searchScript';
+import classes from './styles/Table.module.css';
+import TextInput from '../TextInput';
+import Modal from '../modal/Modal';
+import Dropdown from '../dropdown/Dropdown';
+import UpdateForm from '../UpdateForm';
+import NewEmployeeModalContent from '../modal/modal_contents/NewEmployeeModalContent';
+import ConfirmEmployeeActionModalContent from '../modal/modal_contents/ConfirmEmployeeActionModalContent';
 import DataTable from './DataTable';
 
 function Table({ employeesList, colorPalette }) {
@@ -29,8 +29,6 @@ function Table({ employeesList, colorPalette }) {
     const [employeeToDelete, setemployeeToDelete] = useState(null);
 
     const [list, setList] = useState([...employeesList]);
-    const [selectedField, setSelectedField] = useState(null);
-    const [isAscending, setIsAscending] = useState(false);
     const [tableLength, setTableLength] = useState(10);
     const [pages, setPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
@@ -59,29 +57,6 @@ function Table({ employeesList, colorPalette }) {
             setCurrentPage(updatedPages)
         }
     }, [list, tableLength, currentPage]);
-
-    // Fonction pour trier par champ cliqué
-    function sortBy(field) {
-        if (selectedField !== field) {
-            setIsAscending(false);
-        }
-        setSelectedField(field);
-        let sortedList = [...list];
-        if (field === 'dateOfBirth' || field === 'startDate') {
-            if (isAscending) {
-                sortedList = sortedList.sort((b, a) => new Date(a[field]) - new Date(b[field]));
-            } else if (!isAscending) {
-                sortedList = sortedList.sort((a, b) => new Date(a[field]) - new Date(b[field]));
-            }
-        } else if (field !== 'dateOfBirth' && field !== 'startDate')
-            if (isAscending) {
-                sortedList = sortedList.sort((b, a) => a[field].localeCompare(b[field]));
-            } else if (!isAscending) {
-                sortedList = sortedList.sort((a, b) => a[field].localeCompare(b[field]));
-            }
-        setIsAscending(!isAscending);
-        setList(sortedList);
-    }
 
     // fonction qui gère la valeur reçue par le menu déroulant
     function handleSelect(value) {
@@ -254,7 +229,8 @@ Table.propTypes = {
         tertiaryColor: PropTypes.string,
         quarternaryColor: PropTypes.string,
         quinaryColor: PropTypes.string,
-    }),
+        senaryColor: PropTypes.string,
+    }).isRequired,
 }
 
 export default Table;

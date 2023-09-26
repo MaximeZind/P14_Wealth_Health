@@ -214,7 +214,6 @@ export function validateDate(string, ageMin, ageMax, dateOfBirth) {
         const day = (date.getDate()).toString().padStart(2, '0');
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
         const year = date.getFullYear();
-        
         const MMDDYYYYdate = `${month}/${day}/${year}`;
         response = MMDDYYYYdate;
     }

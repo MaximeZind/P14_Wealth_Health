@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from '../styles/EmployeeList.module.css';
 import { useSelector } from 'react-redux';
-import Table from '../components/Table';
+import Table from '../components/table/Table';
 
 function EmployeeList() {
 

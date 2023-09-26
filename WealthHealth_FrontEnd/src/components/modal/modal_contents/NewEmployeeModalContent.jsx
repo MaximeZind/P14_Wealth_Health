@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from '../../../styles/NewEmployeeModalContent.module.css';
+import classes from '../styles/NewEmployeeModalContent.module.css';
 import PropTypes from 'prop-types';
 import NewUserIcon from '../icons/NewUserIcon';
 import Button from '../../Button';

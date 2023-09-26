@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import classes from '../../styles/NormalBox.module.css';
+import classes from './styles/NormalBox.module.css';
 import PropTypes from 'prop-types';
 import MagnifyingGlass from './icons/MagnifyingGlass';
 import { dropdownFilter } from '../../utils/searchScript';
