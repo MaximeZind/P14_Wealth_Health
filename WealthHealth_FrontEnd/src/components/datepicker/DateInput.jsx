@@ -5,7 +5,7 @@ import { useState, useRef } from 'react';
 import Calendar from './icons/Calendar';
 import DatePickerBox from './DatePickerBox';
 
-function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundYearHighlight, defaultValue, labelColor, focusedLabelColor, boxShadowColor, fontColor, selectedDayFontColor, previousNextMonthFontColor, iconColor, backgroundColor, hoveredBackgroundColor, selectedDayBackgroundColor, todayBackgroundColor, selectedMonthYearBackgroundColor }) {
+function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundYearHighlight, defaultValue, dateInputField, labelColor, focusedLabelColor, boxShadowColor, fontColor, selectedDayFontColor, previousNextMonthFontColor, iconColor, backgroundColor, hoveredBackgroundColor, selectedDayBackgroundColor, todayBackgroundColor, selectedMonthYearBackgroundColor }) {
 
     const defaultDate = new Date(defaultValue);
     const [day, setDay] = useState((defaultValue && defaultDate) ? defaultDate.getDate() : 'DD');
@@ -14,9 +14,9 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundY
 
     // On définit les valeurs des départ pour le composant datePickerBox
     const today = new Date();
-    const [startingDay, setStartingDay] = useState(today.getDate());
-    const [startingMonth, setStartingMonth] = useState(today.getMonth() + 1);
-    const [startingYear, setStartingYear] = useState(today.getFullYear());
+    const [startingDay, setStartingDay] = useState((defaultValue && defaultDate) ? defaultDate.getDate() : today.getDate());
+    const [startingMonth, setStartingMonth] = useState((defaultValue && defaultDate) ? defaultDate.getMonth() + 1 : today.getMonth() + 1);
+    const [startingYear, setStartingYear] = useState((defaultValue && defaultDate) ? defaultDate.getFullYear() : today.getFullYear());
 
     const [isOpen, setIsOpen] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
@@ -26,7 +26,7 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundY
     const datePicker = useRef(null);
     const input = useRef(null);
     const hiddenInput = useRef(null);
-    const selectedValue = `${month}/${day}/${year}`;
+    const selectedValue = `${month.toString().padStart(2, '0')}/${day.toString().padStart(2, '0')}/${year}`;
 
     function handleClose() {
         setIsOpen(false);
@@ -114,6 +114,7 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundY
                     startingYear={startingYear}
                     yearsRangeMin={yearsRangeMin}
                     yearsRangeMax={yearsRangeMax}
+                    dateInputField={dateInputField}
                     roundYearHighlight={roundYearHighlight}
                     backgroundColor={backgroundColor}
                     fontColor={fontColor}

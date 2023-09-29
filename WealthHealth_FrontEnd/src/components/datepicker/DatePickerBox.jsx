@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import classes from './styles/DatePickerBox.module.css';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import DoubleArrow from './icons/DoubleArrow';
 import Arrow from './icons/Arrow';
 import Span from '../Span';
+import DateInputField from './DateInputField';
 
-function DatePickerBox({ position, handleValues, handleClose, startingDay, startingMonth, startingYear, yearsRangeMin, yearsRangeMax, backgroundColor, fontColor, selectedDayFontColor, selectedMonthYearBackgroundColor, hoveredBackgroundColor, selectedDayBackgroundColor, todayBackgroundColor, previousNextMonthFontColor, iconColor }) {
+function DatePickerBox({ position, handleValues, handleClose, startingDay, startingMonth, startingYear, yearsRangeMin, yearsRangeMax, dateInputField, backgroundColor, fontColor, selectedDayFontColor, selectedMonthYearBackgroundColor, hoveredBackgroundColor, selectedDayBackgroundColor, todayBackgroundColor, previousNextMonthFontColor, iconColor }) {
 
     const navSpanSize = 25;
     // Date d'aujourd'hui
@@ -20,6 +20,12 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
     const [selectedDay, setSelectedDay] = useState(startingDay);
     const [selectedMonth, setSelectedMonth] = useState(startingMonth);
     const [selectedYear, setSelectedYear] = useState(startingYear);
+
+    // Input fields refs
+    const monthInput = useRef(null);
+    const dayInput = useRef(null);
+    const yearInput = useRef(null);
+
 
     // Type d'array dans la grid: jours par défaut, mais peut être "months" ou "years";
     const [arrayType, setArrayType] = useState('days');
@@ -155,11 +161,87 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
         }
     }
 
+    // INPUT FIELDS //
+
+    function selectInput(event) {
+        const inputField = event.target;
+        inputField.select();
+    }
+
+    function handleOnBlurMonth(event) {
+        const value = Number(event.target.value);
+        const inputField = event.target;
+        if (value > 12) {
+            setMonth(12);
+            setSelectedMonth(12);
+            sendData(selectedDay, 12, selectedYear, false);
+            inputField.value = 12;
+        } else if (value <= 12 && value > 0) {
+            setMonth(value);
+            setSelectedMonth(value);
+            sendData(selectedDay, value, selectedYear, false);
+        } else if (value <= 0) {
+            setMonth(1);
+            setSelectedMonth(1);
+            sendData(selectedDay, 1, selectedYear, false);
+            inputField.value = 1;
+        }
+        inputField.value = inputField.value.toString().padStart(2, '0');
+    }
+
+    function handleOnBlurDay(event) {
+        const daysThisMonth = new Date(year, month, 0).getDate();
+        const value = Number(event.target.value);
+        const inputField = event.target;
+        if (value > daysThisMonth) {
+            setSelectedDay(daysThisMonth);
+            sendData(daysThisMonth, selectedMonth, selectedYear, false);
+            inputField.value = daysThisMonth;
+        } else if (value <= daysThisMonth && value > 0) {
+            setSelectedDay(value);
+            sendData(value, selectedMonth, selectedYear, false);
+        } else if (value <= 0) {
+            setSelectedDay(1);
+            sendData(1, selectedMonth, selectedYear, false);
+            inputField.value = 1;
+        }
+        inputField.value = inputField.value.toString().padStart(2, '0');
+    }
+
+    function handleOnBlurYear(event) {
+        const value = Number(event.target.value);
+        const inputField = event.target;
+        if (yearsRangeMax && value > yearsRangeMax) {
+            setYear(Number(yearsRangeMax));
+            setSelectedYear(Number(yearsRangeMax));
+            sendData(selectedDay, selectedMonth, yearsRangeMax, false);
+            inputField.value = yearsRangeMax;
+        } else if (yearsRangeMax && yearsRangeMin && value <= yearsRangeMax && value > yearsRangeMin) {
+            setYear(value);
+            setSelectedYear(value);
+            sendData(selectedDay, selectedMonth, value, false);
+        } else if (yearsRangeMin && value <= yearsRangeMin) {
+            setYear(Number(yearsRangeMin));
+            setSelectedYear(Number(yearsRangeMin));
+            sendData(selectedDay, selectedMonth, yearsRangeMin, false);
+            inputField.value = yearsRangeMin;
+        }
+    }
+
+    useEffect(() => {
+        if (dayInput.current && monthInput.current && yearInput.current){
+            dayInput.current.value = selectedDay.toString().padStart(2, '0');
+            monthInput.current.value = selectedMonth.toString().padStart(2, '0');
+            yearInput.current.value = selectedYear;
+        }
+    }, [selectedDay, selectedMonth, selectedYear]);
+
     return (
         <div className={classes.date_picker}
             style={{
                 transform: position === 'above' && 'translateY(-355px)',
-                backgroundColor: backgroundColor && backgroundColor
+                backgroundColor: backgroundColor && backgroundColor,
+                gap: dateInputField ? '5px' : '30px'
             }}>
             <header className={classes.date_picker_header}>
                 <Span onClick={() => setYear(year - 1)}
@@ -203,6 +285,41 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
                     <DoubleArrow rotate={-90} color={iconColor && iconColor} size={18} />
                 </Span>
             </header>
+            {dateInputField &&
+                <div className={classes.date_input_fields}
+                style={{
+                    color: fontColor,
+                }}>
+                    <DateInputField type="text"
+                        characters={2}
+                        elementRef={monthInput}
+                        defaultValue={selectedMonth.toString().padStart(2, '0')}
+                        onBlur={(event) => handleOnBlurMonth(event)}
+                        onClick={(event) => selectInput(event)}
+                        onKeyDown={(event) => event.key === 'Enter' && event.preventDefault()}
+                        className={`${classes.date_input_fields_field} ${classes.month_input}`} 
+                        fontColor={fontColor}/>
+                    <p>/</p>
+                    <DateInputField type="text"
+                        characters={2}
+                        elementRef={dayInput}
+                        defaultValue={selectedDay.toString().padStart(2, '0')}
+                        onBlur={(event) => handleOnBlurDay(event)}
+                        onClick={(event) => selectInput(event)}
+                        onKeyDown={(event) => event.key === 'Enter' && event.preventDefault()}
+                        className={`${classes.date_input_fields_field} ${classes.day_input}`} 
+                        fontColor={fontColor}/>
+                    <p>/</p>
+                    <DateInputField type="text"
+                        characters={4}
+                        elementRef={yearInput}
+                        defaultValue={selectedYear}
+                        onBlur={(event) => handleOnBlurYear(event)}
+                        onClick={(event) => selectInput(event)}
+                        onKeyDown={(event) => event.key === 'Enter' && event.preventDefault()}
+                        className={`${classes.date_input_fields_field} ${classes.year_input}`} 
+                        fontColor={fontColor}/>
+                </div>}
             {arrayType === 'days' &&
                 <div className={classes.date_picker_days}>
                     <header className={classes.date_picker_days_grid_header}>
@@ -299,6 +416,7 @@ DatePickerBox.propTypes = {
     startingYear: PropTypes.number.isRequired,
     yearsRangeMin: PropTypes.number,
     yearsRangeMax: PropTypes.number,
+    dateInputField: PropTypes.bool,
     backgroundColor: PropTypes.string,
     fontColor: PropTypes.string,
     hoveredBackgroundColor: PropTypes.string,

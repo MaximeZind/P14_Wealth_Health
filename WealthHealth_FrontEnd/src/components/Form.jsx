@@ -200,6 +200,7 @@ function Form({ openModal, colorPalette }) {
                     yearsRangeMin={1923}
                     yearsRangeMax={2023}
                     roundYearHighlight={true}
+                    dateInputField={true}
                     labelColor={colorPalette.quinaryColor}
                     focusedLabelColor={colorPalette.tertiaryColor}
                     boxShadowColor={colorPalette.senaryColor}
