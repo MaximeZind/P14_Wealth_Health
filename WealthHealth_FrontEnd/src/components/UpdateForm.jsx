@@ -10,9 +10,10 @@ import Collapse from './Collapse';
 import { useDispatch } from 'react-redux';
 import { updateEmployee } from '../actions/employees.action';
 import { validateEmployee } from '../utils/formValidation';
+import { doesEmployeeExist } from '../utils/utils';
 
 
-function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
+function UpdateForm({ closeModal, employee, employeesList, handleUpdateClick, colorPalette }) {
 
     // On recupere les states et les departements
     const states = getStates();
@@ -42,10 +43,19 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
 
         // Validation
         const formValidation = validateEmployee(updatedFormJson);
-
         if (formValidation.isValid === true) {
-            dispatch(updateEmployee(formValidation.data));
-            handleUpdateClick(formValidation.data);
+            const updatedEmployee = formValidation.data
+            let possibleDuplicates = doesEmployeeExist(employeesList, updatedEmployee);
+            possibleDuplicates.map((employee) => console.log(employee.id));
+            console.log(updatedEmployee);
+            possibleDuplicates = possibleDuplicates.filter((employee) => employee.id !== updatedEmployee.id);
+            console.log(possibleDuplicates);
+            if (possibleDuplicates.length === 0) {
+                dispatch(updateEmployee(updatedEmployee));
+                handleUpdateClick(updatedEmployee, possibleDuplicates);
+            } else if (possibleDuplicates.length > 0) {
+                handleUpdateClick(updatedEmployee, possibleDuplicates);
+            }
         }
         handleErrorMsgs(formValidation.errorMsg);
     }
@@ -146,7 +156,7 @@ function UpdateForm({ closeModal, employee, handleUpdateClick, colorPalette }) {
                             focusedLabelColor={colorPalette.tertiaryColor}
                             boxShadowColor={colorPalette.senaryColor}
                             fontColor={colorPalette.tertiaryColor}
-                            borderBottomColor={colorPalette.senaryColor}/>
+                            borderBottomColor={colorPalette.senaryColor} />
                         <TextInput name='city'
                             label='City'
                             errorMsg={cityErrorMsg}
@@ -263,6 +273,19 @@ UpdateForm.propTypes = {
         state: PropTypes.string.isRequired,
         zipCode: PropTypes.string.isRequired,
     }).isRequired,
+    employeesList: PropTypes.arrayOf(
+        PropTypes.shape({
+            firstName: PropTypes.string.isRequired,
+            lastName: PropTypes.string.isRequired,
+            startDate: PropTypes.string.isRequired,
+            department: PropTypes.string.isRequired,
+            dateOfBirth: PropTypes.string.isRequired,
+            street: PropTypes.string.isRequired,
+            city: PropTypes.string.isRequired,
+            state: PropTypes.string.isRequired,
+            zipCode: PropTypes.string.isRequired,
+        })
+    ).isRequired,
     handleUpdateClick: PropTypes.func.isRequired,
     colorPalette: PropTypes.shape({
         primaryColor: PropTypes.string,

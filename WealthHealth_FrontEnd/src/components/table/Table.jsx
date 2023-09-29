@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { deleteEmployee } from '../../actions/employees.action';
+import { deleteEmployee, updateEmployee } from '../../actions/employees.action';
 import fields from '../../data/fields.json';
 import { search } from '../../utils/searchScript';
 import classes from './styles/Table.module.css';
@@ -22,11 +22,13 @@ function Table({ employeesList, colorPalette }) {
 
     // Contenu du modal
     const [isFormOpen, setIsFormOpen] = useState(false);
+    const [needForConfirmationToUpdate, setNeedForConfirmationToUpdate] = useState(false);
     const [isConfirmationOfUpdateOpen, setIsConfirmationOfUpdateOpen] = useState(false);
     const [isConfirmationOfDeletionOpen, setIsConfirmationOfDeletionOpen] = useState(false);
 
     const [employeeToUpdate, setEmployeeToUpdate] = useState(null);
     const [employeeToDelete, setemployeeToDelete] = useState(null);
+    const [employeeToConfirm, setEmployeeToConfirm] = useState(null);
 
     const [list, setList] = useState([...employeesList]);
     const [tableLength, setTableLength] = useState(10);
@@ -75,9 +77,21 @@ function Table({ employeesList, colorPalette }) {
 
     // Fonction qui est appelee une fois que lq mise a jour des infos de l'employe est faite
     // ouvre la modale de confirmation de mise a jour
-    function handleUpdateClick() {
-        setIsFormOpen(false);
-        setIsConfirmationOfUpdateOpen(true);
+    function handleUpdateClick(updatedEmployee, possibleDuplicates) {
+        console.log(possibleDuplicates);
+        if (possibleDuplicates.length === 0) {
+            setIsFormOpen(false);
+            setIsConfirmationOfUpdateOpen(true);
+        } else if (possibleDuplicates.length > 0) {
+            setIsFormOpen(false);
+            setNeedForConfirmationToUpdate(true);
+            setEmployeeToConfirm(updatedEmployee);
+        }
+    }
+
+    function handleConfirmUpdate(updatedEmployee){
+        dispatch(updateEmployee(updatedEmployee));
+        handleCloseModal();
     }
 
     // Fonction appelee lorsque la deletion est validee par l'utilisateur
@@ -92,10 +106,12 @@ function Table({ employeesList, colorPalette }) {
     function handleCloseModal() {
         setEmployeeToUpdate(null);
         setemployeeToDelete(null);
+        setEmployeeToConfirm(null);
         setIsModalOpen(false);
         setIsFormOpen(false);
         setIsConfirmationOfUpdateOpen(false);
         setIsConfirmationOfDeletionOpen(false);
+        setNeedForConfirmationToUpdate(false);
     }
     return (
         employeesList &&
@@ -120,7 +136,7 @@ function Table({ employeesList, colorPalette }) {
                     id='employees_table_length'
                     defaultValue={tableLengths[0]}
                     onChange={handleSelect}
-                     separatedBox={true} />
+                    separatedBox={true} />
                 <TextInput name='search'
                     label='Search: '
                     onChange={handleSearch}
@@ -175,13 +191,22 @@ function Table({ employeesList, colorPalette }) {
             {isModalOpen ?
                 <Modal closeModal={handleCloseModal}
                     modalBackgroundColor={colorPalette.secondaryColor}
-                    hoveredIconBackgroundColor={colorPalette.secondaryColor}
+                    hoveredIconBackgroundColor={colorPalette.primaryColor}
                     iconColor={colorPalette.tertiaryColor}>
                     {isFormOpen &&
                         <UpdateForm
                             closeModal={handleCloseModal}
                             handleUpdateClick={handleUpdateClick}
                             employee={employeeToUpdate}
+                            employeesList={employeesList}
+                            colorPalette={colorPalette} />}
+                    {needForConfirmationToUpdate &&
+                        <ConfirmEmployeeActionModalContent
+                            closeModal={handleCloseModal}
+                            confirm={() => handleConfirmUpdate(employeeToConfirm)}
+                            text={`One or several employees named ${employeeToConfirm.firstName} ${employeeToConfirm.lastName} 
+                            and born on ${employeeToConfirm.dateOfBirth} already exist in the system. 
+                            Would you still like to create a new employee with this name?`}
                             colorPalette={colorPalette} />}
                     {isConfirmationOfUpdateOpen &&
                         <NewEmployeeModalContent isCorrect={true}

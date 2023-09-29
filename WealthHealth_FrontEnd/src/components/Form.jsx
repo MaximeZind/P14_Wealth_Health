@@ -119,14 +119,14 @@ function Form({ openModal, colorPalette }) {
                 const idObject = { id: generateUniqueID() }
                 const newEmployee = Object.assign(personnalInformations, employeeAddress, formValidation.data, idObject);
                 // Vérification que l'employé n'est pas déjà dans la liste
-                const verification = doesEmployeeExist(EmployeeList, newEmployee);
-                if (verification === false) {
+                const possibleDuplicates = doesEmployeeExist(EmployeeList, newEmployee);
+                if (possibleDuplicates.length === 0) {
                     // Si l'employé n'existe pas, on l'ajoute au state
-                    openModal(true);
+                    openModal(possibleDuplicates, newEmployee);
                     dispatch(addEmployee(newEmployee));
-                } else if (verification === true) {
+                } else if (possibleDuplicates.length > 0) {
                     // Sinon, un message d'erreur s'affiche dans la modale
-                    openModal(false, newEmployee);
+                    openModal(possibleDuplicates, newEmployee);
                 }
             }
             handleErrorMsgs(formValidation.errorMsg);

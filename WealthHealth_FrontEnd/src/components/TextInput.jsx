@@ -47,6 +47,7 @@ function TextInput({ name, label, errorMsg, onChange, defaultValue, height, labe
                     height: height && `${height}px`,
                     color: fontColor && fontColor,
                     boxShadow: boxShadowColor && `0 1px 0 0 ${boxShadowColor}`,
+                    WebkitTextFillColor: fontColor,
                 }}
                 className={classes.input}
                 type="text"

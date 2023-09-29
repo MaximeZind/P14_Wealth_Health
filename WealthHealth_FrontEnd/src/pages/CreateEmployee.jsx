@@ -20,12 +20,19 @@ function CreateEmployee() {
     const [actionTaken, setActionTaken] = useState('');
     // Informations de l'employe a creer / mettre a jour
     const [employeeToConfirm, setEmployeeToConfirm] = useState(null);
+    const [duplicates, setDuplicates] = useState(null);
     // Le modal est il ouvert ou non
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Fonction de fermeture du modal
-    function openModal(isCorrect, newEmployee) {
-        setIsCorrect(isCorrect);
+
+    // Fonction d'ouverture du modal
+    function openModal(possibleDuplicates, newEmployee) {
+        setDuplicates(possibleDuplicates);
+        if (possibleDuplicates.length > 0){
+            setIsCorrect(false);
+        } else if (possibleDuplicates.length === 0){
+            setIsCorrect(true);
+        }
         setActionTaken('created');
         if (!isCorrect && newEmployee) {
             setEmployeeToConfirm(newEmployee);
@@ -72,7 +79,7 @@ function CreateEmployee() {
                             iconBackgroundColor='rgb(0, 175, 95, 0.5)'
                             closeModal={closeModal}
                             text={`This employee was successfully ${actionTaken}.`}
-                            colorPalette={colorPalette} /> :
+                            colorPalette={colorPalette} /> : duplicates.length === 1 ?
                         <ConfirmEmployeeActionModalContent
                             closeModal={closeModal}
                             confirm={() => handleConfirmEmployeeCreation(employeeToConfirm)}
@@ -80,6 +87,13 @@ function CreateEmployee() {
                             text={`An employee named ${employeeToConfirm.firstName} ${employeeToConfirm.lastName} 
                             and born on ${employeeToConfirm.dateOfBirth} already exists in the system. 
                             Would you like to create a new employee with this name or update the existing one?`}
+                            colorPalette={colorPalette} /> : 
+                            <ConfirmEmployeeActionModalContent
+                            closeModal={closeModal}
+                            confirm={() => handleConfirmEmployeeCreation(employeeToConfirm)}
+                            text={`Several employees named ${employeeToConfirm.firstName} ${employeeToConfirm.lastName} 
+                            and born on ${employeeToConfirm.dateOfBirth} already exist in the system. 
+                            Would you still like to create a new employee with this name?`}
                             colorPalette={colorPalette} />
                     }
                 </Modal>
