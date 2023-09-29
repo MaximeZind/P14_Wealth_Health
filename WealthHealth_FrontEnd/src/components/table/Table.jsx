@@ -78,7 +78,6 @@ function Table({ employeesList, colorPalette }) {
     // Fonction qui est appelee une fois que lq mise a jour des infos de l'employe est faite
     // ouvre la modale de confirmation de mise a jour
     function handleUpdateClick(updatedEmployee, possibleDuplicates) {
-        console.log(possibleDuplicates);
         if (possibleDuplicates.length === 0) {
             setIsFormOpen(false);
             setIsConfirmationOfUpdateOpen(true);

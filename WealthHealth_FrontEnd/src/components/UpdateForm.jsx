@@ -47,9 +47,7 @@ function UpdateForm({ closeModal, employee, employeesList, handleUpdateClick, co
             const updatedEmployee = formValidation.data
             let possibleDuplicates = doesEmployeeExist(employeesList, updatedEmployee);
             possibleDuplicates.map((employee) => console.log(employee.id));
-            console.log(updatedEmployee);
             possibleDuplicates = possibleDuplicates.filter((employee) => employee.id !== updatedEmployee.id);
-            console.log(possibleDuplicates);
             if (possibleDuplicates.length === 0) {
                 dispatch(updateEmployee(updatedEmployee));
                 handleUpdateClick(updatedEmployee, possibleDuplicates);
