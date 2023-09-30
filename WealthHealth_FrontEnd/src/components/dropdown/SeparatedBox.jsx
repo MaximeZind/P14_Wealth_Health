@@ -29,7 +29,14 @@ function SeparatedBox({ list, height, backgroundColor, hoveredBackgroundColor, f
                         <span className={classes.filter_items_icon}>
                             <MagnifyingGlass />
                         </span>
-                        <input name='search_field' className={classes.filter_items_input} type='text' placeholder='Search...' onChange={handleFilter} />
+                        <input name='search_field' 
+                        style={{
+                            color: fontColor,
+                        }}
+                        className={classes.filter_items_input} 
+                        type='text' 
+                        placeholder='Search...' 
+                        onChange={handleFilter} />
                     </div> : null}
                 <div className={classes.dropdown_options}
                     style={{
