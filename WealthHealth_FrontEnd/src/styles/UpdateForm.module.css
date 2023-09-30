@@ -7,12 +7,29 @@
 }
 
 .form_sections{
-    display: flex;
-    flex-direction: column;
     gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     padding: 40px;
     max-height: calc(80vh - 200px);
-    overflow-y: auto;
+}
+
+.personnal_informations{
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.address{
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.form_section.work_informations{
+    flex-direction: row;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 2;
 }
 
 .form_section{

@@ -75,7 +75,7 @@
     font-weight: bold;
 }
 
-.date_input_fields_field:hover {
+.date_input_fields_field:hover {        
     cursor: pointer;
 }
 

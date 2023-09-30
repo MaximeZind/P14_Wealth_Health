@@ -6,7 +6,6 @@ import Dropdown from '../components/dropdown/Dropdown';
 import Button from './Button';
 import { getDepartments, getStates } from '../utils/fetchData';
 import PropTypes from 'prop-types';
-import Collapse from './Collapse';
 import { useDispatch } from 'react-redux';
 import { updateEmployee } from '../actions/employees.action';
 import { validateEmployee } from '../utils/formValidation';
@@ -93,10 +92,6 @@ function UpdateForm({ closeModal, employee, employeesList, handleUpdateClick, co
             style={{ backgroundColor: colorPalette.secondaryColor }}>
             <h2 style={{ color: colorPalette.tertiaryColor }}> Update Employee</h2>
             <div className={classes.form_sections}>
-                <Collapse title={"Personnal Informations"}
-                    headerBackgroundColor={colorPalette.primaryColor}
-                    fontColor={colorPalette.tertiaryColor}
-                    iconColor={colorPalette.tertiaryColor}>
                     <div className={`${classes.personnal_informations} ${classes.form_section}`}>
                         <TextInput name='firstName'
                             label='First Name'
@@ -139,11 +134,6 @@ function UpdateForm({ closeModal, employee, employeesList, handleUpdateClick, co
                             todayBackgroundColor={colorPalette.senaryColor}
                             borderBottomColor={colorPalette.senaryColor} />
                     </div>
-                </Collapse>
-                <Collapse title={'Address'}
-                    headerBackgroundColor={colorPalette.primaryColor}
-                    fontColor={colorPalette.tertiaryColor}
-                    iconColor={colorPalette.tertiaryColor}>
                     <div className={`${classes.address} ${classes.form_section}`}>
                         <TextInput name='street'
                             label='Street'
@@ -191,11 +181,6 @@ function UpdateForm({ closeModal, employee, employeesList, handleUpdateClick, co
                             fontColor={colorPalette.tertiaryColor}
                             borderBottomColor={colorPalette.senaryColor} />
                     </div>
-                </Collapse>
-                <Collapse title={'Work Informations'}
-                    headerBackgroundColor={colorPalette.primaryColor}
-                    fontColor={colorPalette.tertiaryColor}
-                    iconColor={colorPalette.tertiaryColor}>
                     <div className={`${classes.work_informations} ${classes.form_section}`}>
                         <Dropdown list={departments}
                             name='department'
@@ -231,7 +216,6 @@ function UpdateForm({ closeModal, employee, employeesList, handleUpdateClick, co
                             todayBackgroundColor={colorPalette.senaryColor}
                             borderBottomColor={colorPalette.senaryColor} />
                     </div>
-                </Collapse>
             </div>
             <div className={classes.update_form_buttons}
                 style={{ backgroundColor: colorPalette.senaryColor }}>
