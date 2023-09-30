@@ -21,11 +21,12 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundY
     const [isOpen, setIsOpen] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
-    const [position, setPosition] = useState('below');
+    const [position, setPosition] = useState(0);
 
     const datePicker = useRef(null);
     const input = useRef(null);
     const hiddenInput = useRef(null);
+    const datePickerBox = useRef(null);
     const selectedValue = `${month.toString().padStart(2, '0')}/${day.toString().padStart(2, '0')}/${year}`;
 
     function handleClose() {
@@ -43,16 +44,19 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundY
 
     // useEffect pour déterminer si le module doit se mettre au dessus ou en dessous
     useEffect(() => {
+        if (datePickerBox.current && input.current){
         const inputRect = input.current.getBoundingClientRect();
         const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
         const spaceAboveInput = inputRect.top;
         const spaceBelowInput = viewportHeight - inputRect.bottom;
+        const datePickerBoxHeight = datePickerBox.current.getBoundingClientRect().height;
+        const translateY = datePickerBoxHeight + 50;
         if (spaceAboveInput > spaceBelowInput) {
-            setPosition('above');
+            setPosition(-translateY);
         } else if (spaceAboveInput < spaceBelowInput) {
-            setPosition('below');
+            setPosition(0);
         }
-
+}
     }, [isOpen]);
 
     // Pour que le datepicker se ferme lorsque l'utilisateur clique en dehors
@@ -106,6 +110,7 @@ function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundY
             </div>
             {isOpen ?
                 <DatePickerBox
+                elementRef={datePickerBox}
                     position={position}
                     handleValues={handleValues}
                     handleClose={handleClose}

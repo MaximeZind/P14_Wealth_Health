@@ -6,7 +6,7 @@ import Arrow from './icons/Arrow';
 import Span from '../Span';
 import DateInputField from './DateInputField';
 
-function DatePickerBox({ position, handleValues, handleClose, startingDay, startingMonth, startingYear, yearsRangeMin, yearsRangeMax, dateInputField, backgroundColor, fontColor, selectedDayFontColor, selectedMonthYearBackgroundColor, hoveredBackgroundColor, selectedDayBackgroundColor, todayBackgroundColor, previousNextMonthFontColor, iconColor }) {
+function DatePickerBox({ elementRef, position, handleValues, handleClose, startingDay, startingMonth, startingYear, yearsRangeMin, yearsRangeMax, dateInputField, backgroundColor, fontColor, selectedDayFontColor, selectedMonthYearBackgroundColor, hoveredBackgroundColor, selectedDayBackgroundColor, todayBackgroundColor, previousNextMonthFontColor, iconColor }) {
 
     const navSpanSize = 25;
     // Date d'aujourd'hui
@@ -229,7 +229,7 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
     }
 
     useEffect(() => {
-        if (dayInput.current && monthInput.current && yearInput.current){
+        if (dayInput.current && monthInput.current && yearInput.current) {
             dayInput.current.value = selectedDay.toString().padStart(2, '0');
             monthInput.current.value = selectedMonth.toString().padStart(2, '0');
             yearInput.current.value = selectedYear;
@@ -238,8 +238,9 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
 
     return (
         <div className={classes.date_picker}
+            ref={elementRef}
             style={{
-                transform: position === 'above' && 'translateY(-355px)',
+                transform: `translateY(${position}px)`,
                 backgroundColor: backgroundColor && backgroundColor,
                 gap: dateInputField ? '5px' : '30px'
             }}>
@@ -287,9 +288,9 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
             </header>
             {dateInputField &&
                 <div className={classes.date_input_fields}
-                style={{
-                    color: fontColor,
-                }}>
+                    style={{
+                        color: fontColor,
+                    }}>
                     <DateInputField type="text"
                         characters={2}
                         elementRef={monthInput}
@@ -297,8 +298,8 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
                         onBlur={(event) => handleOnBlurMonth(event)}
                         onClick={(event) => selectInput(event)}
                         onKeyDown={(event) => event.key === 'Enter' && event.preventDefault()}
-                        className={`${classes.date_input_fields_field} ${classes.month_input}`} 
-                        fontColor={fontColor}/>
+                        className={`${classes.date_input_fields_field} ${classes.month_input}`}
+                        fontColor={fontColor} />
                     <p>/</p>
                     <DateInputField type="text"
                         characters={2}
@@ -307,8 +308,8 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
                         onBlur={(event) => handleOnBlurDay(event)}
                         onClick={(event) => selectInput(event)}
                         onKeyDown={(event) => event.key === 'Enter' && event.preventDefault()}
-                        className={`${classes.date_input_fields_field} ${classes.day_input}`} 
-                        fontColor={fontColor}/>
+                        className={`${classes.date_input_fields_field} ${classes.day_input}`}
+                        fontColor={fontColor} />
                     <p>/</p>
                     <DateInputField type="text"
                         characters={4}
@@ -317,8 +318,8 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
                         onBlur={(event) => handleOnBlurYear(event)}
                         onClick={(event) => selectInput(event)}
                         onKeyDown={(event) => event.key === 'Enter' && event.preventDefault()}
-                        className={`${classes.date_input_fields_field} ${classes.year_input}`} 
-                        fontColor={fontColor}/>
+                        className={`${classes.date_input_fields_field} ${classes.year_input}`}
+                        fontColor={fontColor} />
                 </div>}
             {arrayType === 'days' &&
                 <div className={classes.date_picker_days}>
@@ -408,7 +409,8 @@ function DatePickerBox({ position, handleValues, handleClose, startingDay, start
 }
 
 DatePickerBox.propTypes = {
-    position: PropTypes.string.isRequired,
+    elementRef: PropTypes.object.isRequired,
+    position: PropTypes.number.isRequired,
     handleValues: PropTypes.func.isRequired,
     handleClose: PropTypes.func.isRequired,
     startingDay: PropTypes.number.isRequired,
