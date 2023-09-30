@@ -176,17 +176,16 @@ export function validateDate(string, ageMin, ageMax, dateOfBirth) {
     const date = new Date(string.trim());
     let response = false;
     let errorMsg = null;
-
+    const today = new Date();
+    const currentDay = today.getDate();
+    const currentMonth = today.getMonth() + 1;
+    const currentYear = today.getFullYear();
     if (date.toString() === 'Invalid Date') {
         errorMsg = 'Enter a valid date.'
     } else if (date.toString() !== 'Invalid Date') {
         if (ageMin && ageMax) {
-            const today = new Date();
-            const currentDay = today.getDate() + 1;
-            const currentMonth = today.getMonth() + 1;
-            const currentYear = today.getFullYear();
             let age = currentYear - date.getFullYear();
-            if ((currentMonth < date.getMonth() + 1) || (currentMonth === date.getMonth() + 1 && currentDay < date.getDate() + 1)) {
+            if ((currentMonth < date.getMonth() + 1) || (currentMonth === date.getMonth() + 1 && currentDay < date.getDate())) {
                 age--;
             }
             if (age < ageMin) {
@@ -208,6 +207,16 @@ export function validateDate(string, ageMin, ageMax, dateOfBirth) {
                 const comparisonDay = date.getDate();
                 if (comparisonMonth < birthMonth || (comparisonMonth === birthMonth && comparisonDay < birthDay)) {
                     errorMsg = 'The employee must be at least 18 to start working';
+                }
+            }
+            const yearDifferenceWithToday = date.getFullYear() - currentYear;
+            if (yearDifferenceWithToday > 1){
+                errorMsg = 'Invalid date: The selected start date is too distant. Please choose a date closer to the present.';
+            } else if ( yearDifferenceWithToday === 1){
+                const comparisonMonth = date.getMonth();
+                const comparisonDay = date.getDate();
+                if (comparisonMonth < currentMonth || (comparisonMonth === currentMonth && comparisonDay < currentDay)) {
+                    errorMsg = 'Invalid date: The selected start date is too distant. Please choose a date closer to the present.';
                 }
             }
         }
