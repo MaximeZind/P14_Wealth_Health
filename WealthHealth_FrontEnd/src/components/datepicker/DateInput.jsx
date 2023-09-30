@@ -5,6 +5,33 @@ import { useState, useRef } from 'react';
 import Calendar from './icons/Calendar';
 import DatePickerBox from './DatePickerBox';
 
+/**
+ * Un composant d'entrée de date personnalisable avec un sélecteur de date qui s'ouvre et se ferme.
+ *
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {string} props.name - L'attribut "name" de l'entrée de date.
+ * @param {string} props.label - Le texte d'étiquette de l'entrée de date.
+ * @param {string} [props.errorMsg] - Le message d'erreur à afficher.
+ * @param {number} [props.yearsRangeMax] - L'année maximale disponible dans le sélecteur de date.
+ * @param {number} [props.yearsRangeMin] - L'année minimale disponible dans le sélecteur de date.
+ * @param {boolean} [props.roundYearHighlight] - Indique si l'année doit être arrondie dans le sélecteur de date.
+ * @param {string} [props.defaultValue] - La valeur par défaut pour l'entrée au format "MM/JJ/AAAA".
+ * @param {string} props.labelColor - La couleur de l'étiquette.
+ * @param {string} props.focusedLabelColor - La couleur de l'étiquette lorsqu'elle est en focus.
+ * @param {string} props.boxShadowColor - La couleur de l'ombre de la boîte de l'entrée.
+ * @param {string} props.fontColor - La couleur du texte de l'entrée.
+ * @param {string} props.selectedDayFontColor - La couleur du jour sélectionné dans le sélecteur de date.
+ * @param {string} props.previousNextMonthFontColor - La couleur des jours du mois précédent/suivant dans le sélecteur de date.
+ * @param {string} props.iconColor - La couleur de l'icône du calendrier.
+ * @param {string} props.backgroundColor - La couleur de fond du conteneur de l'entrée.
+ * @param {string} props.hoveredBackgroundColor - La couleur de fond lors du survol.
+ * @param {string} props.selectedDayBackgroundColor - La couleur de fond du jour sélectionné dans le sélecteur de date.
+ * @param {string} props.selectedMonthYearBackgroundColor - La couleur de fond du mois/année sélectionné dans le sélecteur de date.
+ * @param {string} props.todayBackgroundColor - La couleur de fond de la date d'aujourd'hui dans le sélecteur de date.
+ * @returns {JSX.Element} Le composant DateInput rendu.
+ */
+
 function DateInput({ name, label, errorMsg, yearsRangeMin, yearsRangeMax, roundYearHighlight, defaultValue, dateInputField, labelColor, focusedLabelColor, boxShadowColor, fontColor, selectedDayFontColor, previousNextMonthFontColor, iconColor, backgroundColor, hoveredBackgroundColor, selectedDayBackgroundColor, todayBackgroundColor, selectedMonthYearBackgroundColor }) {
 
     const defaultDate = new Date(defaultValue);

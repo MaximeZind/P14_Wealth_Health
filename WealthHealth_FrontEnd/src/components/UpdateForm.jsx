@@ -11,6 +11,19 @@ import { updateEmployee } from '../actions/employees.action';
 import { validateEmployee } from '../utils/formValidation';
 import { doesEmployeeExist } from '../utils/utils';
 
+/**
+ * Composant UpdateForm pour mettre à jour les informations d'un employé.
+ *
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {function} props.closeModal - La fonction pour fermer la modale de mise à jour.
+ * @param {Object} props.employee - Les informations de l'employé à mettre à jour.
+ * @param {Array} props.employeesList - La liste des employés existants.
+ * @param {function} props.handleUpdateClick - La fonction à appeler lorsque la mise à jour est effectuée.
+ * @param {Object} props.colorPalette - La palette de couleurs pour le style.
+ * @returns {JSX.Element} Le composant UpdateForm rendu.
+ */
+
 
 function UpdateForm({ closeModal, employee, employeesList, handleUpdateClick, colorPalette }) {
 

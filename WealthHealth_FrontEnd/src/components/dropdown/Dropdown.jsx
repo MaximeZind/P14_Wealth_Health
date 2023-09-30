@@ -5,6 +5,36 @@ import DropdownArrow from './icons/DropdownArrow';
 import SeparatedBox from './SeparatedBox';
 import NormalBox from './NormalBox';
 
+/**
+ * Composant Dropdown pour la sélection d'éléments dans une liste déroulante personnalisée. 
+ * On peut choisir le type de liste déroulante.
+ *
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {Array} props.list - La liste des éléments à afficher dans la liste déroulante.
+ * @param {string} props.label - L'étiquette associée à la liste déroulante.
+ * @param {string} props.name - Le nom de la liste déroulante.
+ * @param {string} [props.errorMsg] - Message d'erreur à afficher en cas de problème.
+ * @param {boolean} [props.separatedBox] - Indique si la liste déroulante utilise une boîte séparée pour les options.
+ * @param {boolean} [props.searchBar] - Indique si une barre de recherche est affichée pour filtrer les options.
+ * @param {string} [props.defaultValue] - La valeur par défaut sélectionnée.
+ * @param {string} [props.defaultName] - Le nom par défaut sélectionné.
+ * @param {function} [props.onChange] - Fonction de rappel appelée lorsque la sélection change.
+ * @param {number} props.height - La hauteur de la liste déroulante.
+ * @param {number} [props.maxWidth] - La largeur maximale de la liste déroulante.
+ * @param {string} [props.labelColor] - Couleur du texte de l'étiquette.
+ * @param {string} [props.focusedLabelColor] - Couleur du texte de l'étiquette lorsque la liste est ouverte ou une valeur est sélectionnée.
+ * @param {string} [props.backgroundColor] - Couleur de fond de la liste déroulante.
+ * @param {string} [props.hoveredBackgroundColor] - Couleur de fond lorsqu'un élément est survolé.
+ * @param {string} [props.fontColor] - Couleur du texte dans la liste déroulante.
+ * @param {string} [props.hoveredFontColor] - Couleur du texte lorsque l'élément est survolé.
+ * @param {string} [props.fontFamily] - Police de caractères à utiliser pour le texte.
+ * @param {string} [props.borderBottomColor] - Couleur de la bordure inférieure de la liste déroulante.
+ * @param {string} [props.boxShadowColor] - Couleur de l'ombre de la liste déroulante.
+ * @returns {JSX.Element} Le composant Dropdown rendu.
+ */
+
+
 function Dropdown({ list, label, name, errorMsg, separatedBox, searchBar, defaultValue, defaultName, onChange, height, maxWidth, labelColor, focusedLabelColor, backgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, fontFamily, borderBottomColor, boxShadowColor}) {
 
     const [isOpen, setIsOpen] = useState(false);

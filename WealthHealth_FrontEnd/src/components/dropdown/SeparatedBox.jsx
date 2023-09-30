@@ -5,6 +5,24 @@ import MagnifyingGlass from './icons/MagnifyingGlass';
 import { dropdownFilter } from '../../utils/searchScript';
 import ListItem from './ListItem';
 
+/**
+ * Composant SeparatedBox pour afficher les options d'une liste déroulante avec un input pour la recherche.
+ *
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {Array} props.list - La liste des éléments à afficher dans la boîte.
+ * @param {number} props.height - La hauteur de la boîte.
+ * @param {string} [props.backgroundColor] - Couleur de fond de la boîte.
+ * @param {string} [props.hoveredBackgroundColor] - Couleur de fond lorsqu'un élément est survolé.
+ * @param {string} [props.fontColor] - Couleur du texte dans la boîte.
+ * @param {string} [props.hoveredFontColor] - Couleur du texte lorsque l'élément est survolé.
+ * @param {string} [props.fontFamily] - Police de caractères à utiliser pour le texte.
+ * @param {function} props.handleClick - Fonction de rappel appelée lorsque l'utilisateur clique sur un élément.
+ * @param {boolean} [props.searchBar] - Indique si une barre de recherche est affichée pour filtrer les options.
+ * @returns {JSX.Element} Le composant SeparatedBox rendu.
+ */
+
+
 function SeparatedBox({ list, height, backgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, fontFamily, handleClick, searchBar }) {
 
     const [newList, setNewList] = useState(list);

@@ -4,6 +4,20 @@ import PropTypes from 'prop-types';
 import CrossIcon from './icons/CrossIcon';
 import Span from '../Span';
 
+/**
+ * Composant Modal pour afficher une boîte modale personnalisée.
+ *
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {React.ReactNode} props.children - Le contenu de la boîte modale.
+ * @param {function} [props.closeModal] - Fonction pour fermer la boîte modale.
+ * @param {number} [props.maxWidth] - La largeur maximale de la boîte modale.
+ * @param {string} [props.modalBackgroundColor] - La couleur de fond de la boîte modale.
+ * @param {string} [props.iconColor] - La couleur de l'icône de fermeture.
+ * @param {string} [props.hoveredIconBackgroundColor] - La couleur de fond de l'icône lorsque survolée.
+ * @returns {JSX.Element} Le composant Modal rendu.
+ */
+
 function Modal({ children, closeModal, maxWidth, modalBackgroundColor, iconColor, hoveredIconBackgroundColor }) {
 
     return (

@@ -11,6 +11,23 @@ import Button from './Button';
 import { doesEmployeeExist, generateUniqueID } from '../utils/utils';
 import PropTypes from 'prop-types';
 
+/**
+ * Composant Form pour ajouter un nouvel employé en plusieurs étapes.
+ *
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {function} props.openModal - La fonction pour ouvrir une modale (doit être fournie par le parent).
+ * @param {Object} props.colorPalette - La palette de couleurs utilisée pour le formulaire.
+ * @param {string} props.colorPalette.primaryColor - La couleur principale.
+ * @param {string} props.colorPalette.secondaryColor - La couleur secondaire.
+ * @param {string} props.colorPalette.tertiaryColor - La couleur tertiaire.
+ * @param {string} props.colorPalette.quarternaryColor - La couleur quaternaire.
+ * @param {string} props.colorPalette.quinaryColor - La couleur quinaire.
+ * @param {string} props.colorPalette.senaryColor - La couleur sénary.
+ * @returns {JSX.Element} Le composant Form rendu.
+ */
+
+
 function Form({ openModal, colorPalette }) {
 
     const dispatch = useDispatch()

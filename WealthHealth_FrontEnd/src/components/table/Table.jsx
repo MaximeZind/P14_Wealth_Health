@@ -13,6 +13,16 @@ import NewEmployeeModalContent from '../modal/modal_contents/NewEmployeeModalCon
 import ConfirmEmployeeActionModalContent from '../modal/modal_contents/ConfirmEmployeeActionModalContent';
 import DataTable from './DataTable';
 
+/**
+ * Composant Table pour afficher une liste d'employés dans un tableau.
+ *
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {Array} props.employeesList - La liste des employés à afficher.
+ * @param {Object} props.colorPalette - La palette de couleurs personnalisée pour le composant.
+ * @returns {JSX.Element} Le composant Table rendu.
+ */
+
 function Table({ employeesList, colorPalette }) {
 
     const dispatch = useDispatch();

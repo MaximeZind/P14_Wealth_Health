@@ -2,6 +2,25 @@ import React, { useEffect, useRef, useState } from 'react';
 import classes from '../styles/TextInput.module.css';
 import PropTypes from 'prop-types';
 
+/**
+ * Composant TextInput pour créer des champs de texte avec des fonctionnalités de style personnalisé.
+ *
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {string} props.name - Le nom du champ de texte.
+ * @param {string} props.label - L'étiquette associée au champ de texte.
+ * @param {string} props.errorMsg - Le message d'erreur à afficher (le cas échéant).
+ * @param {function} props.onChange - La fonction à appeler lorsqu'une modification est apportée au champ de texte.
+ * @param {string} props.defaultValue - La valeur par défaut du champ de texte.
+ * @param {number} props.height - La hauteur du champ de texte.
+ * @param {string} props.labelColor - La couleur de l'étiquette.
+ * @param {string} props.focusedLabelColor - La couleur de l'étiquette lorsqu'elle est en mode focus.
+ * @param {string} props.boxShadowColor - La couleur de l'ombre de la boîte du champ de texte.
+ * @param {string} props.fontColor - La couleur du texte du champ de texte.
+ * @returns {JSX.Element} Le composant TextInput rendu.
+ */
+
+
 function TextInput({ name, label, errorMsg, onChange, defaultValue, height, labelColor, focusedLabelColor, boxShadowColor, fontColor }) {
 
     const input = useRef(null);

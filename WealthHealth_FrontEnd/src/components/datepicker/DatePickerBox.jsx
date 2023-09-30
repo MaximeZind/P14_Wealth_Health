@@ -6,6 +6,33 @@ import Arrow from './icons/Arrow';
 import Span from '../Span';
 import DateInputField from './DateInputField';
 
+/**
+ * Composant DatePickerBox pour la sélection de dates personnalisée. On peut choisir d'avoir le DateInputField (manuel) ou non.
+ *
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {object} props.elementRef - Référence React pour l'élément DatePickerBox.
+ * @param {number} props.position - Position verticale du DatePickerBox par rapport à son parent.
+ * @param {function} props.handleValues - Fonction de rappel pour gérer les valeurs sélectionnées.
+ * @param {function} props.handleClose - Fonction de rappel pour fermer le DatePickerBox.
+ * @param {number} props.startingDay - Jour de départ sélectionné.
+ * @param {number} props.startingMonth - Mois de départ sélectionné.
+ * @param {number} props.startingYear - Année de départ sélectionnée.
+ * @param {number} [props.yearsRangeMin] - Année minimale autorisée dans la plage des années.
+ * @param {number} [props.yearsRangeMax] - Année maximale autorisée dans la plage des années.
+ * @param {boolean} [props.dateInputField] - Indique si les champs de saisie de date sont affichés.
+ * @param {string} [props.backgroundColor] - Couleur de fond du DatePickerBox.
+ * @param {string} [props.fontColor] - Couleur du texte dans le DatePickerBox.
+ * @param {string} [props.hoveredBackgroundColor] - Couleur de fond au survol des éléments interactifs.
+ * @param {string} [props.selectedMonthYearBackgroundColor] - Couleur de fond des mois et années sélectionnés.
+ * @param {string} [props.selectedDayFontColor] - Couleur du texte pour le jour sélectionné.
+ * @param {string} [props.selectedDayBackgroundColor] - Couleur de fond du jour sélectionné.
+ * @param {string} [props.todayBackgroundColor] - Couleur de fond du jour actuel.
+ * @param {string} [props.previousNextMonthFontColor] - Couleur du texte pour les mois précédents et suivants.
+ * @param {string} [props.iconColor] - Couleur des icônes.
+ * @returns {JSX.Element} Le composant DatePickerBox rendu.
+ */
+
 function DatePickerBox({ elementRef, position, handleValues, handleClose, startingDay, startingMonth, startingYear, yearsRangeMin, yearsRangeMax, dateInputField, backgroundColor, fontColor, selectedDayFontColor, selectedMonthYearBackgroundColor, hoveredBackgroundColor, selectedDayBackgroundColor, todayBackgroundColor, previousNextMonthFontColor, iconColor }) {
 
     const navSpanSize = 25;

@@ -2,6 +2,23 @@ import React, { useState } from 'react';
 import classes from './styles/ListItem.module.css';
 import PropTypes from 'prop-types';
 
+/**
+ * Composant ListItem pour afficher un élément de la liste déroulante.
+ *
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {(Object|string|number)} props.item - L'élément à afficher. Peut être un objet avec des propriétés 'name' et 'abbreviation', une chaîne de caractères ou un nombre.
+ * @param {number} props.index - L'indice de l'élément dans la liste.
+ * @param {number} props.height - La hauteur de l'élément de liste.
+ * @param {string} [props.fontFamily] - La famille de polices à appliquer au texte.
+ * @param {string} [props.backgroundColor] - La couleur de fond de l'élément.
+ * @param {string} [props.hoveredBackgroundColor] - La couleur de fond lorsque l'élément est survolé.
+ * @param {string} [props.fontColor] - La couleur du texte de l'élément.
+ * @param {string} [props.hoveredFontColor] - La couleur du texte lorsque l'élément est survolé.
+ * @param {function} props.handleClick - Fonction de rappel appelée lorsque l'utilisateur clique sur l'élément.
+ * @returns {JSX.Element} Le composant ListItem rendu.
+ */
+
 
 function ListItem({ item, index, height, fontFamily, backgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, handleClick }) {
 

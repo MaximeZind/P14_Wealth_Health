@@ -5,6 +5,32 @@ import fields from '../../data/fields.json';
 import Arrow from '../Arrow';
 import PropTypes from 'prop-types';
 
+/**
+ * Composant DataTable pour afficher une liste d'employés dans un tableau.
+ *
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {Array} props.list - La liste des employés à afficher.
+ * @param {number} props.currentPage - Le numéro de la page actuelle.
+ * @param {number} props.tableLength - Le nombre d'entrées à afficher par page.
+ * @param {function} props.setEmployeeToUpdate - La fonction pour définir l'employé à mettre à jour.
+ * @param {function} props.setIsModalOpen - La fonction pour définir si le modal est ouvert.
+ * @param {function} props.setIsFormOpen - La fonction pour définir si le formulaire est ouvert.
+ * @param {function} props.setemployeeToDelete - La fonction pour définir l'employé à supprimer.
+ * @param {function} props.setList - La fonction pour définir la liste des employés.
+ * @param {string} props.tableBackgroundColor - La couleur de fond de la table.
+ * @param {string} props.oddBackgroundColor - La couleur de fond des lignes impaires.
+ * @param {string} props.evenBackgroundColor - La couleur de fond des lignes paires.
+ * @param {string} props.hoveredBackgroundColor - La couleur de fond au survol.
+ * @param {string} props.fontColor - La couleur du texte.
+ * @param {string} props.hoveredFontColor - La couleur du texte au survol.
+ * @param {string} props.iconBoxBackgroundColor - La couleur de fond de la boîte d'icônes.
+ * @param {string} props.iconColor - La couleur de l'icône.
+ * @param {string} props.highlightedBackgroundColor - La couleur de fond en surbrillance.
+ * @returns {JSX.Element} Le composant DataTable rendu.
+ */
+
+
 function DataTable({ list, currentPage, tableLength, setEmployeeToUpdate, setIsModalOpen, setIsFormOpen, setemployeeToDelete, setList, tableBackgroundColor, oddBackgroundColor, evenBackgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, iconBoxBackgroundColor, iconColor, highlightedBackgroundColor }) {
 
     // initialisation des States
