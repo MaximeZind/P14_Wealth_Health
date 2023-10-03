@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classes from '../styles/UpdateForm.module.css';
 import TextInput from '../components/TextInput';
-import DateInput from '../components/datepicker/DateInput';
+import DateInput from 'maximez_date_picker/src/DateInput';
 import Dropdown from '../components/dropdown/Dropdown';
 import Button from './Button';
 import { getDepartments, getStates } from '../utils/fetchData';

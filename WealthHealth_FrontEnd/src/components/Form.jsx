@@ -5,7 +5,7 @@ import { addEmployee } from '../actions/employees.action';
 import { validatePersonnalInformations, validateAddress, validateWorkSituation } from '../utils/formValidation';
 import { useDispatch, useSelector } from 'react-redux';
 import TextInput from './TextInput';
-import DateInput from './datepicker/DateInput';
+import DateInput from 'maximez_date_picker/src/DateInput';
 import Dropdown from './dropdown/Dropdown';
 import Button from './Button';
 import { doesEmployeeExist, generateUniqueID } from '../utils/utils';
@@ -193,6 +193,19 @@ function Form({ openModal, colorPalette }) {
                     backgroundColor: colorPalette.secondaryColor,
                     border: `1px solid ${colorPalette.quinaryColor}`,
                 }}>
+                <Dropdown list={states}
+                    name='state'
+                    label='State'
+                    errorMsg={stateErrorMsg}
+                    height={40}
+                    labelColor={colorPalette.quinaryColor}
+                    focusedLabelColor={colorPalette.tertiaryColor}
+                    backgroundColor={colorPalette.secondaryColor}
+                    hoveredBackgroundColor={colorPalette.primaryColor}
+                    fontColor={colorPalette.tertiaryColor}
+                    hoveredFontColor={colorPalette.tertiaryColor}
+                    borderBottomColor={colorPalette.senaryColor}
+                    separatedBox={false} searchBar={true} />
                 <TextInput name='firstName'
                     label='First Name'
                     errorMsg={firstNameErrorMsg}
@@ -211,12 +224,12 @@ function Form({ openModal, colorPalette }) {
                     boxShadowColor={colorPalette.senaryColor}
                     fontColor={colorPalette.tertiaryColor}
                     borderBottomColor={colorPalette.senaryColor} />
+
                 <DateInput name='dateOfBirth'
                     label='Date of Birth'
                     errorMsg={dateOfBirthErrorMsg}
                     yearsRangeMin={1923}
                     yearsRangeMax={2023}
-                    roundYearHighlight={true}
                     dateInputField={true}
                     labelColor={colorPalette.quinaryColor}
                     focusedLabelColor={colorPalette.tertiaryColor}
@@ -336,7 +349,6 @@ function Form({ openModal, colorPalette }) {
                     errorMsg={startDateErrorMsg}
                     yearsRangeMin={1923}
                     yearsRangeMax={2023}
-                    roundYearHighlight={true}
                     labelColor={colorPalette.quinaryColor}
                     focusedLabelColor={colorPalette.tertiaryColor}
                     boxShadowColor={colorPalette.senaryColor}
