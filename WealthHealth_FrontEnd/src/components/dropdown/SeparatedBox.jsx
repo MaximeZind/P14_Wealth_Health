@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import classes from './styles/SeparatedBox.module.css';
 import PropTypes from 'prop-types';
 import MagnifyingGlass from './icons/MagnifyingGlass';
-import { dropdownFilter } from '../../utils/searchScript';
+import { dropdownFilter } from './scripts';
 import ListItem from './ListItem';
 
 /**

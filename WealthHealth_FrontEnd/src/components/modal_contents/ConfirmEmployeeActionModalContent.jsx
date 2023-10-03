@@ -1,7 +1,7 @@
 import React from 'react';
-import classes from '../styles/ConfirmEmployeeDeletionModalContent.module.css';
+import classes from '../../styles/ConfirmEmployeeDeletionModalContent.module.css';
 import PropTypes from 'prop-types';
-import Button from '../../Button';
+import Button from '../Button';
 
 function ConfirmEmployeeActionModalContent({ closeModal, confirm, update, text, colorPalette }) {
 

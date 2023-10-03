@@ -6,11 +6,11 @@ import fields from '../../data/fields.json';
 import { search } from '../../utils/searchScript';
 import classes from './styles/Table.module.css';
 import TextInput from '../TextInput';
-import Modal from '../modal/Modal';
+import Modal from 'maximez_modal/src/Modal';
 import Dropdown from '../dropdown/Dropdown';
 import UpdateForm from '../UpdateForm';
-import NewEmployeeModalContent from '../modal/modal_contents/NewEmployeeModalContent';
-import ConfirmEmployeeActionModalContent from '../modal/modal_contents/ConfirmEmployeeActionModalContent';
+import NewEmployeeModalContent from '../modal_contents/NewEmployeeModalContent';
+import ConfirmEmployeeActionModalContent from '../modal_contents/ConfirmEmployeeActionModalContent';
 import DataTable from './DataTable';
 
 /**

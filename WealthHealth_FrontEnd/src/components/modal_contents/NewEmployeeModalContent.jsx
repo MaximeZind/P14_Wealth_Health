@@ -1,9 +1,9 @@
 import React from 'react';
-import classes from '../styles/NewEmployeeModalContent.module.css';
+import classes from '../../styles/NewEmployeeModalContent.module.css';
 import PropTypes from 'prop-types';
-import NewUserIcon from '../icons/NewUserIcon';
-import Button from '../../Button';
-import WrongUserIcon from '../icons/WrongUserIcon';
+import NewUserIcon from './icons/NewUserIcon';
+import Button from '../Button';
+import WrongUserIcon from './icons/WrongUserIcon';
 
 function NewEmployeeModalContent({ isCorrect, iconColor, iconBackgroundColor, closeModal, text, colorPalette }) {
 
