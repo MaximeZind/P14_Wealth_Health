@@ -1,34 +1,35 @@
 import React, { useState } from 'react';
 import classes from './styles/DataTable.module.css';
 import Row from './Row';
-import Arrow from '../Arrow';
+import Arrow from './icons/Arrow';
 import PropTypes from 'prop-types';
-import {toCamelCase} from './utils/utils'
+import {toCamelCase} from './utils/utils';
 
 /**
- * Composant DataTable pour afficher une liste d'employés dans un tableau.
+ * DataTable component for rendering a table of data with sorting and pagination.
  *
- * @component
- * @param {Object} props - Les propriétés du composant.
- * @param {Array} props.list - La liste des employés à afficher.
- * @param {number} props.currentPage - Le numéro de la page actuelle.
- * @param {number} props.tableLength - Le nombre d'entrées à afficher par page.
- * @param {function} props.setList - La fonction pour définir la liste des employés.
- * @param {string} props.tableBackgroundColor - La couleur de fond de la table.
- * @param {string} props.oddBackgroundColor - La couleur de fond des lignes impaires.
- * @param {string} props.evenBackgroundColor - La couleur de fond des lignes paires.
- * @param {string} props.hoveredBackgroundColor - La couleur de fond au survol.
- * @param {string} props.fontColor - La couleur du texte.
- * @param {string} props.hoveredFontColor - La couleur du texte au survol.
- * @param {string} props.iconBoxBackgroundColor - La couleur de fond de la boîte d'icônes.
- * @param {string} props.iconColor - La couleur de l'icône.
- * @param {string} props.highlightedBackgroundColor - La couleur de fond en surbrillance.
- * @returns {JSX.Element} Le composant DataTable rendu.
+ * @param {object} props - The component's props.
+ * @param {Array<object>} props.list - The list of data items to display in the table.
+ * @param {Array<string>} props.fields - The list of table fields.
+ * @param {number} props.currentPage - The current page number for pagination.
+ * @param {number} props.tableLength - The number of items to display per page.
+ * @param {function} props.handleBinClick - Function to handle bin icon clicks.
+ * @param {function} props.handlePencilClick - Function to handle pencil icon clicks.
+ * @param {function} props.setList - Function to set the list of items.
+ * @param {string} [props.tableBackgroundColor] - Background color of the table.
+ * @param {string} [props.oddBackgroundColor] - Background color for odd rows.
+ * @param {string} [props.evenBackgroundColor] - Background color for even rows.
+ * @param {string} [props.hoveredBackgroundColor] - Background color for hovered rows.
+ * @param {string} [props.fontColor] - Font color for table content.
+ * @param {string} [props.hoveredFontColor] - Font color for hovered rows.
+ * @param {string} [props.iconBoxBackgroundColor] - Background color for icon boxes.
+ * @param {string} [props.iconColor] - Color of icons.
+ * @param {string} [props.highlightedBackgroundColor] - Background color for highlighted rows.
+ * @returns {JSX.Element} The rendered DataTable component.
  */
 
-
 function DataTable({ list, fields, currentPage, tableLength, handleBinClick, handlePencilClick, setList, tableBackgroundColor, oddBackgroundColor, evenBackgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, iconBoxBackgroundColor, iconColor, highlightedBackgroundColor }) {
-
+    
     // initialisation des States
     const [selectedField, setSelectedField] = useState(null);
     const [isAscending, setIsAscending] = useState(false);
@@ -172,8 +173,11 @@ DataTable.propTypes = {
             zipCode: PropTypes.string.isRequired,
         })
     ).isRequired,
+    fields: PropTypes.arrayOf(PropTypes.string).isRequired,
     currentPage: PropTypes.number.isRequired,
     tableLength: PropTypes.number.isRequired,
+    handleBinClick: PropTypes.func.isRequired,
+    handlePencilClick: PropTypes.func.isRequired,
     setList: PropTypes.func.isRequired,
     tableBackgroundColor: PropTypes.string,
     oddBackgroundColor: PropTypes.string,
@@ -184,6 +188,7 @@ DataTable.propTypes = {
     iconBoxBackgroundColor: PropTypes.string,
     iconColor: PropTypes.string,
     highlightedBackgroundColor: PropTypes.string,
+    
 }
 
 export default DataTable;

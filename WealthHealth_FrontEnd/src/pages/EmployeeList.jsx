@@ -10,7 +10,7 @@ import { deleteEmployee, updateEmployee } from '../actions/employees.action';
 import fields from '../data/fields.json';
 
 function EmployeeList() {
-    
+
     const dispatch = useDispatch();
     // initialisation des States
     // Modal
@@ -84,10 +84,33 @@ function EmployeeList() {
         <main className={classes.main}
             style={{ backgroundColor: colorPalette.primaryColor }}>
             <Table itemsList={employeesList}
-            fields={fields}
-            handleBinClick={handleBinClick}
-            handlePencilClick={handlePencilClick}
-                colorPalette={colorPalette} />
+                fields={fields}
+                handleBinClick={handleBinClick}
+                handlePencilClick={handlePencilClick}
+                colorPalette={colorPalette}
+                tableBackgroundColor={colorPalette.secondaryColor}
+                oddBackgroundColor={colorPalette.primaryColor}
+                evenBackgroundColor={colorPalette.secondaryColor}
+                hoveredBackgroundColor={colorPalette.quarternaryColor}
+                fontColor={colorPalette.tertiaryColor}
+                hoveredFontColor={colorPalette.secondaryColor}
+                ArrowColor={colorPalette.quarternaryColor}
+                iconBoxBackgroundColor={colorPalette.secondaryColor}
+                iconColor={colorPalette.tertiaryColor}
+                highlightedBackgroundColor={colorPalette.senaryColor}
+                
+                dropdownLabelColor={colorPalette.quinaryColor}
+                dropdownFocusedLabelColor={colorPalette.tertiaryColor}
+                dropdownBackgroundColor={colorPalette.secondaryColor}
+                dropdownHoveredBackgroundColor={colorPalette.primaryColor}
+                dropdownFontColor={colorPalette.tertiaryColor}
+                dropdownHoveredFontColor={colorPalette.tertiaryColor}
+                dropdownBorderBottomColor={colorPalette.senaryColor}
+                
+                textInputLabelColor={colorPalette.quinaryColor}
+                textInputFocusedLabelColor={colorPalette.tertiaryColor}
+                textInputBoxShadowColor={colorPalette.senaryColor}
+                textInputTontColor={colorPalette.tertiaryColor}/>
             {isModalOpen ?
                 <Modal closeModal={handleCloseModal}
                     modalBackgroundColor={colorPalette.secondaryColor}
