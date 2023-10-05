@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classes from '../styles/CreateEmployee.module.css';
 import Form from '../components/Form';
-import Modal from 'maximez_modal/src/Modal'
+import {Modal} from 'maximez_modal';
 import NewEmployeeModalContent from '../components/modal_contents/NewEmployeeModalContent'
 import ConfirmEmployeeActionModalContent from '../components/modal_contents/ConfirmEmployeeActionModalContent';
 import { addEmployee, updateEmployee } from '../actions/employees.action';

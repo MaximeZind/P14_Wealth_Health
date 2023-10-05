@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { deleteEmployee, updateEmployee } from '../../actions/employees.action';
-import fields from '../../data/fields.json';
-import { search } from '../../utils/searchScript';
+import { search } from './utils/searchScript';
 import classes from './styles/Table.module.css';
 import TextInput from '../TextInput';
-import Modal from 'maximez_modal/src/Modal';
 import Dropdown from '../dropdown/Dropdown';
-import UpdateForm from '../UpdateForm';
-import NewEmployeeModalContent from '../modal_contents/NewEmployeeModalContent';
-import ConfirmEmployeeActionModalContent from '../modal_contents/ConfirmEmployeeActionModalContent';
 import DataTable from './DataTable';
 
 /**
@@ -18,29 +11,14 @@ import DataTable from './DataTable';
  *
  * @component
  * @param {Object} props - Les propriétés du composant.
- * @param {Array} props.employeesList - La liste des employés à afficher.
+ * @param {Array} props.itemsList - La liste des employés à afficher.
  * @param {Object} props.colorPalette - La palette de couleurs personnalisée pour le composant.
  * @returns {JSX.Element} Le composant Table rendu.
  */
 
-function Table({ employeesList, colorPalette }) {
+function Table({ itemsList, fields, handleBinClick, handlePencilClick, colorPalette }) {
 
-    const dispatch = useDispatch();
-    // initialisation des States
-    // Modal
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    // Contenu du modal
-    const [isFormOpen, setIsFormOpen] = useState(false);
-    const [needForConfirmationToUpdate, setNeedForConfirmationToUpdate] = useState(false);
-    const [isConfirmationOfUpdateOpen, setIsConfirmationOfUpdateOpen] = useState(false);
-    const [isConfirmationOfDeletionOpen, setIsConfirmationOfDeletionOpen] = useState(false);
-
-    const [employeeToUpdate, setEmployeeToUpdate] = useState(null);
-    const [employeeToDelete, setemployeeToDelete] = useState(null);
-    const [employeeToConfirm, setEmployeeToConfirm] = useState(null);
-
-    const [list, setList] = useState([...employeesList]);
+    const [list, setList] = useState([...itemsList]);
     const [tableLength, setTableLength] = useState(10);
     const [pages, setPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
@@ -56,8 +34,8 @@ function Table({ employeesList, colorPalette }) {
 
     // On utilise useEffect pour re render le tableau lorsque la liste change
     useEffect(() => {
-        setList([...employeesList]);
-    }, [employeesList]);
+        setList([...itemsList]);
+    }, [itemsList]);
 
     useEffect(() => {
         // Mise en place du nombre de pages
@@ -78,52 +56,13 @@ function Table({ employeesList, colorPalette }) {
     // Fonction qui gère le champ de recherche du tableau
     function handleSearch(event) {
         let array = event.target.value.split(' ');
-        const newList = search(array, employeesList);
+        const newList = search(array, itemsList);
         setList(newList);
         setCurrentPage(1);
     }
 
-    // Gestion du modal //
-
-    // Fonction qui est appelee une fois que lq mise a jour des infos de l'employe est faite
-    // ouvre la modale de confirmation de mise a jour
-    function handleUpdateClick(updatedEmployee, possibleDuplicates) {
-        if (possibleDuplicates.length === 0) {
-            setIsFormOpen(false);
-            setIsConfirmationOfUpdateOpen(true);
-        } else if (possibleDuplicates.length > 0) {
-            setIsFormOpen(false);
-            setNeedForConfirmationToUpdate(true);
-            setEmployeeToConfirm(updatedEmployee);
-        }
-    }
-
-    function handleConfirmUpdate(updatedEmployee){
-        dispatch(updateEmployee(updatedEmployee));
-        handleCloseModal();
-    }
-
-    // Fonction appelee lorsque la deletion est validee par l'utilisateur
-    // met a jour le state redux, puis ouvre la modale de confirmation de suppression
-    function handleDelete(employeeId) {
-        dispatch(deleteEmployee(employeeId));
-        setemployeeToDelete(null);
-        setIsConfirmationOfDeletionOpen(true);
-    };
-
-    // Fonction qui sert a fermer la modale, et reset tous les states qui ont a voir avec la modale.
-    function handleCloseModal() {
-        setEmployeeToUpdate(null);
-        setemployeeToDelete(null);
-        setEmployeeToConfirm(null);
-        setIsModalOpen(false);
-        setIsFormOpen(false);
-        setIsConfirmationOfUpdateOpen(false);
-        setIsConfirmationOfDeletionOpen(false);
-        setNeedForConfirmationToUpdate(false);
-    }
     return (
-        employeesList &&
+        itemsList &&
         <section className={classes.table_section}
             style={{
                 backgroundColor: colorPalette.secondaryColor,
@@ -141,8 +80,8 @@ function Table({ employeesList, colorPalette }) {
                     fontColor={colorPalette.tertiaryColor}
                     hoveredFontColor={colorPalette.tertiaryColor}
                     borderBottomColor={colorPalette.senaryColor}
-                    name='employees_table_length'
-                    id='employees_table_length'
+                    name='items_table_length'
+                    id='items_table_length'
                     defaultValue={tableLengths[0]}
                     onChange={handleSelect}
                     separatedBox={true} />
@@ -155,12 +94,11 @@ function Table({ employeesList, colorPalette }) {
                     fontColor={colorPalette.tertiaryColor} />
             </div>
             <DataTable list={list}
+                fields={fields}
                 currentPage={currentPage}
                 tableLength={tableLength}
-                setEmployeeToUpdate={setEmployeeToUpdate}
-                setIsModalOpen={setIsModalOpen}
-                setIsFormOpen={setIsFormOpen}
-                setemployeeToDelete={setemployeeToDelete}
+                handlePencilClick={handlePencilClick}
+                handleBinClick={handleBinClick}
                 setList={setList}
                 tableBackgroundColor={colorPalette.secondaryColor}
                 oddBackgroundColor={colorPalette.primaryColor}
@@ -197,65 +135,13 @@ function Table({ employeesList, colorPalette }) {
                     </p> : null}
                 </div> : null}
             </div>
-            {isModalOpen ?
-                <Modal closeModal={handleCloseModal}
-                    modalBackgroundColor={colorPalette.secondaryColor}
-                    hoveredIconBackgroundColor={colorPalette.primaryColor}
-                    iconColor={colorPalette.tertiaryColor}>
-                    {isFormOpen &&
-                        <UpdateForm
-                            closeModal={handleCloseModal}
-                            handleUpdateClick={handleUpdateClick}
-                            employee={employeeToUpdate}
-                            employeesList={employeesList}
-                            colorPalette={colorPalette} />}
-                    {needForConfirmationToUpdate &&
-                        <ConfirmEmployeeActionModalContent
-                            closeModal={handleCloseModal}
-                            confirm={() => handleConfirmUpdate(employeeToConfirm)}
-                            text={`One or several employees named ${employeeToConfirm.firstName} ${employeeToConfirm.lastName} 
-                            and born on ${employeeToConfirm.dateOfBirth} already exist in the system. 
-                            Would you still like to create a new employee with this name?`}
-                            colorPalette={colorPalette} />}
-                    {isConfirmationOfUpdateOpen &&
-                        <NewEmployeeModalContent isCorrect={true}
-                            iconColor='rgb(0, 175, 95)'
-                            iconBackgroundColor='rgb(0, 175, 95, 0.5)'
-                            closeModal={handleCloseModal}
-                            text='This employee was successfully updated'
-                            colorPalette={colorPalette} />}
-                    {employeeToDelete &&
-                        <ConfirmEmployeeActionModalContent
-                            closeModal={handleCloseModal}
-                            confirm={() => handleDelete(employeeToDelete.id)}
-                            text={`Are you sure that you wish to remove ${employeeToDelete.firstName} ${employeeToDelete.lastName} from the system?`}
-                            colorPalette={colorPalette} />}
-                    {isConfirmationOfDeletionOpen &&
-                        <NewEmployeeModalContent isCorrect={false}
-                            iconColor='rgb(0, 175, 95)'
-                            iconBackgroundColor='rgb(0, 175, 95, 0.5)'
-                            closeModal={handleCloseModal}
-                            text='This employee was successfully removed from the system'
-                            colorPalette={colorPalette} />
-                    }
-                </Modal> : null}
         </section>
     )
 }
 
 Table.propTypes = {
-    employeesList: PropTypes.arrayOf(
-        PropTypes.shape({
-            firstName: PropTypes.string.isRequired,
-            lastName: PropTypes.string.isRequired,
-            startDate: PropTypes.string.isRequired,
-            department: PropTypes.string.isRequired,
-            dateOfBirth: PropTypes.string.isRequired,
-            street: PropTypes.string.isRequired,
-            city: PropTypes.string.isRequired,
-            state: PropTypes.string.isRequired,
-            zipCode: PropTypes.string.isRequired,
-        })
+    itemsList: PropTypes.arrayOf(
+        PropTypes.object,
     ).isRequired,
     colorPalette: PropTypes.shape({
         primaryColor: PropTypes.string,

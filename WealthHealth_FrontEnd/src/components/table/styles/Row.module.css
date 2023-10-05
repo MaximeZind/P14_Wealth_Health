@@ -29,13 +29,13 @@ td{
     margin: 0;
 }
 
-.zipcode_container{
+.last_container{
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
 }
 
-.zipcode_container > p {
+.last_container > p {
     grid-row: 1;
     grid-column: 1;
 }

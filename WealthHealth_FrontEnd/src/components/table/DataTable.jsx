@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import classes from './styles/DataTable.module.css';
 import Row from './Row';
-import fields from '../../data/fields.json';
 import Arrow from '../Arrow';
 import PropTypes from 'prop-types';
+import {toCamelCase} from './utils/utils'
 
 /**
  * Composant DataTable pour afficher une liste d'employés dans un tableau.
@@ -13,10 +13,6 @@ import PropTypes from 'prop-types';
  * @param {Array} props.list - La liste des employés à afficher.
  * @param {number} props.currentPage - Le numéro de la page actuelle.
  * @param {number} props.tableLength - Le nombre d'entrées à afficher par page.
- * @param {function} props.setEmployeeToUpdate - La fonction pour définir l'employé à mettre à jour.
- * @param {function} props.setIsModalOpen - La fonction pour définir si le modal est ouvert.
- * @param {function} props.setIsFormOpen - La fonction pour définir si le formulaire est ouvert.
- * @param {function} props.setemployeeToDelete - La fonction pour définir l'employé à supprimer.
  * @param {function} props.setList - La fonction pour définir la liste des employés.
  * @param {string} props.tableBackgroundColor - La couleur de fond de la table.
  * @param {string} props.oddBackgroundColor - La couleur de fond des lignes impaires.
@@ -31,22 +27,26 @@ import PropTypes from 'prop-types';
  */
 
 
-function DataTable({ list, currentPage, tableLength, setEmployeeToUpdate, setIsModalOpen, setIsFormOpen, setemployeeToDelete, setList, tableBackgroundColor, oddBackgroundColor, evenBackgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, iconBoxBackgroundColor, iconColor, highlightedBackgroundColor }) {
+function DataTable({ list, fields, currentPage, tableLength, handleBinClick, handlePencilClick, setList, tableBackgroundColor, oddBackgroundColor, evenBackgroundColor, hoveredBackgroundColor, fontColor, hoveredFontColor, iconBoxBackgroundColor, iconColor, highlightedBackgroundColor }) {
 
     // initialisation des States
-
     const [selectedField, setSelectedField] = useState(null);
     const [isAscending, setIsAscending] = useState(false);
     const [isHeaderHovered, setIsHeaderHovered] = useState(false);
 
     // On crée une array de fields en camelCase
-    let camelFields = []
-    fields.map((field) => {
-        camelFields.push(field.camelField);
-    })
+    const camelFields = fields.map((field) => {
+        return toCamelCase(field);
+    });
+
+    const combinedFields = fields.map((field) => {
+        return {
+            field: field,
+            camelField: toCamelCase(field)
+        }
+    });
     // ... Pour savoir lequel est sélectionné
     const highlightedField = selectedField ? camelFields.indexOf(selectedField) : null;
-
     // Fonction pour trier par champ cliqué
     function sortBy(field) {
         if (selectedField !== field) {
@@ -70,23 +70,8 @@ function DataTable({ list, currentPage, tableLength, setEmployeeToUpdate, setIsM
         setList(sortedList);
     }
 
-    // Fonction appelee lors du clic sur le "crayon" d'une ligne
-    // Ouvre le formulaire de mise a jour des infos de l'employe
-    function handlePencilClick(employee) {
-        setEmployeeToUpdate(employee);
-        setIsModalOpen(true);
-        setIsFormOpen(true)
-    }
-
-    // Fonction appelee lors du clic sur la "poubelle" d'une ligne
-    // Ouvre la modale de demande de validation de suppression de l'employe du systeme
-    function handleBinClick(employee) {
-        setemployeeToDelete(employee);
-        setIsModalOpen(true);
-    }
-
     return (
-        <table id='employee_table' className={classes.table} style={{ backgroundColor: tableBackgroundColor && tableBackgroundColor }}>
+        <table id='table' className={classes.table} style={{ backgroundColor: tableBackgroundColor && tableBackgroundColor }}>
             <thead className={classes.table_header}
                 onMouseEnter={() => setIsHeaderHovered(true)}
                 onMouseLeave={() => setIsHeaderHovered(false)}>
@@ -94,10 +79,10 @@ function DataTable({ list, currentPage, tableLength, setEmployeeToUpdate, setIsM
                     style={{
                         backgroundColor: isHeaderHovered ? hoveredBackgroundColor : '',
                     }}>
-                    {fields.map((field) => {
+                    {combinedFields.map((field) => {
                         return (
                             <th className={field.camelField === selectedField ? classes.selected_field : ''}
-                                key={fields.indexOf(field)}
+                                key={combinedFields.indexOf(field)}
                                 onClick={() => sortBy(field.camelField)}
                                 style={{
                                     backgroundColor: field.camelField === selectedField ? hoveredBackgroundColor : '',
@@ -140,7 +125,7 @@ function DataTable({ list, currentPage, tableLength, setEmployeeToUpdate, setIsM
                 </tr>
             </thead>
             <tbody>
-                {list.length > 0 && list.map((employee, index) => {
+                {list.length > 0 && list.map((item, index) => {
                     const indexWithinPage = index % tableLength;
                     const type = index % 2 ? 'even' : 'odd';
                     const isOnCurrentPage = (index >= (currentPage - 1) * tableLength) && (index < currentPage * tableLength)
@@ -151,18 +136,10 @@ function DataTable({ list, currentPage, tableLength, setEmployeeToUpdate, setIsM
                             highlightedField={highlightedField}
                             key={index}
                             type={type}
-                            firstName={employee.firstName}
-                            lastName={employee.lastName}
-                            startDate={employee.startDate}
-                            department={employee.department}
-                            dateOfBirth={employee.dateOfBirth}
-                            street={employee.street}
-                            city={employee.city}
-                            state={employee.state}
-                            zipCode={employee.zipCode}
-                            employeeId={employee.id}
-                            handlePencilClick={() => handlePencilClick(employee)}
-                            handleBinClick={() => handleBinClick(employee)}
+                            item={item}
+                            fields={camelFields}
+                            handlePencilClick={() => handlePencilClick(item)}
+                            handleBinClick={() => handleBinClick(item)}
                             backgroundColor={rowBackgroundColor}
                             hoveredBackgroundColor={hoveredBackgroundColor}
                             fontColor={fontColor}
@@ -197,10 +174,6 @@ DataTable.propTypes = {
     ).isRequired,
     currentPage: PropTypes.number.isRequired,
     tableLength: PropTypes.number.isRequired,
-    setEmployeeToUpdate: PropTypes.func.isRequired,
-    setIsModalOpen: PropTypes.func.isRequired,
-    setIsFormOpen: PropTypes.func.isRequired,
-    setemployeeToDelete: PropTypes.func.isRequired,
     setList: PropTypes.func.isRequired,
     tableBackgroundColor: PropTypes.string,
     oddBackgroundColor: PropTypes.string,

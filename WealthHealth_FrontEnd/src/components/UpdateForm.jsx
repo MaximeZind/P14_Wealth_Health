@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classes from '../styles/UpdateForm.module.css';
 import TextInput from '../components/TextInput';
-import DateInput from 'maximez_date_picker/src/DateInput';
+import {DateInput} from 'maximez_date_picker';
 import Dropdown from '../components/dropdown/Dropdown';
 import Button from './Button';
 import { getDepartments, getStates } from '../utils/fetchData';
@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { updateEmployee } from '../actions/employees.action';
 import { validateEmployee } from '../utils/formValidation';
-import { doesEmployeeExist } from '../utils/utils';
+import { doesEmployeeExist, haveEmployeeInformationsChanged } from '../utils/utils';
 
 /**
  * Composant UpdateForm pour mettre à jour les informations d'un employé.
@@ -48,7 +48,6 @@ function UpdateForm({ closeModal, employee, employeesList, handleUpdateClick, co
         const form = event.target;
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
-
         // On rajoute son id a l'employe
         const employeeId = employee.id;
         const updatedFormJson = { ...formJson, id: employeeId };
@@ -58,13 +57,18 @@ function UpdateForm({ closeModal, employee, employeesList, handleUpdateClick, co
         if (formValidation.isValid === true) {
             const updatedEmployee = formValidation.data
             let possibleDuplicates = doesEmployeeExist(employeesList, updatedEmployee);
-            possibleDuplicates.map((employee) => console.log(employee.id));
             possibleDuplicates = possibleDuplicates.filter((employee) => employee.id !== updatedEmployee.id);
-            if (possibleDuplicates.length === 0) {
+            const areEmployeeInformationsUpdated = haveEmployeeInformationsChanged(employee, updatedEmployee);
+            if (!areEmployeeInformationsUpdated){
                 dispatch(updateEmployee(updatedEmployee));
-                handleUpdateClick(updatedEmployee, possibleDuplicates);
-            } else if (possibleDuplicates.length > 0) {
-                handleUpdateClick(updatedEmployee, possibleDuplicates);
+                handleUpdateClick(updatedEmployee, []);
+            } else if (areEmployeeInformationsUpdated){
+                if ((possibleDuplicates.length === 0)) {
+                    dispatch(updateEmployee(updatedEmployee));
+                    handleUpdateClick(updatedEmployee, possibleDuplicates);
+                } else if (possibleDuplicates.length > 0) {
+                    handleUpdateClick(updatedEmployee, possibleDuplicates);
+                }
             }
         }
         handleErrorMsgs(formValidation.errorMsg);
@@ -132,6 +136,7 @@ function UpdateForm({ closeModal, employee, employeesList, handleUpdateClick, co
                             defaultValue={employee.dateOfBirth}
                             yearsRangeMin={1923}
                             yearsRangeMax={2023}
+                            dateInputField={true}
                             roundYearHighlight={true}
                             labelColor={colorPalette.quinaryColor}
                             focusedLabelColor={colorPalette.tertiaryColor}

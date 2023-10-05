@@ -3,7 +3,6 @@ export function doesEmployeeExist(employeesList, newEmployee) {
     // On prend en compte Nom, Prénom, date de naissance
 
     const result = employeesList.filter((employee) => employee.firstName === newEmployee.firstName && employee.lastName === newEmployee.lastName && employee.dateOfBirth === newEmployee.dateOfBirth);
-    // return doesEmployeeExist;
     return result;
 }
 export function generateUniqueID() {
@@ -15,3 +14,15 @@ export function getEmployeeById(id, employeesList){
     const employee = employeesList.find((employee) => employee.id === id)
     return employee;
 }
+
+export function haveEmployeeInformationsChanged(employee, updatedEmployee){
+    if(employee.firstName === updatedEmployee.firstName 
+        && employee.lastName === updatedEmployee.lastName 
+        && employee.dateOfBirth === updatedEmployee.dateOfBirth){
+            return false;
+    } else if (employee.firstName !== updatedEmployee.firstName 
+        || employee.lastName !== updatedEmployee.lastName 
+        || employee.dateOfBirth !== updatedEmployee.dateOfBirth){
+            return true;
+        }
+}   
