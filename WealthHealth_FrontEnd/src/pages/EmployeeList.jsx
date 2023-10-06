@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classes from '../styles/EmployeeList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import Table from '../components/table/Table';
+import {Table} from 'maximez_table';
 import { Modal } from 'maximez_modal';
 import UpdateForm from '../components/UpdateForm';
 import ConfirmEmployeeActionModalContent from '../components/modal_contents/ConfirmEmployeeActionModalContent';
@@ -85,6 +85,7 @@ function EmployeeList() {
             style={{ backgroundColor: colorPalette.primaryColor }}>
             <Table itemsList={employeesList}
                 fields={fields}
+                allowEditDelete={true}
                 handleBinClick={handleBinClick}
                 handlePencilClick={handlePencilClick}
                 colorPalette={colorPalette}
@@ -110,7 +111,7 @@ function EmployeeList() {
                 textInputLabelColor={colorPalette.quinaryColor}
                 textInputFocusedLabelColor={colorPalette.tertiaryColor}
                 textInputBoxShadowColor={colorPalette.senaryColor}
-                textInputTontColor={colorPalette.tertiaryColor}/>
+                textInputFontColor={colorPalette.tertiaryColor}/>
             {isModalOpen ?
                 <Modal closeModal={handleCloseModal}
                     modalBackgroundColor={colorPalette.secondaryColor}
