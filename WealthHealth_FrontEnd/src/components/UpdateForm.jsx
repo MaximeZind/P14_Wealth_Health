@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import classes from '../styles/UpdateForm.module.css';
 import TextInput from '../components/TextInput';
 import {DateInput} from 'maximez_date_picker';
-import Dropdown from '../components/dropdown/Dropdown';
+import {Dropdown} from 'maximez_dropdown';
 import Button from './Button';
 import { getDepartments, getStates } from '../utils/fetchData';
 import PropTypes from 'prop-types';
