@@ -51,7 +51,7 @@ function Nav() {
                                 width={iconSize} />
                         </span>}
                 </div>
-                <NavLink to="/" >
+                <NavLink to="/" aria-label='Create employee'>
                     {({ isActive }) => (
                         isActive ?
                             <span className={classes.add_employee_icon}
@@ -67,7 +67,7 @@ function Nav() {
                             </span>
                     )}
                 </NavLink>
-                <NavLink to="/employeeslist" >
+                <NavLink to="/employeeslist" aria-label='Employees list'>
                 {({ isActive }) => (
                         isActive ?
                             <span className={classes.table_icon}
