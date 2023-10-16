@@ -13,6 +13,8 @@
     grid-template-rows: repeat(2, 1fr);
     padding: 40px;
     max-height: calc(80vh - 200px);
+    overflow-y: scroll;
+    overflow-x: visible;
 }
 
 .personnal_informations{
