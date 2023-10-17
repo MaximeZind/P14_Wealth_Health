@@ -13,7 +13,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "maximez_date_picker": "^0.0.0",
-    "maximez_dropdown": "^0.0.9",
+    "maximez_dropdown": "^0.0.11",
     "maximez_modal": "^0.0.0",
     "maximez_table": "^0.0.2",
     "react": "^18.2.0",
