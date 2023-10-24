@@ -6,7 +6,6 @@ import { validatePersonnalInformations, validateAddress, validateWorkSituation }
 import { useDispatch, useSelector } from 'react-redux';
 import TextInput from './TextInput';
 import {DateInput} from 'maximez_date_picker';
-// import Dropdown from './dropdown/Dropdown';
 import {Dropdown} from 'maximez_dropdown';
 import Button from './Button';
 import { doesEmployeeExist, generateUniqueID } from '../utils/utils';
@@ -34,7 +33,9 @@ function Form({ openModal, colorPalette }) {
     const dispatch = useDispatch()
     const departments = getDepartments();
     const states = getStates();
-    const EmployeeList = useSelector((state) => state.employeesReducer);
+
+    // on recupere la liste des employes
+    const employeeList = useSelector((state) => state.employeesReducer);
 
     // Messages d'erreur
     const [firstNameErrorMsg, setFirstNameErrorMsg] = useState('');
@@ -137,7 +138,7 @@ function Form({ openModal, colorPalette }) {
                 const idObject = { id: generateUniqueID() }
                 const newEmployee = Object.assign(personnalInformations, employeeAddress, formValidation.data, idObject);
                 // Vérification que l'employé n'est pas déjà dans la liste
-                const possibleDuplicates = doesEmployeeExist(EmployeeList, newEmployee);
+                const possibleDuplicates = doesEmployeeExist(employeeList, newEmployee);
                 if (possibleDuplicates.length === 0) {
                     // Si l'employé n'existe pas, on l'ajoute au state
                     openModal(possibleDuplicates, newEmployee);
@@ -174,8 +175,8 @@ function Form({ openModal, colorPalette }) {
         Object.entries(errorMsgs).map(([field, errorMsg]) => {
             // exemple
             // if (setters[firstName]){
-            //     setters[firstName(errorMsg)] ( ou setFirstNameErrorMsg(errorMsg))
-            // }
+            //     setters[firstName](errorMsg) ( ou setFirstNameErrorMsg(errorMsg))
+            // } 
             if (setters[field]) {
                 setters[field](errorMsg);
             }

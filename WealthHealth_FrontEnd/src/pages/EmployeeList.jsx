@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import classes from '../styles/EmployeeList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {Table} from 'maximez_table';
+import classes from '../styles/EmployeeList.module.css';
+import { Table } from 'maximez_table';
 import { Modal } from 'maximez_modal';
 import UpdateForm from '../components/UpdateForm';
 import ConfirmEmployeeActionModalContent from '../components/modal_contents/ConfirmEmployeeActionModalContent';
@@ -9,7 +9,16 @@ import NewEmployeeModalContent from '../components/modal_contents/NewEmployeeMod
 import { deleteEmployee, updateEmployee } from '../actions/employees.action';
 import fields from '../data/fields.json';
 
+
 function EmployeeList() {
+
+    // modification du titre de la page
+    const pageTitle = 'Employees list';
+    document.title = `Wealth Health HRnet - ${pageTitle}`;
+
+    // recuperation de la liste et de la palette de couleurs
+    const employeesList = useSelector((state) => state.employeesReducer);
+    const colorPalette = useSelector((state) => state.colorPaletteReducer);
 
     const dispatch = useDispatch();
     // initialisation des States
@@ -25,14 +34,9 @@ function EmployeeList() {
     const [employeeToDelete, setemployeeToDelete] = useState(null);
     const [employeeToConfirm, setEmployeeToConfirm] = useState(null);
 
-    const pageTitle = 'Employees list';
-    document.title = `Wealth Health HRnet - ${pageTitle}`;
-    const employeesList = useSelector((state) => state.employeesReducer);
-    const colorPalette = useSelector((state) => state.colorPaletteReducer);
+    // Gestion de la modale //
 
-    // Gestion du modal //
-
-    // Fonction qui est appelee une fois que lq mise a jour des infos de l'employe est faite
+    // Fonction qui est appelee une fois que la mise a jour des infos de l'employe est faite
     // ouvre la modale de confirmation de mise a jour
     function handleUpdateClick(updatedEmployee, possibleDuplicates) {
         if (possibleDuplicates.length === 0) {
@@ -45,12 +49,14 @@ function EmployeeList() {
         }
     }
 
+    // Fonction qui est appelee lorsque l'utilisateur confirme la mise a jour
+    // modifie le state redux et appelle la fonction de femreture de la modale
     function handleConfirmUpdate(updatedEmployee) {
         dispatch(updateEmployee(updatedEmployee));
         handleCloseModal();
     }
 
-    // Fonction appelee lorsque la deletion est validee par l'utilisateur
+    // Fonction appelee lorsque la suppression est validee par l'utilisateur
     // met a jour le state redux, puis ouvre la modale de confirmation de suppression
     function handleDelete(employeeId) {
         dispatch(deleteEmployee(employeeId));
@@ -70,12 +76,14 @@ function EmployeeList() {
         setNeedForConfirmationToUpdate(false);
     }
 
+    // Fonction appelee lorsque l'utilisateur clique sur le crayon
     function handlePencilClick(employee) {
         setEmployeeToUpdate(employee);
         setIsModalOpen(true);
         setIsFormOpen(true)
     }
 
+    // Fonction appelee lorsque l'utilisateur clique sur la poubelle
     function handleBinClick(employee) {
         setemployeeToDelete(employee);
         setIsModalOpen(true);
@@ -88,7 +96,6 @@ function EmployeeList() {
                 allowEditDelete={true}
                 handleBinClick={handleBinClick}
                 handlePencilClick={handlePencilClick}
-                colorPalette={colorPalette}
                 tableBackgroundColor={colorPalette.secondaryColor}
                 oddBackgroundColor={colorPalette.primaryColor}
                 evenBackgroundColor={colorPalette.secondaryColor}

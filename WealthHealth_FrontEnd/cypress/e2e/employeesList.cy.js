@@ -2,7 +2,11 @@ describe('If on Employees List, I select 25 entries', () => {
     it('will make the table longer', () => {
         cy.visit('/employeeslist');
         cy.get('table tr').should('have.length', 11) //tableau a 10 lignes + 1 du header
-        cy.get('div[class*="dropdown_header"]').click({ force: true });
+        cy.get('div[class*="component_container"]')
+            .contains('Entries')
+            .parent()
+            .find('div[class*="dropdown_header"]')
+            .click();
         cy.get('span[value="25"]').click();
         cy.get('table tr').should('have.length.greaterThan', 11); //tableau a plus de 10 lignes
     })

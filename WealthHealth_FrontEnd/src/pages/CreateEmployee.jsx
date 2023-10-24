@@ -9,11 +9,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function CreateEmployee() {
 
+    // modification du titre de la page
     const pageTitle = 'Create an employee';
     document.title = `Wealth Health HRnet - ${pageTitle}`;
 
+    // recuperation de la palette de couleurs
     const colorPalette = useSelector((state) => state.colorPaletteReducer);
     const dispatch = useDispatch();
+
+    // Initialisation des states locaux
     // L'utilisateur a ete cree ou non
     const [isCorrect, setIsCorrect] = useState(false);
     // Nom de l'action (updated ou created)
@@ -25,7 +29,7 @@ function CreateEmployee() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
 
-    // Fonction d'ouverture du modal
+    // Fonction d'ouverture de la modale
     function openModal(possibleDuplicates, newEmployee) {
         setDuplicates(possibleDuplicates);
         if (possibleDuplicates.length > 0) {
@@ -41,7 +45,7 @@ function CreateEmployee() {
     }
 
     // Fonction de creation d'un employe dans le systeme
-    // met a jour les states qui gerent le contenu du modal
+    // met a jour les states qui gerent le contenu de la modale
     function handleConfirmEmployeeCreation(newEmployee) {
         dispatch(addEmployee(newEmployee));
         setIsCorrect(true);
@@ -50,7 +54,7 @@ function CreateEmployee() {
     }
 
     // Fonction de mise a jour de l'employe
-    // met aussi a jour le contenu du modal
+    // met aussi a jour le contenu de la modale
     function handleUpdateEmployee(newEmployee) {
         let updatedEmployee = {...newEmployee, id: duplicates[0].id}
         dispatch(updateEmployee(updatedEmployee));
@@ -59,7 +63,7 @@ function CreateEmployee() {
     }
 
     // Fonction de fermeture du modal
-    // reset tous les states qui ont a voir avec le contenu du modal
+    // reset tous les states qui ont a voir avec le contenu de la modale
     function closeModal() {
         setIsModalOpen(false);
         setIsCorrect(false);
