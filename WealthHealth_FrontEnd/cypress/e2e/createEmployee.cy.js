@@ -59,7 +59,7 @@ describe('If on Create employee, I create an employee already in the system, and
         cy.get('a[aria-label="Employees list"]').click();
         cy.get('input[id="search"]').type('Maxime');
         cy.get('table tr').should('have.length', 2)
-
+        cy.get('table tr:contains("Maxime")').should('contain', 'hollywood street');
     })
 })
 
